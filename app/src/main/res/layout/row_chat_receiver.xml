@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/msg_tv"
+        android:layout_width="wrap_content"
+        android:minWidth="120dp"
+        android:layout_height="wrap_content"
+        android:text="ÇåáÇ ÇÚÉ"
+        android:textSize="14sp"
+        android:fontFamily="@font/cairo_light"
+        android:textColor="#4c5264"
+        android:paddingTop="13dp"
+        android:paddingBottom="13dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        app:layout_constraintVertical_bias="0"
+        android:background="@drawable/bg_chat_receiver"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+    <TextView
+        android:id="@+id/msg_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="25/02/2019, 03.45 PM"
+        android:textSize="12sp"
+        android:textColor="#bcc5d3"
+        android:fontFamily="@font/cairo_light"
+        android:layout_marginTop="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="@id/msg_tv"
+        app:layout_constraintTop_toBottomOf="@+id/msg_tv"
+        />
+</LinearLayout>

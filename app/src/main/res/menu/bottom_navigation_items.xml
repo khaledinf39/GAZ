@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+
+
+    <item
+        android:id="@+id/Home"
+        android:title="الرئسية"
+        android:icon="@drawable/ic_menu_home"
+
+        />
+    <item
+        android:id="@+id/MyReservations"
+        android:title="طلباتي"
+        android:icon="@drawable/ic_menu_my_res"
+
+        />
+    <item
+        android:id="@+id/Notification"
+        android:title="الإشعارات"
+        android:icon="@drawable/ic_menu_notification_off"
+
+        />
+    <item
+        android:id="@+id/Search"
+        android:title="البحث"
+        android:icon="@drawable/ic_menu_search"
+        app:showAsAction="ifRoom"
+        />
+    <!--android:icon="@drawable/menu_steps"-->
+</menu>

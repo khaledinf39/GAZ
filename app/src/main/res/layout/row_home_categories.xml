@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="160dp"
+    android:layout_height="120dp"
+    android:layout_margin="3dp"
+    android:elevation="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@+id/cat_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/placeholder"
+        android:layout_marginBottom="10dp"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_catrgories_gradiant"/>
+    <TextView
+        android:id="@+id/categories_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="إكسسوارات"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/cairo_semibold"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+</android.support.constraint.ConstraintLayout>

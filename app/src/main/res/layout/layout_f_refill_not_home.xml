@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="30dp"
+    tools:context=".Fragments.RefillNotHome">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.constraint.ConstraintLayout
+            android:paddingBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <TextView
+                android:id="@+id/tx1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:fontFamily="@font/cairo_regular"
+                android:text="السعة  (لتر)"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/GaztypeRV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="40dp"
+                tools:layout_editor_absoluteY="46dp" />
+            <HorizontalScrollView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/tx1"
+                tools:layout_editor_absoluteX="40dp">
+
+                <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="right"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:gravity="right"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginStart="15dp"-->
+                <!--android:background="@drawable/bg_black_border"-->
+                <!--android:fontFamily="@font/roboto_regular"-->
+                <!--android:paddingStart="12dp"-->
+                <!--android:paddingTop="8dp"-->
+                <!--android:paddingEnd="12dp"-->
+                <!--android:paddingBottom="8dp"-->
+                <!--android:text="2500"-->
+                <!--android:textColor="@color/bg_tx_black_white"-->
+                <!--android:textSize="14sp" />-->
+
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginStart="15dp"-->
+                <!--android:background="@drawable/bg_black_border"-->
+                <!--android:fontFamily="@font/roboto_regular"-->
+                <!--android:paddingStart="12dp"-->
+                <!--android:paddingTop="8dp"-->
+                <!--android:paddingEnd="12dp"-->
+                <!--android:paddingBottom="8dp"-->
+                <!--android:text="2000"-->
+                <!--android:textColor="@color/bg_tx_black_white"-->
+                <!--android:textSize="14sp" />-->
+
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginStart="15dp"-->
+                <!--android:background="@drawable/bg_black_border"-->
+                <!--android:fontFamily="@font/roboto_regular"-->
+                <!--android:paddingStart="12dp"-->
+                <!--android:paddingTop="8dp"-->
+                <!--android:paddingEnd="12dp"-->
+                <!--android:paddingBottom="8dp"-->
+                <!--android:text="1500"-->
+                <!--android:textColor="@color/bg_tx_black_white"-->
+                <!--android:textSize="14sp" />-->
+
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginStart="15dp"-->
+                <!--android:background="@drawable/bg_black_border"-->
+                <!--android:fontFamily="@font/roboto_regular"-->
+                <!--android:paddingStart="12dp"-->
+                <!--android:paddingTop="8dp"-->
+                <!--android:paddingEnd="12dp"-->
+                <!--android:paddingBottom="8dp"-->
+                <!--android:text="1000"-->
+                <!--android:textColor="@color/bg_tx_black_white"-->
+                <!--android:textSize="14sp" />-->
+
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginStart="15dp"-->
+                <!--android:background="@drawable/bg_black_border"-->
+                <!--android:fontFamily="@font/roboto_regular"-->
+                <!--android:paddingStart="12dp"-->
+                <!--android:paddingTop="8dp"-->
+                <!--android:paddingEnd="12dp"-->
+                <!--android:paddingBottom="8dp"-->
+                <!--android:text="750"-->
+                <!--android:textColor="@color/bg_tx_black_white"-->
+                <!--android:textSize="14sp" />-->
+
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginStart="15dp"-->
+                <!--android:background="@drawable/bg_black_border"-->
+                <!--android:fontFamily="@font/roboto_regular"-->
+                <!--android:paddingStart="12dp"-->
+                <!--android:paddingTop="8dp"-->
+                <!--android:paddingEnd="12dp"-->
+                <!--android:paddingBottom="8dp"-->
+                <!--android:text="500"-->
+                <!--android:textColor="@color/bg_tx_black_white"-->
+                <!--android:textSize="14sp" />-->
+
+
+                <!--</LinearLayout>-->
+
+            </HorizontalScrollView>
+
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f7f8fa"
+                android:layout_marginTop="15dp"
+                app:layout_constraintTop_toBottomOf="@+id/GaztypeRV" />
+
+            <TextView
+                android:id="@+id/Name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/cairo_semibold"
+                android:text="11 - كغم معدن - منظم كبس"
+                android:textColor="#0d0e10"
+                android:textSize="14sp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line1" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_blue_border"
+                android:orientation="horizontal"
+                android:paddingStart="8dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="5dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line1">
+
+                <TextView
+                  android:id="@+id/price_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="15.0"
+                    android:textColor="#1f57ff"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="SR"
+                    android:textColor="#1f57ff"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear1"
+                android:layout_width="match_parent"
+                android:layout_height="105dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="17dp"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                app:layout_constraintTop_toBottomOf="@+id/Name_tv">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="7dp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="#fafafa"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="5dp">
+
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginEnd="17dp"
+                            android:fontFamily="@font/cairo_regular"
+                            android:text="الوقت"
+                            android:textColor="#9d9d9d"
+                            android:textSize="14sp"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="17dp"
+                            android:layout_marginBottom="12dp"
+                            android:fontFamily="@font/cairo_regular"
+                            android:text="03:45 مساءً"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintRight_toRightOf="parent" />
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginTop="12dp"
+                            android:src="@drawable/ic_clock"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </android.support.constraint.ConstraintLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="7dp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="#fafafa"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="5dp">
+
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginEnd="17dp"
+                            android:fontFamily="@font/cairo_regular"
+                            android:text="التاريخ"
+                            android:textColor="#9d9d9d"
+                            android:textSize="14sp"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="17dp"
+                            android:layout_marginBottom="12dp"
+                            android:fontFamily="@font/cairo_regular"
+                            android:text="15/5/2019"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintRight_toRightOf="parent" />
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginTop="12dp"
+                            android:src="@drawable/ic_calender"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </android.support.constraint.ConstraintLayout>
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear2"
+                android:layout_width="match_parent"
+                android:layout_height="105dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="0dp"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                app:layout_constraintTop_toBottomOf="@+id/linear1">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="7dp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="#fafafa"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="5dp">
+
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginEnd="17dp"
+                            android:fontFamily="@font/cairo_regular"
+                            android:text="المنزل"
+                            android:textColor="#9d9d9d"
+                            android:textSize="14sp"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="17dp"
+                            android:layout_marginBottom="12dp"
+                            android:fontFamily="@font/cairo_regular"
+                            android:text="طريق الملك عبد العزيز"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintRight_toRightOf="parent" />
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginTop="12dp"
+                            android:src="@drawable/ic_location"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </android.support.constraint.ConstraintLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="7dp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="#fafafa"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="5dp">
+
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginEnd="17dp"
+                            android:fontFamily="@font/cairo_regular"
+                            android:text="العدد"
+                            android:textColor="#9d9d9d"
+                            android:textSize="14sp"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="17dp"
+                            android:layout_marginBottom="12dp"
+                            android:fontFamily="@font/cairo_regular"
+                            android:text="15"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintRight_toRightOf="parent" />
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginTop="12dp"
+                            android:src="@drawable/ic_add"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </android.support.constraint.ConstraintLayout>
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/bg_login_btn_radues10"
+                android:fontFamily="@font/cairo_semibold"
+                android:text="حجز الآن"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@+id/linear2" />
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+
+
+</android.support.constraint.ConstraintLayout>

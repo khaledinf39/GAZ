@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="100"
+    tools:context=".Fragments.Payment">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="centerInside"
+            android:layout_marginStart="30dp"
+            android:src="@drawable/ic_close"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
+            android:fontFamily="@font/cairo_semibold"
+            android:text="اختر وسيلة الدفع"
+            android:textColor="#0d0e10"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/et_line_color"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="90">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/layout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="30dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="10.5dp"
+                    android:layout_marginEnd="9dp"
+                    android:background="#1f57ff"
+                    app:layout_constraintTop_toTopOf="parent"
+
+                    />
+
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/ic_bar_circle_ckecked"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:layout_marginEnd="85dp"
+                    android:background="@drawable/ic_bar_circle_ckecked"
+                    app:layout_constraintBottom_toBottomOf="@+id/view1"
+                    app:layout_constraintRight_toLeftOf="@+id/view1"
+                    app:layout_constraintTop_toTopOf="@+id/view1" />
+
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="21dp"
+                    android:layout_height="21dp"
+                    android:layout_marginStart="85dp"
+                    android:background="@drawable/ic_bar_circle_not"
+                    app:layout_constraintBottom_toBottomOf="@+id/view1"
+                    app:layout_constraintLeft_toRightOf="@+id/view4"
+                    app:layout_constraintTop_toTopOf="@+id/view1" />
+
+                <View
+                    android:id="@+id/view4"
+                    android:layout_width="21dp"
+                    android:layout_height="21dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/ic_bar_circle_gray"
+                    app:layout_constraintBottom_toBottomOf="@+id/view1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/view1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/cairo_regular"
+                    android:text="العربة"
+                    android:textColor="#1f57ff"
+                    android:textSize="14sp"
+                    app:layout_constraintLeft_toLeftOf="@+id/view1"
+                    app:layout_constraintRight_toRightOf="@+id/view1"
+                    app:layout_constraintTop_toBottomOf="@+id/view1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/cairo_regular"
+                    android:text="الشحن"
+                    android:textColor="#1f57ff"
+                    android:textSize="14sp"
+                    app:layout_constraintLeft_toLeftOf="@+id/view2"
+                    app:layout_constraintRight_toRightOf="@+id/view2"
+                    app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/cairo_regular"
+                    android:text="الدفع"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintLeft_toLeftOf="@+id/view3"
+                    app:layout_constraintRight_toRightOf="@+id/view3"
+                    app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/cairo_regular"
+                    android:text="تأكيد"
+                    android:textColor="@color/gray_text_color"
+                    android:textSize="14sp"
+                    app:layout_constraintLeft_toLeftOf="@+id/view4"
+                    app:layout_constraintRight_toRightOf="@+id/view4"
+                    app:layout_constraintTop_toBottomOf="@+id/view4" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:id="@+id/cash"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_pay_ways"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/ic_pay4" />
+
+                    <TextView
+                        android:id="@+id/cash_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/cairo_regular"
+                        android:text="كاش"
+                        android:textColor="@color/btn_blue"
+                        android:textSize="12sp" />
+                </LinearLayout>
+                <LinearLayout
+
+                    android:id="@+id/point_lay"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_pay_ways"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_pay2"
+
+
+
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/ic_point_icon"
+                        />
+
+                    <TextView
+                        android:id="@+id/point_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/cairo_regular"
+                        android:text="نقاطي"
+                        android:textColor="@color/btn_blue"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+android:visibility="gone"
+                    android:id="@+id/visa"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_pay_ways"
+                    android:clickable="true"
+                    android:focusable="true"
+
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/ic_pay3" />
+
+                    <TextView
+                        android:id="@+id/visa_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/cairo_regular"
+                        android:text="بطاقة إئتمان"
+                        android:textColor="@color/btn_blue"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="15dp"
+                android:background="@color/blue_fb_opacity" />
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+
+                >
+
+                <TextView
+                    android:id="@+id/tx2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:fontFamily="@font/cairo_regular"
+                    android:text="معلومات البطاقة"
+                    android:textColor="#8e8e93"
+                    android:textSize="14sp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tx3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginEnd="15dp"
+                    android:fontFamily="@font/cairo_regular"
+                    android:text="رقم البطاقة"
+                    android:textColor="#8e8e93"
+                    android:textSize="14sp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tx2" />
+
+
+                <TextView
+                    android:id="@+id/tx4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="****   ****   ****"
+                    android:textColor="#8e8e93"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tx3"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tx3" />
+
+                <TextView
+                    android:id="@+id/tx5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="1537"
+                    android:textColor="#8e8e93"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tx3"
+                    app:layout_constraintLeft_toRightOf="@id/tx4"
+                    app:layout_constraintTop_toTopOf="@+id/tx3" />
+
+                <View
+                    android:id="@+id/line2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/blue_fb_opacity"
+                    app:layout_constraintTop_toBottomOf="@+id/tx3" />
+
+                <TextView
+                    android:id="@+id/tx6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:fontFamily="@font/cairo_regular"
+                    android:text="تاريخ الانتهاء"
+                    android:textColor="#8e8e93"
+                    android:textSize="14sp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/line2" />
+
+                <TextView
+                    android:id="@+id/date_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="30dp"
+                    android:fontFamily="@font/cairo_regular"
+                    android:text="09/19"
+                    android:textColor="#8e8e93"
+                    android:textSize="14sp"
+                    app:layout_constraintRight_toLeftOf="@+id/tx6"
+                    app:layout_constraintTop_toBottomOf="@+id/line2" />
+
+                <TextView
+                    android:id="@+id/ConfCode_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="30dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="****"
+                    android:textColor="#8e8e93"
+                    android:textSize="21sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/line2" />
+
+                <TextView
+                    android:id="@+id/tx7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/cairo_regular"
+                    android:text="رقم التحقق"
+                    android:textColor="#8e8e93"
+                    android:textSize="14sp"
+                    app:layout_constraintLeft_toRightOf="@+id/ConfCode_tv"
+                    app:layout_constraintTop_toBottomOf="@+id/line2" />
+
+                <View
+                    android:id="@+id/line3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/blue_fb_opacity"
+                    app:layout_constraintTop_toBottomOf="@+id/tx6" />
+
+                <TextView
+                    android:id="@+id/tx9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="15dp"
+                    android:fontFamily="@font/cairo_regular"
+                    android:text="اسم حامل البطاقة"
+                    android:textColor="#9d9d9d"
+                    android:textSize="14sp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/line3" />
+
+                <TextView
+                    android:id="@+id/CreditName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="25dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Moamer Sawafiri"
+                    android:textColor="#9d9d9d"
+                    android:textSize="14sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/line3" />
+
+                <View
+                    android:id="@+id/line4"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/blue_fb_opacity"
+                    app:layout_constraintTop_toBottomOf="@+id/tx9" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:fontFamily="@font/cairo_regular"
+                    android:text="البلد"
+                    android:textColor="#9d9d9d"
+                    android:textSize="14sp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/line4" />
+                <TextView
+                    android:id="@+id/Country_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="KSA"
+                    android:textColor="#9d9d9d"
+                    android:textSize="14sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/line4" />
+                <View
+                    android:id="@+id/line5"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="22dp"
+                    android:background="@color/blue_fb_opacity"
+                    app:layout_constraintTop_toBottomOf="@+id/Country_tv" />
+                <TextView
+                    android:id="@+id/Saved_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cairo_regular"
+                    android:text="معلومات البطاقة الخاصة بك مؤمنة ولا يمكن مشاركتها مع المندوب"
+                    android:textColor="#9d9d9d"
+                    android:textSize="14sp"
+                    android:drawableEnd="@drawable/ic_lock"
+                    android:drawablePadding="15dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/line5" />
+                <TextView
+                    android:id="@+id/tx8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="25dp"
+                    android:fontFamily="@font/cairo_regular"
+                    android:text="حفظ معلومات البطاقة"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:layout_marginEnd="15dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/Saved_tv" />
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tx8"
+                    app:layout_constraintBottom_toBottomOf="@+id/tx8"
+                    />
+
+            </android.support.constraint.ConstraintLayout>
+            <Button
+                android:id="@+id/continue_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_login_btn_radues10"
+                android:fontFamily="@font/cairo_semibold"
+                android:text="تأكيد الدفع"
+                android:textColor="@color/white"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginTop="70dp"
+                android:layout_marginBottom="40dp"
+                android:textSize="16sp"
+                 />
+
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

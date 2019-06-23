@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+
+   >
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        >
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_weight="10">
+
+            <ImageView
+                android:id="@+id/back_btn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="centerInside"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/ic_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:fontFamily="@font/cairo_regular"
+                android:text="موقد غاز متنقل للرحلات"
+                android:textColor="#364f6b"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/back_btn"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+           >
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/hot_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/bg_login_btn"
+                android:drawableStart="@drawable/ic_star"
+                android:drawablePadding="7dp"
+                android:fontFamily="@font/cairo_semibold"
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp"
+                android:text="مميز"
+                android:padding="5dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+android:id="@+id/add_basket"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/bg_blue_cicle"
+                android:padding="6dp"
+                android:src="@drawable/ic_basket"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/basketCount_tv"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="3"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:gravity="center"
+                android:layout_marginBottom="30dp"
+                android:layout_marginStart="38dp"
+                android:background="@drawable/bg_red_circle"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/basket"
+                tools:ignore="SmallSp" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="270dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:id="@+id/img"
+                app:layout_constraintTop_toBottomOf="@+id/add_basket">
+
+            </ImageView>
+           <android.support.constraint.ConstraintLayout
+               android:id="@+id/details_lay"
+                    app:layout_constraintTop_toBottomOf="@+id/img"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="0dp"
+                    android:layout_height="0dp"
+
+                    android:layout_weight="60">
+
+                    <ImageView
+                        android:id="@+id/like_btn"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="34dp"
+                        android:background="@drawable/bg_blue_cicle"
+                        android:padding="9dp"
+                        android:src="@drawable/ic_like"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/productName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="70dp"
+                        android:layout_marginStart="22dp"
+                        android:layout_marginTop="28dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/cairo_semibold"
+                        android:text="موقد غاز متنقل للرحلات مميز مصنوع من الستانليس سهل الحمل والتنقل"
+                        android:textColor="@color/text_black_color"
+                        android:textSize="16sp"
+                        app:layout_constraintLeft_toRightOf="@+id/like_btn"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+                    <TextView
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/tx3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/cairo_regular"
+                        android:text="تقييماً"
+                        android:textColor="#9d9d9d"
+                        android:textSize="12sp"
+                        android:layout_marginStart="40dp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/productName" />
+
+
+
+                    <TextView
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/tx4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="40dp"
+                        android:fontFamily="@font/cairo_regular"
+                        android:text="السعر"
+                        android:textColor="#9d9d9d"
+                        android:textSize="12sp"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/productName" />
+
+
+
+                    <LinearLayout
+                        android:id="@+id/linear2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintLeft_toLeftOf="@+id/tx4"
+                        app:layout_constraintRight_toRightOf="@+id/tx4"
+                        app:layout_constraintTop_toBottomOf="@+id/tx4">
+
+                        <TextView
+                            android:id="@+id/SR1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:fontFamily="@font/cairo_regular"
+                            android:text="ريال"
+                            android:textColor="#9d9d9d"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/price_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/cairo_semibold"
+                            android:text="249.9"
+
+                            android:textColor="@color/text_black_color"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="8dp"
+                   android:orientation="horizontal"
+
+                   app:layout_constraintLeft_toLeftOf="@+id/tx3"
+                   app:layout_constraintTop_toBottomOf="@+id/tx3">
+
+                   <ImageView
+                       android:layout_width="16dp"
+                       android:layout_height="16dp"
+                       android:layout_gravity="center|center_vertical"
+                       android:src="@drawable/ic_star" />
+
+                   <TextView
+                       android:id="@+id/rating_tv"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginStart="8dp"
+                       android:fontFamily="@font/cairo_semibold"
+                       android:text="4.6"
+                       android:textColor="@color/text_black_color"
+                       android:textSize="12sp" />
+               </LinearLayout>
+
+
+
+                    <ImageView
+                        android:id="@+id/img1"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="16dp"
+                        android:src="@drawable/icon_sheet"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/tx8"
+                        app:layout_constraintBottom_toBottomOf="@+id/tx7"/>
+                    <TextView
+                        android:id="@+id/tx8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ضمان أساسي"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/cairo_regular"
+                        android:textColor="@color/black"
+                        android:layout_marginEnd="12dp"
+                        android:layout_marginTop="25dp"
+                        app:layout_constraintTop_toBottomOf="@+id/linear2"
+                        app:layout_constraintRight_toLeftOf="@+id/img1"
+                        />
+                    <TextView
+                        android:id="@+id/warnaty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ضمان لمدة سنتين"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/cairo_regular"
+                        android:textColor="#9d9d9d"
+                        android:layout_marginEnd="12dp"
+                        app:layout_constraintTop_toBottomOf="@+id/tx8"
+                        app:layout_constraintRight_toLeftOf="@+id/img1"
+                        />
+                    <ImageView
+                        android:visibility="gone"
+                        android:layout_width="8dp"
+                        android:layout_height="12dp"
+                        android:src="@drawable/ic_arrow_left_small"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tx7"
+                        app:layout_constraintTop_toTopOf="@+id/tx8"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        />
+                    <View
+                        android:id="@+id/view1"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#1A1F57FF"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintTop_toBottomOf="@+id/warnaty"
+                        />
+                    <TextView
+                        android:id="@+id/tx9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="المواصفات"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/cairo_regular"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/view1"
+                        />
+                    <TextView
+                        android:id="@+id/details_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="هذا النص افتراضي يمكن استبداله بالنص الأساسي
+هذا النص افتراضي يمكن استبداله بالنص الأساسي
+هذا النص افتراضي يمكن استبداله بالنص الأساسي"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/cairo_regular"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintHorizontal_bias="1"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tx9"
+                        />
+
+                </android.support.constraint.ConstraintLayout>
+
+
+
+
+            <Button
+                android:id="@+id/buy_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/bg_login_btn_radues10"
+                android:fontFamily="@font/cairo_semibold"
+                android:text="اشترِ الآن"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:layout_marginBottom="40dp"
+                app:layout_constraintTop_toBottomOf="@+id/details_lay"
+                />
+
+        </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
+</ScrollView>
+
+
+
+
+
+
+
+
+
+
+
+</RelativeLayout>

@@ -1,0 +1,42 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="TabText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/cairo_semibold</item>
+        <item name="android:textColor">#0d0e10</item>
+    </style>
+    <!--<style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView">-->
+    <!--<item name="fontFamily">@font/questv1_bold</item>-->
+    <!--<item name="android:textSize">11sp</item>-->
+    <!--</style>-->
+
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">#ff6a29</item>
+        <item name="android:height">10dp</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="text_white_sizeBig" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/tx_dark_gray</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/cairo_semibold</item>
+    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <!--<style name="Radio" parent="Theme.AppCompat.Light">-->
+    <!--<item name="colorAccent">#1f57ff</item>-->
+    <!--</style>-->
+</resources>

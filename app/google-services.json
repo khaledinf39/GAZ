@@ -1,0 +1,143 @@
+{
+  "project_info": {
+    "project_number": "239118239090",
+    "firebase_url": "https://gazapp-4e160.firebaseio.com",
+    "project_id": "gazapp-4e160",
+    "storage_bucket": "gazapp-4e160.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:239118239090:android:9a7425ca28f34a97",
+        "android_client_info": {
+          "package_name": "com.example.gaz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "239118239090-dnrhvfqqqenlqpjsdr2bsva0uu2c2q9t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gaz",
+            "certificate_hash": "f66cb05493c54e4242fa7df3e12a083ba6a46ac8"
+          }
+        },
+        {
+          "client_id": "239118239090-589nugcb4be9hcbe9ph9gbh8s9vas9se.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABrYB4Mc5qt_s3F5cHPo19KrypCkQEQtY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "239118239090-589nugcb4be9hcbe9ph9gbh8s9vas9se.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "239118239090-7jli56cjjga6ea58klqt6roqg6gor4ga.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gaz-app.iQahtan.Gaz-App"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:239118239090:android:442f531eeb4e3d80",
+        "android_client_info": {
+          "package_name": "com.example.gaz_driver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "239118239090-h0l4p1siukfkr7pkd1ds11f0srvrtb4r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gaz_driver",
+            "certificate_hash": "c4ce8cbd1fcaa292d5c8b7b78afdf8065d0a8623"
+          }
+        },
+        {
+          "client_id": "239118239090-589nugcb4be9hcbe9ph9gbh8s9vas9se.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABrYB4Mc5qt_s3F5cHPo19KrypCkQEQtY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "239118239090-589nugcb4be9hcbe9ph9gbh8s9vas9se.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "239118239090-7jli56cjjga6ea58klqt6roqg6gor4ga.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gaz-app.iQahtan.Gaz-App"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:239118239090:android:83e97f8a04c43add",
+        "android_client_info": {
+          "package_name": "com.kh_sof_dev.gaz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "239118239090-vc70jubpdeikdrdd78aalm9rjhu8jbco.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kh_sof_dev.gaz",
+            "certificate_hash": "f66cb05493c54e4242fa7df3e12a083ba6a46ac8"
+          }
+        },
+        {
+          "client_id": "239118239090-589nugcb4be9hcbe9ph9gbh8s9vas9se.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABrYB4Mc5qt_s3F5cHPo19KrypCkQEQtY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "239118239090-589nugcb4be9hcbe9ph9gbh8s9vas9se.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "239118239090-7jli56cjjga6ea58klqt6roqg6gor4ga.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gaz-app.iQahtan.Gaz-App"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

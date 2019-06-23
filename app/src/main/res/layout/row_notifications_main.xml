@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:background="@drawable/bg_notification_main"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
+        <TextView
+            android:id="@+id/name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="السيد/ة عبدالعزيز"
+            android:textSize="15sp"
+            android:textColor="#364f6b"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="13dp"
+            android:fontFamily="@font/cairo_regular"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+        <TextView
+            android:id="@+id/date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12.55 م"
+            android:textSize="12sp"
+            android:textColor="#1f57ff"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="23dp"
+            android:fontFamily="@font/cairo_regular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="تذكير: لم تقم بالتعبئة منذ 20 يوم يرجى تفقد كمية الغاز لديك"
+            android:textSize="12sp"
+            android:textColor="#9d9d9d"
+            android:layout_marginTop="0dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginEnd="9dp"
+            android:layout_marginBottom="17dp"
+            android:fontFamily="@font/cairo_regular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name_tv"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            />
+    </android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="13dp"
+        android:padding="8dp"
+        android:src="@drawable/ic_notification_icon"
+        android:background="@drawable/bg_notification_icon"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="city_array">
+        <item>الرياض</item>
+        <item>جدة</item>
+        <item>الرياض</item>
+        <item>جدة</item>
+    </array>
+</resources>

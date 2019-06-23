@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/tx1_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="نسعد بمعرفة تقييمك"
+        android:textColor="@color/text_light_gray"
+        android:textSize="18sp"
+        android:layout_marginTop="35dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/cairo_regular"
+        />
+    <TextView
+        android:id="@+id/tx2_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="كيف كانت تجربتك مع غاز"
+        android:textColor="#848282"
+        android:textSize="14sp"
+        android:layout_marginTop="6dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx1_tv"
+        />
+    <LinearLayout
+        android:id="@+id/rate_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="17dp"
+        app:layout_constraintTop_toBottomOf="@id/tx2_tv"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        >
+
+        <ImageView
+            android:id="@+id/star1_img"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/icon_star"/>
+        <ImageView
+            android:id="@+id/star2_img"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/icon_star"/>
+        <ImageView
+            android:id="@+id/star3_img"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/icon_star"/>
+
+        <ImageView
+            android:id="@+id/star4_img"
+            android:layout_width="18dp"
+            android:layout_height="17dp"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/icon_star" />
+        <ImageView
+            android:id="@+id/star5_img"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:src="@drawable/icon_star"/>
+    </LinearLayout>
+    <EditText
+        android:id="@+id/comment"
+        android:layout_width="match_parent"
+        android:layout_height="105dp"
+        android:hint="ملاحظاتك محط اهتمامنا..."
+        android:textColorHint="#848282"
+
+        android:gravity="top"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginStart="35dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="13dp"
+        android:background="@drawable/bg_et_cancel_req"
+        android:textSize="12sp"
+        android:textColor="@color/text_light_gray"
+        android:fontFamily="@font/cairo_regular"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rate_bar"
+        />
+    <Button
+        android:id="@+id/send_rates_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ارسال التقييم"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:background="@drawable/bg_login_btn_radues10"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/comment"
+        />
+</android.support.constraint.ConstraintLayout>

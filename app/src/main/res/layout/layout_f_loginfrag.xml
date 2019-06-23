@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    tools:context=".Fragments.LoginFrag">
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="100"
+            android:orientation="vertical">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10">
+
+                <ImageView
+                    android:id="@+id/logout_btn"
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_marginStart="35dp"
+                    android:background="@drawable/ic_close"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="90">
+
+                <LinearLayout
+                    android:id="@+id/lay1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/cairo_semibold"
+                        android:text="مرحبا بك"
+                        android:textColor="@color/text_black_color"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/cairo_semibold"
+                        android:text="يرجى تسجيل الدخول للمتابعة"
+                        android:textColor="@color/gray_text_color"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:gravity="right"
+                        android:orientation="horizontal"
+                        android:weightSum="4">
+
+                        <com.hbb20.CountryCodePicker
+                            android:id="@+id/ccp"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="bottom"
+                            android:layout_weight="1.5"
+                            android:gravity="center"
+                            app:ccp_defaultNameCode="SA"
+                            app:ccp_textGravity="LEFT"
+                            app:ccp_textSize="12sp" />
+
+                        <EditText
+                            android:id="@+id/phoneNo_et"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp"
+                            android:layout_weight="2.5"
+                            android:backgroundTint="@color/et_line_color"
+                            android:fontFamily="@font/cairo_regular"
+                            android:gravity="right"
+                            android:hint="رقم الهاتف"
+                            android:inputType="phone"
+                            android:paddingBottom="30dp"
+                            android:textColor="@color/text_black_color"
+                            android:textColorHint="@color/et_text_color"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+
+                    <EditText
+                        android:id="@+id/password_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginEnd="16dp"
+                        android:backgroundTint="@color/et_line_color"
+                        android:fontFamily="@font/cairo_semibold"
+                        android:gravity="right"
+                        android:hint="كلمة المرور"
+                        android:inputType="textPassword"
+                        android:paddingBottom="17dp"
+                        android:textColor="@color/text_black_color"
+                        android:textColorHint="@color/et_text_color"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/forget_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginTop="22dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/cairo_semibold"
+                        android:text="هل نسيت كلمة المرور؟"
+                        android:textColor="@color/text_black_color"
+                        android:textSize="16sp" />
+
+                    <Button
+                        android:id="@+id/login_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="28dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/bg_login_btn"
+                        android:fontFamily="@font/cairo_semibold"
+                        android:text="تسجيل الدخول"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginStart="18sp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginEnd="18dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/logup_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:fontFamily="@font/cairo_regular"
+                            android:text="تسجيل حساب"
+                            android:textColor="@color/red_google"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/cairo_regular"
+                            android:text="ليس لديك حساب مسبقاً؟"
+                            android:textColor="@color/gray_text_color"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginEnd="28dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp"
+                    android:visibility="visible"
+
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lay1">
+
+                    <Button
+                        android:id="@+id/sign_in_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="28dp"
+                        android:layout_marginEnd="28dp"
+                        android:layout_marginBottom="30dp"
+                        android:background="@drawable/bg_google"
+                        android:drawableEnd="@drawable/ic_google"
+                        android:drawablePadding="-37dp"
+                        android:fontFamily="@font/cairo_semibold"
+                        android:gravity="center"
+                        android:paddingTop="14dp"
+                        android:paddingEnd="12dp"
+                        android:paddingBottom="14dp"
+                        android:text="التسجيل بحساب جوجل"
+                        android:textColor="@drawable/red_google"
+                        android:textSize="16sp"
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+
+                        />
+
+                    <com.google.android.gms.common.SignInButton
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="@font/cairo_semibold"
+                        android:gravity="center"
+                        android:text="التسجيل بحساب جوجل"
+
+
+                        android:textSize="16sp"
+                        android:visibility="gone"
+
+
+                        />
+
+                    <com.facebook.login.widget.LoginButton
+                        android:id="@+id/loginButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+
+                        android:fontFamily="@font/cairo_semibold"
+                        android:paddingTop="14dp"
+                        android:paddingBottom="14dp"
+
+                        android:text="التسجيل بحساب فيس بوك"
+                        android:textSize="16sp"
+
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/fb_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginEnd="28dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/bg_fb"
+                    android:drawableEnd="@drawable/ic_fb"
+                    android:drawablePadding="-37dp"
+                    android:fontFamily="@font/cairo_semibold"
+                    android:gravity="center"
+                    android:paddingTop="14dp"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="14dp"
+                    android:text="التسجيل بحساب فيس بوك"
+                    android:textColor="@color/btn_blue"
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
