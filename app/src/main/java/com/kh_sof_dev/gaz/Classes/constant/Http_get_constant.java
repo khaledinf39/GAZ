@@ -17,6 +17,8 @@ import com.kh_sof_dev.gaz.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 public class Http_get_constant {
     public interface socialListener{
         void onSuccess(show_contact_ways contact_ways);
@@ -35,6 +37,11 @@ public class Http_get_constant {
     }
     public interface sittingListener{
         void onSuccess(show_setting setting);
+        void onStart();
+        void onFailure(String msg);
+    }
+    public interface OnoffersListener{
+        void onSuccess(show_ads ads );
         void onStart();
         void onFailure(String msg);
     }
@@ -257,5 +264,39 @@ public class Http_get_constant {
         queue.add(getRequest);
         queue.getCache().clear();
     }
-    ///5
+    ///7
+    public void GetAds( final Context mcontext,final OnoffersListener listener)
+    {
+        listener.onStart();
+        String url=mcontext.getString(R.string.api)+"api/adv/adv";
+        if (queue==null){
+            queue = Volley.newRequestQueue(mcontext);
+        }  // this = context
+
+
+        // prepare the Request
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // display response
+                        Log.d("Response", response.toString());
+                        listener.onSuccess(new show_ads(response));
+
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+//                        Log.d("Error.Response", error.getMessage());
+                    }
+                }
+        );
+
+        queue.getCache().initialize();
+        queue.add(getRequest);
+        queue.getCache().clear();
+    }
 }

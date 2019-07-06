@@ -58,6 +58,8 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key"/>
+
+
             <!--android:value="AIzaSyDKhB_cnnxmylJycsDUoi9XbsJTWQJY91Q"/>-->
             <!--android:value="AIzaSyDKhB_cnnxmylJycsDUoi9XbsJTWQJY91Q"/>   //debug-->
            <!--android:value="AIzaSyDsDaMo4UQxysokCbdC97GvX2CR4mD5guM"/>  //test-->

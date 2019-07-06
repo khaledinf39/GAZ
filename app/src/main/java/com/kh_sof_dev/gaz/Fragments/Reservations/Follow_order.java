@@ -161,6 +161,10 @@ public class Follow_order extends Fragment implements OnMapReadyCallback {
         });
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference();
+        Log.d("flowOrder",order_getter.getId()
+                +"dv Id :"+order_getter.getDriverId().getId());
+
+
         reference.child("tracking").child(order_getter.getId()).child(order_getter.getDriverId().getId())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

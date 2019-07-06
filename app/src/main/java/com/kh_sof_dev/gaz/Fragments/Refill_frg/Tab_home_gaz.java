@@ -10,7 +10,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.kh_sof_dev.gaz.Activities.MainNew;
+import com.kh_sof_dev.gaz.Classes.constant.Http_get_constant;
+import com.kh_sof_dev.gaz.Classes.constant.ads;
+import com.kh_sof_dev.gaz.Classes.constant.show_ads;
 import com.kh_sof_dev.gaz.R;
 
 /**
@@ -50,6 +57,59 @@ int order_type;
             public void onClick(View v) {
 
                     MainNew.goto_(new Refill(2),getContext());
+
+            }
+        });
+
+        /***************Ads******************************/
+
+       final SliderLayout mDemoSlider = (SliderLayout) view.findViewById(R.id.slider_l);
+        final TextSliderView textSliderView = new TextSliderView(getContext());
+
+        Http_get_constant constant=new Http_get_constant();
+        constant.GetAds(getContext(), new Http_get_constant.OnoffersListener() {
+            @Override
+            public void onSuccess(show_ads Ads) {
+                if(Ads.isStatus()){
+                    for (ads offer:Ads.getItems()
+                    ) {
+                        String url =offer.getImage();
+
+                        textSliderView
+                                .description(offer.getName())
+                                .image(url)   //url_maps.get(url_maps.keySet())
+                                .setScaleType(BaseSliderView.ScaleType.Fit);
+//                        .setOnSliderClickListener(Home.this);
+
+//            i++;
+                        //add your extra information
+                        textSliderView.bundle(new Bundle());
+                        textSliderView.getBundle()
+                                .putString("extra", url);
+
+                        try{
+                            mDemoSlider.addSlider(textSliderView);
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+
+                    // you can change animasi, time page and anythink.. read more on github
+                    mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Accordion);
+                    mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+                    mDemoSlider.setCustomAnimation(new DescriptionAnimation());
+                    mDemoSlider.setDuration(4000);
+//            mDemoSlider.addOnPageChangeListener(getContext());
+                }
+            }
+
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onFailure(String msg) {
 
             }
         });

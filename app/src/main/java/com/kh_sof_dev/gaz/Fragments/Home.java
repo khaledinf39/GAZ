@@ -1,6 +1,7 @@
 package com.kh_sof_dev.gaz.Fragments;
 
 
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -21,6 +22,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.kh_sof_dev.gaz.Activities.MainNew;
 import com.kh_sof_dev.gaz.Adapters.Gategories;
 import com.kh_sof_dev.gaz.Adapters.Product_adapter;
@@ -34,10 +44,15 @@ import com.kh_sof_dev.gaz.Classes.Products.show_products;
 import com.kh_sof_dev.gaz.Classes.User.user_info;
 import com.kh_sof_dev.gaz.Classes.constant.Http_get_constant;
 import com.kh_sof_dev.gaz.Classes.constant.Setting;
+import com.kh_sof_dev.gaz.Classes.constant.ads;
+import com.kh_sof_dev.gaz.Classes.constant.show_ads;
 import com.kh_sof_dev.gaz.Classes.constant.show_setting;
 import com.kh_sof_dev.gaz.Fragments.Refill_frg.Refill;
 import com.kh_sof_dev.gaz.Fragments.Refill_frg.Tab_home_gaz;
 import com.kh_sof_dev.gaz.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -90,7 +105,7 @@ RecyclerView speacialRV,categoriesRV,productRV;
     Gategories categ_adapter;
 
     ImageView go_basket;
-
+private  SliderLayout mDemoSlider;
     private TextView count,Allcatig;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -125,6 +140,7 @@ RecyclerView speacialRV,categoriesRV,productRV;
         }else {
             count.setVisibility(View.GONE);
         }
+
         /**************************************************************/
         go_basket=(ImageView)view.findViewById(R.id.basket);
         go_basket.setOnClickListener(new View.OnClickListener() {

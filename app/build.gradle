@@ -2,13 +2,21 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('C:\\Users\\MCS\\AndroidStudioProjects\\GAZ\\key_store.jks')
+            storePassword '123456'
+            keyAlias = 'gaz'
+            keyPassword '123456'
+        }
+    }
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.kh_sof_dev.gaz"
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 11
-        versionName "1.0.10"                            //aliase gaz and pw 123456
+        versionCode 12          //04-07-2019
+        versionName "1.0.11"                            //aliase gaz and pw 123456
                                                        // google account pw:Na-g59372 ,email: alnaqellalafthalf@gmail.com
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -16,6 +24,8 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            debuggable = false
+            signingConfig signingConfigs.debug
         }
     }
     dataBinding {
@@ -73,5 +83,11 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
 ////fore upload image
     implementation 'com.karumi:dexter:5.0.0'
+
+
+    /// slide Ads
+    implementation 'com.squareup.picasso:picasso:2.3.2'
+    implementation 'com.nineoldandroids:library:2.4.0'
+    implementation 'com.daimajia.slider:library:1.1.5@aar'
 }
 apply plugin: 'com.google.gms.google-services'

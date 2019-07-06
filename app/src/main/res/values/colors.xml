@@ -13,7 +13,7 @@
     <color name="et_text_color">#9d9d9d</color>
     <color name="et_line_color">#d8d8d8</color>
     <color name="white">#fff</color>
-    <color name="btn_blue">#D31F57FF</color>
+    <color name="btn_blue">#BF1F57FF</color>
 
     <color name="btn_blue_pressed">#1943BE</color>
     <color name="red_google">#fd373b</color>
@@ -29,7 +29,7 @@
     <color name="nav_item_state_list_selected">#1f57ff</color>
     <color name="nav_item_state_list">#364f6b</color>
     <color name="btn_orng_pressed" >#E75A2D</color>
-    <color name="btn_orng">#FF5722</color>
+    <color name="btn_orng">#BFFF5722</color>
     <color name="grey">#B5555352</color>
     <color name="grey_pressed" >#413F3F</color>
 </resources>
