@@ -7,12 +7,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.kh_sof_dev.gaz.R;
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 
 public class Logo extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.layout_a_logo);
         new Handler().postDelayed(new Runnable() {
             @Override
