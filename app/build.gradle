@@ -12,14 +12,14 @@ apply plugin: 'io.fabric'
 apply plugin: 'com.google.gms.google-services'
 
 android {
-    signingConfigs {
-        debug {
-            storeFile file('C:\\Users\\MCS\\AndroidStudioProjects\\GAZ\\key_store.jks')
-            storePassword '123456'
-            keyAlias = 'gaz'
-            keyPassword '123456'
-        }
-    }
+//    signingConfigs {
+//        debug {
+//            storeFile file('C:\\Users\\MCS\\AndroidStudioProjects\\GAZ\\key_store.jks')
+//            storePassword '123456'
+//            keyAlias = 'gaz'
+//            keyPassword '123456'
+//        }
+//    }
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.kh_sof_dev.gaz"
