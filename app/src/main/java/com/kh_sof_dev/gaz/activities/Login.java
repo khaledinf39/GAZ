@@ -1,4 +1,4 @@
-package com.kh_sof_dev.gaz.Activities;
+package com.kh_sof_dev.gaz.activities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -21,11 +21,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.kh_sof_dev.gaz.Fragments.LoginFrag;
 import com.kh_sof_dev.gaz.R;

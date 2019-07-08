@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.kh_sof_dev.gaz.Activities.Login;
+import com.kh_sof_dev.gaz.activities.Login;
 import com.kh_sof_dev.gaz.Classes.User.Http_user;
 import com.kh_sof_dev.gaz.Classes.User.new_account;
 import com.kh_sof_dev.gaz.R;

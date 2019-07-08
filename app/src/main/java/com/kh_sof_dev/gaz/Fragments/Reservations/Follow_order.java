@@ -28,14 +28,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.kh_sof_dev.gaz.Activities.Chat;
-import com.kh_sof_dev.gaz.Activities.MainNew;
+import com.kh_sof_dev.gaz.activities.Chat;
 import com.kh_sof_dev.gaz.Classes.Firebase.car_informatiom;
 import com.kh_sof_dev.gaz.Classes.Order.GetMayOrders.Order_getter;
 import com.kh_sof_dev.gaz.Classes.url.DirectionsJSONParser;
-import com.kh_sof_dev.gaz.Fragments.Home;
-import com.kh_sof_dev.gaz.Fragments.Shipping;
 import com.kh_sof_dev.gaz.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -161,21 +157,25 @@ public class Follow_order extends Fragment implements OnMapReadyCallback {
         });
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference();
-        Log.d("flowOrder",order_getter.getId()
-                +"dv Id :"+order_getter.getDriverId().getId());
+        Log.d("flowOrder", order_getter.getId()
+                + "dv Id :" + order_getter.getDriverId().getId());
 
 
         reference.child("tracking").child(order_getter.getId()).child(order_getter.getDriverId().getId())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                        if (dataSnapshot.exists()) {
-                            car_informatiom = dataSnapshot.getValue(car_informatiom.class);
-                            carName.setText(car_informatiom.getCar_name() + " لونها " + car_informatiom.getCar_color());
-                            carNB.setText(car_informatiom.getCar_number());
-                            callBtn.setEnabled(true);
+                        try {
+                            if (dataSnapshot.exists()) {
+                                car_informatiom = dataSnapshot.getValue(car_informatiom.class);
+                                carName.setText(car_informatiom.getCar_name() + " لونها " + car_informatiom.getCar_color());
+                                carNB.setText(car_informatiom.getCar_number());
+                                callBtn.setEnabled(true);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
+
                     }
 
                     @Override
@@ -309,25 +309,30 @@ public class Follow_order extends Fragment implements OnMapReadyCallback {
     }
 
     void drowDriverMarker(DataSnapshot dataSnapshot, ProgressDialog dialog) {
-        Log.e("dataSnapshot", dataSnapshot.toString());
-        if (dataSnapshot.getKey().equals("lat")) {
-            lat = dataSnapshot.getValue(Double.class);
-        }
-        if (dataSnapshot.getKey().equals("lng")) {
-            lng = dataSnapshot.getValue(Double.class);
-        }
-        if (lat != null && lng != null) {
-            try {
-                Map_draw(new LatLng(lat, lng));
-                if (firstOpen) {
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(start, 15));
-                    firstOpen = false;
-                }
-                dialog.dismiss();
-            } catch (Exception e) {
-                e.printStackTrace();
+        try {
+            Log.e("dataSnapshot", dataSnapshot.toString());
+            if (dataSnapshot.getKey().equals("lat")) {
+                lat = dataSnapshot.getValue(Double.class);
             }
+            if (dataSnapshot.getKey().equals("lng")) {
+                lng = dataSnapshot.getValue(Double.class);
+            }
+            if (lat != null && lng != null) {
+                try {
+                    Map_draw(new LatLng(lat, lng));
+                    if (firstOpen) {
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(start, 15));
+                        firstOpen = false;
+                    }
+                    dialog.dismiss();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
 
     @Override

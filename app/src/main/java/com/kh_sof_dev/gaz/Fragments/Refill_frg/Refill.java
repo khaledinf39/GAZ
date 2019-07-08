@@ -13,12 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TableLayout;
 import android.widget.TextView;
 
 
-import com.kh_sof_dev.gaz.Activities.MainNew;
-import com.kh_sof_dev.gaz.Fragments.Refill_frg.RefillHome;
+import com.kh_sof_dev.gaz.activities.MainNew;
 import com.kh_sof_dev.gaz.R;
 
 

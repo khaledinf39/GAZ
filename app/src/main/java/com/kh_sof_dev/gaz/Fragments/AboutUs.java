@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.kh_sof_dev.gaz.Activities.MainNew;
 import com.kh_sof_dev.gaz.Adapters.Tirme_and_condiction_adapter;
 import com.kh_sof_dev.gaz.Classes.constant.About_us.cons;
 import com.kh_sof_dev.gaz.Classes.constant.About_us.show_s_cus;

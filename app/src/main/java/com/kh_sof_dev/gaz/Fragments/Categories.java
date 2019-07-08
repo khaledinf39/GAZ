@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.kh_sof_dev.gaz.Activities.MainNew;
+import com.kh_sof_dev.gaz.activities.MainNew;
 import com.kh_sof_dev.gaz.Adapters.Gategories;
 import com.kh_sof_dev.gaz.Classes.Products.Http_products;
 import com.kh_sof_dev.gaz.Classes.Products.show_main_catigories;

@@ -1,13 +1,11 @@
 package com.kh_sof_dev.gaz.Fragments;
 
 
-import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,24 +14,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
-import com.kh_sof_dev.gaz.Activities.MainNew;
+import com.kh_sof_dev.gaz.activities.MainNew;
 import com.kh_sof_dev.gaz.Adapters.Gategories;
-import com.kh_sof_dev.gaz.Adapters.Product_adapter;
 import com.kh_sof_dev.gaz.Adapters.Top20Products;
 import com.kh_sof_dev.gaz.Classes.Database.DBManager;
 import com.kh_sof_dev.gaz.Classes.Order.Http_orders;
@@ -44,15 +32,9 @@ import com.kh_sof_dev.gaz.Classes.Products.show_products;
 import com.kh_sof_dev.gaz.Classes.User.user_info;
 import com.kh_sof_dev.gaz.Classes.constant.Http_get_constant;
 import com.kh_sof_dev.gaz.Classes.constant.Setting;
-import com.kh_sof_dev.gaz.Classes.constant.ads;
-import com.kh_sof_dev.gaz.Classes.constant.show_ads;
 import com.kh_sof_dev.gaz.Classes.constant.show_setting;
-import com.kh_sof_dev.gaz.Fragments.Refill_frg.Refill;
 import com.kh_sof_dev.gaz.Fragments.Refill_frg.Tab_home_gaz;
 import com.kh_sof_dev.gaz.R;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * A simple {@link Fragment} subclass.

@@ -10,9 +10,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.TextView;
 
-import com.kh_sof_dev.gaz.Activities.MainNew;
 import com.kh_sof_dev.gaz.Classes.constant.About_us.cons;
-import com.kh_sof_dev.gaz.Fragments.SearchResults;
 import com.kh_sof_dev.gaz.R;
 
 import java.util.ArrayList;

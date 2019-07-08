@@ -1,7 +1,6 @@
 package com.kh_sof_dev.gaz.Classes.User;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
@@ -11,7 +10,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.kh_sof_dev.gaz.Activities.Login;
+import com.kh_sof_dev.gaz.activities.Login;
 import com.kh_sof_dev.gaz.R;
 
 
@@ -20,8 +19,6 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class Http_user {
     public interface user_createListener{

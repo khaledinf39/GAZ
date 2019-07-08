@@ -1,11 +1,9 @@
-package com.kh_sof_dev.gaz.Activities;
+package com.kh_sof_dev.gaz.activities;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.internal.NavigationMenuPresenter;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -22,12 +20,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
-import com.kh_sof_dev.gaz.Classes.User.Http_user;
-import com.kh_sof_dev.gaz.Classes.User.new_account;
 import com.kh_sof_dev.gaz.Classes.User.user_info;
 import com.kh_sof_dev.gaz.Fragments.AboutUs;
 import com.kh_sof_dev.gaz.Fragments.ChangePassword;
@@ -39,7 +34,6 @@ import com.kh_sof_dev.gaz.Fragments.Reservations.MyReservations;
 import com.kh_sof_dev.gaz.Fragments.Notifications;
 import com.kh_sof_dev.gaz.Fragments.Profile;
 import com.kh_sof_dev.gaz.Fragments.Search;
-import com.kh_sof_dev.gaz.Fragments.Settings;
 import com.kh_sof_dev.gaz.Fragments.UserAgreement;
 import com.kh_sof_dev.gaz.R;
 

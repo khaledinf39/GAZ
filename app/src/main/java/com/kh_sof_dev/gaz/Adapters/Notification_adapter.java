@@ -12,8 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.kh_sof_dev.gaz.Activities.MainNew;
-import com.kh_sof_dev.gaz.Activities.OutherActivty;
+import com.kh_sof_dev.gaz.activities.OutherActivty;
 import com.kh_sof_dev.gaz.Classes.Ntification.Http_notification;
 import com.kh_sof_dev.gaz.Classes.Ntification.notification;
 import com.kh_sof_dev.gaz.Classes.Ntification.show_notif;

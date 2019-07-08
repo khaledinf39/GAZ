@@ -1,4 +1,4 @@
-package com.kh_sof_dev.gaz.Activities;
+package com.kh_sof_dev.gaz.activities;
 
 import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;

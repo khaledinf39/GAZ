@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.kh_sof_dev.gaz.Activities.MainNew;
+import com.kh_sof_dev.gaz.activities.MainNew;
 import com.kh_sof_dev.gaz.Adapters.Gategories;
 import com.kh_sof_dev.gaz.Adapters.Product_adapter;
 import com.kh_sof_dev.gaz.Adapters.Top20Products;

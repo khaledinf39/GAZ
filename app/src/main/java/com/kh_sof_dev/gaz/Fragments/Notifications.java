@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.kh_sof_dev.gaz.Activities.MainNew;
+import com.kh_sof_dev.gaz.activities.MainNew;
 import com.kh_sof_dev.gaz.Adapters.Notification_adapter;
 import com.kh_sof_dev.gaz.Classes.Ntification.Http_notification;
 import com.kh_sof_dev.gaz.Classes.Ntification.show_notif;

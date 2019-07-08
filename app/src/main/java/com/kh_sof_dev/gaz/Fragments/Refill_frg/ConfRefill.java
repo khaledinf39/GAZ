@@ -15,14 +15,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.kh_sof_dev.gaz.Activities.MainNew;
+import com.kh_sof_dev.gaz.activities.MainNew;
 import com.kh_sof_dev.gaz.Adapters.Refill_adapter;
 import com.kh_sof_dev.gaz.Classes.Products.Product;
 import com.kh_sof_dev.gaz.Classes.constant.Setting;
 import com.kh_sof_dev.gaz.Fragments.Payment;
-import com.kh_sof_dev.gaz.Fragments.Refill_frg.Refill;
-import com.kh_sof_dev.gaz.Fragments.Refill_frg.RefillHome;
-import com.kh_sof_dev.gaz.Fragments.Shipping;
 import com.kh_sof_dev.gaz.R;
 
 

@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.kh_sof_dev.gaz.Activities.MainNew;
 import com.kh_sof_dev.gaz.Adapters.MyFavorit_adapter;
 import com.kh_sof_dev.gaz.Classes.Database.DBManager;
 import com.kh_sof_dev.gaz.R;

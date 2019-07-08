@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.kh_sof_dev.gaz.Activities.MainNew;
 import com.kh_sof_dev.gaz.R;
 
 /**

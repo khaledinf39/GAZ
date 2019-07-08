@@ -12,8 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.kh_sof_dev.gaz.Activities.Login;
-import com.kh_sof_dev.gaz.Activities.MainNew;
+import com.kh_sof_dev.gaz.activities.MainNew;
 import com.kh_sof_dev.gaz.Adapters.Favorit_adapter;
 import com.kh_sof_dev.gaz.Adapters.Resrvation_adapter;
 import com.kh_sof_dev.gaz.Classes.Database.DBManager;

@@ -11,8 +11,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <application
         android:name=".MyApplication"
-        android:networkSecurityConfig="@xml/network_security_config"
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
@@ -25,7 +23,7 @@
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
 
 
-        <activity android:name=".Activities.OutherActivty"/>
+        <activity android:name=".activities.OutherActivty"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -52,7 +50,8 @@
          </activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDjm0ONs1KCfE1ZJi3eTnkenyktfFfP47E"/>
+            android:value="AIzaSyDsDaMo4UQxysokCbdC97GvX2CR4mD5guM"/>
+            <!--android:value="AIzaSyDjm0ONs1KCfE1ZJi3eTnkenyktfFfP47E"/>-->
 
 
             <!--android:value="AIzaSyDKhB_cnnxmylJycsDUoi9XbsJTWQJY91Q"/>-->
@@ -60,13 +59,13 @@
            <!--android:value="AIzaSyDsDaMo4UQxysokCbdC97GvX2CR4mD5guM"/>  //test-->
              <!--"AIzaSyDKhB_cnnxmylJycsDUoi9XbsJTWQJY91Q"-->
 
-        <activity android:name=".Activities.Chat" />
+        <activity android:name=".activities.Chat" />
         <activity
-            android:name=".Activities.MainNew"
+            android:name=".activities.MainNew"
             android:label="@string/title_activity_main_new"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.Intro" />
-        <activity android:name=".Activities.Main">
+        <activity android:name=".activities.Intro" />
+        <activity android:name=".activities.Main">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
 
@@ -75,7 +74,7 @@
 
 
         </activity>
-            <activity android:name=".Activities.Logo">
+            <activity android:name=".activities.Logo">
 
                 <intent-filter>
                     <action android:name="android.intent.action.MAIN" />
@@ -84,7 +83,7 @@
                 </intent-filter>
 
             </activity>
-            <activity android:name=".Activities.Login" />
+            <activity android:name=".activities.Login" />
             <meta-data
             android:name="io.fabric.ApiKey"
             android:value="d2cca9159707aeb74a5e8a636bf00585e97f446c" />

@@ -23,15 +23,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.kh_sof_dev.gaz.Activities.MainNew;
-import com.kh_sof_dev.gaz.Activities.OutherActivty;
-import com.kh_sof_dev.gaz.Adapters.BasketReserv_adapter;
 import com.kh_sof_dev.gaz.Adapters.OrderDetails_prod_adapter;
 import com.kh_sof_dev.gaz.Adapters.Order_adapter;
 import com.kh_sof_dev.gaz.Classes.Order.GetMayOrders.Order_getter;
 import com.kh_sof_dev.gaz.Classes.Order.Http_orders;
 import com.kh_sof_dev.gaz.Classes.Order.show_order;
-import com.kh_sof_dev.gaz.Fragments.Reservations.MyReservations;
 import com.kh_sof_dev.gaz.R;
 
 import java.util.HashMap;

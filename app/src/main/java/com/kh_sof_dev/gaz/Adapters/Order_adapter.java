@@ -12,18 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.kh_sof_dev.gaz.Activities.MainNew;
-import com.kh_sof_dev.gaz.Activities.OutherActivty;
+import com.kh_sof_dev.gaz.activities.OutherActivty;
 import com.kh_sof_dev.gaz.Classes.Order.GetMayOrders.Order_getter;
 import com.kh_sof_dev.gaz.Fragments.Order_details;
 import com.kh_sof_dev.gaz.Fragments.Reservations.Follow_order;
 import com.kh_sof_dev.gaz.R;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 
 /**

@@ -1,5 +1,5 @@
 
-package com.kh_sof_dev.gaz.Activities;
+package com.kh_sof_dev.gaz.activities;
 
 import android.content.Context;
 import android.content.Intent;

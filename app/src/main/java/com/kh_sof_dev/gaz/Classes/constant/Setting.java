@@ -3,8 +3,6 @@ package com.kh_sof_dev.gaz.Classes.constant;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.kh_sof_dev.gaz.Activities.MainNew;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
