@@ -54,20 +54,24 @@ public class Shipping extends Fragment implements OnMapReadyCallback {
     public static String locationAdd = "";
     private Boolean flag;
 
-    @SuppressLint("MissingPermission")
     private void get_location() {
-
         flag = displayGpsStatus();
         if (flag) {
             locationListener = new MyLocationListener();
-
-
-            locationManager.requestLocationUpdates(LocationManager
-                    .GPS_PROVIDER, 5000, 10, locationListener);
-
-
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED &&
+                        ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                                != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{
+                            Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.INTERNET
+                    }, 15);
+                } else if (locationListener != null) {
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
+                }
+            }
         } else {
-
             alertbox();
 //            alertbox("Gps Status!!", "Your GPS is: OFF");
         }
