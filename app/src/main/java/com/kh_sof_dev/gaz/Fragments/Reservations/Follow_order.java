@@ -28,11 +28,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.kh_sof_dev.gaz.activities.Chat;
-import com.kh_sof_dev.gaz.Classes.Firebase.car_informatiom;
-import com.kh_sof_dev.gaz.Classes.Order.GetMayOrders.Order_getter;
-import com.kh_sof_dev.gaz.Classes.url.DirectionsJSONParser;
-import com.kh_sof_dev.gaz.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -40,7 +35,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -50,6 +44,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.kh_sof_dev.gaz.Classes.Firebase.car_informatiom;
+import com.kh_sof_dev.gaz.Classes.Order.GetMayOrders.Order_getter;
+import com.kh_sof_dev.gaz.Classes.url.DirectionsJSONParser;
+import com.kh_sof_dev.gaz.R;
+import com.kh_sof_dev.gaz.activities.Chat;
 
 import org.json.JSONObject;
 
@@ -62,6 +61,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -93,96 +93,107 @@ public class Follow_order extends Fragment implements OnMapReadyCallback {
     }
 
 
-    private TextView address1, address2, orderState, driverName/*, coste*/, carNB, carName;
-    private CircleImageView driverImg;
-    private Button callBtn, msgBtn;
-    private ImageView back;
+    private TextView carNB;
+    private TextView carName;
+    private Button callBtn;
     private car_informatiom car_informatiom;
     private Double lat = null, lng = null;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.layout_f_reservation__current, container, false);
-        address1 = (TextView) view.findViewById(R.id.address1_tv);
-        address2 = (TextView) view.findViewById(R.id.address2_tv);
-        orderState = (TextView) view.findViewById(R.id.orderState_tv);
-        carName = (TextView) view.findViewById(R.id.DriverCar);
-        carNB = (TextView) view.findViewById(R.id.CarNo_tv);
+        TextView address1 = view.findViewById(R.id.address1_tv);
+        TextView address2 = view.findViewById(R.id.address2_tv);
+//        TextView orderState = view.findViewById(R.id.orderState_tv);
+        carName = view.findViewById(R.id.DriverCar);
+        carNB = view.findViewById(R.id.CarNo_tv);
 
-        driverName = (TextView) view.findViewById(R.id.DriverName);
+        /*, coste*/
+        TextView driverName = view.findViewById(R.id.DriverName);
 //        coste = (TextView) view.findViewById(R.id.cost);
-        back = (ImageView) view.findViewById(R.id.back_btn);
-        driverImg = (CircleImageView) view.findViewById(R.id.DriverImg);
-        callBtn = (Button) view.findViewById(R.id.msgDriver_btn);
-        msgBtn = (Button) view.findViewById(R.id.callDriver_btn);
-        /**********************************intialise***********************************/
-        Glide.with(getContext())
-                .load(order_getter.getDriverId().getImage())
-                .placeholder(R.drawable.ic_user_img_gray)
-                .into(driverImg);
-        driverName.setText(order_getter.getDriverId().getName());
+        ImageView back = view.findViewById(R.id.back_btn);
+        CircleImageView driverImg = view.findViewById(R.id.DriverImg);
+        callBtn = view.findViewById(R.id.msgDriver_btn);
+        Button msgBtn = view.findViewById(R.id.callDriver_btn);
+        //**********************************intialise***********************************/
+        try {
+            if (order_getter != null) {
+                if (order_getter.getDriverId() != null) {
+                    Glide.with(getContext())
+                            .load(order_getter.getDriverId().getImage())
+                            .placeholder(R.drawable.ic_user_img_gray)
+                            .into(driverImg);
+                    driverName.setText(order_getter.getDriverId().getName());
+                    address1.setText(order_getter.getDriverId().getAddress());
+                }
 //        coste.setText(order_getter.getDeliveryCost() + "");
 //        coste.setVisibility(View.GONE);
-        address2.setText(order_getter.getAddressDetails());
-        address1.setText(order_getter.getDriverId().getAddress());
+                if (order_getter.getAddressDetails() != null)
+                    address2.setText(order_getter.getAddressDetails());
 //        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+                SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
 
-        mapFragment.getMapAsync(this);
-        /******************************action*********************************/
-        msgBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Chat.order_id = order_getter.getId();
-                startActivity(new Intent(getContext(), Chat.class));
-            }
-        });
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().finish();
-//                MainNew._goto(Follow_order.this,new Home(),View.VISIBLE);
-            }
-        });
-
-        callBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", car_informatiom.getDriverPhone()
-                        , null)));
-            }
-        });
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference();
-        Log.d("flowOrder", order_getter.getId()
-                + "dv Id :" + order_getter.getDriverId().getId());
-
-
-        reference.child("tracking").child(order_getter.getId()).child(order_getter.getDriverId().getId())
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+                mapFragment.getMapAsync(this);
+                //******************************action*********************************/
+                msgBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        try {
-                            if (dataSnapshot.exists()) {
-                                car_informatiom = dataSnapshot.getValue(car_informatiom.class);
-                                carName.setText(car_informatiom.getCar_name() + " لونها " + car_informatiom.getCar_color());
-                                carNB.setText(car_informatiom.getCar_number());
-                                callBtn.setEnabled(true);
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                    public void onClick(View v) {
+                        if (order_getter.getId() != null) {
+                            Chat.order_id = order_getter.getId();
+                            startActivity(new Intent(getContext(), Chat.class));
                         }
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
                     }
                 });
+                back.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Objects.requireNonNull(getActivity()).finish();
+//                MainNew._goto(Follow_order.this,new Home(),View.VISIBLE);
+                    }
+                });
+
+                callBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", car_informatiom.getDriverPhone()
+                                , null)));
+                    }
+                });
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference reference = database.getReference();
+
+                if (order_getter.getId() != null && order_getter.getDriverId() != null && order_getter.getDriverId().getId() != null)
+                    reference.child("tracking").child(order_getter.getId()).child(order_getter.getDriverId().getId())
+                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    try {
+                                        if (dataSnapshot.exists()) {
+                                            car_informatiom = dataSnapshot.getValue(car_informatiom.class);
+                                            if (car_informatiom != null) {
+                                                carName.setText(String.valueOf(car_informatiom.getCar_name() + " لونها " + car_informatiom.getCar_color()));
+                                                carNB.setText(car_informatiom.getCar_number());
+                                                callBtn.setEnabled(true);
+                                            }
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return view;
     }
 
@@ -311,10 +322,10 @@ public class Follow_order extends Fragment implements OnMapReadyCallback {
     void drowDriverMarker(DataSnapshot dataSnapshot, ProgressDialog dialog) {
         try {
             Log.e("dataSnapshot", dataSnapshot.toString());
-            if (dataSnapshot.getKey().equals("lat")) {
+            if (Objects.equals(dataSnapshot.getKey(), "lat")) {
                 lat = dataSnapshot.getValue(Double.class);
             }
-            if (dataSnapshot.getKey().equals("lng")) {
+            if (Objects.equals(dataSnapshot.getKey(), "lng")) {
                 lng = dataSnapshot.getValue(Double.class);
             }
             if (lat != null && lng != null) {
@@ -368,18 +379,18 @@ public class Follow_order extends Fragment implements OnMapReadyCallback {
         end = new LatLng(secondMarker.getPosition().latitude, secondMarker.getPosition().longitude);
 
 
-        LatLngBounds bounds = new LatLngBounds.Builder()
-                .include(origin)
-                .include(destination).build();
+//        LatLngBounds bounds = new LatLngBounds.Builder()
+//                .include(origin)
+//                .include(destination).build();
         Point displaySize = new Point();
-        getActivity().getWindowManager().getDefaultDisplay().getSize(displaySize);
+        Objects.requireNonNull(getActivity()).getWindowManager().getDefaultDisplay().getSize(displaySize);
 //        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, displaySize.x, 250, 30));
 
         if (firstMarker != null && secondMarker != null) {
 
             DrawPolyLine();
         } else {
-            Toast.makeText(getContext(), getResources().getString(R.string.marker_empty), 5);
+            Toast.makeText(getContext(), getResources().getString(R.string.marker_empty), Toast.LENGTH_LONG).show();
         }
 
 
@@ -387,8 +398,10 @@ public class Follow_order extends Fragment implements OnMapReadyCallback {
 
     private BitmapDescriptor bitmapDescriptorFromVector(Context context, @DrawableRes int vectorDrawableResourceId, int vectorDrawableBackground) {
         Drawable background = ContextCompat.getDrawable(context, vectorDrawableBackground);
+        assert background != null;
         background.setBounds(0, 0, background.getIntrinsicWidth(), background.getIntrinsicHeight());
         Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorDrawableResourceId);
+        assert vectorDrawable != null;
         vectorDrawable.setBounds(+20, +20, vectorDrawable.getIntrinsicWidth() - 20, vectorDrawable.getIntrinsicHeight() - 20);
         Bitmap bitmap = Bitmap.createBitmap(background.getIntrinsicWidth(), background.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
@@ -410,8 +423,8 @@ public class Follow_order extends Fragment implements OnMapReadyCallback {
             // Reading data from url
             iStream = urlConnection.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(iStream));
-            StringBuffer sb = new StringBuffer();
-            String line = "";
+            StringBuilder sb = new StringBuilder();
+            String line;
             while ((line = br.readLine()) != null) {
                 sb.append(line);
             }
@@ -513,31 +526,31 @@ public class Follow_order extends Fragment implements OnMapReadyCallback {
         @SuppressLint("SetTextI18n")
         @Override
         protected void onPostExecute(List<List<HashMap<String, String>>> result) {
-            ArrayList<LatLng> points = null;
-            PolylineOptions lineOptions = null;
-            MarkerOptions markerOptions = new MarkerOptions();
-            String distance = "";
-            String duration = "";
+            ArrayList<LatLng> points;
+            PolylineOptions lineOptions;
+//            MarkerOptions markerOptions = new MarkerOptions();
+//            String distance = "";
+//            String duration = "";
             if (result.size() < 1) {
                 // Toast.makeText(getContext(), "عذرا لم نستطع تحديد الطريق", Toast.LENGTH_LONG).show();
                 return;
             }
 //            // Traversing through all the routes
             for (int i = 0; i < result.size(); i++) {
-                points = new ArrayList<LatLng>();
+                points = new ArrayList<>();
                 lineOptions = new PolylineOptions();
                 // Fetching i-th route
                 List<HashMap<String, String>> path = result.get(i);
                 // Fetching all the points in i-th route
                 for (int j = 0; j < path.size(); j++) {
                     HashMap<String, String> point = path.get(j);
-                    if (j == 0) {    // Get distance from the list
-                        distance = (String) point.get("distance");
-                        continue;
-                    } else if (j == 1) { // Get duration from the list
-                        duration = point.get("duration");
-                        continue;
-                    }
+//                    if (j == 0) {    // Get distance from the list
+//                        distance = point.get("distance");
+//                        continue;
+//                    } else if (j == 1) { // Get duration from the list
+//                        duration = point.get("duration");
+//                        continue;
+//                    }
                     double lat = Double.parseDouble(point.get("lat"));
                     double lng = Double.parseDouble(point.get("lng"));
                     LatLng position = new LatLng(lat, lng);

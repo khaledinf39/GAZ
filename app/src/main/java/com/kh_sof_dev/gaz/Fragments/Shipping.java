@@ -53,6 +53,10 @@ import java.util.Locale;
 public class Shipping extends Fragment implements OnMapReadyCallback {
     public static String locationAdd = "";
     private Boolean flag;
+    private String[] permissions = new String[]{
+            Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.INTERNET
+    };
 
     private void get_location() {
         flag = displayGpsStatus();
@@ -63,10 +67,7 @@ public class Shipping extends Fragment implements OnMapReadyCallback {
                         != PackageManager.PERMISSION_GRANTED &&
                         ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
                                 != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions(new String[]{
-                            Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,
-                            Manifest.permission.INTERNET
-                    }, 15);
+                    requestPermissions(permissions, 15);
                 } else if (locationListener != null) {
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
                 }
@@ -324,7 +325,7 @@ public class Shipping extends Fragment implements OnMapReadyCallback {
                     new user_info(user_info, getActivity());
                 } else {
                     Http_orders http_orders = new Http_orders();
-                    final ProgressDialog dialog = new ProgressDialog(getContext());
+                    final ProgressDialog dialog = new ProgressDialog(getActivity());
                     dialog.setMessage("يتم التأكد من وجود سائقين في هده المتطقة ...");
                     dialog.setTitle("التأكد من وجود سائقين");
                     dialog.setCanceledOnTouchOutside(false);
@@ -375,10 +376,7 @@ public class Shipping extends Fragment implements OnMapReadyCallback {
                     != PackageManager.PERMISSION_GRANTED &&
                     ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
                             != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{
-                        Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.INTERNET
-                }, 15);
+                requestPermissions(permissions, 15);
 
 
             } else if (mMap != null) {
@@ -403,10 +401,7 @@ public class Shipping extends Fragment implements OnMapReadyCallback {
                     != PackageManager.PERMISSION_GRANTED &&
                     ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
                             != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{
-                        Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.INTERNET
-                }, 15);
+                requestPermissions(permissions, 15);
 
 
             } else {

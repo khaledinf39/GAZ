@@ -15,18 +15,18 @@ public class Order_getter {
     private String notes;
     private String city;
     private int statusId;
-    private Double total;
+    private Double total = 0.0;
     private String addressDetails;
     private String createAt;
     private String delivery_date;
-    private Double deliveryCost;
+    private Double deliveryCost = 0.0;
     private int orderType;
     private String delivery_time;
     private List<OrderProduct> items;
-    private double lat;
-    private double lng;
+    private double lat = 0.0;
+    private double lng = 0.0;
     private int paymentType;
-    private Double subTotal;
+    private Double subTotal = 0.0;
     private user userId;
     private DriverId driverId;
 
