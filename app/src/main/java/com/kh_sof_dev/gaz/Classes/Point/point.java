@@ -13,8 +13,8 @@ public class point {
             return;
         }
         points = jsonObject.optInt("points");
-        _id = jsonObject.opt("_id").toString();
-        user_id = jsonObject.opt("user_id").toString();
+        _id = jsonObject.optString("_id");
+        user_id = jsonObject.optString("user_id");
 
     }
     public JSONObject toJsonObject()

@@ -93,6 +93,11 @@ public class Follow_order extends Fragment implements OnMapReadyCallback {
     }
 
 
+    public Follow_order() {
+
+    }
+
+
     private TextView carNB;
     private TextView carName;
     private Button callBtn;

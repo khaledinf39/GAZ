@@ -38,9 +38,9 @@ public class cons{
         if(jsonObject == null){
             return;
         }
-        id = jsonObject.opt("_id").toString();
-        content = jsonObject.opt("content").toString();
-        title = jsonObject.opt("title").toString();
+        id = jsonObject.optString("_id");
+        content = jsonObject.optString("content");
+        title = jsonObject.optString("title");
     }
 
     /**

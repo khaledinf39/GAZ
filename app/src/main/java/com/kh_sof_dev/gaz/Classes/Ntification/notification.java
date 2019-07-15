@@ -4,29 +4,30 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class notification {
-    private String _id,from,title,msg,user_id,body_parms,dt_date;
+    private String _id, from, title, msg, user_id, body_parms, dt_date;
     private Boolean isRead;
     private int type;
 
     public notification(JSONObject jsonObject) throws JSONException {
-        if(jsonObject == null){
+        if (jsonObject == null) {
             return;
         }
-        _id = jsonObject.opt("_id").toString();
-//        from = jsonObject.opt("from").toString();
-        title = jsonObject.opt("title").toString();
-        msg = jsonObject.opt("msg").toString();
+        _id = jsonObject.optString("_id");
+//        from = jsonObject.optString("from");
+        title = jsonObject.optString("title");
+        msg = jsonObject.optString("msg");
         try {
-            user_id = jsonObject.opt("user_id").toString();
-            body_parms = jsonObject.opt("body_parms").toString();
-        }catch (Exception e){
-
+            user_id = jsonObject.optString("user_id");
+            body_parms = jsonObject.optString("body_parms");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         type = jsonObject.getInt("type");
 
-        dt_date = jsonObject.opt("dt_date").toString();
+        dt_date = jsonObject.optString("dt_date");
         isRead = jsonObject.getBoolean("isRead");
     }
+
     public String get_id() {
         return _id;
     }

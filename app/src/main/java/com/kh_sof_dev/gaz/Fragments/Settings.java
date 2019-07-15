@@ -9,28 +9,12 @@ import android.view.ViewGroup;
 
 import com.kh_sof_dev.gaz.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Settings#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class Settings extends Fragment {
 
     public Settings() {
-        // Required empty public constructor
-    }
-
-
-    public static Settings newInstance(String param1, String param2) {
-        Settings fragment = new Settings();
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -8,25 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.kh_sof_dev.gaz.activities.Login;
-import com.kh_sof_dev.gaz.R;
 import com.heinrichreimersoftware.materialintro.app.SlideFragment;
+import com.kh_sof_dev.gaz.R;
+import com.kh_sof_dev.gaz.activities.Login;
 
 
 public class Welcome1 extends SlideFragment {
 
     public Welcome1() {
-        // Required empty public constructor
-    }
-
-    public static Welcome1 newInstance(String param1, String param2) {
-        Welcome1 fragment = new Welcome1();
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
     }
 

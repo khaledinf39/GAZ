@@ -71,7 +71,7 @@ public class show_products {
                 }
             }
          // catigoriess = catigoriessArrayList;
-        }		message = jsonObject.opt("message").toString();
+        }		message = jsonObject.optString("message");
         try {
             pagatination=new pagatination(jsonObject.getJSONObject("pagenation"));
         } catch (JSONException e) {

@@ -15,10 +15,10 @@ import java.util.List;
 
 
 public class GeterOrder {
-// more details
-    private String comment,ratedate;
+    // more details
+    private String comment, ratedate;
     private int rate;
-    private Boolean isRate,isOpen;
+    private Boolean isRate, isOpen;
 
 
     ////////////////
@@ -188,11 +188,11 @@ public class GeterOrder {
         if (jsonObject == null) {
             return;
         }
-        orderType = jsonObject.opt("orderType").toString();
-        delivery_date = jsonObject.opt("delivery_date").toString();
-        Notes = jsonObject.opt("Notes").toString();
-        addressDetails = jsonObject.opt("addressDetails").toString();
-        delivery_time = jsonObject.opt("delivery_time").toString();
+        orderType = jsonObject.optString("orderType");
+        delivery_date = jsonObject.optString("delivery_date");
+        Notes = jsonObject.optString("Notes");
+        addressDetails = jsonObject.optString("addressDetails");
+        delivery_time = jsonObject.optString("delivery_time");
         deliveryCost = jsonObject.getDouble("deliveryCost");
         JSONArray itemsJsonArray = jsonObject.optJSONArray("items");
         if (itemsJsonArray != null) {
@@ -212,30 +212,31 @@ public class GeterOrder {
             subTotal = jsonObject.getDouble("subTotal");
             city = jsonObject.getString("city");
             user_id = new user(jsonObject.optJSONObject("user_id"));
-try{
-    comment = jsonObject.getString("comment");
-    ratedate = jsonObject.getString("rateDate");
-    rate = jsonObject.getInt("rate");
-    isOpen = jsonObject.getBoolean("isOpen");
-    isRate = jsonObject.getBoolean("isRate");
+            try {
+                comment = jsonObject.getString("comment");
+                ratedate = jsonObject.getString("rateDate");
+                rate = jsonObject.getInt("rate");
+                isOpen = jsonObject.getBoolean("isOpen");
+                isRate = jsonObject.getBoolean("isRate");
 
-}catch (Exception e){
+            } catch (Exception e) {
 
-}
+            }
 
         }
     }
-        /**
-         * Returns all the available property values in the form of JSONObject instance where the key is the approperiate json key and the value is the value of the corresponding field
-         */
-        public JSONObject toJsonObject () throws JSONException {
-            JSONObject jsonObject = new JSONObject();
+
+    /**
+     * Returns all the available property values in the form of JSONObject instance where the key is the approperiate json key and the value is the value of the corresponding field
+     */
+    public JSONObject toJsonObject() throws JSONException {
+        JSONObject jsonObject = new JSONObject();
 
 
-                jsonObject.put("Notes", Notes);
-                jsonObject.put("addressDetails", addressDetails);
-                jsonObject.put("delivery_time", delivery_time);
-                jsonObject.put("deliveryCost", deliveryCost);
+        jsonObject.put("Notes", Notes);
+        jsonObject.put("addressDetails", addressDetails);
+        jsonObject.put("delivery_time", delivery_time);
+        jsonObject.put("deliveryCost", deliveryCost);
 //                if (items != null && items.size() > 0) {
 //                    JSONArray itemsJsonArray = new JSONArray();
 //                    for (items itemsElement : items) {
@@ -243,21 +244,21 @@ try{
 //                    }
 //                    jsonObject.put("items", itemsJsonArray);
 //                }
-                jsonObject.put("lat", lat);
-                jsonObject.put("lng", lng);
-                jsonObject.put("paymentType", paymentType);
-                jsonObject.put("subTotal", subTotal);
-                jsonObject.put("orderType", orderType);
+        jsonObject.put("lat", lat);
+        jsonObject.put("lng", lng);
+        jsonObject.put("paymentType", paymentType);
+        jsonObject.put("subTotal", subTotal);
+        jsonObject.put("orderType", orderType);
 
-            return jsonObject;
-        }
+        return jsonObject;
     }
+}
 
-class item{
-        private String id;
-        private Double price;
-        private int qty;
-        private Product product_id;
+class item {
+    private String id;
+    private Double price;
+    private int qty;
+    private Product product_id;
 
     public String getId() {
         return id;
@@ -290,19 +291,15 @@ class item{
     public void setProduct_id(Product product_id) {
         this.product_id = product_id;
     }
+
     public item(JSONObject jsonObject) throws JSONException {
         if (jsonObject == null) {
             return;
         }
-        id = jsonObject.opt("_id").toString();
+        id = jsonObject.optString("_id");
         price = jsonObject.getDouble("price");
         qty = jsonObject.getInt("qty");
-product_id=new Product(jsonObject.optJSONObject("product_id"));
-
-
-
-
-
+        product_id = new Product(jsonObject.optJSONObject("product_id"));
     }
 
 }

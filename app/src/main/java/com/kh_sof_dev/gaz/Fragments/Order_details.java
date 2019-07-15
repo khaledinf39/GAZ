@@ -22,7 +22,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.kh_sof_dev.gaz.Adapters.OrderDetails_prod_adapter;
 import com.kh_sof_dev.gaz.Adapters.Order_adapter;
 import com.kh_sof_dev.gaz.Classes.Order.GetMayOrders.Order_getter;
@@ -41,10 +40,9 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 public class Order_details extends Fragment {
 
     private ImageView back_btn;
-    private TextView req_heqder, req_id_tv,req_type_tv,req_state_tv,req_date_tv,username_tv,userNumber_tv,userAddress_tv
-            ,notes_tv,payWay_tv,deliver_time_tv,deliver_date_tv,subTotal_tv,delivery_cost_tv,TotalCost_tv,cancelReq_tv;
+    private TextView req_heqder, req_id_tv, req_type_tv, req_state_tv, req_date_tv, username_tv, userNumber_tv, userAddress_tv, notes_tv, payWay_tv, deliver_time_tv, deliver_date_tv, subTotal_tv, delivery_cost_tv, TotalCost_tv, cancelReq_tv;
     private Button sellDone_btn;
-    public static Map<String,Object> DetailsDataMap = new HashMap<>();
+    public static Map<String, Object> DetailsDataMap = new HashMap<>();
     private RecyclerView productList_RV;
     private LinearLayoutManager mLayoutManager;
     private ProgressBar progressBar;
@@ -53,22 +51,28 @@ public class Order_details extends Fragment {
 
     private String ReqID;
 
-    Order_getter reqDetail =null;
-    public Order_details(Order_getter reqDetail ) {
-        // Required empty public constructor
-        this.reqDetail=reqDetail;
+    Order_getter reqDetail = null;
+
+    public Order_details() {
+
     }
-    public Order_details(String reqid, Context mcoxt ) {
+
+    public Order_details(Order_getter reqDetail) {
         // Required empty public constructor
-        Http_orders http_orders=new Http_orders();
+        this.reqDetail = reqDetail;
+    }
+
+    public Order_details(String reqid, Context mcoxt) {
+        // Required empty public constructor
+        Http_orders http_orders = new Http_orders();
         http_orders.Getdetails_Order(mcoxt, reqid, new Http_orders.OnOrder_geter_lisennter() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onSuccess(show_order order) {
-               if (order.getStatusCode()==200 && order.getItems().size()!=0){
-                reqDetail=order.getItems().get(0);
-                   Request_Get_Details(mView);
-               }
+                if (order.getStatusCode() == 200 && order.getItems().size() != 0) {
+                    reqDetail = order.getItems().get(0);
+                    Request_Get_Details(mView);
+                }
             }
 
             @Override
@@ -89,25 +93,27 @@ public class Order_details extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-View mView;
+
+    View mView;
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.layout_f_order_details, container, false);
-        mView=view;
+        mView = view;
         back_btn = view.findViewById(R.id.back_btn);
         cancelReq_tv = view.findViewById(R.id.cancelReq_tv);
         progressBar = view.findViewById(R.id.progressBar);
         //progressBar.setVisibility(View.VISIBLE);
         sellDone_btn = view.findViewById(R.id.sellDone_btn);
 
-        SharedPreferences sp1 = getContext().getSharedPreferences("ReqDetailsCurrent",MODE_PRIVATE);
-        ReqID = sp1.getString("ReqID",null);
+        SharedPreferences sp1 = getContext().getSharedPreferences("ReqDetailsCurrent", MODE_PRIVATE);
+        ReqID = sp1.getString("ReqID", null);
 
-       // httpRequest = new HttpRequest_GET();
-        if (reqDetail!=null) {
+        // httpRequest = new HttpRequest_GET();
+        if (reqDetail != null) {
             Request_Get_Details(view);
         }
         //TODO -********************Adapter Products******************
@@ -122,7 +128,7 @@ View mView;
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-getActivity().finish();
+                getActivity().finish();
 //                MainNew.goto_(new MyReservations(),getContext());
             }
         });
@@ -136,21 +142,21 @@ getActivity().finish();
         sellDone_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-popup_rate();
+                popup_rate();
             }
         });
         /******************************************************/
         return view;
     }
 
-    public void showPopUp(){
-        cancelReqDialog= new Dialog(getContext());
+    public void showPopUp() {
+        cancelReqDialog = new Dialog(getContext());
         cancelReqDialog.setContentView(R.layout.popup_cancel_req);
         cancelReqDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         cancelReqDialog.show();
         final EditText cancelReq_et = cancelReqDialog.findViewById(R.id.cancelReq_et);
-        final Button cancelReq_btn =cancelReqDialog.findViewById(R.id.cancelReq_btn);
-        Button back_btn =cancelReqDialog.findViewById(R.id.back_btn);
+        final Button cancelReq_btn = cancelReqDialog.findViewById(R.id.cancelReq_btn);
+        Button back_btn = cancelReqDialog.findViewById(R.id.back_btn);
 
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,7 +174,7 @@ popup_rate();
                     request_post.Post_updateOrder(getContext(), reqDetail.getId(), 5, new Http_orders.OnOrder_geter_lisennter() {
                         @Override
                         public void onSuccess(show_order order) {
-Toast.makeText(getContext(),"تم الغاء طلبك ",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "تم الغاء طلبك ", Toast.LENGTH_LONG).show();
                             cancelReq_tv.setVisibility(View.GONE);
                         }
 
@@ -187,8 +193,9 @@ Toast.makeText(getContext(),"تم الغاء طلبك ",Toast.LENGTH_LONG).show(
             }
         });
     }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void Request_Get_Details(final View view){
+    private void Request_Get_Details(final View view) {
         req_heqder = view.findViewById(R.id.req_header_id_tv);
         req_id_tv = view.findViewById(R.id.req_id_tv);
         req_state_tv = view.findViewById(R.id.req_state_tv);
@@ -204,36 +211,36 @@ Toast.makeText(getContext(),"تم الغاء طلبك ",Toast.LENGTH_LONG).show(
         delivery_cost_tv = view.findViewById(R.id.delivery_cost_tv);
         TotalCost_tv = view.findViewById(R.id.TotalCost_tv);
         req_type_tv = view.findViewById(R.id.req_typ_tv);
-        productList_RV=view.findViewById(R.id.productList_RV);
+        productList_RV = view.findViewById(R.id.productList_RV);
         /************************************/
-        if (reqDetail.getStatusId()==3 ){
+        if (reqDetail.getStatusId() == 3) {
             sellDone_btn.setVisibility(View.VISIBLE);
         }
-        if (reqDetail.getStatusId()==5 || reqDetail.getStatusId()==6 || reqDetail.getStatusId()==3
-                || reqDetail.getStatusId()==4 || reqDetail.getStatusId()==2){
+        if (reqDetail.getStatusId() == 5 || reqDetail.getStatusId() == 6 || reqDetail.getStatusId() == 3
+                || reqDetail.getStatusId() == 4 || reqDetail.getStatusId() == 2) {
             cancelReq_tv.setVisibility(View.GONE);
         }
         req_id_tv.setText(reqDetail.getId());
         req_heqder.setText(reqDetail.getId());
 //                    _id =reqDetail.get_id();
-        String state_st="";
-        switch (reqDetail.getStatusId()){
-            case 1 :
+        String state_st = "";
+        switch (reqDetail.getStatusId()) {
+            case 1:
                 state_st = "بانتظار استلام السائق";
                 break;
-            case 2 :
+            case 2:
                 state_st = "جاري التوصيل";
                 break;
-            case 3 :
+            case 3:
                 state_st = "تم الوصيل";
                 break;
-            case 4 :
+            case 4:
                 state_st = " مكتمل";
                 break;
-            case 6 :
+            case 6:
                 state_st = "ملغي من قبل السائق";
                 break;
-            case 5 :
+            case 5:
                 state_st = "ملغي من قبل العميل";
                 break;
             default:
@@ -277,79 +284,79 @@ Toast.makeText(getContext(),"تم الغاء طلبك ",Toast.LENGTH_LONG).show(
                 break;
         }
         req_type_tv.setText(orderType);
-        productList_RV.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
-        productList_RV.setAdapter(new OrderDetails_prod_adapter(getContext(),reqDetail.getItems()));
+        productList_RV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        productList_RV.setAdapter(new OrderDetails_prod_adapter(getContext(), reqDetail.getItems()));
 
         payWay_tv.setText(payType_st);
-        try{
+        try {
             deliver_time_tv.setText(Order_adapter.getdate(reqDetail.getDelivery_date()));
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         deliver_date_tv.setText(reqDetail.getDelivery_time());
-        String subTotal_st = String.format("%.2f",reqDetail.getSubTotal())+"";
+        String subTotal_st = String.format("%.2f", reqDetail.getSubTotal()) + "";
         subTotal_tv.setText(subTotal_st);
-        String deliveryCost_st=String.format("%.2f",reqDetail.getDeliveryCost()) +"";
+        String deliveryCost_st = String.format("%.2f", reqDetail.getDeliveryCost()) + "";
         delivery_cost_tv.setText(deliveryCost_st);
-        String totalCost_st= String.format("%.2f",reqDetail.getTotal())+"";
+        String totalCost_st = String.format("%.2f", reqDetail.getTotal()) + "";
         TotalCost_tv.setText(totalCost_st);
     }
 
-    int nb_start=0;
-    private void popup_rate(){
-        final Dialog dialog=new Dialog(getContext());
+    int nb_start = 0;
+
+    private void popup_rate() {
+        final Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.popup_rate_req);
-        final TextView comment=dialog.findViewById(R.id.comment);
+        final TextView comment = dialog.findViewById(R.id.comment);
         dialog.show();
-        Button send_rate=dialog.findViewById(R.id.send_rates_btn);
+        Button send_rate = dialog.findViewById(R.id.send_rates_btn);
 
 
-        final ImageView start1=dialog.findViewById(R.id.star1_img);
-        final ImageView start2=dialog.findViewById(R.id.star2_img);
-        final ImageView start3=dialog.findViewById(R.id.star3_img);
-        final ImageView start4=dialog.findViewById(R.id.star4_img);
-        final ImageView start5=dialog.findViewById(R.id.star5_img);
+        final ImageView start1 = dialog.findViewById(R.id.star1_img);
+        final ImageView start2 = dialog.findViewById(R.id.star2_img);
+        final ImageView start3 = dialog.findViewById(R.id.star3_img);
+        final ImageView start4 = dialog.findViewById(R.id.star4_img);
+        final ImageView start5 = dialog.findViewById(R.id.star5_img);
         start1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nb_start=rate(start1,start2,start3,start4,start5,start1);
+                nb_start = rate(start1, start2, start3, start4, start5, start1);
             }
         });
         start5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nb_start=rate(start1,start2,start3,start4,start5,start5);
+                nb_start = rate(start1, start2, start3, start4, start5, start5);
             }
         });
         start2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nb_start=rate(start1,start2,start3,start4,start5,start2);
+                nb_start = rate(start1, start2, start3, start4, start5, start2);
             }
         });
         start3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nb_start=rate(start1,start2,start3,start4,start5,start3);
+                nb_start = rate(start1, start2, start3, start4, start5, start3);
             }
         });
         start4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nb_start=rate(start1,start2,start3,start4,start5,start4);
+                nb_start = rate(start1, start2, start3, start4, start5, start4);
             }
         });
 
         send_rate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String comment_txt=comment.getText().toString();
-                if (comment_txt.isEmpty() || nb_start==0)
-                {
+                String comment_txt = comment.getText().toString();
+                if (comment_txt.isEmpty() || nb_start == 0) {
                     comment.setError("نرجو إدخال نص التقيم وإختار عدد النجوم ");
                     return;
                 }
-                Http_orders post=new Http_orders();
+                Http_orders post = new Http_orders();
                 post.Post_PostADD_rat(getApplicationContext(), reqDetail.getId()
                         , comment_txt, nb_start, new Http_orders.OnOrder_geter_lisennter() {
                             @Override
@@ -371,22 +378,22 @@ Toast.makeText(getContext(),"تم الغاء طلبك ",Toast.LENGTH_LONG).show(
 
                         });
 
-                    post.Post_updateOrder(getContext(), reqDetail.getId(), 4, new Http_orders.OnOrder_geter_lisennter() {
-                        @Override
-                        public void onSuccess(show_order order) {
+                post.Post_updateOrder(getContext(), reqDetail.getId(), 4, new Http_orders.OnOrder_geter_lisennter() {
+                    @Override
+                    public void onSuccess(show_order order) {
 //                                   Toast.makeText(getContext(),order.getMessage(),Toast.LENGTH_LONG).show();
-                        }
+                    }
 
-                        @Override
-                        public void onStart() {
+                    @Override
+                    public void onStart() {
 
-                        }
+                    }
 
-                        @Override
-                        public void onFailure(String msg) {
+                    @Override
+                    public void onFailure(String msg) {
 //                            Toast.makeText(getContext(),msg,Toast.LENGTH_LONG).show();
-                        }
-                    });
+                    }
+                });
 
             }
         });
@@ -394,12 +401,12 @@ Toast.makeText(getContext(),"تم الغاء طلبك ",Toast.LENGTH_LONG).show(
     }
 
     private int rate(ImageView start1, ImageView start2, ImageView start3, ImageView start4,
-                     ImageView start5,ImageView start_sel) {
-        int start_on=R.drawable.start_on;
-        int start_off=R.drawable.icon_star;
-        switch (start_sel.getId()){
+                     ImageView start5, ImageView start_sel) {
+        int start_on = R.drawable.start_on;
+        int start_off = R.drawable.icon_star;
+        switch (start_sel.getId()) {
             case R.id.star1_img:
-                nb_start=1;
+                nb_start = 1;
                 start1.setImageResource(start_on);
                 start2.setImageResource(start_off);
                 start3.setImageResource(start_off);
@@ -407,7 +414,7 @@ Toast.makeText(getContext(),"تم الغاء طلبك ",Toast.LENGTH_LONG).show(
                 start5.setImageResource(start_off);
                 break;
             case R.id.star2_img:
-                nb_start=2;
+                nb_start = 2;
                 start1.setImageResource(start_on);
                 start2.setImageResource(start_on);
                 start3.setImageResource(start_off);
@@ -415,7 +422,7 @@ Toast.makeText(getContext(),"تم الغاء طلبك ",Toast.LENGTH_LONG).show(
                 start5.setImageResource(start_off);
                 break;
             case R.id.star3_img:
-                nb_start=3;
+                nb_start = 3;
                 start1.setImageResource(start_on);
                 start2.setImageResource(start_on);
                 start3.setImageResource(start_on);
@@ -423,7 +430,7 @@ Toast.makeText(getContext(),"تم الغاء طلبك ",Toast.LENGTH_LONG).show(
                 start5.setImageResource(start_off);
                 break;
             case R.id.star4_img:
-                nb_start=4;
+                nb_start = 4;
                 start1.setImageResource(start_on);
                 start2.setImageResource(start_on);
                 start3.setImageResource(start_on);
@@ -431,7 +438,7 @@ Toast.makeText(getContext(),"تم الغاء طلبك ",Toast.LENGTH_LONG).show(
                 start5.setImageResource(start_off);
                 break;
             case R.id.star5_img:
-                nb_start=5;
+                nb_start = 5;
                 start1.setImageResource(start_on);
                 start2.setImageResource(start_on);
                 start3.setImageResource(start_on);

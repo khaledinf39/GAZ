@@ -40,8 +40,8 @@ public  class City{
         if(jsonObject == null){
             return;
         }
-        id = jsonObject.opt("_id").toString();
-        name = jsonObject.opt("name").toString();
+        id = jsonObject.optString("_id");
+        name = jsonObject.optString("name");
 
     }
 

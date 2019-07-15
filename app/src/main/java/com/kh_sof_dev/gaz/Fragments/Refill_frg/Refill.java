@@ -39,44 +39,35 @@ public class Refill extends Fragment {
 
 
     public Refill() {
-        // Required empty public constructor
+
     }
+
     int order_type;
+
     @SuppressLint("ValidFragment")
-
     public Refill(int order_type) {
-        this.order_type=order_type;
+        this.order_type = order_type;
     }
 
+    private ImageView back_btn, refillImg;
 
-    public static Refill newInstance(String param1, String param2) {
-        Refill fragment = new Refill();
-        Bundle args = new Bundle();
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-private ImageView back_btn,refillImg;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.layout_f_refill, container, false);
-        back_btn=(ImageView)view.findViewById(R.id.back_icon);
-        refillImg=(ImageView)view.findViewById(R.id.refillImg);
+        back_btn = (ImageView) view.findViewById(R.id.back_icon);
+        refillImg = (ImageView) view.findViewById(R.id.refillImg);
         /***************************TabLayout***********************/
-        mViewPager =  view.findViewById(R.id.viewpager);
-        TextView typeOrder_tv=view.findViewById(R.id.typeorder_tv);
-        final TabLayout tabLayout =  view.findViewById(R.id.tab_layout);
-        if (order_type==4){
+        mViewPager = view.findViewById(R.id.viewpager);
+        TextView typeOrder_tv = view.findViewById(R.id.typeorder_tv);
+        final TabLayout tabLayout = view.findViewById(R.id.tab_layout);
+        if (order_type == 4) {
             typeOrder_tv.setText("شراء مستلزمات غاز");
             tabLayout.setVisibility(View.GONE);
             mViewPager.setAdapter(new Refill.MyPagerAdapter2(getFragmentManager()));
             refillImg.setImageResource(R.drawable.ic_product7);
-        }else {
+        } else {
             mViewPager.setAdapter(new Refill.MyPagerAdapter(getFragmentManager()));
             mViewPager.setOffscreenPageLimit(1);
             tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#1f57ff"));
@@ -99,12 +90,13 @@ private ImageView back_btn,refillImg;
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-startActivity(new Intent(getContext(),MainNew.class));
+                startActivity(new Intent(getContext(), MainNew.class));
 //                MainNew._goto(Refill.this,new Home(),View.VISIBLE);
             }
         });
         return view;
     }
+
     public class MyPagerAdapter extends android.support.v4.app.FragmentStatePagerAdapter {
 
         public MyPagerAdapter(FragmentManager fragmentManager) {
@@ -113,9 +105,9 @@ startActivity(new Intent(getContext(),MainNew.class));
 
         @Override
         public Fragment getItem(int position) {
-            if (position==0){
-              refillImg.setImageResource(R.drawable.ic_product8);
-            }else {
+            if (position == 0) {
+                refillImg.setImageResource(R.drawable.ic_product8);
+            } else {
                 refillImg.setImageResource(R.drawable.ic_product7);
             }
             return PAGES[position];
@@ -138,7 +130,6 @@ startActivity(new Intent(getContext(),MainNew.class));
             ""
 
 
-
     };
 
     private final Fragment[] PAGES2 = new Fragment[]{
@@ -146,6 +137,7 @@ startActivity(new Intent(getContext(),MainNew.class));
 
 
     };
+
     public class MyPagerAdapter2 extends android.support.v4.app.FragmentStatePagerAdapter {
 
         public MyPagerAdapter2(FragmentManager fragmentManager) {

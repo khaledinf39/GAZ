@@ -14,48 +14,55 @@ public class show_points {
     private boolean status;
     private int statusCode;
 
-    public void setItems(List<points> items){
+    public void setItems(List<points> items) {
         this.items = items;
     }
-    public List<points> getItems(){
+
+    public List<points> getItems() {
         return this.items;
     }
-    public void setMessage(String message){
+
+    public void setMessage(String message) {
         this.message = message;
     }
-    public String getMessage(){
+
+    public String getMessage() {
         return this.message;
     }
-    public void setStatus(boolean status){
+
+    public void setStatus(boolean status) {
         this.status = status;
     }
-    public boolean isStatus()
-    {
+
+    public boolean isStatus() {
         return this.status;
     }
-    public void setStatusCode(int statusCode){
+
+    public void setStatusCode(int statusCode) {
         this.statusCode = statusCode;
     }
-    public int getStatusCode(){
+
+    public int getStatusCode() {
         return this.statusCode;
     }
 
     /**
      * Instantiate the instance using the passed jsonObject to set the properties values
      */
-    public show_points(JSONObject jsonObject){
-        if(jsonObject == null){
+    public show_points(JSONObject jsonObject) {
+        if (jsonObject == null) {
             return;
         }
         JSONArray itemsJsonArray = jsonObject.optJSONArray("items");
-        if(itemsJsonArray != null){
+        if (itemsJsonArray != null) {
             items = new ArrayList<>();
             for (int i = 0; i < itemsJsonArray.length(); i++) {
                 JSONObject itemsObject = itemsJsonArray.optJSONObject(i);
                 items.add(new points(itemsObject));
             }
 
-        }		message = jsonObject.opt("message").toString();
+        }
+        message = jsonObject.optString("message");
         status = jsonObject.optBoolean("status");
         statusCode = jsonObject.optInt("status_code");
     }

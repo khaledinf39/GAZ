@@ -44,37 +44,23 @@ import java.util.Locale;
 
 @SuppressLint("ValidFragment")
 public class RefillHome extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
     private int order_type;
 
     public RefillHome(int order_type) {
         this.order_type = order_type;
+    }
+
+    public RefillHome() {
         // Required empty public constructor
     }
 
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
     private ConstraintLayout layoutAddress, layoutTime, layoutDate, layoutCount;
     private RecyclerView gaztypRV, produRV;
-private LinearLayout l1,l2;
+    private LinearLayout l1, l2;
     private Button continue_btn;
     private ProgressBar progressBar;
-    private TextView locationTV, date_tv, time_tv, nb_item,tx3;
+    private TextView locationTV, date_tv, time_tv, nb_item, tx3;
     /************************order info*****************/
     public static String date = "", time = "";
     int qty = 1;
@@ -101,8 +87,8 @@ private LinearLayout l1,l2;
         produRV = view.findViewById(R.id.Name_tv);
         produRV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         produRV.setAdapter(new Refill_adapter(getContext(), productList));
-l1=view.findViewById(R.id.linear1);
-        l2=view.findViewById(R.id.linear2);
+        l1 = view.findViewById(R.id.linear1);
+        l2 = view.findViewById(R.id.linear2);
         progressBar = (ProgressBar) view.findViewById(R.id.progress);
         layoutAddress = (ConstraintLayout) view.findViewById(R.id.layAddress);
         layoutDate = (ConstraintLayout) view.findViewById(R.id.layoutDate);
@@ -111,7 +97,7 @@ l1=view.findViewById(R.id.linear1);
         nb_item = (TextView) view.findViewById(R.id.nb_item);
         add = (ImageView) view.findViewById(R.id.add);
         locationTV = (TextView) view.findViewById(R.id.location_tv);
-tx3=view.findViewById(R.id.tx3);
+        tx3 = view.findViewById(R.id.tx3);
         date_tv = (TextView) view.findViewById(R.id.date_tv);
         time_tv = (TextView) view.findViewById(R.id.time_tv);
 //        user_info user_info=new user_info(getContext());
@@ -213,20 +199,19 @@ tx3=view.findViewById(R.id.tx3);
             @Override
             public void onSuccess(final show_products products) {
                 progressBar.setVisibility(View.GONE);
-                if (products.getProducts().size()==0){
+                if (products.getProducts().size() == 0) {
                     tx3.setVisibility(View.VISIBLE);
 
                     l1.setVisibility(View.GONE);
                     l2.setVisibility(View.GONE);
                     continue_btn.setVisibility(View.GONE);
 
-                }else {
+                } else {
                     tx3.setVisibility(View.GONE);
 
                     l1.setVisibility(View.VISIBLE);
                     l2.setVisibility(View.VISIBLE);
                     continue_btn.setVisibility(View.VISIBLE);
-
 
 
                 }
@@ -403,51 +388,52 @@ tx3=view.findViewById(R.id.tx3);
     }
 
 
-private int compareTime(){
+    private int compareTime() {
 
 
-    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
-    String currentDateandTime = sdf.format(new Date());
-    SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
-    Calendar cal = Calendar.getInstance();
-    try {
-        cal.setTime(dateFormat.parse(currentDateandTime));
-    } catch (ParseException e) {
-        e.printStackTrace();
-    }
-    cal.add(Calendar.DATE, 0);
-    String currentTime = dateFormat.format(cal.getTime());
-String settime="22:00";
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
+        String currentDateandTime = sdf.format(new Date());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
+        Calendar cal = Calendar.getInstance();
+        try {
+            cal.setTime(dateFormat.parse(currentDateandTime));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        cal.add(Calendar.DATE, 0);
+        String currentTime = dateFormat.format(cal.getTime());
+        String settime = "22:00";
 
 
-        if(currentTime.compareTo(settime)>=0) {
+        if (currentTime.compareTo(settime) >= 0) {
 
 
-            Log.d("compareTime",currentTime+" is after than "+ settime);
-return 1;
+            Log.d("compareTime", currentTime + " is after than " + settime);
+            return 1;
 
-        }else {
-            Log.d("compareTime",currentTime+" is before than "+ settime);
+        } else {
+            Log.d("compareTime", currentTime + " is before than " + settime);
             return 0;
         }
 
 
-}
+    }
+
     private void DatePopup() {
         final Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.popup_select_date);
 
-        int dateNB=0;
-        dateNB=dateNB+compareTime();
+        int dateNB = 0;
+        dateNB = dateNB + compareTime();
 
         TextView date1 = (TextView) dialog.findViewById(R.id.date1);
         date1.setText(getdat(dateNB));
 
         TextView date2 = (TextView) dialog.findViewById(R.id.date2);
-        date2.setText(getdat(dateNB+1));
+        date2.setText(getdat(dateNB + 1));
 
         TextView date3 = (TextView) dialog.findViewById(R.id.date3);
-        date3.setText(getdat(dateNB+2));
+        date3.setText(getdat(dateNB + 2));
 
         dialog.show();
         date1.setOnClickListener(new View.OnClickListener() {

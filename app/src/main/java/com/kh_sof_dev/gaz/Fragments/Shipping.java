@@ -161,15 +161,18 @@ public class Shipping extends Fragment implements OnMapReadyCallback {
     /***********************************************************************************/
     private int Maptyp = 1;
 
-    @SuppressLint("ValidFragment")
     int order_type;
 
+    @SuppressLint("ValidFragment")
     public Shipping(int typ2_Order_1_test, int order_type) {
-        // Required empty public constructor
         Maptyp = typ2_Order_1_test;
         ////1 for test
         /////2 for order
         this.order_type = order_type;
+
+    }
+
+    public Shipping() {
 
     }
 
@@ -396,21 +399,36 @@ public class Shipping extends Fragment implements OnMapReadyCallback {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED &&
-                    ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
-                            != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(permissions, 15);
+        if (requestCode == 15) {
+            boolean grant = false;
+            for (int i = 0; i < permissions.length; i++) {
+                int grantResult = grantResults[i];
+                if (grantResult == PackageManager.PERMISSION_GRANTED) {
+                    grant = true;
+                } else {
+                    grant = false;
+                    break;
+                }
 
-
-            } else {
-                showDefaultLocation();
             }
+            if (grant) {
+                showDefaultLocation();
+            } else
+                requestPermissions(permissions, 15);
         }
-        return;
-
-
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+//                    != PackageManager.PERMISSION_GRANTED &&
+//                    ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
+//                            != PackageManager.PERMISSION_GRANTED) {
+//                requestPermissions(permissions, 15);
+//
+//
+//            } else {
+//                showDefaultLocation();
+//            }
+//        }
+//        return;
     }
 
 //    private GoogleMap.OnMyLocationButtonClickListener onMyLocationButtonClickListener =

@@ -61,7 +61,7 @@ public class get_user_points {
             }
 
         }
-        message = jsonObject.opt("message").toString();
+        message = jsonObject.optString("message");
 
         status = jsonObject.optBoolean("status");
         statusCode = jsonObject.optInt("status_code");

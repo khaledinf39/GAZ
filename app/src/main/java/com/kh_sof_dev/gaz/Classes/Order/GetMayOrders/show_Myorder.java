@@ -60,7 +60,7 @@ public class show_Myorder {
 				ordergetters.add(new Order_getter(itemsObject));
 			}
 
-		}		message = jsonObject.opt("message").toString();
+		}		message = jsonObject.optString("message");
 		pagenation = new Pagenation(jsonObject.optJSONObject("pagenation"));
 		status = jsonObject.optBoolean("status");
 		statusCode = jsonObject.optInt("status_code");

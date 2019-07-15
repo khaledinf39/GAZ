@@ -9,7 +9,7 @@ import org.json.JSONObject;
 //	point.java
 
 
-public class user{
+public class user {
 
     private String id;
     private String password;
@@ -27,7 +27,7 @@ public class user{
     private String phoneNumber;
     private String token;
     private String verifyCode;
-    private Long wallet= Long.valueOf(0);
+    private Long wallet = Long.valueOf(0);
 
     public String getPassword() {
         return password;
@@ -61,129 +61,158 @@ public class user{
         isVerify = verify;
     }
 
-    public void setId(String id){
+    public void setId(String id) {
         this.id = id;
     }
-    public String getId(){
+
+    public String getId() {
         return this.id;
     }
-    public void setAddress(String address){
+
+    public void setAddress(String address) {
         this.address = address;
     }
-    public String getAddress(){
+
+    public String getAddress() {
         return this.address;
     }
-    public void setCity(String city){
+
+    public void setCity(String city) {
         this.city = city;
     }
-    public String getCity(){
+
+    public String getCity() {
         return this.city;
     }
-    public void setCreateAt(String createAt){
+
+    public void setCreateAt(String createAt) {
         this.createAt = createAt;
     }
-    public String getCreateAt(){
+
+    public String getCreateAt() {
         return this.createAt;
     }
-    public void setEmail(String email){
+
+    public void setEmail(String email) {
         this.email = email;
     }
-    public String getEmail(){
+
+    public String getEmail() {
         return this.email;
     }
-    public void setFullName(String fullName){
+
+    public void setFullName(String fullName) {
         this.fullName = fullName;
     }
-    public String getFullName(){
+
+    public String getFullName() {
         return this.fullName;
     }
-    public void setImage(String image){
+
+    public void setImage(String image) {
         this.image = image;
     }
-    public String getImage(){
+
+    public String getImage() {
         return this.image;
     }
-    public void setIsBlock(boolean isBlock){
+
+    public void setIsBlock(boolean isBlock) {
         this.isBlock = isBlock;
     }
-    public boolean isIsBlock()
-    {
+
+    public boolean isIsBlock() {
         return this.isBlock;
     }
-    public void setIsVerify(boolean isVerify){
+
+    public void setIsVerify(boolean isVerify) {
         this.isVerify = isVerify;
     }
-    public boolean isIsVerify()
-    {
+
+    public boolean isIsVerify() {
         return this.isVerify;
     }
-    public void setLat(float lat){
+
+    public void setLat(float lat) {
         this.lat = lat;
     }
-    public float getLat(){
+
+    public float getLat() {
         return this.lat;
     }
-    public void setLng(float lng){
+
+    public void setLng(float lng) {
         this.lng = lng;
     }
-    public float getLng(){
+
+    public float getLng() {
         return this.lng;
     }
-    public void setPhoneNumber(String phoneNumber){
+
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    public String getPhoneNumber(){
+
+    public String getPhoneNumber() {
         return this.phoneNumber;
     }
-    public void setToken(String token){
+
+    public void setToken(String token) {
         this.token = token;
     }
-    public String getToken(){
+
+    public String getToken() {
         return this.token;
     }
-    public void setVerifyCode(String verifyCode){
+
+    public void setVerifyCode(String verifyCode) {
         this.verifyCode = verifyCode;
     }
-    public String getVerifyCode(){
+
+    public String getVerifyCode() {
         return this.verifyCode;
     }
-    public void setWallet(Long wallet){
+
+    public void setWallet(Long wallet) {
         this.wallet = wallet;
     }
-    public Long getWallet(){
+
+    public Long getWallet() {
         return this.wallet;
     }
 
     /**
      * Instantiate the instance using the passed jsonObject to set the properties values
      */
-    public user(JSONObject jsonObject){
-        if(jsonObject == null){
+    public user(JSONObject jsonObject) {
+        if (jsonObject == null) {
             return;
         }
-        id = (String) jsonObject.opt("_id");
+        id = jsonObject.optString("_id");
 
-       try {
-           gender = (String) jsonObject.opt("gender");
-       }catch (Exception e){
-           e.printStackTrace();
-       }
-        password = (String) jsonObject.opt("password");
-        address = jsonObject.opt("address").toString();
-        city = jsonObject.opt("city").toString();
-        createAt = jsonObject.opt("createAt").toString();
-        email = jsonObject.opt("email").toString();
-        fullName = jsonObject.opt("full_name").toString();
-        image = jsonObject.opt("image").toString();
+        try {
+            gender = jsonObject.optString("gender");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        password = jsonObject.optString("password");
+        address = jsonObject.optString("address");
+        city = jsonObject.optString("city");
+        createAt = jsonObject.optString("createAt");
+        email = jsonObject.optString("email");
+        fullName = jsonObject.optString("full_name");
+        image = jsonObject.optString("image");
         isBlock = jsonObject.optBoolean("isBlock");
         isVerify = jsonObject.optBoolean("isVerify");
         lat = jsonObject.optLong("lat");
         lng = jsonObject.optLong("lng");
-        phoneNumber = jsonObject.opt("phone_number").toString();
+        phoneNumber = jsonObject.optString("phone_number");
         try {
-            token = jsonObject.opt("token").toString();
-        }catch (Exception exc){}
-        verifyCode = jsonObject.opt("verify_code").toString();
+            token = jsonObject.optString("token");
+        } catch (Exception exc) {
+            exc.printStackTrace();
+        }
+        verifyCode = jsonObject.optString("verify_code");
         wallet = jsonObject.optLong("wallet");
     }
 

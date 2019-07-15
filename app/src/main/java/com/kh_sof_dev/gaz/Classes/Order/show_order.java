@@ -55,7 +55,7 @@ private pagatination pagatination;
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            message = jsonObject.opt("message").toString();
+            message = jsonObject.optString("message");
             statusCode = jsonObject.optInt("status_code");
             for (int i = 0; i < itemsJsonArray.length(); i++) {
                 JSONObject itemsObject = itemsJsonArray.optJSONObject(i);

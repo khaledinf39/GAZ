@@ -64,13 +64,13 @@ public class ads{
         if(jsonObject == null){
             return;
         }
-        id = jsonObject.opt("_id").toString();
-        details = jsonObject.opt("details").toString();
-        image = jsonObject.opt("image").toString();
-        name = jsonObject.opt("name").toString();
+        id = jsonObject.optString("_id");
+        details = jsonObject.optString("details");
+        image = jsonObject.optString("image");
+        name = jsonObject.optString("name");
         priceAfter = jsonObject.optInt("price_after");
         priceBefore = jsonObject.optInt("price_before");
-        type = jsonObject.opt("type").toString();
+        type = jsonObject.optString("type");
     }
 
     /**

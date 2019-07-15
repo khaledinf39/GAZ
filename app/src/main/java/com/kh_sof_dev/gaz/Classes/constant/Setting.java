@@ -51,8 +51,8 @@ private Long nb_order;
         if (jsonObject == null) {
             return;
         }
-        id = jsonObject.opt("_id").toString();
-        name = jsonObject.opt("name").toString();
+        id = jsonObject.optString("_id");
+        name = jsonObject.optString("name");
         value = jsonObject.getDouble("value");
 
     }

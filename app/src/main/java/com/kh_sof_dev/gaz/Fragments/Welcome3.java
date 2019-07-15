@@ -18,7 +18,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class Welcome3 extends SlideFragment {
 
     public Welcome3() {
-        // Required empty public constructor
+
     }
 
     @Override
@@ -26,34 +26,26 @@ public class Welcome3 extends SlideFragment {
         return false;
     }
 
-    public static Welcome3 newInstance(String param1, String param2) {
-        Welcome3 fragment = new Welcome3();
-        return fragment;
-    }
+    private Button start;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-private Button start;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.layout_f_welcome3, container, false);
-start=(Button)view.findViewById(R.id.start_btn);
-start.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        SharedPreferences sp=getContext().getSharedPreferences("Intro", MODE_PRIVATE);
-        SharedPreferences.Editor Ed = sp.edit();
-        Ed.putBoolean("state", true);
-        Ed.commit();
-        startActivity(new Intent(getContext(), Login.class));
-        getActivity().finish();
+        View view = inflater.inflate(R.layout.layout_f_welcome3, container, false);
+        start = (Button) view.findViewById(R.id.start_btn);
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sp = getContext().getSharedPreferences("Intro", MODE_PRIVATE);
+                SharedPreferences.Editor Ed = sp.edit();
+                Ed.putBoolean("state", true);
+                Ed.commit();
+                startActivity(new Intent(getContext(), Login.class));
+                getActivity().finish();
 
-    }
-});
+            }
+        });
         return view;
     }
 }

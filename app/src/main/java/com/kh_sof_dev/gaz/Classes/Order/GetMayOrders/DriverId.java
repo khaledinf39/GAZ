@@ -120,13 +120,13 @@ public class DriverId{
 		if(jsonObject == null){
 			return;
 		}
-		id = jsonObject.opt("_id").toString();
-		address = jsonObject.opt("address").toString();
-		createAt = jsonObject.opt("createAt").toString();
-		dtDob = jsonObject.opt("dt_dob").toString();
-		email = jsonObject.opt("email").toString();
-		fcmToken = jsonObject.opt("fcmToken").toString();
-		image = jsonObject.opt("image").toString();
+		id = jsonObject.optString("_id");
+		address = jsonObject.optString("address");
+		createAt = jsonObject.optString("createAt");
+		dtDob = jsonObject.optString("dt_dob");
+		email = jsonObject.optString("email");
+		fcmToken = jsonObject.optString("fcmToken");
+		image = jsonObject.optString("image");
 		JSONArray imagesTmp = jsonObject.optJSONArray("images");
 		if(imagesTmp != null){
 			images = new ArrayList<>();
@@ -135,11 +135,11 @@ public class DriverId{
 			}
 		}
 		isBlock = jsonObject.optBoolean("isBlock");
-		name = jsonObject.opt("name").toString();
-		password = jsonObject.opt("password").toString();
-		phoneNumber = jsonObject.opt("phone_number").toString();
-		supplierId = jsonObject.opt("supplier_id").toString();
-		token = jsonObject.opt("token").toString();
+		name = jsonObject.optString("name");
+		password = jsonObject.optString("password");
+		phoneNumber = jsonObject.optString("phone_number");
+		supplierId = jsonObject.optString("supplier_id");
+		token = jsonObject.optString("token");
 	}
 
 	/**

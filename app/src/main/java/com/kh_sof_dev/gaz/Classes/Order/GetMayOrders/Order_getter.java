@@ -186,19 +186,19 @@ public class Order_getter {
         if (jsonObject == null) {
             return;
         }
-        id = jsonObject.opt("_id").toString();
+        id = jsonObject.optString("_id");
         try {
-            delivery_date = jsonObject.opt("delivery_date").toString();
-            delivery_time = jsonObject.opt("delivery_time").toString();
+            delivery_date = jsonObject.optString("delivery_date");
+            delivery_time = jsonObject.optString("delivery_time");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        notes = jsonObject.opt("Notes").toString();
+        notes = jsonObject.optString("Notes");
         statusId = jsonObject.optInt("StatusId");
         total = jsonObject.getDouble("Total");
-        addressDetails = jsonObject.opt("addressDetails").toString();
-        //city = jsonObject.opt("city").toString();
-        createAt = jsonObject.opt("createAt").toString();
+        addressDetails = jsonObject.optString("addressDetails");
+        //city = jsonObject.optString("city");
+        createAt = jsonObject.optString("createAt");
         deliveryCost = jsonObject.getDouble("deliveryCost");
         JSONArray itemsJsonArray = jsonObject.optJSONArray("items");
         if (itemsJsonArray != null) {

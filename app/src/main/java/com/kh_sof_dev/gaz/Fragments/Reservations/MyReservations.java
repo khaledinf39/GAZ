@@ -30,8 +30,6 @@ public class MyReservations extends Fragment {
             "بإنتظار الموافقة",
 
 
-
-
 //            "الملغية من طرف السائق"
 
 
@@ -44,20 +42,20 @@ public class MyReservations extends Fragment {
             new Reservation_wait(),
 
 
-
-
 //            new Reservation_Canceled_devier()
 
 
     };
 
     public MyReservations() {
-        // Required empty public constructor
+
     }
-    Boolean refillhome=true;
+
+    Boolean refillhome = true;
+
     @SuppressLint("ValidFragment")
     public MyReservations(Boolean refillhome) {
-        this.refillhome=refillhome;
+        this.refillhome = refillhome;
     }
 
 
@@ -71,17 +69,19 @@ public class MyReservations extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-    private ImageView back_btn,refillImg;
+
+    private ImageView back_btn, refillImg;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.layout_f_my_reservations, container, false);
         /***************************TabLayout***********************/
-        mViewPager =  view.findViewById(R.id.viewpager);
+        mViewPager = view.findViewById(R.id.viewpager);
         mViewPager.setAdapter(new MyReservations.MyPagerAdapter(getChildFragmentManager()));
         mViewPager.setOffscreenPageLimit(1);
-        final TabLayout tabLayout =  view.findViewById(R.id.tab_layout);
+        final TabLayout tabLayout = view.findViewById(R.id.tab_layout);
         tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#1f57ff"));
         tabLayout.setSelectedTabIndicatorHeight((int) (4 * getResources().getDisplayMetrics().density));
         tabLayout.setTabTextColors(Color.parseColor("#9d9d9d"), Color.parseColor("#0d0e10"));
@@ -97,17 +97,18 @@ public class MyReservations extends Fragment {
 //            tabLayout.setAccessibilityPaneTitle(PAGE_TITLES[1]);
 //        }
         /***************************************************************************/
-        back_btn=(ImageView)view.findViewById(R.id.back_icon);
+        back_btn = (ImageView) view.findViewById(R.id.back_icon);
 
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-startActivity(new Intent(getContext(),MainNew.class));
+                startActivity(new Intent(getContext(), MainNew.class));
 //                MainNew._goto(MyReservations.this,new Home(),View.VISIBLE);
             }
         });
         return view;
     }
+
     public class MyPagerAdapter extends android.support.v4.app.FragmentStatePagerAdapter {
 
         public MyPagerAdapter(FragmentManager fragmentManager) {

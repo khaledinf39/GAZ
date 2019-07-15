@@ -40,7 +40,7 @@ public class send_order {
         if (jsonObject == null) {
             return;
         }
-        message = jsonObject.opt("message").toString();
+        message = jsonObject.optString("message").toString();
         statusCode = jsonObject.optInt("status_code");
 
         JSONArray itemsJsonArray = jsonObject.optJSONArray("items");

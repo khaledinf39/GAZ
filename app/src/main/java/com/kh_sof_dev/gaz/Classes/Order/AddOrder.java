@@ -123,11 +123,11 @@ public class AddOrder{
             return;
         }
         orderType = jsonObject.getInt("orderType");
-        delivery_date = jsonObject.opt("delivery_date").toString();
+        delivery_date = jsonObject.optString("delivery_date");
         try {
-            Notes = jsonObject.opt("Notes").toString();
-            addressDetails = jsonObject.opt("addressDetails").toString();
-            delivery_time = jsonObject.opt("delivery_time").toString();
+            Notes = jsonObject.optString("Notes");
+            addressDetails = jsonObject.optString("addressDetails");
+            delivery_time = jsonObject.optString("delivery_time");
             try {
                 deliveryCost = jsonObject.getDouble("deliveryCost");
             } catch (JSONException e) {

@@ -26,7 +26,7 @@ public class change_point {
 //            }
 //
 //        }
-        message = jsonObject.opt("message").toString();
+        message = jsonObject.optString("message");
 
         status = jsonObject.optBoolean("status");
         statusCode = jsonObject.optInt("status_code");

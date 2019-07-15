@@ -59,18 +59,8 @@ public class LoginFrag extends Fragment {
         // Required empty public constructor
     }
 
-
-    public static LoginFrag newInstance(String param1, String param2) {
-        LoginFrag fragment = new LoginFrag();
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-EditText phone,password;
-    TextView logup,forget;
+    EditText phone, password;
+    TextView logup, forget;
     Button login;
     ImageView logout;
     private AccessTokenTracker accessTokenTracker;
@@ -79,31 +69,32 @@ EditText phone,password;
     String number;
     CountryCodePicker ccp;
     String fcmtoken;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         FacebookSdk.sdkInitialize(getActivity());
-        callbackManager= CallbackManager.Factory.create();
+        callbackManager = CallbackManager.Factory.create();
         View view = inflater.inflate(R.layout.layout_f_loginfrag, container, false);
 
         FirebaseApp.initializeApp(getContext());
-        fcmtoken= FirebaseInstanceId.getInstance().getToken();
+        fcmtoken = FirebaseInstanceId.getInstance().getToken();
 
-        final ProgressBar progressBar=view.findViewById(R.id.progress);
+        final ProgressBar progressBar = view.findViewById(R.id.progress);
         login_with_google();
         Button signInButton = view.findViewById(R.id.sign_in_button);
 //        signInButton.setSize(SignInButton.SIZE_STANDARD);
-signInButton.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        signIn();
-    }
-});
+        signInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signIn();
+            }
+        });
 
 
         FaceBookButton = (LoginButton) view.findViewById(R.id.loginButton);
-FaceBookButton.setReadPermissions(Arrays.asList("email", "public_profile"));
+        FaceBookButton.setReadPermissions(Arrays.asList("email", "public_profile"));
         // Creating CallbackManager
 //        callbackManager = CallbackManager.Factory.create();
         accessTokenTracker = new AccessTokenTracker() {
@@ -130,17 +121,17 @@ FaceBookButton.setReadPermissions(Arrays.asList("email", "public_profile"));
 
             @Override
             public void onError(FacebookException error) {
-                Toast.makeText(getApplicationContext(),"error_login", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "error_login", Toast.LENGTH_SHORT).show();
             }
         });
 
 
-        phone=(EditText)view.findViewById(R.id.phoneNo_et);
-        password=(EditText)view.findViewById(R.id.password_et);
-        logup=(TextView)view.findViewById(R.id.logup_tv);
-        forget=(TextView)view.findViewById(R.id.forget_tv);
-        login=(Button)view.findViewById(R.id.login_btn);
-        logout=(ImageView)view.findViewById(R.id.logout_btn);
+        phone = (EditText) view.findViewById(R.id.phoneNo_et);
+        password = (EditText) view.findViewById(R.id.password_et);
+        logup = (TextView) view.findViewById(R.id.logup_tv);
+        forget = (TextView) view.findViewById(R.id.forget_tv);
+        login = (Button) view.findViewById(R.id.login_btn);
+        logout = (ImageView) view.findViewById(R.id.logout_btn);
         ccp = (CountryCodePicker) view.findViewById(R.id.ccp);
         ccp.registerCarrierNumberEditText(phone);
         logout.setOnClickListener(new View.OnClickListener() {
@@ -152,37 +143,37 @@ FaceBookButton.setReadPermissions(Arrays.asList("email", "public_profile"));
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (verify()){
+                if (verify()) {
                     progressBar.setVisibility(View.VISIBLE);
-                    Http_user http_user=new Http_user();
-                    http_user.Post_Login(getContext(),fcmtoken, password.getText().toString()
+                    Http_user http_user = new Http_user();
+                    http_user.Post_Login(getContext(), fcmtoken, password.getText().toString()
                             , number, new Http_user.user_loginListener() {
-                        @Override
-                        public Boolean onSuccess(new_account new_account) {
-                            progressBar.setVisibility(View.GONE);
-                            Toast.makeText(getContext(),new_account.getMessage(),Toast.LENGTH_LONG).show();
-                            if (new_account.isStatus()){
-                                new user_info(new_account.getItems(),password.getText().toString(),getContext());
-                                startActivity(new Intent(getContext(), MainNew.class));
-                                getActivity().finish();
-                                return true;
-                            }else {
-                                return  false;
-                            }
-                        }
+                                @Override
+                                public Boolean onSuccess(new_account new_account) {
+                                    progressBar.setVisibility(View.GONE);
+                                    Toast.makeText(getContext(), new_account.getMessage(), Toast.LENGTH_LONG).show();
+                                    if (new_account.isStatus()) {
+                                        new user_info(new_account.getItems(), password.getText().toString(), getContext());
+                                        startActivity(new Intent(getContext(), MainNew.class));
+                                        getActivity().finish();
+                                        return true;
+                                    } else {
+                                        return false;
+                                    }
+                                }
 
-                        @Override
-                        public void onStart() {
+                                @Override
+                                public void onStart() {
 
-                        }
+                                }
 
-                        @Override
-                        public Boolean onFailure(String msg) {
-                            progressBar.setVisibility(View.GONE);
-                            Toast.makeText(getContext(),msg,Toast.LENGTH_LONG).show();
-                            return false;
-                        }
-                    });
+                                @Override
+                                public Boolean onFailure(String msg) {
+                                    progressBar.setVisibility(View.GONE);
+                                    Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
+                                    return false;
+                                }
+                            });
 
                 }
             }
@@ -201,7 +192,9 @@ FaceBookButton.setReadPermissions(Arrays.asList("email", "public_profile"));
         });
         return view;
     }
-int RC_SIGN_IN=1;
+
+    int RC_SIGN_IN = 1;
+
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -212,21 +205,24 @@ int RC_SIGN_IN=1;
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
+
     GoogleSignInClient mGoogleSignInClient;
-    private  void  login_with_google(){
 
-    GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestEmail()
-            .build();
-    // Build a GoogleSignInClient with the options specified by gso.
-     mGoogleSignInClient = GoogleSignIn.getClient(getContext(), gso);
-    // Check for existing Google Sign In account, if the user is already signed in
+    private void login_with_google() {
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        // Build a GoogleSignInClient with the options specified by gso.
+        mGoogleSignInClient = GoogleSignIn.getClient(getContext(), gso);
+        // Check for existing Google Sign In account, if the user is already signed in
 // the GoogleSignInAccount will be non-null.
-    GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
-    updateUI(account);
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
+        updateUI(account);
 
-}
-private void useLoginInformation(AccessToken accessToken) {
+    }
+
+    private void useLoginInformation(AccessToken accessToken) {
         /**
          Creating the GraphRequest to fetch user details
          1st Param - AccessToken
@@ -240,7 +236,7 @@ private void useLoginInformation(AccessToken accessToken) {
                     String name = object.getString("name");
                     String email = object.getString("email");
                     String image = object.getJSONObject("picture").getJSONObject("data").getString("url");
-                    Toast.makeText(getContext(),name+email+"fb info",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), name + email + "fb info", Toast.LENGTH_LONG).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -253,14 +249,15 @@ private void useLoginInformation(AccessToken accessToken) {
 //        // Initiate the GraphRequest
 //        request.executeAsync();
     }
+
     @Override
     public void onStart() {
         super.onStart();
         GoogleSignInAccount alreadyloggedAccount = GoogleSignIn.getLastSignedInAccount(getContext());
         if (alreadyloggedAccount != null) {
-            Toast.makeText(getContext(), "Already Logged In"+alreadyloggedAccount.getDisplayName()
-                    +alreadyloggedAccount.getEmail(), Toast.LENGTH_SHORT).show();
-           // onLoggedIn(alreadyloggedAccount);
+            Toast.makeText(getContext(), "Already Logged In" + alreadyloggedAccount.getDisplayName()
+                    + alreadyloggedAccount.getEmail(), Toast.LENGTH_SHORT).show();
+            // onLoggedIn(alreadyloggedAccount);
         } else {
             Log.d(TAG, "Not logged in");
         }
@@ -277,20 +274,21 @@ private void useLoginInformation(AccessToken accessToken) {
            */
 
     }
+
     private void updateUI(@Nullable GoogleSignInAccount account) {
         if (account != null) {
 //            mStatusTextView.setText(getString(R.string.signed_in_fmt, account.getDisplayName()));
 //
 //            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
 //            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
-            user_info user_info=new user_info(getContext());
+            user_info user_info = new user_info(getContext());
             user_info.setPoint(2);
             user_info.setName(account.getGivenName());
             user_info.setGender(account.getFamilyName());
             user_info.setEmail(account.getEmail());
-            try{
+            try {
                 user_info.setImag(account.getPhotoUrl().toString());
-            }catch (Exception e){
+            } catch (Exception e) {
 
             }
             _goto(new SignUp(user_info));
@@ -326,13 +324,13 @@ private void useLoginInformation(AccessToken accessToken) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         Log.d("FRAGMENT", "onResultCalled");
 
-        Toast.makeText(getContext(),data.toString()+"",Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), data.toString() + "", Toast.LENGTH_LONG).show();
     }
 
     // [START handleSignInResult]
     private void handleSignInResult(com.google.android.gms.tasks.Task<GoogleSignInAccount> completedTask) {
         try {
-          GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
             // Signed in successfully, show authenticated UI.
             updateUI(account);
@@ -342,26 +340,26 @@ private void useLoginInformation(AccessToken accessToken) {
             Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
             updateUI(null);
         }
-    }    private boolean verify() {
+    }
+
+    private boolean verify() {
         number = ccp.getFullNumberWithPlus();
-        String pass=password.getText().toString();
-        if (number.isEmpty()){
+        String pass = password.getText().toString();
+        if (number.isEmpty()) {
             phone.setError(phone.getHint());
 
             return false;
         }
-        if ( pass.isEmpty())
-        {
+        if (pass.isEmpty()) {
             password.setError(password.getHint());
             return false;
         }
 
-        return  true;
-          }
+        return true;
+    }
 
 
-
-    private void _goto(Fragment frg){
+    private void _goto(Fragment frg) {
         Login.fragmentManager = getFragmentManager();
         Login.fragmentTransaction = Login.fragmentManager.beginTransaction();
         Login.fragment = frg;

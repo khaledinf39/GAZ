@@ -128,16 +128,16 @@ public class Product {
         if(jsonObject == null){
             return;
         }
-        id = jsonObject.opt("_id").toString();
-        description = jsonObject.opt("description").toString();
+        id = jsonObject.optString("_id");
+        description = jsonObject.optString("description");
         rate = jsonObject.getInt("rate");
-        createat = jsonObject.opt("createat").toString();
+        createat = jsonObject.optString("createat");
         price = jsonObject.getDouble("price");
         price_buy_new = jsonObject.getDouble("price_buy_new");
-        image = jsonObject.opt("image").toString();
+        image = jsonObject.optString("image");
 
-        name = jsonObject.opt("name").toString();
-        warrenty = jsonObject.opt("warrenty").toString();
+        name = jsonObject.optString("name");
+        warrenty = jsonObject.optString("warrenty");
         category_id = jsonObject.getString("category_id");
     }
 

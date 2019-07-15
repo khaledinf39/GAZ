@@ -57,7 +57,7 @@ public class show_notif {
                 items.add(new notification(itemsObject));
             }
 
-        }		message = jsonObject.opt("message").toString();
+        }		message = jsonObject.optString("message").toString();
         status = jsonObject.optBoolean("status");
         statusCode = jsonObject.optInt("status_code");
     }

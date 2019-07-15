@@ -36,9 +36,9 @@ public class contact_us{
         if(jsonObject == null){
             return;
         }
-        id = jsonObject.opt("_id").toString();
-        data = jsonObject.opt("data").toString();
-        name = jsonObject.opt("name").toString();
+        id = jsonObject.optString("_id");
+        data = jsonObject.optString("data");
+        name = jsonObject.optString("name");
     }
 
     /**
