@@ -176,12 +176,6 @@ public class Shipping extends Fragment implements OnMapReadyCallback {
 
     }
 
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
     private ImageView like;
     private Boolean like_stat = false;
     private Button continue_btn;
@@ -413,8 +407,7 @@ public class Shipping extends Fragment implements OnMapReadyCallback {
             }
             if (grant) {
                 showDefaultLocation();
-            } else
-                requestPermissions(permissions, 15);
+            }
         }
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 //            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)

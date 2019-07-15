@@ -70,18 +70,23 @@ public class Home extends Fragment {
         Allcatig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainNew.goto_(new Categories(), getContext());
+                MainNew.goto_(new Categories(), getActivity());
             }
         });
-        DBManager db = new DBManager(getContext());
-        db.open();
-        Long count_order = db.get_order_count();
-        db.close();
-        if (count_order != 0) {
-            count.setText(count_order.toString());
-            count.setVisibility(View.VISIBLE);
-        } else {
-            count.setVisibility(View.GONE);
+        try {
+            DBManager db = new DBManager(getActivity());
+            db.open();
+            long count_order = db.get_order_count();
+            db.close();
+
+            if (count_order != 0) {
+                count.setText(String.valueOf(count_order));
+                count.setVisibility(View.VISIBLE);
+            } else {
+                count.setVisibility(View.GONE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         /**************************************************************/
@@ -89,7 +94,7 @@ public class Home extends Fragment {
         go_basket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainNew.goto_(new Car(), getContext());
+                MainNew.goto_(new Car(), getActivity());
             }
         });
         speacialRV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, true));
