@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 import com.kh_sof_dev.gaz.Classes.Products.Product;
 import com.kh_sof_dev.gaz.R;
@@ -60,9 +61,12 @@ mView=view;
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called.");
-
+        Log.d(mItems.get(position).getName(), mItems.get(position).getImage());
         holder.prod_name.setText(mItems.get(position).getName());
-        Picasso.with(mContext).load(mItems.get(position).getImage())
+        Picasso.with(mContext)
+                .load(mItems.get(position).getImage())
+                .placeholder(R.drawable.placeholder)
+
         .into(holder.prod_img);
         holder.prod_img.setOnClickListener(new View.OnClickListener() {
             @Override
