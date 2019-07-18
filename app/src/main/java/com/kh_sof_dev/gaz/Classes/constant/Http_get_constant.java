@@ -10,6 +10,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.kh_sof_dev.gaz.Classes.User.user_info;
 import com.kh_sof_dev.gaz.Classes.constant.About_us.show_s_cus;
 import com.kh_sof_dev.gaz.Classes.constant.contact_us.show_contact_ways;
 import com.kh_sof_dev.gaz.R;
@@ -192,8 +193,9 @@ public class Http_get_constant {
 
     public void setting(final Context mcontext, final sittingListener listener)
     {
+        user_info user_info=new user_info(mcontext);
         listener.onStart();
-        String url=mcontext.getString(R.string.api)+"api/settings";
+        String url=mcontext.getString(R.string.api)+"api/settings/"+user_info.supplier_id;
         if (queue==null){
             queue = Volley.newRequestQueue(mcontext);  // this = context
         }
@@ -214,6 +216,7 @@ public class Http_get_constant {
 
                     }
                 },
+
                 new Response.ErrorListener()
                 {
                     @Override
@@ -232,8 +235,9 @@ public class Http_get_constant {
 ////6
     public void Time(final Context mcontext, final citesListener listener)
     {
+        user_info  user_info=new user_info(mcontext);
         listener.onStart();
-        String url=mcontext.getString(R.string.api)+"api/delivery_time";
+        String url=mcontext.getString(R.string.api)+"api/delivery_time/"+user_info.supplier_id;
         if (queue==null){
             queue = Volley.newRequestQueue(mcontext);  // this = context
         }

@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 import com.kh_sof_dev.gaz.Adapters.Favorit_adapter;
 import com.kh_sof_dev.gaz.Adapters.Resrvation_adapter;
 import com.kh_sof_dev.gaz.Classes.Database.DBManager;
@@ -64,7 +64,7 @@ public class Profile extends Fragment {
         /****************************action***************************/
         user_info user_info = new user_info(getContext());
         if (!user_info.getImag().isEmpty()) {
-            Glide.with(getContext())
+            Picasso.with(getContext())
                     .load(user_info.getImag())
                     .placeholder(R.drawable.ic_user_img_gray)
                     .into(user_img);

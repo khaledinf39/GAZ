@@ -21,7 +21,7 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+
 
 import com.kh_sof_dev.gaz.Classes.User.user_info;
 import com.kh_sof_dev.gaz.Fragments.AboutUs;
@@ -36,6 +36,7 @@ import com.kh_sof_dev.gaz.Fragments.Profile;
 import com.kh_sof_dev.gaz.Fragments.Search;
 import com.kh_sof_dev.gaz.Fragments.UserAgreement;
 import com.kh_sof_dev.gaz.R;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -121,7 +122,7 @@ public class MainNew extends AppCompatActivity
         username.setText(user_info.getName());
         wallet.setText("لديك " + user_info.getPoint() + " نقطة");
         if (!user_info.getImag().isEmpty()) {
-            Glide.with(getApplicationContext())
+            Picasso.with(getApplicationContext())
                     .load(user_info.getImag())
                     .placeholder(R.drawable.ic_user_img_gray)
                     .into(user_img);
@@ -152,7 +153,7 @@ public class MainNew extends AppCompatActivity
         username.setText(user_info.getName());
         wallet.setText("لديك " + user_info.getPoint() + " نقطة");
         if (!user_info.getImag().isEmpty()) {
-            Glide.with(getApplicationContext())
+            Picasso.with(getApplicationContext())
                     .load(user_info.getImag())
                     .placeholder(R.drawable.ic_user_img_gray)
                     .into(user_img);

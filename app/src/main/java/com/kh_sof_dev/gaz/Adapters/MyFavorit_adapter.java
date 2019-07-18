@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 import com.kh_sof_dev.gaz.activities.MainNew;
 import com.kh_sof_dev.gaz.Classes.Database.DBManager;
 import com.kh_sof_dev.gaz.Classes.Products.Product;
@@ -66,7 +66,7 @@ if (Item_selected==position){
 }
 holder.price.setText(mItems.get(position).getPrice().toString());
 holder.name.setText(mItems.get(position).getName());
-        Glide.with(mContext).load(mItems.get(position).getImage())
+        Picasso.with(mContext).load(mItems.get(position).getImage())
         .into(holder.img);
         holder.delet.setOnClickListener(new View.OnClickListener() {
             @Override

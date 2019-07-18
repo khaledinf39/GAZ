@@ -12,7 +12,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.kh_sof_dev.gaz.Classes.Order.coupon.test_coupon;
 import com.kh_sof_dev.gaz.Classes.Order.point.show_points;
+import com.kh_sof_dev.gaz.Classes.Order.supplier.near_supplier;
 import com.kh_sof_dev.gaz.Classes.User.user_info;
 import com.kh_sof_dev.gaz.R;
 
@@ -42,12 +44,94 @@ public class Http_orders {
         void onStart();
         void onFailure(String msg);
     }
+    public interface Onsupplier_place_lisennter{
+        void onSuccess(near_supplier near_supplier);
+
+        void onStart();
+        void onFailure(String msg);
+    }
     public interface OnPoint_lisennter{
         void onSuccess(show_points show_points);
 
         void onStart();
         void onFailure(String msg);
     }
+    public interface OnCoupon_lisennter{
+        void onSuccess(test_coupon test_coupon);
+
+        void onStart();
+        void onFailure(String msg);
+    }
+    public void Post_test_coupon(final  Context mcontext,final String coupon_txt,final OnCoupon_lisennter listener){
+        listener.onStart();
+        RequestQueue queue = Volley.newRequestQueue(mcontext);  // this = context
+        String url = mcontext.getString(R.string.api)+"api/coupon/checkCoupon";
+        final user_info user_info=new user_info(mcontext);
+
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response) {
+                        // response
+                        Log.d("Response", response);
+                        String jsonData = response;
+                        JSONObject Jobject = null;
+                        try {
+                            Jobject = new JSONObject(jsonData);
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+                        try {
+                            test_coupon test_coupon_=new test_coupon(Jobject);
+                            listener.onSuccess(test_coupon_);
+
+//                            mOrder_.setmCoupon(test_coupon_.getOrdergetters());
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                            listener.onFailure(e1.getMessage());
+                        }
+
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        Log.d("Error.Response", String.valueOf(error.getMessage()));
+                        listener.onFailure("Error.Response");
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String>  Header = new HashMap<String, String>();
+//
+                Header.put("token",user_info.getToken());
+
+
+                return Header;
+            }
+
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  parameters = new HashMap<String, String>();
+//
+                parameters.put("coupon",coupon_txt);
+
+                return parameters;
+            }
+        };
+        queue.getCache().initialize();
+        queue.add(postRequest);
+        queue.getCache().clear();
+
+        // prepare the Request
+
+    }
+
     public void Post_send_Order(final Context mcontext, final JSONObject cart , final OnOrder_lisennter listener){
         if (queue==null){
             queue = Volley.newRequestQueue(mcontext);
@@ -143,7 +227,7 @@ public class Http_orders {
         queue.getCache().clear();
     }
     public void Get_TestMyPlace(final Context mcontext,Double lat,Double lng, final Ontestplace_lisennter listener){
-        user_info user_info_=new user_info(mcontext);
+       // user_info user_info_=new user_info(mcontext);
         listener.onStart();
         String url=mcontext.getString(R.string.api)+"api/checkAvailableDrivers";
         if (queue == null) {
@@ -193,6 +277,59 @@ listener.onFailure(mcontext.getString(R.string.networke)+"لا وجود لسائ
         queue.add(getRequest);
         queue.getCache().clear();
     }
+    public void Get_MyPlaceSupp(final Context mcontext,Double lat,Double lng, final Onsupplier_place_lisennter listener){
+        // user_info user_info_=new user_info(mcontext);
+        listener.onStart();
+        String url=mcontext.getString(R.string.api)+"api/checkAvailableSupplier";
+        if (queue == null) {
+            queue = Volley.newRequestQueue(mcontext);  // this = context
+            //Build.logError("Setting a new request queue");
+        }
+
+        /*****************/
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("lat", lat);
+            jsonObject.put("lng", lng);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.d("parrameter", jsonObject.toString());
+        // prepare the Request
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
+                new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // display response
+                        Log.d("Response", response.toString());
+                        try {
+                            listener.onSuccess(new near_supplier(response));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        listener.onFailure(mcontext.getString(R.string.networke)+"لا وجود لسائقين في هذه المنطقة ");
+//                        Log.d("Error.Response", mcontext.getString(R.string.networke));
+                    }
+                }
+        );
+
+// add it to the RequestQueue
+        queue.getCache().initialize();
+// add it to the RequestQueue
+        queue.add(getRequest);
+        queue.getCache().clear();
+    }
+
+
     public void Getdetails_Order(final Context mcontext,String order_id, final OnOrder_geter_lisennter listener)
     {
         user_info user_info_=new user_info(mcontext);

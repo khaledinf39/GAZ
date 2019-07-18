@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 import com.kh_sof_dev.gaz.Classes.Database.DBManager;
 import com.kh_sof_dev.gaz.Classes.Products.Product;
 import com.kh_sof_dev.gaz.R;
@@ -75,7 +75,7 @@ public class Product_details extends Fragment {
         name.setText(mProduct.getName());
         price.setText(mProduct.getPrice().toString());
         details.setText(mProduct.getDescription());
-        Glide.with(getContext()).load(mProduct.getImage()).into(pro_img);
+        Picasso.with(getContext()).load(mProduct.getImage()).into(pro_img);
 
         /********************************action******************************/
         back.setOnClickListener(new View.OnClickListener() {

@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 import com.kh_sof_dev.gaz.Classes.Database.DBManager;
 import com.kh_sof_dev.gaz.Classes.Products.Product;
 
@@ -64,7 +64,8 @@ final DBManager dbManager=new DBManager(mContext);
 holder.nb.setText(qty+"");
 holder.price.setText(mItems.get(position).getPrice().toString());
         holder.pro_nam.setText(mItems.get(position).getName());
-        Glide.with(mContext).load(mItems.get(position).getImage())
+        Picasso.with(mContext).load(mItems.get(position).getImage())
+                .placeholder(R.drawable.placeholder)
         .into(holder.pro_img);
         holder.add.setOnClickListener(new View.OnClickListener() {
             @Override

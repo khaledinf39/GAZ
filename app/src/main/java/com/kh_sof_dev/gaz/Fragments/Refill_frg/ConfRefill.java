@@ -19,7 +19,7 @@ import com.kh_sof_dev.gaz.activities.MainNew;
 import com.kh_sof_dev.gaz.Adapters.Refill_adapter;
 import com.kh_sof_dev.gaz.Classes.Products.Product;
 import com.kh_sof_dev.gaz.Classes.constant.Setting;
-import com.kh_sof_dev.gaz.Fragments.Payment;
+import com.kh_sof_dev.gaz.Fragments.Reservations.Payment;
 import com.kh_sof_dev.gaz.R;
 
 

@@ -11,6 +11,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.kh_sof_dev.gaz.Classes.User.user_info;
 import com.kh_sof_dev.gaz.R;
 
 import org.json.JSONException;
@@ -163,7 +164,7 @@ public class Http_products {
         }}
     public void Post_shearch_products(final  Context mcontext, final String prod_name, final productsListener listener ){
         listener.onStart();
-
+final user_info user_info=new user_info(mcontext);
         if (queue==null){
             queue = Volley.newRequestQueue(mcontext);  // this = context
         }
@@ -203,6 +204,7 @@ public class Http_products {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String>  param = new HashMap<String, String>();
                 param.put("name",prod_name);
+                param.put("supplier_id",user_info.supplier_id);
                return  param;
             }
 
@@ -218,7 +220,7 @@ public class Http_products {
     }
     public void Post_products_category(final Context mcontext, final String categorie_id,final  int orderNB, int limit, int page, final productsListener listener){
         listener.onStart();
-
+        final user_info user_info=new user_info(mcontext);
         if (queue==null){
             queue = Volley.newRequestQueue(mcontext);  // this = context
         }
@@ -275,7 +277,7 @@ public class Http_products {
                     param.put("category_id",categorie_id);
                 }
 
-
+                param.put("supplier_id",user_info.supplier_id);
 
                 return  param;
             }

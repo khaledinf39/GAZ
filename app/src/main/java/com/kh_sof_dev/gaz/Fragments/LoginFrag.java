@@ -2,6 +2,7 @@ package com.kh_sof_dev.gaz.Fragments;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -49,6 +50,7 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.facebook.FacebookSdk.getApplicationContext;
 import static com.facebook.internal.FacebookDialogFragment.TAG;
 
@@ -77,6 +79,8 @@ public class LoginFrag extends Fragment {
         FacebookSdk.sdkInitialize(getActivity());
         callbackManager = CallbackManager.Factory.create();
         View view = inflater.inflate(R.layout.layout_f_loginfrag, container, false);
+
+
 
         FirebaseApp.initializeApp(getContext());
         fcmtoken = FirebaseInstanceId.getInstance().getToken();

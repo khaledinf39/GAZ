@@ -37,7 +37,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 import com.kh_sof_dev.gaz.activities.MainNew;
 import com.kh_sof_dev.gaz.Adapters.City_adapter;
 import com.kh_sof_dev.gaz.Classes.Http.upload_img.VolleyMultipartRequest;
@@ -412,7 +412,7 @@ public class EditProfile extends Fragment {
         phone.setText(user_info.getPhone());
 
         if (!user_info.getImag().isEmpty()) {
-            Glide.with(getContext())
+            Picasso.with(getContext())
                     .load(user_info.getImag())
                     .placeholder(R.drawable.ic_user_img_gray)
                     .into(user_img);

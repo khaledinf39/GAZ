@@ -3,6 +3,8 @@ package com.kh_sof_dev.gaz.Classes.Order;
 //
 //	AddOrder.java
 
+import com.kh_sof_dev.gaz.Classes.User.user_info;
+
 import org.json.*;
 
 import java.util.*;
@@ -24,6 +26,22 @@ public class AddOrder{
     private int orderType;
 
     public AddOrder() {
+    }
+
+    public String getCoupon() {
+        return coupon;
+    }
+
+    public void setCoupon(String coupon) {
+        this.coupon = coupon;
+    }
+
+    public String getSuppiler_id() {
+        return suppiler_id;
+    }
+
+    public void setSuppiler_id(String suppiler_id) {
+        this.suppiler_id = suppiler_id;
     }
 
     public String getNotes() {
@@ -166,7 +184,7 @@ public class AddOrder{
 
 
     }
-
+private String coupon=null,suppiler_id;
     /**
      * Returns all the available property values in the form of JSONObject instance where the key is the approperiate json key and the value is the value of the corresponding field
      */
@@ -191,6 +209,13 @@ public class AddOrder{
             jsonObject.put("paymentType", paymentType);
             jsonObject.put("subTotal", subTotal);
             jsonObject.put("orderType", orderType);
+
+
+            jsonObject.put("supplier_id", suppiler_id);
+            if (coupon!=null){
+                jsonObject.put("coupon", coupon);
+            }
+
         } catch (JSONException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -219,6 +244,11 @@ public class AddOrder{
             jsonObject.put("paymentType", paymentType);
             jsonObject.put("subTotal", subTotal);
             jsonObject.put("orderType", orderType);
+
+            jsonObject.put("supplier_id", suppiler_id);
+            if (coupon!=null){
+                jsonObject.put("coupon", coupon);
+            }
         } catch (JSONException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -252,7 +282,7 @@ public class AddOrder{
 ////            jsonObject.put("Notes", notes);
 ////            jsonObject.put("StatusId", statusId);
 ////            jsonObject.put("addressDetails",addressDetails);
-////            jsonObject.put("coupon", coupon);
+////            jsonObject.put("supplier", supplier);
 ////            jsonObject.put("deliveryCost", deliveryCost);
 ////            jsonObject.put("deliveryOption_id", deliveryOptionId);
 ////            jsonObject.put("delivery_date", deliveryDate);

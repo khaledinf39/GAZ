@@ -42,6 +42,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.kh_sof_dev.gaz.Classes.Order.Http_orders;
 import com.kh_sof_dev.gaz.Classes.Order.testMyplace;
 import com.kh_sof_dev.gaz.Classes.User.user_info;
+import com.kh_sof_dev.gaz.Fragments.Reservations.Payment;
 import com.kh_sof_dev.gaz.R;
 import com.kh_sof_dev.gaz.activities.MainNew;
 

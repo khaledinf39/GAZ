@@ -8,6 +8,7 @@ import com.kh_sof_dev.gaz.Classes.Order.point.points;
 import static android.content.Context.MODE_PRIVATE;
 
 public class user_info {
+    public String supplier_id;
     private String id,phone,token,name,email,image,gender,city,pw,address;
 private String lat;
     private String lng;
@@ -29,8 +30,18 @@ private  int point;
         pw=sp.getString("pw","");
         wallet=sp.getLong("wallet", (long) 0.0);
         point=sp.getInt("point", 0);
+        supplier_id=sp.getString("supplier_id","");
     }
 
+    public user_info(String supplier_id, Context context) {
+        SharedPreferences sp=context.getSharedPreferences("Login", MODE_PRIVATE);
+        SharedPreferences.Editor Ed=sp.edit();
+
+        Ed.putString("supplier_id", String.valueOf(supplier_id));
+
+        Ed.commit();
+
+    }
     public user_info(user user_,String pw, Context context) {
         SharedPreferences sp=context.getSharedPreferences("Login", MODE_PRIVATE);
         SharedPreferences.Editor Ed=sp.edit();

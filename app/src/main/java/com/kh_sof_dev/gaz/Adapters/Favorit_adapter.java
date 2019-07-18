@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 import com.kh_sof_dev.gaz.Classes.Products.Product;
 
 import com.kh_sof_dev.gaz.R;
@@ -59,7 +59,8 @@ if (Item_selected==position){
 
 }
 
-        Glide.with(mContext).load(mItems.get(position).getImage())
+        Picasso.with(mContext).load(mItems.get(position).getImage())
+                .placeholder(R.drawable.placeholder)
         .into(holder.img);
 
 

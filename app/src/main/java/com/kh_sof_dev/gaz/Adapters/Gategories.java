@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import com.kh_sof_dev.gaz.Classes.Products.catigories;
 
@@ -59,7 +59,7 @@ mView=view;
         Log.d(TAG, "onBindViewHolder: called.");
 
         holder.categories_tv.setText(mItems.get(position).getName());
-        Glide.with(mContext).load(mItems.get(position).getImage())
+        Picasso.with(mContext).load(mItems.get(position).getImage())
                 .placeholder(R.drawable.placeholder)
         .into(holder.cat_img);
         mView.setOnClickListener(new View.OnClickListener() {

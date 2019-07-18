@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 import com.kh_sof_dev.gaz.activities.MainNew;
 import com.kh_sof_dev.gaz.Fragments.Product_details;
 import com.kh_sof_dev.gaz.R;
@@ -55,7 +55,7 @@ mView=view;
         Log.d(TAG, "onBindViewHolder: called.");
 
         holder.prod_name.setText(mItems.get(position).getName());
-        Glide.with(mContext).load(mItems.get(position).getImage())
+        Picasso.with(mContext).load(mItems.get(position).getImage())
                 .placeholder(R.drawable.placeholder)
         .into(holder.prod_img);
         holder.nb_start.setText(mItems.get(position).getRate()+"");

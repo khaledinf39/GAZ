@@ -27,7 +27,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -127,7 +127,7 @@ public class Follow_order extends Fragment implements OnMapReadyCallback {
         try {
             if (order_getter != null) {
                 if (order_getter.getDriverId() != null) {
-                    Glide.with(getContext())
+                    Picasso.with(getContext())
                             .load(order_getter.getDriverId().getImage())
                             .placeholder(R.drawable.ic_user_img_gray)
                             .into(driverImg);

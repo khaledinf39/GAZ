@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 import com.kh_sof_dev.gaz.activities.MainNew;
 import com.kh_sof_dev.gaz.Classes.Products.Product;
 import com.kh_sof_dev.gaz.Fragments.Product_details;
@@ -59,7 +59,7 @@ holder.name_pro.setText(mItems.get(position).getName());
         holder.score.setText(mItems.get(position).getRate()+"");
         holder.type.setText("");
         holder.price.setText(mItems.get(position).getPrice().toString());
-        Glide.with(mContext).load(mItems.get(position).getImage())
+        Picasso.with(mContext).load(mItems.get(position).getImage())
                 .placeholder(R.drawable.placeholder)
         .into(holder.pro_img);
 
