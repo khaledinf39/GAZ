@@ -1,132 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
 
-    android:weightSum="100"
-    >
+    android:weightSum="100">
+
     <LinearLayout
+        android:id="@+id/progress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_centerInParent="true"
         android:gravity="center"
-        android:id="@+id/progress">
+        android:orientation="vertical">
+
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-          />
+            />
+
         <TextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="فضلا انتظر ثواني"
-            android:textSize="22sp"
-            android:textColor="#364F6B"
-            android:fontFamily="@font/cairo_semibold"
             android:layout_marginTop="20dp"
-            app:layout_constraintTop_toTopOf="parent"
+            android:fontFamily="@font/cairo_semibold"
+            android:text="فضلا انتظر ثواني"
+            android:textColor="#364F6B"
+            android:textSize="22sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" نكتشف هل منطقتك مغطاة بموزعين سوق غاز"
-            android:textSize="14sp"
-            android:textColor="#364F6B"
             android:fontFamily="@font/cairo_semibold"
+            android:text=" نكتشف هل منطقتك مغطاة بموزعين سوق غاز"
+            android:textColor="#364F6B"
+            android:textSize="14sp"
 
             />
     </LinearLayout>
+
     <LinearLayout
-        android:visibility="visible"
         android:id="@+id/no_location"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="visible">
+
         <android.support.v7.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="30dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="55"
-            app:cardCornerRadius="8dp"
             app:cardBackgroundColor="@color/white"
-            app:cardElevation="10dp"
-            >
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp">
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/illustration"
                 android:scaleType="fitXY"
-
-
-                />
+                android:src="@drawable/ic_illustration" />
         </android.support.v7.widget.CardView>
+
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="45">
+
             <TextView
                 android:id="@+id/tx1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="عذرا"
-                android:textSize="22sp"
-                android:textColor="#364F6B"
-                android:fontFamily="@font/cairo_semibold"
                 android:layout_marginTop="20dp"
-                app:layout_constraintTop_toTopOf="parent"
+                android:fontFamily="@font/cairo_semibold"
+                android:text="عذرا"
+                android:textColor="#364F6B"
+                android:textSize="22sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/tx2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="منطقتك غير مغطاة من قبل تطبيق سوق غاز … نسعى جاهدين لتغطية كافة المناطق"
-                android:textSize="14sp"
-                android:textColor="#000000"
-                android:fontFamily="@font/cairo_regular"
-                android:gravity="center_horizontal"
+                android:layout_marginStart="35dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="35dp"
-                android:layout_marginStart="35dp"
-                app:layout_constraintTop_toBottomOf="@+id/tx1"
+                android:fontFamily="@font/cairo_regular"
+                android:gravity="center_horizontal"
+                android:text="منطقتك غير مغطاة من قبل تطبيق سوق غاز … نسعى جاهدين لتغطية كافة المناطق"
+                android:textColor="#000000"
+                android:textSize="14sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                />
+                app:layout_constraintTop_toBottomOf="@+id/tx1" />
+
             <TextView
                 android:id="@+id/tx3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="شكراً لكم"
-                android:textSize="14sp"
-                android:textColor="#000000"
-                android:fontFamily="@font/cairo_regular"
-                android:gravity="center_horizontal"
+                android:layout_marginStart="35dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="35dp"
-                android:layout_marginStart="35dp"
-                app:layout_constraintTop_toBottomOf="@+id/tx2"
+                android:fontFamily="@font/cairo_regular"
+                android:gravity="center_horizontal"
+                android:text="شكراً لكم"
+                android:textColor="#000000"
+                android:textSize="14sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                />
+                app:layout_constraintTop_toBottomOf="@+id/tx2" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tx2"
-                app:layout_constraintVertical_bias="1"
-                android:orientation="horizontal"
-                android:weightSum="2"/>
+                app:layout_constraintVertical_bias="1" />
         </android.support.constraint.ConstraintLayout>
 
     </LinearLayout>
