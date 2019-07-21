@@ -57,12 +57,16 @@ public class Test_location extends Fragment {
 
     private void Getpermissin(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+            if (ActivityCompat.checkSelfPermission(getContext(),
+                    Manifest.permission.ACCESS_FINE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED &&
-                    ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                    ActivityCompat.checkSelfPermission(getContext(),
+                            Manifest.permission.ACCESS_COARSE_LOCATION)
                             != PackageManager.PERMISSION_GRANTED) {
+
                 requestPermissions(new String[]{
-                        Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
                         Manifest.permission.INTERNET
                 }, 15);
                 locationManager = (LocationManager)
@@ -153,6 +157,7 @@ public class Test_location extends Fragment {
 
 
     }
+    boolean firstone=false;
     /*---------- Listener class to get coordinates ------------- */
     private class MyLocationListener implements LocationListener {
 
@@ -162,7 +167,10 @@ public class Test_location extends Fragment {
 
             mLatLng=new LatLng(loc.getLatitude(),loc.getLongitude());
             Login.mLatLng=mLatLng;
-            test_location();
+            if (!firstone) {
+                test_location();
+                firstone=true;
+            }
 
         }
 
