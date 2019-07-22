@@ -65,7 +65,7 @@ public class RefillHome extends Fragment {
     public static String date = "", time = "";
     int qty = 1;
     List<Product> productList2, productList3, productList4;
-    public static List<Product> productList;
+    public static List<Product> productList = new ArrayList<>();
     /*********************************************/
 
     /***********************pagenation **************************/
@@ -83,7 +83,7 @@ public class RefillHome extends Fragment {
         productList2 = new ArrayList<>();
         productList3 = new ArrayList<>();
         productList4 = new ArrayList<>();
-        productList = new ArrayList<>();
+//        productList = new ArrayList<>();
         produRV = view.findViewById(R.id.Name_tv);
         produRV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         produRV.setAdapter(new Refill_adapter(getContext(), productList));
@@ -294,7 +294,7 @@ public class RefillHome extends Fragment {
     }
 
     private void CountPopup() {
-        final Dialog dialog = new Dialog(getContext());
+        final Dialog dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.popup_count);
         TextView nb1 = (TextView) dialog.findViewById(R.id.nb1);
         TextView nb2 = (TextView) dialog.findViewById(R.id.nb2);
@@ -345,7 +345,7 @@ public class RefillHome extends Fragment {
     }
 
     private void TimePopup() {
-        final Dialog dialog = new Dialog(getContext());
+        final Dialog dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.popup_select_time);
         final RecyclerView RV = (RecyclerView) dialog.findViewById(R.id.RV);
         RV.setLayoutManager(new GridLayoutManager(getContext(), 2));
@@ -420,7 +420,7 @@ public class RefillHome extends Fragment {
     }
 
     private void DatePopup() {
-        final Dialog dialog = new Dialog(getContext());
+        final Dialog dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.popup_select_date);
 
         int dateNB = 0;

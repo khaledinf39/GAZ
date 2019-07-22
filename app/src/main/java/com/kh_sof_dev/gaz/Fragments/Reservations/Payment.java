@@ -44,7 +44,7 @@ public class Payment extends Fragment implements View.OnClickListener {
 
     private LinearLayout visa, cash, paytabs;
     private ImageView back;
-    private int payment_typ=0;
+    private int payment_typ = 0;
     private Double price_ = 0.0, total = 0.0;
     private Button continue_btn;
     private TextView cashTV, visaTV, pointTV;
@@ -102,10 +102,10 @@ public class Payment extends Fragment implements View.OnClickListener {
                 MainNew.goto_(new Car(), getContext());
                 break;
             case R.id.continue_btn:
-if (payment_typ==0){
-    Toast.makeText(getContext(),"اختار وسيلة الدفع",Toast.LENGTH_LONG).show();
-    return;
-}
+                if (payment_typ == 0) {
+                    Toast.makeText(getContext(), "اختار وسيلة الدفع", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 MainNew.goto_(new ConfReservation1(payment_typ, order_typ), getContext());
                 break;
             case R.id.point_lay:
@@ -140,28 +140,28 @@ if (payment_typ==0){
 
         switch (payment_typ) {
             case 2:
-                visa.setBackground(ContextCompat.getDrawable(getActivity(),R.drawable.bg_pay_ways2));
-                visaTV.setTextColor(ContextCompat.getColor(getActivity(),R.color.white));
-                cashTV.setTextColor(ContextCompat.getColor(getActivity(),R.color.btn_blue));
-                pointTV.setTextColor(ContextCompat.getColor(getActivity(),R.color.btn_blue));
-                paytabs.setBackground(ContextCompat.getDrawable(getActivity(),R.drawable.bg_pay_ways));
-                cash.setBackground(ContextCompat.getDrawable(getActivity(),R.drawable.bg_pay_ways));
+                visa.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.bg_pay_ways2));
+                visaTV.setTextColor(ContextCompat.getColor(getActivity(), R.color.white));
+                cashTV.setTextColor(ContextCompat.getColor(getActivity(), R.color.btn_blue));
+                pointTV.setTextColor(ContextCompat.getColor(getActivity(), R.color.btn_blue));
+                paytabs.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.bg_pay_ways));
+                cash.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.bg_pay_ways));
                 break;
             case 3:
-                visa.setBackground(ContextCompat.getDrawable(getActivity(),R.drawable.bg_pay_ways));
-                cashTV.setTextColor(ContextCompat.getColor(getActivity(),R.color.btn_blue));
-                visaTV.setTextColor(ContextCompat.getColor(getActivity(),R.color.btn_blue));
-                pointTV.setTextColor(ContextCompat.getColor(getActivity(),R.color.white));
-                paytabs.setBackground(ContextCompat.getDrawable(getActivity(),R.drawable.bg_pay_ways2));
-                cash.setBackground(ContextCompat.getDrawable(getActivity(),R.drawable.bg_pay_ways));
+                visa.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.bg_pay_ways));
+                cashTV.setTextColor(ContextCompat.getColor(getActivity(), R.color.btn_blue));
+                visaTV.setTextColor(ContextCompat.getColor(getActivity(), R.color.btn_blue));
+                pointTV.setTextColor(ContextCompat.getColor(getActivity(), R.color.white));
+                paytabs.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.bg_pay_ways2));
+                cash.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.bg_pay_ways));
                 break;
             case 1:
-                visa.setBackground(ContextCompat.getDrawable(getActivity(),R.drawable.bg_pay_ways));
-                cashTV.setTextColor(ContextCompat.getColor(getActivity(),R.color.white));
-                visaTV.setTextColor(ContextCompat.getColor(getActivity(),R.color.btn_blue));
-                pointTV.setTextColor(ContextCompat.getColor(getActivity(),R.color.btn_blue));
-                paytabs.setBackground(ContextCompat.getDrawable(getActivity(),R.drawable.bg_pay_ways));
-                cash.setBackground(ContextCompat.getDrawable(getActivity(),R.drawable.bg_pay_ways2));
+                visa.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.bg_pay_ways));
+                cashTV.setTextColor(ContextCompat.getColor(getActivity(), R.color.white));
+                visaTV.setTextColor(ContextCompat.getColor(getActivity(), R.color.btn_blue));
+                pointTV.setTextColor(ContextCompat.getColor(getActivity(), R.color.btn_blue));
+                paytabs.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.bg_pay_ways));
+                cash.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.bg_pay_ways2));
                 break;
         }
     }

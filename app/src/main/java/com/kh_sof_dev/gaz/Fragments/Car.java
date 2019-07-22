@@ -176,7 +176,7 @@ public class Car extends Fragment {
     }
 
     private void EDitNotesPopup() {
-        final Dialog dialog = new Dialog(getContext());
+        final Dialog dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.popup_notes);
         Button save = dialog.findViewById(R.id.save_btn);
         final EditText notes = dialog.findViewById(R.id.notes_tv);

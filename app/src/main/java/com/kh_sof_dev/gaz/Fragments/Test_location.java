@@ -49,13 +49,13 @@ public class Test_location extends Fragment {
 
     }
 
-   LinearLayout no_location,progressBar;
+    LinearLayout no_location, progressBar;
 
     /************************location*/
     private LocationManager locationManager = null;
     private LocationListener locationListener = null;
 
-    private void Getpermissin(){
+    private void Getpermissin() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ActivityCompat.checkSelfPermission(getContext(),
                     Manifest.permission.ACCESS_FINE_LOCATION)
@@ -70,7 +70,7 @@ public class Test_location extends Fragment {
                         Manifest.permission.INTERNET
                 }, 15);
                 locationManager = (LocationManager)
-                        getActivity(). getSystemService(Context.LOCATION_SERVICE);
+                        getActivity().getSystemService(Context.LOCATION_SERVICE);
 
                 //if you want to lock screen for always Portrait mode
                 getActivity().setRequestedOrientation(ActivityInfo
@@ -79,7 +79,7 @@ public class Test_location extends Fragment {
 
             } else {
                 locationManager = (LocationManager)
-                        getActivity(). getSystemService(Context.LOCATION_SERVICE);
+                        getActivity().getSystemService(Context.LOCATION_SERVICE);
 
                 //if you want to lock screen for always Portrait mode
                 getActivity().setRequestedOrientation(ActivityInfo
@@ -88,8 +88,10 @@ public class Test_location extends Fragment {
             }
         }
     }
+
     /**********get gps location*********/
     private Boolean flag;
+
     @SuppressLint("MissingPermission")
     private void get_location() {
 
@@ -98,12 +100,12 @@ public class Test_location extends Fragment {
             locationListener = new MyLocationListener();
 
 
-
             try {
                 locationManager.requestLocationUpdates(LocationManager
                         .GPS_PROVIDER, 5000, 10, locationListener);
 
-            }catch (Exception ex){}
+            } catch (Exception ex) {
+            }
 
 
         } else {
@@ -111,7 +113,9 @@ public class Test_location extends Fragment {
         }
 
     }
-  LatLng mLatLng=null;
+
+    LatLng mLatLng = null;
+
     /*----Method to Check GPS is enable or disable ----- */
     private Boolean displayGpsStatus() {
         ContentResolver contentResolver = getActivity().getBaseContext()
@@ -129,12 +133,12 @@ public class Test_location extends Fragment {
 
     /*----------Method to create an AlertBox ------------- */
     protected void alertbox(String title, String mymessage) {
-        final Dialog  dialog = new Dialog(getContext());
-        dialog .setContentView(R.layout.popup_opengps);
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.popup_opengps);
         dialog.setCancelable(false);
-        Button cancel=(Button)dialog.findViewById(R.id.cancel_btn);
-        TextView tex1=(TextView)dialog.findViewById(R.id.tx1_tv);
-        TextView tex2=(TextView)dialog.findViewById(R.id.tx2_tv);
+        Button cancel = (Button) dialog.findViewById(R.id.cancel_btn);
+        TextView tex1 = (TextView) dialog.findViewById(R.id.tx1_tv);
+        TextView tex2 = (TextView) dialog.findViewById(R.id.tx2_tv);
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,7 +147,7 @@ public class Test_location extends Fragment {
             }
         });
         dialog.show();
-        Button go_sitting=(Button)dialog.findViewById(R.id.open_sitting_btn);
+        Button go_sitting = (Button) dialog.findViewById(R.id.open_sitting_btn);
         go_sitting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -155,9 +159,10 @@ public class Test_location extends Fragment {
         });
 
 
-
     }
-    boolean firstone=false;
+
+    boolean firstone = false;
+
     /*---------- Listener class to get coordinates ------------- */
     private class MyLocationListener implements LocationListener {
 
@@ -165,34 +170,37 @@ public class Test_location extends Fragment {
         public void onLocationChanged(Location loc) {
 
 
-            mLatLng=new LatLng(loc.getLatitude(),loc.getLongitude());
-            Login.mLatLng=mLatLng;
+            mLatLng = new LatLng(loc.getLatitude(), loc.getLongitude());
+            Login.mLatLng = mLatLng;
             if (!firstone) {
                 test_location();
-                firstone=true;
+                firstone = true;
             }
 
         }
 
         @Override
-        public void onProviderDisabled(String provider) {}
+        public void onProviderDisabled(String provider) {
+        }
 
         @Override
-        public void onProviderEnabled(String provider) {}
-
+        public void onProviderEnabled(String provider) {
+        }
 
 
         @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {}
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+        }
     }
+
     /*************************************/
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.layout_f_test_location, container, false);
-        no_location=view.findViewById(R.id.no_location);
-        progressBar=view.findViewById(R.id.progress);
+        no_location = view.findViewById(R.id.no_location);
+        progressBar = view.findViewById(R.id.progress);
         no_location.setVisibility(View.GONE);
         /***********************Get location***************/
         Getpermissin();
@@ -220,55 +228,55 @@ public class Test_location extends Fragment {
         /*****************************************************/
     }
 
-    private void _goto(Fragment frg) {
-        Login.fragmentManager = getFragmentManager();
-        Login.fragmentTransaction = Login.fragmentManager.beginTransaction();
-        Login.fragment = frg;
-        Login.fragmentTransaction.replace(R.id.ContentLogin, Login.fragment);
-        Login.fragmentTransaction.commit();
-    }
+//    private void _goto(Fragment frg) {
+//        Login.fragmentManager = getFragmentManager();
+//        Login.fragmentTransaction = Login.fragmentManager.beginTransaction();
+//        Login.fragment = frg;
+//        Login.fragmentTransaction.replace(R.id.ContentLogin, Login.fragment);
+//        Login.fragmentTransaction.commit();
+//    }
 
-private void test_location(){
-    Http_orders http_orders=new Http_orders();
-try{
-    http_orders.Get_MyPlaceSupp(getContext(), mLatLng.latitude, mLatLng.longitude, new Http_orders.Onsupplier_place_lisennter() {
-        @Override
-        public void onSuccess(near_supplier test) {
-            if (test.isStatus()){
+    private void test_location() {
+        Http_orders http_orders = new Http_orders();
+        try {
+            http_orders.Get_MyPlaceSupp(getContext(), mLatLng.latitude, mLatLng.longitude, new Http_orders.Onsupplier_place_lisennter() {
+                @Override
+                public void onSuccess(near_supplier test) {
+                    if (test.isStatus()) {
 
-                /*******************************Test Login*************/
+                        /*******************************Test Login*************/
 
-                SharedPreferences loginInf=getActivity().getSharedPreferences("Login", MODE_PRIVATE);
+                        SharedPreferences loginInf = getActivity().getSharedPreferences("Login", MODE_PRIVATE);
 
-                String id=loginInf.getString("id", null);
-                String token = loginInf.getString("token", null);
-                if(id!=null && token!= null){
-                    startActivity(new Intent(getContext(),MainNew.class));
-                    getActivity().finish();
-                }else {
+                        String id = loginInf.getString("id", null);
+                        String token = loginInf.getString("token", null);
+                        if (id != null && token != null) {
+                            startActivity(new Intent(getContext(), MainNew.class));
+                            getActivity().finish();
+                        } else {
 
 
-                    _goto(new LoginFrag());
-                    new user_info(test.getItems().getId(), getContext());
+                            ((Login) getActivity()).changeFragment(new LoginFrag());
+                            new user_info(test.getItems().getId(), getContext());
+                        }
+                    } else {
+                        no_location.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
+                    }
                 }
-            }else {
-                no_location.setVisibility(View.VISIBLE);
-                progressBar.setVisibility(View.GONE);
-            }
+
+                @Override
+                public void onStart() {
+
+                }
+
+                @Override
+                public void onFailure(String msg) {
+
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        @Override
-        public void onStart() {
-
-        }
-
-        @Override
-        public void onFailure(String msg) {
-
-        }
-    });
-    }catch (Exception e){
-    e.printStackTrace();
     }
-}
 }

@@ -124,7 +124,7 @@ public class SearchResults extends Fragment {
     }
 
     private void orderFunction() {
-        final Dialog dialog = new Dialog(getContext());
+        final Dialog dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.layout_f_categories);
         final RecyclerView Rv = dialog.findViewById(R.id.RV);
         Rv.setLayoutManager(new GridLayoutManager(getContext(), 2));

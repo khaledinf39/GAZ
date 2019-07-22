@@ -150,7 +150,7 @@ public class Order_details extends Fragment {
     }
 
     public void showPopUp() {
-        cancelReqDialog = new Dialog(getContext());
+        cancelReqDialog = new Dialog(getActivity());
         cancelReqDialog.setContentView(R.layout.popup_cancel_req);
         cancelReqDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         cancelReqDialog.show();
@@ -171,7 +171,7 @@ public class Order_details extends Fragment {
                 if (!cancelReq_et.getText().toString().trim().equals("")) {
                     cancelReqDialog.dismiss();
                     Http_orders request_post = new Http_orders();
-                    request_post.Post_updateOrder(getContext(), reqDetail.getId(), 5, new Http_orders.OnOrder_geter_lisennter() {
+                    request_post.Post_updateOrder(getActivity(), reqDetail.getId(), 5, new Http_orders.OnOrder_geter_lisennter() {
                         @Override
                         public void onSuccess(show_order order) {
                             Toast.makeText(getContext(), "تم الغاء طلبك ", Toast.LENGTH_LONG).show();
@@ -305,7 +305,7 @@ public class Order_details extends Fragment {
     int nb_start = 0;
 
     private void popup_rate() {
-        final Dialog dialog = new Dialog(getContext());
+        final Dialog dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.popup_rate_req);
         final TextView comment = dialog.findViewById(R.id.comment);
         dialog.show();

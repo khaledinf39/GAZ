@@ -185,13 +185,15 @@ public class LoginFrag extends Fragment {
         forget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                _goto(new ForgotPassword());
+                ((Login) getActivity()).changeFragment(new ForgotPassword());
+//                _goto(new ForgotPassword());
             }
         });
         logup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                _goto(new SignUp());
+                ((Login) getActivity()).changeFragment(new SignUp());
+//                _goto(new SignUp());
             }
         });
         return view;
@@ -295,7 +297,8 @@ public class LoginFrag extends Fragment {
             } catch (Exception e) {
 
             }
-            _goto(new SignUp(user_info));
+            ((Login) getActivity()).changeFragment(new SignUp(user_info));
+//            _goto(new SignUp(user_info));
             mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -363,12 +366,12 @@ public class LoginFrag extends Fragment {
     }
 
 
-    private void _goto(Fragment frg) {
-        Login.fragmentManager = getFragmentManager();
-        Login.fragmentTransaction = Login.fragmentManager.beginTransaction();
-        Login.fragment = frg;
-        Login.fragmentTransaction.replace(R.id.ContentLogin, Login.fragment);
-        Login.fragmentTransaction.commit();
-    }
+//    private void _goto(Fragment frg) {
+//        Login.fragmentManager = getFragmentManager();
+//        Login.fragmentTransaction = Login.fragmentManager.beginTransaction();
+//        Login.fragment = frg;
+//        Login.fragmentTransaction.replace(R.id.ContentLogin, Login.fragment);
+//        Login.fragmentTransaction.commit();
+//    }
 
 }

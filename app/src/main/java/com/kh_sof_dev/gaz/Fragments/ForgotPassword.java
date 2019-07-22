@@ -38,7 +38,8 @@ public class ForgotPassword extends Fragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                _goto(new LoginFrag());
+                ((Login) getActivity()).changeFragment(new LoginFrag());
+//                _goto(new LoginFrag());
             }
         });
         send.setOnClickListener(new View.OnClickListener() {
@@ -50,13 +51,13 @@ public class ForgotPassword extends Fragment {
         return view;
     }
 
-    private void _goto(Fragment frg) {
-        Login.fragmentManager = getFragmentManager();
-        Login.fragmentTransaction = Login.fragmentManager.beginTransaction();
-        Login.fragment = frg;
-        Login.fragmentTransaction.replace(R.id.ContentLogin, Login.fragment);
-        Login.fragmentTransaction.commit();
-    }
+//    private void _goto(Fragment frg) {
+//        Login.fragmentManager = getFragmentManager();
+//        Login.fragmentTransaction = Login.fragmentManager.beginTransaction();
+//        Login.fragment = frg;
+//        Login.fragmentTransaction.replace(R.id.ContentLogin, Login.fragment);
+//        Login.fragmentTransaction.commit();
+//    }
 
     private void forget_function() {
         String email_ = email.getText().toString();

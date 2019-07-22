@@ -84,13 +84,15 @@ public class SignUp extends Fragment {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                _goto(new LoginFrag());
+                ((Login) getActivity()).changeFragment(new LoginFrag());
+//                _goto(new LoginFrag());
             }
         });
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                _goto(new LoginFrag());
+                ((Login) getActivity()).changeFragment(new LoginFrag());
+//                _goto(new LoginFrag());
             }
         });
         logup.setOnClickListener(new View.OnClickListener() {
@@ -113,7 +115,7 @@ public class SignUp extends Fragment {
                 try {
                     cite_name = cityList.get(position).getId();
                 } catch (Exception fg) {
-
+                    fg.printStackTrace();
                 }
             }
 
@@ -291,10 +293,8 @@ public class SignUp extends Fragment {
         }
     }
 
-    private void country_cod() {
-
+//    private void country_cod() {
 //    List<Country> countries = new ArrayList<Country>();
-//
 //    // Get ISO countries, create Country object and
 //    // store in the collection.
 //    String[] isoCountries = Locale.getISOCountries();
@@ -308,13 +308,13 @@ public class SignUp extends Fragment {
 //            countries.add(new Country(iso, code, name));
 //        }
 //    }
-    }
+//    }
 
-    private void _goto(Fragment frg) {
-        Login.fragmentManager = getFragmentManager();
-        Login.fragmentTransaction = Login.fragmentManager.beginTransaction();
-        Login.fragment = frg;
-        Login.fragmentTransaction.replace(R.id.ContentLogin, Login.fragment);
-        Login.fragmentTransaction.commit();
-    }
+//    private void _goto(Fragment frg) {
+//        Login.fragmentManager = getFragmentManager();
+//        Login.fragmentTransaction = Login.fragmentManager.beginTransaction();
+//        Login.fragment = frg;
+//        Login.fragmentTransaction.replace(R.id.ContentLogin, Login.fragment);
+//        Login.fragmentTransaction.commit();
+//    }
 }
