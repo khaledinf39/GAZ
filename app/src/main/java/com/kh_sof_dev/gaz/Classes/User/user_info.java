@@ -8,7 +8,7 @@ import com.kh_sof_dev.gaz.Classes.Order.point.points;
 import static android.content.Context.MODE_PRIVATE;
 
 public class user_info {
-    public String supplier_id;
+    private String supplier_id;
     private String id,phone,token,name,email,image,gender,city,pw,address;
 private String lat;
     private String lng;
@@ -76,6 +76,17 @@ private  int point;
         Ed.putLong("wallet", (long) 0.0);
         Ed.commit();
 
+    }
+
+    public String getSupplier_id(Context mcontext) {
+        final SharedPreferences sp=mcontext.getSharedPreferences("Login", MODE_PRIVATE);
+
+        supplier_id=sp.getString("supplier_id","");
+        return supplier_id;
+    }
+
+    public void setSupplier_id(String supplier_id) {
+        this.supplier_id = supplier_id;
     }
 
     public user_info() {

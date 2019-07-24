@@ -1,6 +1,7 @@
 package com.kh_sof_dev.gaz.Classes.constant;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 
@@ -14,6 +15,7 @@ import com.kh_sof_dev.gaz.Classes.User.user_info;
 import com.kh_sof_dev.gaz.Classes.constant.About_us.show_s_cus;
 import com.kh_sof_dev.gaz.Classes.constant.contact_us.show_contact_ways;
 import com.kh_sof_dev.gaz.R;
+import com.kh_sof_dev.gaz.activities.Login;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -194,8 +196,15 @@ public class Http_get_constant {
     public void setting(final Context mcontext, final sittingListener listener)
     {
         user_info user_info=new user_info(mcontext);
+        String supplier_id=user_info.getSupplier_id(mcontext);
+        if (supplier_id.equals("")){
+            mcontext.startActivity(new Intent(mcontext, Login.class));
+
+        }
+        Log.d("supllier_id","Http_cons line 204  :"+supplier_id);
+
         listener.onStart();
-        String url=mcontext.getString(R.string.api)+"api/settings/"+user_info.supplier_id;
+        String url=mcontext.getString(R.string.api)+"api/settings/"+supplier_id;
         if (queue==null){
             queue = Volley.newRequestQueue(mcontext);  // this = context
         }
@@ -235,9 +244,16 @@ public class Http_get_constant {
 ////6
     public void Time(final Context mcontext, final citesListener listener)
     {
-        user_info  user_info=new user_info(mcontext);
+        user_info user_info=new user_info(mcontext);
+        String supplier_id=user_info.getSupplier_id(mcontext);
+        if (supplier_id.equals("")){
+            mcontext.startActivity(new Intent(mcontext, Login.class));
+
+        }
+        Log.d("supllier_id","Http_cont  Time  line 253  :"+supplier_id);
+
         listener.onStart();
-        String url=mcontext.getString(R.string.api)+"api/delivery_time/"+user_info.supplier_id;
+        String url=mcontext.getString(R.string.api)+"api/delivery_time/"+supplier_id;
         if (queue==null){
             queue = Volley.newRequestQueue(mcontext);  // this = context
         }

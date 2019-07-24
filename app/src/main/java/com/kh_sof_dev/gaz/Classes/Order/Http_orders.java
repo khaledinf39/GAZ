@@ -322,11 +322,11 @@ listener.onFailure(mcontext.getString(R.string.networke)+"لا وجود لسائ
                 }
         );
 
-// add it to the RequestQueue
-        queue.getCache().initialize();
-// add it to the RequestQueue
+//// add it to the RequestQueue
+//        queue.getCache().initialize();
+//// add it to the RequestQueue
         queue.add(getRequest);
-        queue.getCache().clear();
+//        queue.getCache().clear();
     }
 
 

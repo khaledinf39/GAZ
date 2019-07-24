@@ -174,7 +174,7 @@ public class Test_location extends Fragment {
             Login.mLatLng = mLatLng;
             if (!firstone) {
                 test_location();
-                firstone = true;
+
             }
 
         }
@@ -243,7 +243,7 @@ public class Test_location extends Fragment {
                 @Override
                 public void onSuccess(near_supplier test) {
                     if (test.isStatus()) {
-
+                        new user_info(test.getItems().getId(), getContext());
                         /*******************************Test Login*************/
 
                         SharedPreferences loginInf = getActivity().getSharedPreferences("Login", MODE_PRIVATE);
@@ -257,8 +257,10 @@ public class Test_location extends Fragment {
 
 
                             ((Login) getActivity()).changeFragment(new LoginFrag());
-                            new user_info(test.getItems().getId(), getContext());
+
                         }
+
+
                     } else {
                         no_location.setVisibility(View.VISIBLE);
                         progressBar.setVisibility(View.GONE);
@@ -275,6 +277,8 @@ public class Test_location extends Fragment {
 
                 }
             });
+
+            firstone=true;
         } catch (Exception e) {
             e.printStackTrace();
         }

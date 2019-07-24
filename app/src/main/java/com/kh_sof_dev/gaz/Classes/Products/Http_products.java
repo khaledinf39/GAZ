@@ -1,6 +1,7 @@
 package com.kh_sof_dev.gaz.Classes.Products;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
@@ -13,6 +14,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.kh_sof_dev.gaz.Classes.User.user_info;
 import com.kh_sof_dev.gaz.R;
+import com.kh_sof_dev.gaz.activities.Login;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -164,7 +166,12 @@ public class Http_products {
         }}
     public void Post_shearch_products(final  Context mcontext, final String prod_name, final productsListener listener ){
         listener.onStart();
-final user_info user_info=new user_info(mcontext);
+        user_info user_info=new user_info(mcontext);
+        final String supplier_id=user_info.getSupplier_id(mcontext);
+        if (supplier_id.equals("")){
+            mcontext.startActivity(new Intent(mcontext, Login.class));
+
+        }
         if (queue==null){
             queue = Volley.newRequestQueue(mcontext);  // this = context
         }
@@ -204,7 +211,7 @@ final user_info user_info=new user_info(mcontext);
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String>  param = new HashMap<String, String>();
                 param.put("name",prod_name);
-                param.put("supplier_id",user_info.supplier_id);
+                param.put("supplier_id",supplier_id);
                return  param;
             }
 
@@ -220,7 +227,15 @@ final user_info user_info=new user_info(mcontext);
     }
     public void Post_products_category(final Context mcontext, final String categorie_id,final  int orderNB, int limit, int page, final productsListener listener){
         listener.onStart();
-        final user_info user_info=new user_info(mcontext);
+
+         user_info user_info=new user_info(mcontext);
+        final String supplier_id=user_info.getSupplier_id(mcontext);
+        if (supplier_id.equals("")){
+            mcontext.startActivity(new Intent(mcontext, Login.class));
+
+        }
+Log.d("supllier_id","Http_prod line 237  :"+supplier_id);
+
         if (queue==null){
             queue = Volley.newRequestQueue(mcontext);  // this = context
         }
@@ -277,7 +292,7 @@ final user_info user_info=new user_info(mcontext);
                     param.put("category_id",categorie_id);
                 }
 
-                param.put("supplier_id",user_info.supplier_id);
+                param.put("supplier_id",supplier_id);
 
                 return  param;
             }
