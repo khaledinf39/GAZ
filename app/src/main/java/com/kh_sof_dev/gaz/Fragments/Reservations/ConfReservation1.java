@@ -209,7 +209,7 @@ private String coupon=null;
 
                 AddOrder order = new AddOrder();
 
-                order.setSuppiler_id(user_info.supplier_id);
+                order.setSuppiler_id(user_info.getSupplier_id(getActivity()));
                 order.setCoupon(coupon);
 
                 order.setAddressDetails(Shipping.locationAdd);

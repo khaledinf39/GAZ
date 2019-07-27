@@ -30,19 +30,19 @@ private View mView;
 private Fragment mFragment;
     //vars
     public interface OnGaztype_selected_listenner{
-        void onSuccess(int postion);
-        void onStart();
-        void onFailure(String msg);
+        void OnAdd(int postion);
+        void OnDelete(int postion);
+
     }
 
     private List<Product> mItems = new ArrayList<>();
 public static int Item_selected;
     private Context mContext;
-
-    public Refill_adapter(Context context, List<Product> names) {
+private OnGaztype_selected_listenner listenner;
+    public Refill_adapter(Context context, List<Product> names,OnGaztype_selected_listenner listenner) {
         mItems = names;
         mContext = context;
-
+this.listenner=listenner;
     }
 
     @Override
@@ -65,19 +65,21 @@ int qty;
        holder.add.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               qty++;
-               mItems.get(position).setQty(qty);
+               listenner.OnAdd(position);
+//               qty++;
+//               mItems.get(position).setQty(qty);
                notifyDataSetChanged();
            }
        });
         holder.minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (qty==1){
-                    return;
-                }
-                qty--;
-                mItems.get(position).setQty(qty);
+                listenner.OnDelete(position);
+//                if (qty==1){
+//                    return;
+//                }
+//                qty--;
+//                mItems.get(position).setQty(qty);
                 notifyDataSetChanged();
             }
         });

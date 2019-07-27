@@ -212,18 +212,18 @@ public class Home extends Fragment {
                     Double delivery = 0.0;
                     for (Setting i : setting.getItems()
                     ) {
-                        switch (i.getId()) {
+                        switch (i.getName()) {
                             case "5c921977c4410f17e1c1ac4c":
                                 nb_order = i.getValue().longValue();
                                 break;
                             case "5c6758e0c65f421a494cef89":
                                 ring = i.getValue().longValue();
                                 break;
-                            case "5c9218bec4410f17e1c1ac4b":
+                            case "قيمة الضريبة":
                                 tax = i.getValue();
 //                                MainNew.tax= i.getValue().longValue();
                                 break;
-                            case "5c6758d9c65f421a494cef88":
+                            case "قيمة التوصيل":
                                 delivery = i.getValue();
 //                                MainNew.delivery= i.getValue().longValue();
                                 break;

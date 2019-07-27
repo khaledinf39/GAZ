@@ -83,7 +83,19 @@ public class ConfRefill extends Fragment {
         time_tv.setText(RefillHome.time);
         RecyclerView RV = view.findViewById(R.id.RV);
         RV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        RV.setAdapter(new Refill_adapter(getContext(), RefillHome.productList));
+        final Refill_adapter adapter=new Refill_adapter(getContext(), RefillHome.productList, new Refill_adapter.OnGaztype_selected_listenner() {
+            @Override
+            public void OnAdd(int postion) {
+
+            }
+
+            @Override
+            public void OnDelete(int postion) {
+
+            }
+        });
+        RV.setAdapter(adapter);
+
 
         Double price_ = 0.0;
         for (Product p : RefillHome.productList
