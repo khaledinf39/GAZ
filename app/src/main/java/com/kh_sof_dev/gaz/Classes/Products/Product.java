@@ -3,8 +3,10 @@ package com.kh_sof_dev.gaz.Classes.Products;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 
-public class Product {
+
+public class Product implements Serializable {
 
     private String id;
     private String description;

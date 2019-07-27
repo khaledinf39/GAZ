@@ -3,6 +3,7 @@ package com.kh_sof_dev.gaz.Fragments.Reservations;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -35,17 +36,16 @@ public class Reservation_Complet extends Fragment {
     List<Order_getter> order_getterList;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.layout_f_reservation_canceled, container, false);
-        RV = (RecyclerView) view.findViewById(R.id.RV);
+        RV = view.findViewById(R.id.RV);
         seeMore = view.findViewById(R.id.see_more);
         RV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         final Http_orders http_orders = new Http_orders();
-        final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progress);
+        final ProgressBar progressBar = view.findViewById(R.id.progress);
         order_getterList = new ArrayList<>();
-        final Order_adapter adapter = new Order_adapter(getContext(), order_getterList, Reservation_Complet.this);
+        final Order_adapter adapter = new Order_adapter(getContext(), order_getterList);
         RV.setAdapter(adapter);
         http_orders.GetMy_Order(getContext(), req_nb, limit, page, new Http_orders.OnOrder_geter_lisennter() {
             @RequiresApi(api = Build.VERSION_CODES.M)

@@ -8,8 +8,10 @@ import com.kh_sof_dev.gaz.Classes.Products.Product;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 
-public class OrderProduct {
+
+public class OrderProduct implements Serializable {
 
     private String _id;
     private Product productId;

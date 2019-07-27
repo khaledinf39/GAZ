@@ -4,44 +4,34 @@ package com.kh_sof_dev.gaz.Fragments;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.kh_sof_dev.gaz.activities.Login;
 import com.kh_sof_dev.gaz.R;
-import com.heinrichreimersoftware.materialintro.app.SlideFragment;
+import com.kh_sof_dev.gaz.activities.TestLocation;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class Welcome3 extends SlideFragment {
-
-    public Welcome3() {
-
-    }
+public class Welcome3 extends Fragment {
 
     @Override
-    public boolean canGoForward() {
-        return false;
-    }
-
-    private Button start;
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.layout_f_welcome3, container, false);
-        start = (Button) view.findViewById(R.id.start_btn);
+        Button start = view.findViewById(R.id.start_btn);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences sp = getContext().getSharedPreferences("Intro", MODE_PRIVATE);
+                SharedPreferences sp = getActivity().getSharedPreferences("Intro", MODE_PRIVATE);
                 SharedPreferences.Editor Ed = sp.edit();
                 Ed.putBoolean("state", true);
-                Ed.commit();
-                startActivity(new Intent(getContext(), Login.class));
+                Ed.apply();
+                startActivity(new Intent(getContext(), TestLocation.class));
                 getActivity().finish();
 
             }

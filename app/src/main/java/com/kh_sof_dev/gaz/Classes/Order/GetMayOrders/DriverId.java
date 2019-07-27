@@ -1,11 +1,17 @@
 package com.kh_sof_dev.gaz.Classes.Order.GetMayOrders; /************************* Mo’min J.Abusaada *************************/
 //
 //	DriverId.java
-import org.json.*;
-import java.util.*;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class DriverId{
+public class DriverId implements Serializable {
 
 	private String id;
 	private String address;

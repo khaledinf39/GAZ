@@ -3,6 +3,7 @@ package com.kh_sof_dev.gaz.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,22 +30,21 @@ public class Notifications extends Fragment {
     private RecyclerView notif_RV;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.layout_f_notifications, container, false);
-        notif_RV = (RecyclerView) view.findViewById(R.id.notifications_RV);
+        notif_RV = view.findViewById(R.id.notifications_RV);
         notif_RV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        notiy_nb = (TextView) view.findViewById(R.id.nb_notification);
-        ImageView back_btn = (ImageView) view.findViewById(R.id.back_btn);
-
-        back_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getContext(), MainNew.class));
-//                MainNew._goto(MyReservations.this,new Home(),View.VISIBLE);
-            }
-        });
+        notiy_nb = view.findViewById(R.id.nb_notification);
+//        ImageView back_btn = view.findViewById(R.id.back_btn);
+//
+//        back_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(getContext(), MainNew.class));
+////                MainNew._goto(MyReservations.this,new Home(),View.VISIBLE);
+//            }
+//        });
         final ProgressBar progressBar = view.findViewById(R.id.progress);
         final Http_notification notification = new Http_notification();
         notification.Getnotification(getContext(), new Http_notification.notificationListener() {
@@ -57,7 +57,7 @@ public class Notifications extends Fragment {
                     view.findViewById(R.id.notification).setVisibility(View.VISIBLE);
 //                    Toast.makeText(getContext(),show_notif.getMessage(),Toast.LENGTH_SHORT).show();
                 }
-                notif_RV.setAdapter(new Notification_adapter(getContext(), show_notif.getItems(), Notifications.this));
+                notif_RV.setAdapter(new Notification_adapter(getContext(), show_notif.getItems()));
 
             }
 

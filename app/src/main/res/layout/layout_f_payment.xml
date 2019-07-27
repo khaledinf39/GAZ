@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="100"
-    tools:context=".Fragments.Reservations.Payment">
+    tools:context=".activities.Payment">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -347,7 +347,6 @@ android:visibility="gone"
                     app:layout_constraintTop_toTopOf="@+id/tx3" />
 
                 <TextView
-                    android:id="@+id/tx5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
@@ -441,7 +440,6 @@ android:visibility="gone"
                     app:layout_constraintTop_toBottomOf="@+id/line3" />
 
                 <TextView
-                    android:id="@+id/CreditName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"

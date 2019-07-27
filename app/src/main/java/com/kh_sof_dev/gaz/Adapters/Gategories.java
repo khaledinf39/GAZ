@@ -9,9 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.kh_sof_dev.gaz.Classes.Products.Categories;
 import com.squareup.picasso.Picasso;
-
-import com.kh_sof_dev.gaz.Classes.Products.catigories;
 
 import com.kh_sof_dev.gaz.R;
 
@@ -28,16 +27,16 @@ public class Gategories extends RecyclerView.Adapter<Gategories.ViewHolder> {
     private static final String TAG = "RecyclerViewAdapter";
 
     //vars
-    private List<catigories> mItems = new ArrayList<>();
+    private List<Categories> mItems = new ArrayList<>();
 public static int Item_selected;
     private Context mContext;
     public interface categorie_selected_listenner{
-        void onSuccess(catigories catigories);
+        void onSuccess(Categories Categories);
         void onStart();
         void onFailure(String msg);
     }
     categorie_selected_listenner listenner;
-    public Gategories(Context context, List<catigories> names,categorie_selected_listenner listenner) {
+    public Gategories(Context context, List<Categories> names, categorie_selected_listenner listenner) {
         mItems = names;
         mContext = context;
        // Item_selected=0;

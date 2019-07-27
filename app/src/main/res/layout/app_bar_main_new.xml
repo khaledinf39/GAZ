@@ -25,9 +25,7 @@
 
     <!--</android.support.design.widget.AppBarLayout>-->
 
-    <include
-        android:id="@+id/BNV"
-        layout="@layout/content_main_new" />
+    <include layout="@layout/content_main_new" />
 
 
 

@@ -3,6 +3,7 @@ package com.kh_sof_dev.gaz.Fragments.Refill_frg;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
@@ -20,7 +21,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.kh_sof_dev.gaz.activities.MainNew;
 import com.kh_sof_dev.gaz.Adapters.GazType_adapter;
 import com.kh_sof_dev.gaz.Adapters.Refill_adapter;
 import com.kh_sof_dev.gaz.Adapters.Time_adapter;
@@ -30,8 +30,10 @@ import com.kh_sof_dev.gaz.Classes.Products.show_products;
 import com.kh_sof_dev.gaz.Classes.User.user_info;
 import com.kh_sof_dev.gaz.Classes.constant.Http_get_constant;
 import com.kh_sof_dev.gaz.Classes.constant.show_cites;
-import com.kh_sof_dev.gaz.Fragments.Shipping;
 import com.kh_sof_dev.gaz.R;
+import com.kh_sof_dev.gaz.activities.ConfRefill;
+import com.kh_sof_dev.gaz.activities.Refill;
+import com.kh_sof_dev.gaz.activities.Shipping;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -86,18 +88,18 @@ public class RefillHome extends Fragment {
 //        productList = new ArrayList<>();
         produRV = view.findViewById(R.id.Name_tv);
         produRV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        final Refill_adapter adapter=new Refill_adapter(getContext(), productList, new Refill_adapter.OnGaztype_selected_listenner() {
+        final Refill_adapter adapter = new Refill_adapter(getContext(), productList, new Refill_adapter.OnGaztype_selected_listenner() {
             @Override
             public void OnAdd(int postion) {
-                int qty= productList.get(postion).getQty()+1;
+                int qty = productList.get(postion).getQty() + 1;
                 productList.get(postion).setQty(qty);
 
             }
 
             @Override
             public void OnDelete(int postion) {
-                int qty= productList.get(postion).getQty()-1;
-                if (qty>0) {
+                int qty = productList.get(postion).getQty() - 1;
+                if (qty > 0) {
                     productList.get(postion).setQty(qty);
                 }
 
@@ -161,7 +163,11 @@ public class RefillHome extends Fragment {
         layoutAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainNew.goto_(new Shipping(1, 0), getContext());
+                Intent intent = new Intent(getActivity(), Shipping.class);
+                intent.putExtra(Shipping.typ2_Order_1_test, 1);
+                intent.putExtra(Shipping.order_type_s, 0);
+                startActivity(intent);
+//                MainNew.goto_(new Shipping(1, 0), getContext());
             }
         });
 
@@ -200,7 +206,11 @@ public class RefillHome extends Fragment {
                     Toast.makeText(getContext(), "", Toast.LENGTH_LONG).show();
                     return;
                 }
-                MainNew.goto_(new ConfRefill(order_type), getContext());
+
+                Intent intent = new Intent(getActivity(), ConfRefill.class);
+                intent.putExtra(Refill.order_type_s, order_type);
+                startActivity(intent);
+//                MainNew.goto_(new ConfRefill(order_type), getContext());
 //        OutherActivty._goto(RefillHome.this,new ConfRefill(rellifHome),View.GONE );
             }
         });
@@ -238,24 +248,24 @@ public class RefillHome extends Fragment {
                     public void onAdd(int postion) {
                         Product product_ = products.getProducts().get(postion);
                         product_.setQty(1);
-                        Log.d("possition_Add",postion+" ");
+                        Log.d("possition_Add", postion + " ");
                         switch (order_type) {
 
                             case 2:
 
                                 productList2.add(product_);
-                                final Refill_adapter adapter=new Refill_adapter(getContext(), productList2, new Refill_adapter.OnGaztype_selected_listenner() {
+                                final Refill_adapter adapter = new Refill_adapter(getContext(), productList2, new Refill_adapter.OnGaztype_selected_listenner() {
                                     @Override
                                     public void OnAdd(int postion) {
-                                       int qty= productList2.get(postion).getQty()+1;
-                                       productList2.get(postion).setQty(qty);
+                                        int qty = productList2.get(postion).getQty() + 1;
+                                        productList2.get(postion).setQty(qty);
 
                                     }
 
                                     @Override
                                     public void OnDelete(int postion) {
-                                        int qty= productList2.get(postion).getQty()-1;
-                                        if (qty>0) {
+                                        int qty = productList2.get(postion).getQty() - 1;
+                                        if (qty > 0) {
                                             productList2.get(postion).setQty(qty);
                                         }
                                     }
@@ -265,18 +275,18 @@ public class RefillHome extends Fragment {
                             case 3:
 
                                 productList3.add(product_);
-                                final Refill_adapter adapter3=new Refill_adapter(getContext(), productList3, new Refill_adapter.OnGaztype_selected_listenner() {
+                                final Refill_adapter adapter3 = new Refill_adapter(getContext(), productList3, new Refill_adapter.OnGaztype_selected_listenner() {
                                     @Override
                                     public void OnAdd(int postion) {
-                                        int qty= productList3.get(postion).getQty()+1;
+                                        int qty = productList3.get(postion).getQty() + 1;
                                         productList3.get(postion).setQty(qty);
 
                                     }
 
                                     @Override
                                     public void OnDelete(int postion) {
-                                        int qty= productList3.get(postion).getQty()-1;
-                                        if (qty>0) {
+                                        int qty = productList3.get(postion).getQty() - 1;
+                                        if (qty > 0) {
                                             productList3.get(postion).setQty(qty);
                                         }
                                     }
@@ -286,18 +296,18 @@ public class RefillHome extends Fragment {
                             case 4:
                                 product_.setPrice(product_.getPrice_buy_new());
                                 productList4.add(product_);
-                                final Refill_adapter adapter4=new Refill_adapter(getContext(), productList4, new Refill_adapter.OnGaztype_selected_listenner() {
+                                final Refill_adapter adapter4 = new Refill_adapter(getContext(), productList4, new Refill_adapter.OnGaztype_selected_listenner() {
                                     @Override
                                     public void OnAdd(int postion) {
-                                        int qty= productList4.get(postion).getQty()+1;
+                                        int qty = productList4.get(postion).getQty() + 1;
                                         productList4.get(postion).setQty(qty);
 
                                     }
 
                                     @Override
                                     public void OnDelete(int postion) {
-                                        int qty= productList4.get(postion).getQty()-1;
-                                        if (qty>0) {
+                                        int qty = productList4.get(postion).getQty() - 1;
+                                        if (qty > 0) {
                                             productList4.get(postion).setQty(qty);
                                         }
                                     }
@@ -309,24 +319,24 @@ public class RefillHome extends Fragment {
 
                     @Override
                     public void onDellet(int postion) {
-                        Log.d("possition_delet",postion+" ");
+                        Log.d("possition_delet", postion + " ");
                         switch (order_type) {
 
                             case 2:
 
                                 productList2.remove(products.getProducts().get(postion));
-                                final Refill_adapter adapter=new Refill_adapter(getContext(), productList2, new Refill_adapter.OnGaztype_selected_listenner() {
+                                final Refill_adapter adapter = new Refill_adapter(getContext(), productList2, new Refill_adapter.OnGaztype_selected_listenner() {
                                     @Override
                                     public void OnAdd(int postion) {
-                                        int qty= productList2.get(postion).getQty()+1;
+                                        int qty = productList2.get(postion).getQty() + 1;
                                         productList2.get(postion).setQty(qty);
 
                                     }
 
                                     @Override
                                     public void OnDelete(int postion) {
-                                        int qty= productList2.get(postion).getQty()-1;
-                                        if (qty>0) {
+                                        int qty = productList2.get(postion).getQty() - 1;
+                                        if (qty > 0) {
                                             productList2.get(postion).setQty(qty);
                                         }
                                     }
@@ -336,18 +346,18 @@ public class RefillHome extends Fragment {
                             case 3:
 
                                 productList3.remove(products.getProducts().get(postion));
-                                final Refill_adapter adapter3=new Refill_adapter(getContext(), productList3, new Refill_adapter.OnGaztype_selected_listenner() {
+                                final Refill_adapter adapter3 = new Refill_adapter(getContext(), productList3, new Refill_adapter.OnGaztype_selected_listenner() {
                                     @Override
                                     public void OnAdd(int postion) {
-                                        int qty= productList3.get(postion).getQty()+1;
+                                        int qty = productList3.get(postion).getQty() + 1;
                                         productList3.get(postion).setQty(qty);
 
                                     }
 
                                     @Override
                                     public void OnDelete(int postion) {
-                                        int qty= productList3.get(postion).getQty()-1;
-                                        if (qty>0) {
+                                        int qty = productList3.get(postion).getQty() - 1;
+                                        if (qty > 0) {
                                             productList3.get(postion).setQty(qty);
                                         }
                                     }
@@ -356,18 +366,18 @@ public class RefillHome extends Fragment {
                                 break;
                             case 4:
                                 productList4.remove(products.getProducts().get(postion));
-                                final Refill_adapter adapter4=new Refill_adapter(getContext(), productList4, new Refill_adapter.OnGaztype_selected_listenner() {
+                                final Refill_adapter adapter4 = new Refill_adapter(getContext(), productList4, new Refill_adapter.OnGaztype_selected_listenner() {
                                     @Override
                                     public void OnAdd(int postion) {
-                                        int qty= productList4.get(postion).getQty()+1;
+                                        int qty = productList4.get(postion).getQty() + 1;
                                         productList4.get(postion).setQty(qty);
 
                                     }
 
                                     @Override
                                     public void OnDelete(int postion) {
-                                        int qty= productList4.get(postion).getQty()-1;
-                                        if (qty>0) {
+                                        int qty = productList4.get(postion).getQty() - 1;
+                                        if (qty > 0) {
                                             productList4.get(postion).setQty(qty);
                                         }
                                     }

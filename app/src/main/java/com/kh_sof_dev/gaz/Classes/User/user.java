@@ -3,13 +3,15 @@ package com.kh_sof_dev.gaz.Classes.User;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 
 /************************* Mo’min J.Abusaada *************************/
 //
 //	point.java
 
 
-public class user {
+public class user implements Serializable {
 
     private String id;
     private String password;

@@ -2,6 +2,7 @@ package com.kh_sof_dev.gaz.Fragments.Reservations;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,18 +25,17 @@ public class Reservation_Canceled_devier extends Fragment {
     RecyclerView RV;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.layout_f_reservation_canceled, container, false);
-        RV = (RecyclerView) view.findViewById(R.id.RV);
+        RV = view.findViewById(R.id.RV);
         RV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         Http_orders http_orders = new Http_orders();
-        final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progress);
+        final ProgressBar progressBar = view.findViewById(R.id.progress);
         http_orders.GetMy_Order(getContext(), "6", 0, 10, new Http_orders.OnOrder_geter_lisennter() {
             @Override
             public void onSuccess(show_order order) {
-                RV.setAdapter(new Order_adapter(getContext(), order.getItems(), Reservation_Canceled_devier.this));
+                RV.setAdapter(new Order_adapter(getContext(), order.getItems()));
                 progressBar.setVisibility(View.GONE);
             }
 

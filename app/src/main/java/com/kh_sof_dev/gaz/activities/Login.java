@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.google.android.gms.maps.model.LatLng;
-import com.kh_sof_dev.gaz.Fragments.Test_location;
+import com.kh_sof_dev.gaz.Fragments.LoginFrag;
 import com.kh_sof_dev.gaz.R;
 
 public class Login extends AppCompatActivity {
@@ -26,11 +26,11 @@ public class Login extends AppCompatActivity {
 //        fragmentTransaction = fragmentManager.beginTransaction();
 //        fragment = fragmentManager.findFragmentById(R.id.ContentLogin);
 //        if (fragment == null) {
-//            fragment = new Test_location();
+//            fragment = new TestLocation();
 //            fragmentTransaction.add(R.id.ContentLogin, fragment).commit();
 //            fragmentTransaction.addToBackStack(null);
 //        }
-        changeFragment(new Test_location());
+        changeFragment(new LoginFrag());
     }
 
     @Override

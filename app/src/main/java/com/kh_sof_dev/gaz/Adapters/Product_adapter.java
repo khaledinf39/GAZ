@@ -1,7 +1,8 @@
 package com.kh_sof_dev.gaz.Adapters;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,9 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.kh_sof_dev.gaz.activities.ProductDetails;
 import com.squareup.picasso.Picasso;
 import com.kh_sof_dev.gaz.activities.MainNew;
-import com.kh_sof_dev.gaz.Fragments.Product_details;
 import com.kh_sof_dev.gaz.R;
 
 import java.util.ArrayList;
@@ -26,45 +27,46 @@ import java.util.List;
 public class Product_adapter extends RecyclerView.Adapter<Product_adapter.ViewHolder> {
 
     private static final String TAG = "RecyclerViewAdapter";
-private View mView;
-private Fragment mFragment;
+    private View mView;
     //vars
-    private List<com.kh_sof_dev.gaz.Classes.Products.Product> mItems = new ArrayList<>();
-public static int Item_selected;
+    private List<com.kh_sof_dev.gaz.Classes.Products.Product> mItems;
+    public static int Item_selected;
     private Context mContext;
 
-    public Product_adapter(Context context, List<com.kh_sof_dev.gaz.Classes.Products.Product> names, Fragment mFragment) {
+    public Product_adapter(Context context, List<com.kh_sof_dev.gaz.Classes.Products.Product> names) {
         mItems = names;
         mContext = context;
-        Item_selected=0;
-        this.mFragment=mFragment;
+        Item_selected = 0;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) { //parent = theme type
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) { //parent = theme type
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_home_products, parent, false);
 
-mView=view;
+        mView = view;
         return new ViewHolder(view); // Inflater means reading a layout XML
     }
 
 
-
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called.");
 
         holder.prod_name.setText(mItems.get(position).getName());
         Picasso.with(mContext).load(mItems.get(position).getImage())
                 .placeholder(R.drawable.placeholder)
-        .into(holder.prod_img);
-        holder.nb_start.setText(mItems.get(position).getRate()+"");
+                .into(holder.prod_img);
+        holder.nb_start.setText(mItems.get(position).getRate() + "");
         holder.type.setText("");
         holder.price.setText(mItems.get(position).getPrice().toString());
         mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainNew.goto_(new Product_details(mItems.get(position),false),mContext);
+                Intent intent = new Intent(mContext, ProductDetails.class);
+                intent.putExtra(ProductDetails.product, mItems.get(position));
+                mContext.startActivity(intent);
+//                MainNew.goto_(new ProductDetails(mItems.get(position), false), mContext);
             }
         });
     }
@@ -74,19 +76,20 @@ mView=view;
         return mItems.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView prod_name,price,nb_start,type;
+        TextView prod_name, price, nb_start, type;
         ImageView prod_img;
-      public ViewHolder(View itemView) {
+
+        public ViewHolder(View itemView) {
             super(itemView);
-            prod_img=itemView.findViewById(R.id.productImg);
-           prod_name = itemView.findViewById(R.id.productName);
+            prod_img = itemView.findViewById(R.id.productImg);
+            prod_name = itemView.findViewById(R.id.productName);
 
-          price=itemView.findViewById(R.id.price);
-          type = itemView.findViewById(R.id.type_tv);
+            price = itemView.findViewById(R.id.price);
+            type = itemView.findViewById(R.id.type_tv);
 
-          nb_start=itemView.findViewById(R.id.nb_star);
+            nb_start = itemView.findViewById(R.id.nb_star);
 
 
         }

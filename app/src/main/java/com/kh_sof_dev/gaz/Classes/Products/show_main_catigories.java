@@ -11,17 +11,17 @@ import java.util.*;
 
 public class show_main_catigories{
 
-    private List<catigories> catigoriess;
+    private List<Categories> catigoriesses;
     private String message;
     private com.kh_sof_dev.gaz.Classes.pagatination pagatination;
     private boolean status;
     private int statusCode;
 
-    public void setcatigoriess(List<catigories> catigoriess){
-        this.catigoriess = catigoriess;
+    public void setcatigoriess(List<Categories> catigoriesses){
+        this.catigoriesses = catigoriesses;
     }
-    public List<catigories> getcatigoriess(){
-        return this.catigoriess;
+    public List<Categories> getcatigoriess(){
+        return this.catigoriesses;
     }
     public void setMessage(String message){
         this.message = message;
@@ -53,7 +53,7 @@ public class show_main_catigories{
      * Instantiate the instance using the passed jsonObject to set the properties values
      */
     public show_main_catigories(JSONObject jsonObject) throws JSONException {
-        catigoriess = new ArrayList<>();
+        catigoriesses = new ArrayList<>();
         if(jsonObject == null){
             return;
         }
@@ -61,9 +61,9 @@ public class show_main_catigories{
         if(catigoriessJsonArray != null){
             for (int i = 0; i < catigoriessJsonArray.length(); i++) {
                 JSONObject catigoriessObject = catigoriessJsonArray.optJSONObject(i);
-                catigoriess.add(new catigories(catigoriessObject));
+                catigoriesses.add(new Categories(catigoriessObject));
                  }
-         // catigoriess = catigoriessArrayList;
+         // catigoriesses = catigoriessArrayList;
         }		message = jsonObject.optString("message");
 
 //       pagatination=new pagatination(jsonObject.getJSONObject("pagenation"));
@@ -78,12 +78,12 @@ public class show_main_catigories{
     {
         JSONObject jsonObject = new JSONObject();
         try {
-            if(catigoriess != null && catigoriess.size() > 0){
+            if(catigoriesses != null && catigoriesses.size() > 0){
                 JSONArray catigoriessJsonArray = new JSONArray();
-                for(catigories catigoriessElement : catigoriess){
+                for(Categories catigoriessElement : catigoriesses){
                     catigoriessJsonArray.put(catigoriessElement.toJsonObject());
                 }
-                jsonObject.put("catigoriess", catigoriessJsonArray);
+                jsonObject.put("catigoriesses", catigoriessJsonArray);
             }
             jsonObject.put("message", message);
             jsonObject.put("pagatination", pagatination);

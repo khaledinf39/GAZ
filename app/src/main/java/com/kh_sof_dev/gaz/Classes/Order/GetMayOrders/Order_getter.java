@@ -1,15 +1,18 @@
-package com.kh_sof_dev.gaz.Classes.Order.GetMayOrders; /************************* Mo’min J.Abusaada *************************/
-//
-//	Order_getter.java
+package com.kh_sof_dev.gaz.Classes.Order.GetMayOrders;
+//************************* Mo’min J.Abusaada *************************/
 
 import com.kh_sof_dev.gaz.Classes.User.user;
 
-import org.json.*;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.util.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class Order_getter {
+public class Order_getter implements Serializable {
 
     private String id;
     private String notes;

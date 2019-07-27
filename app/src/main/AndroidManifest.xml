@@ -8,7 +8,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -20,10 +21,12 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:supportsRtl">
 
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
 
 
-        <activity android:name=".activities.OutherActivty"/>
+        <activity android:name=".activities.OutherActivty" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -41,51 +44,84 @@
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
-         <activity android:name="com.facebook.CustomTabActivity"
-         android:exported="true">
-         <intent-filter> <action android:name="android.intent.action.VIEW" />
-         <category android:name="android.intent.category.DEFAULT" />
-         <category android:name="android.intent.category.BROWSABLE" />
-         <data android:scheme="@string/fb_login_protocol_scheme" /> </intent-filter>
-         </activity>
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter><action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDjm0ONs1KCfE1ZJi3eTnkenyktfFfP47E"/>
-            <!--android:value="AIzaSyDjm0ONs1KCfE1ZJi3eTnkenyktfFfP47E"/>-->
+            android:value="AIzaSyDjm0ONs1KCfE1ZJi3eTnkenyktfFfP47E" />
+        <!--android:value="AIzaSyDjm0ONs1KCfE1ZJi3eTnkenyktfFfP47E"/>-->
 
 
-            <!--android:value="AIzaSyDKhB_cnnxmylJycsDUoi9XbsJTWQJY91Q"/>-->
-            <!--android:value="AIzaSyDKhB_cnnxmylJycsDUoi9XbsJTWQJY91Q"/>   //debug-->
-           <!--android:value="AIzaSyDsDaMo4UQxysokCbdC97GvX2CR4mD5guM"/>  //test-->
-             <!--"AIzaSyDKhB_cnnxmylJycsDUoi9XbsJTWQJY91Q"-->
+        <!--android:value="AIzaSyDKhB_cnnxmylJycsDUoi9XbsJTWQJY91Q"/>-->
+        <!--android:value="AIzaSyDKhB_cnnxmylJycsDUoi9XbsJTWQJY91Q"/>   //debug-->
+        <!--android:value="AIzaSyDsDaMo4UQxysokCbdC97GvX2CR4mD5guM"/>  //test-->
+        <!--"AIzaSyDKhB_cnnxmylJycsDUoi9XbsJTWQJY91Q"-->
 
         <activity android:name=".activities.Chat" />
         <activity
             android:name=".activities.MainNew"
-            android:label="@string/title_activity_main_new"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.Intro" />
-        <activity android:name=".activities.Main">
+        <activity
+            android:name=".activities.Intro"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activities.Main"
+            android:launchMode="singleTask">
             <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
 
 
         </activity>
-            <activity android:name=".activities.Logo">
+        <activity android:name=".activities.Logo">
 
-                <intent-filter>
-                    <action android:name="android.intent.action.MAIN" />
-                    <category android:name="android.intent.category.LAUNCHER" />
-                </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
-            </activity>
-            <activity android:name=".activities.Login" />
-            <meta-data
+        </activity>
+        <activity android:name=".activities.Login" />
+        <activity android:name=".activities.TestLocation" />
+        <activity android:name=".activities.EditProfile" />
+        <activity android:name=".activities.Profile" />
+        <activity android:name=".activities.MyReservations" />
+        <activity android:name=".activities.MyFavorites" />
+        <activity android:name=".activities.ChangePassword" />
+        <activity android:name=".activities.UserAgreement" />
+        <activity android:name=".activities.AboutUs" />
+        <activity android:name=".activities.RateApp" />
+        <activity android:name=".activities.OrderDetails" />
+        <activity android:name=".activities.Follow_order" />
+        <activity android:name=".activities.Car" />
+        <activity android:name=".activities.Shipping" />
+        <activity android:name=".activities.Payment" />
+        <activity android:name=".activities.Categories" />
+        <activity android:name=".activities.AllProducts" />
+        <activity android:name=".activities.ProductDetails" />
+        <activity android:name=".activities.Refill" />
+        <activity android:name=".activities.ConfRefill" />
+        <activity android:name=".activities.SendRequestSucc" />
+        <activity android:name=".activities.ConfReservation1" />
+        <activity android:name=".activities.Search" />
+        <activity android:name=".activities.SearchResults" />
+
+        <meta-data
             android:name="io.fabric.ApiKey"
             android:value="d2cca9159707aeb74a5e8a636bf00585e97f446c" />
     </application>
 
-    </manifest>
+</manifest>

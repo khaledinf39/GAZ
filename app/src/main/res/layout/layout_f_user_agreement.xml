@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:weightSum="100"
-    tools:context=".Fragments.UserAgreement">
+    tools:context=".activities.UserAgreement">
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -84,7 +84,6 @@
             />
         <android.support.v7.widget.RecyclerView
             android:visibility="gone"
-            android:id="@+id/agreement_RV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"

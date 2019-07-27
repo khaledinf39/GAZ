@@ -1,7 +1,9 @@
 package com.kh_sof_dev.gaz.Fragments.Refill_frg;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +18,7 @@ import com.kh_sof_dev.gaz.Classes.constant.Http_get_constant;
 import com.kh_sof_dev.gaz.Classes.constant.ads;
 import com.kh_sof_dev.gaz.Classes.constant.show_ads;
 import com.kh_sof_dev.gaz.R;
-import com.kh_sof_dev.gaz.activities.MainNew;
+import com.kh_sof_dev.gaz.activities.Refill;
 
 public class Tab_home_gaz extends Fragment {
 
@@ -32,7 +34,7 @@ public class Tab_home_gaz extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.layout_f_tab_home_gaz, container, false);
@@ -42,8 +44,10 @@ public class Tab_home_gaz extends Fragment {
         refill_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                MainNew.goto_(new Refill(4), getContext());
+                Intent intent = new Intent(getActivity(), Refill.class);
+                intent.putExtra(Refill.order_type_s, 4);
+                startActivity(intent);
+//                MainNew.goto_(new Refill(4), getContext());
 
             }
         });
@@ -52,15 +56,16 @@ public class Tab_home_gaz extends Fragment {
         shop_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                MainNew.goto_(new Refill(2), getContext());
-
+                Intent intent = new Intent(getActivity(), Refill.class);
+                intent.putExtra(Refill.order_type_s, 2);
+                startActivity(intent);
+//                MainNew.goto_(new Refill(2), getContext());
             }
         });
 
-        /***************Ads******************************/
+        //***************Ads******************************/
 
-        final SliderLayout mDemoSlider = (SliderLayout) view.findViewById(R.id.slider_l);
+        final SliderLayout mDemoSlider = view.findViewById(R.id.slider_l);
         final TextSliderView textSliderView = new TextSliderView(getContext());
 
         Http_get_constant constant = new Http_get_constant();

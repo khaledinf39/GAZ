@@ -1,6 +1,7 @@
 package com.kh_sof_dev.gaz.Fragments;
 
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -20,6 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderLayout;
+import com.kh_sof_dev.gaz.activities.AllProducts;
+import com.kh_sof_dev.gaz.activities.Car;
+import com.kh_sof_dev.gaz.activities.Categories;
 import com.kh_sof_dev.gaz.activities.MainNew;
 import com.kh_sof_dev.gaz.Adapters.Gategories;
 import com.kh_sof_dev.gaz.Adapters.Top20Products;
@@ -70,7 +74,8 @@ public class Home extends Fragment {
         Allcatig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainNew.goto_(new Categories(), getActivity());
+                startActivity(new Intent(getActivity(), Categories.class));
+//                MainNew.goto_(new Categories(), getActivity());
             }
         });
         try {
@@ -90,11 +95,12 @@ public class Home extends Fragment {
         }
 
         /**************************************************************/
-        go_basket = (ImageView) view.findViewById(R.id.basket);
+        go_basket = view.findViewById(R.id.basket);
         go_basket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainNew.goto_(new Car(), getActivity());
+                startActivity(new Intent(getActivity(), Car.class));
+//                MainNew.goto_(new Car(), getActivity());
             }
         });
         speacialRV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, true));
@@ -102,7 +108,7 @@ public class Home extends Fragment {
         http_products.Get_top20_Products(getContext(), new Http_products.productsListener() {
             @Override
             public void onSuccess(show_products products) {
-                adapter = new Top20Products(getContext(), products.getProducts(), Home.this);
+                adapter = new Top20Products(getContext(), products.getProducts());
                 speacialRV.setAdapter(adapter);
                 // Toast.makeText(getContext(),products.getMessage(),Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
@@ -126,9 +132,12 @@ public class Home extends Fragment {
             public void onSuccess(show_main_catigories catigories) {
                 categ_adapter = new Gategories(getContext(), catigories.getcatigoriess(), new Gategories.categorie_selected_listenner() {
                     @Override
-                    public void onSuccess(com.kh_sof_dev.gaz.Classes.Products.catigories catigories) {
+                    public void onSuccess(com.kh_sof_dev.gaz.Classes.Products.Categories Categories) {
                         progressBar.setVisibility(View.GONE);
-                        MainNew.goto_(new AllProducts(catigories), getContext());
+                        Intent intent = new Intent(getActivity(), AllProducts.class);
+                        intent.putExtra(AllProducts.category, Categories);
+                        startActivity(intent);
+//                        MainNew.goto_(new AllProducts(Categories), getContext());
                     }
 
                     @Override
@@ -143,7 +152,7 @@ public class Home extends Fragment {
                 });
                 try {
                     categoriesRV.setAdapter(categ_adapter);
-                    // Toast.makeText(getContext(),catigories.getMessage(),Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(getContext(),Categories.getMessage(),Toast.LENGTH_SHORT).show();
                 } catch (Exception ef) {
 
                 }

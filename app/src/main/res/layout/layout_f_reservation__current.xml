@@ -114,7 +114,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/address1_tv" />
 
                 <ImageView
-                    android:id="@+id/img2"
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:layout_marginEnd="15dp"
@@ -162,7 +161,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/orderState_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
