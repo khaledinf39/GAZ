@@ -16,6 +16,8 @@ import com.kh_sof_dev.gaz.Fragments.Welcome2;
 import com.kh_sof_dev.gaz.Fragments.Welcome3;
 import com.kh_sof_dev.gaz.R;
 
+import me.relex.circleindicator.CircleIndicator;
+
 public class Intro extends AppCompatActivity {
 
     @Override
@@ -40,6 +42,8 @@ public class Intro extends AppCompatActivity {
         });
         ViewPager pager = findViewById(R.id.pager);
         pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+        CircleIndicator indicator = findViewById(R.id.indicator);
+        indicator.setViewPager(pager);
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {

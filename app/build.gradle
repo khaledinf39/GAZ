@@ -99,6 +99,9 @@ dependencies {
     implementation 'com.karumi:dexter:5.0.0'
 
 
+    /// Circle Indicator
+    implementation 'me.relex:circleindicator:1.2.2'
+
     /// slide Ads
     implementation 'com.nineoldandroids:library:2.4.0'
     implementation 'com.daimajia.slider:library:1.1.5@aar'
