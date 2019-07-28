@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:weightSum="100">
 
     <LinearLayout
@@ -17,9 +15,7 @@
 
         <ProgressBar
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            />
+            android:layout_height="wrap_content" />
 
         <TextView
 
@@ -35,15 +31,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/cairo_semibold"
             android:text=" نكتشف هل منطقتك مغطاة بموزعين سوق غاز"
             android:textColor="#364F6B"
-            android:textSize="14sp"
+            android:textSize="14sp" />
 
-            />
     </LinearLayout>
 
     <LinearLayout
@@ -68,8 +62,8 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="fitXY"
                 android:adjustViewBounds="true"
+                android:scaleType="fitXY"
                 android:src="@drawable/ic_illustration" />
         </android.support.v7.widget.CardView>
 
@@ -122,6 +116,30 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tx2" />
+
+
+            <TextView
+                android:id="@+id/refresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/bg_blue_border"
+                android:drawableRight="@drawable/ic_refresh"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/cairo_regular"
+                android:gravity="center_vertical"
+                android:paddingLeft="8dp"
+                android:paddingTop="2dp"
+                android:paddingRight="8dp"
+                android:paddingBottom="2dp"
+                android:text="الرجاء حدث الصفحة .. للتأكد من ان منطقتك مغطاة"
+                android:textColor="#1f57ff"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tx3" />
 
             <LinearLayout
                 android:layout_width="match_parent"

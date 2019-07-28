@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -58,7 +59,6 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -131,10 +131,8 @@ public class EditProfile extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
 
             if (requestCode == PICK_IMAGE_REQUEST) {
-                Uri picUri = data.getData();
-
-
-                Log.d("picUri", picUri.toString());
+//                Uri picUri = data.getData();
+//                Log.d("picUri", picUri.toString());
                 // Log.d("filePath", filePath);
                 Uri contentURI = data.getData();
                 // user_img.setImageURI(picUri);
@@ -156,7 +154,7 @@ public class EditProfile extends AppCompatActivity {
 
     /********uploaimg*******/
     private RequestQueue rQueue;
-    private ArrayList<HashMap<String, String>> arraylist;
+//    private ArrayList<HashMap<String, String>> arraylist;
 
     private void uploadImage(final Bitmap bitmap) {
         final ProgressDialog dialog = new ProgressDialog(this);
@@ -172,9 +170,8 @@ public class EditProfile extends AppCompatActivity {
                         Log.d("ressssssoo", new String(response.data));
                         rQueue.getCache().clear();
 
-                        JSONObject jsonObject = null;
                         try {
-                            jsonObject = new JSONObject(new String(response.data));
+                            JSONObject jsonObject = new JSONObject(new String(response.data));
                             //JSONObject jsonObjectRequest=jsonObject.getJSONObject("items");
                             user_info.setImag(jsonObject.getString("url"));
                             Log.d("ressssssoo", jsonObject.getString("url"));
@@ -198,24 +195,15 @@ public class EditProfile extends AppCompatActivity {
                     }
                 }) {
 
-            /*
-             * If you want to add more parameters with the image
-             * you can do it here
-             * here we have only one parameter with the image
-             * which is tags
-             * */
             @Override
             protected Map<String, String> getParams() {
-                Map<String, String> Params = new HashMap<>();
-
-
-                return Params;
+                return new HashMap<>();
             }
 
 
             @Override
             public Map<String, String> getHeaders() {
-                Map<String, String> Headers = new HashMap<String, String>();
+                Map<String, String> Headers = new HashMap<>();
                 Headers.put("token", user_info.getToken());
 
                 return Headers;
@@ -244,7 +232,7 @@ public class EditProfile extends AppCompatActivity {
     public void Put_profilInfo(final Context mcontext) {
         RequestQueue queue;
         try {
-            queue = Volley.newRequestQueue(mcontext);  // this = context
+            queue = Volley.newRequestQueue(mcontext);
         } catch (Exception e) {
             e.printStackTrace();
             return;
@@ -252,7 +240,6 @@ public class EditProfile extends AppCompatActivity {
 
         String url = "https://gazapp.herokuapp.com/api/updateUserAndroid";
 
-// Request a json response from the provided URL
         progressBar.setVisibility(View.VISIBLE);
         StringRequest postRequest = new StringRequest(Request.Method.PUT, url,
                 new Response.Listener<String>() {
@@ -260,10 +247,9 @@ public class EditProfile extends AppCompatActivity {
                     public void onResponse(String response) {
                         // response
                         Log.d("Response", response);
-                        String jsonData = response;
                         JSONObject Jobject = null;
                         try {
-                            Jobject = new JSONObject(jsonData);
+                            Jobject = new JSONObject(response);
                         } catch (JSONException e1) {
                             e1.printStackTrace();
                         }
@@ -283,7 +269,7 @@ public class EditProfile extends AppCompatActivity {
         ) {
             @Override
             public Map<String, String> getHeaders() {
-                Map<String, String> Headers = new HashMap<String, String>();
+                Map<String, String> Headers = new HashMap<>();
                 Headers.put("token", user_info.getToken());
                 Log.d("token", user_info.getToken());
                 return Headers;
@@ -291,7 +277,7 @@ public class EditProfile extends AppCompatActivity {
 
             @Override
             protected Map<String, String> getParams() {
-                Map<String, String> Params = new HashMap<String, String>();
+                Map<String, String> Params = new HashMap<>();
                 Params.put("_id", user_info.getId());
                 Params.put("full_name", user_info.getName());
 //                Params.put("gender",user_info.getGender());
@@ -332,11 +318,11 @@ public class EditProfile extends AppCompatActivity {
                                     , "All permissions are granted by user!", Toast.LENGTH_SHORT).show();
                         }
 
-                        // check for permanent denial of any permission
-                        if (report.isAnyPermissionPermanentlyDenied()) {
-                            // show alert dialog navigating to Settings
-
-                        }
+//                        // check for permanent denial of any permission
+//                        if (report.isAnyPermissionPermanentlyDenied()) {
+//                            // show alert dialog navigating to Settings
+//
+//                        }
                     }
 
                     @Override
@@ -453,7 +439,7 @@ public class EditProfile extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             Log.v(TAG, "Permission: " + permissions[0] + "was " + grantResults[0]);
@@ -504,10 +490,11 @@ public class EditProfile extends AppCompatActivity {
 
     }
 
-    public <ViewGroup> void spinner2meth() {
+    public void spinner2meth() {
 
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list) {
-            public View getView(int position, View convertView, android.view.ViewGroup parent) {
+            @NonNull
+            public View getView(int position, View convertView, @NonNull android.view.ViewGroup parent) {
                 tfavv = Typeface.createFromAsset(getAssets(), "fonts/cairo_regular.ttf");
                 TextView v = (TextView) super.getView(position, convertView, parent);
                 v.setTypeface(tfavv);
@@ -516,7 +503,7 @@ public class EditProfile extends AppCompatActivity {
                 return v;
             }
 
-            public View getDropDownView(int position, View convertView, android.view.ViewGroup parent) {
+            public View getDropDownView(int position, View convertView, @NonNull android.view.ViewGroup parent) {
                 TextView v = (TextView) super.getView(position, convertView, parent);
                 v.setTypeface(tfavv);
                 v.setTextColor(Color.parseColor("#272d39"));

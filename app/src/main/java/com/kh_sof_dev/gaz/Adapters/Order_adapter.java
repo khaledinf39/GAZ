@@ -13,10 +13,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.kh_sof_dev.gaz.Classes.Order.GetMayOrders.Order_getter;
-import com.kh_sof_dev.gaz.activities.OrderDetails;
-import com.kh_sof_dev.gaz.activities.Follow_order;
 import com.kh_sof_dev.gaz.R;
-import com.kh_sof_dev.gaz.activities.OutherActivty;
+import com.kh_sof_dev.gaz.activities.Follow_order;
+import com.kh_sof_dev.gaz.activities.OrderDetails;
 
 import java.util.List;
 import java.util.Locale;

@@ -32,6 +32,7 @@ import com.kh_sof_dev.gaz.R;
 public class TestLocation extends AppCompatActivity {
 
     LinearLayout no_location, progressBar;
+    View refresh;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class TestLocation extends AppCompatActivity {
         setContentView(R.layout.layout_f_test_location);
         no_location = findViewById(R.id.no_location);
         progressBar = findViewById(R.id.progress);
+        refresh = findViewById(R.id.refresh);
         no_location.setVisibility(View.GONE);
         //***********************Get location***************/
         Getpermissin();
@@ -46,6 +48,19 @@ public class TestLocation extends AppCompatActivity {
         get_location();
         //*****************************************************/
 
+
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
+                no_location.setVisibility(View.GONE);
+                //***********************Get location***************/
+                Getpermissin();
+                locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                test_location();
+                //*****************************************************/
+            }
+        });
     }
 
 
@@ -96,22 +111,17 @@ public class TestLocation extends AppCompatActivity {
         }
     }
 
-    /**********get gps location*********/
-    private Boolean flag;
-
-    @SuppressLint("MissingPermission")
     private void get_location() {
 
-        flag = displayGpsStatus();
+        //**********get gps location*********/
+        boolean flag = displayGpsStatus();
         if (flag) {
             LocationListener locationListener = new MyLocationListener();
 
-
             try {
-                locationManager.requestLocationUpdates(LocationManager
-                        .GPS_PROVIDER, 5000, 10, locationListener);
-
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
             } catch (Exception ex) {
+                ex.printStackTrace();
             }
 
 
@@ -167,15 +177,11 @@ public class TestLocation extends AppCompatActivity {
 
         @Override
         public void onLocationChanged(Location loc) {
-
-
             mLatLng = new LatLng(loc.getLatitude(), loc.getLongitude());
             Login.mLatLng = mLatLng;
             if (!firstone) {
                 test_location();
-
             }
-
         }
 
         @Override
@@ -214,7 +220,6 @@ public class TestLocation extends AppCompatActivity {
                             finish();
                         }
 
-
                     } else {
                         no_location.setVisibility(View.VISIBLE);
                         progressBar.setVisibility(View.GONE);
@@ -228,7 +233,8 @@ public class TestLocation extends AppCompatActivity {
 
                 @Override
                 public void onFailure(String msg) {
-
+                    no_location.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.GONE);
                 }
             });
 

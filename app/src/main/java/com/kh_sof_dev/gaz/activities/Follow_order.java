@@ -70,7 +70,7 @@ public class Follow_order extends AppCompatActivity implements OnMapReadyCallbac
     private TextView carName;
     private Button callBtn;
     private car_informatiom car_informatiom;
-    private Double lat = null, lng = null;
+    private double lat = 0.0, lng = 0.0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -224,7 +224,7 @@ public class Follow_order extends AppCompatActivity implements OnMapReadyCallbac
             if (Objects.equals(dataSnapshot.getKey(), "lng")) {
                 lng = dataSnapshot.getValue(Double.class);
             }
-            if (lat != null && lng != null) {
+            if (lat > 0.0 && lng > 0.0) {
                 try {
                     Map_draw(new LatLng(lat, lng));
                     if (firstOpen) {

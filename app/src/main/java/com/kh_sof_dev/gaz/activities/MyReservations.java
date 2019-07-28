@@ -21,28 +21,15 @@ import com.kh_sof_dev.gaz.R;
 public class MyReservations extends AppCompatActivity {
 
     private ViewPager mViewPager;
-    private final String[] PAGE_TITLES = new String[]{
-            "الملغية",
-            "السابقة",
-            "الحالية",
-            "بإنتظار الموافقة"
-//            "الملغية من طرف السائق"
-    };
-
-    private final Fragment[] PAGES = new Fragment[]{
-            new Reservation_Canceled(),
-            new Reservation_Complet(),
-            new Reservation_Current(),
-            new Reservation_wait()
-//            new Reservation_Canceled_devier()
-    };
+    private MyPagerAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_f_my_reservations);
         mViewPager = findViewById(R.id.viewpager);
-        mViewPager.setAdapter(new MyReservations.MyPagerAdapter(getSupportFragmentManager()));
+        adapter = new MyPagerAdapter(getSupportFragmentManager());
+        mViewPager.setAdapter(adapter);
         mViewPager.setOffscreenPageLimit(1);
         final TabLayout tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#1f57ff"));
@@ -76,12 +63,27 @@ public class MyReservations extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (mViewPager != null){
-            mViewPager.setAdapter(new MyReservations.MyPagerAdapter(getSupportFragmentManager()));
-            mViewPager.setOffscreenPageLimit(1);
+        if (adapter != null && mViewPager != null) {
             mViewPager.setCurrentItem(3);
+            adapter.notifyDataSetChanged();
         }
     }
+
+    private final String[] PAGE_TITLES = new String[]{
+            "الملغية",
+            "السابقة",
+            "الحالية",
+            "بإنتظار الموافقة"
+//            "الملغية من طرف السائق"
+    };
+
+    private final Fragment[] PAGES = new Fragment[]{
+            new Reservation_Canceled(),
+            new Reservation_Complet(),
+            new Reservation_Current(),
+            new Reservation_wait()
+//            new Reservation_Canceled_devier()
+    };
 
     public class MyPagerAdapter extends android.support.v4.app.FragmentStatePagerAdapter {
 

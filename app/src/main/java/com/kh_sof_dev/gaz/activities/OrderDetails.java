@@ -1,7 +1,6 @@
 package com.kh_sof_dev.gaz.activities;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;

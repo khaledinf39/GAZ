@@ -47,23 +47,22 @@ import java.util.Locale;
 
 public class Shipping extends AppCompatActivity implements OnMapReadyCallback {
     public static String locationAdd = "";
-    private Boolean flag;
     private String[] permissions = new String[]{
             Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.INTERNET
     };
 
     private void get_location() {
-        flag = displayGpsStatus();
+        Boolean flag = displayGpsStatus();
         if (flag) {
-            locationListener = new MyLocationListener();
+            LocationListener locationListener = new MyLocationListener();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                         != PackageManager.PERMISSION_GRANTED &&
                         ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
                                 != PackageManager.PERMISSION_GRANTED) {
                     requestPermissions(permissions, 15);
-                } else if (locationListener != null) {
+                } else {
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
                 }
             }
@@ -110,15 +109,7 @@ public class Shipping extends AppCompatActivity implements OnMapReadyCallback {
      */
     private Boolean displayGpsStatus() {
         ContentResolver contentResolver = getContentResolver();
-        boolean gpsStatus = Settings.Secure
-                .isLocationProviderEnabled(contentResolver,
-                        LocationManager.GPS_PROVIDER);
-        if (gpsStatus) {
-            return true;
-
-        } else {
-            return false;
-        }
+        return Settings.Secure.isLocationProviderEnabled(contentResolver, LocationManager.GPS_PROVIDER);
     }
 
     /*----------Method to create an AlertBox ------------- */
@@ -256,7 +247,6 @@ public class Shipping extends AppCompatActivity implements OnMapReadyCallback {
     /********************************MAP***********************************/
     private GoogleMap mMap;
     private LocationManager locationManager = null;
-    private LocationListener locationListener = null;
 
 
     public static LatLng mLatLng = null;

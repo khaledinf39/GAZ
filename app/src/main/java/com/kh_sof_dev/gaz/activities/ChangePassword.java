@@ -49,8 +49,6 @@ public class ChangePassword extends AppCompatActivity {
     }
 
     private void changePW() {
-
-
         String newPss = newPw.getText().toString();
         String oldPss = old.getText().toString();
         String rePss = rePW.getText().toString();

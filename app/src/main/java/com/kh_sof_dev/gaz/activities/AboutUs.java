@@ -25,8 +25,6 @@ import java.util.List;
 
 public class AboutUs extends AppCompatActivity {
 
-    private ImageView back;
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +60,7 @@ public class AboutUs extends AppCompatActivity {
 
             }
         });
-        back = findViewById(R.id.back_btn);
+        ImageView back = findViewById(R.id.back_btn);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

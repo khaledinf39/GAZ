@@ -23,7 +23,7 @@ import com.kh_sof_dev.gaz.R;
 
 public class ConfRefill extends AppCompatActivity {
 
-    public static String notes_ = "لا يوجد";
+    public String notes_ = "لا يوجد";
     private int order_type;
 
     private TextView note_tv;
@@ -71,12 +71,13 @@ public class ConfRefill extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ConfRefill.this, Payment.class);
                 intent.putExtra(Payment.order_type, order_type);
+                intent.putExtra(ConfReservation1.note_s, notes_);
                 startActivity(intent);
 //                MainNew.goto_(new Payment(order_type), getContext());
 
             }
         });
-        /*******************************intialise info*****************************/
+        //*******************************intialise info*****************************/
         date_tv.setText(RefillHome.date);
         time_tv.setText(RefillHome.time);
         RecyclerView RV = findViewById(R.id.RV);
@@ -95,32 +96,29 @@ public class ConfRefill extends AppCompatActivity {
         RV.setAdapter(adapter);
 
 
-        Double price_ = 0.0;
-        for (Product p : RefillHome.productList
-        ) {
+        double price_ = 0.0;
+        for (Product p : RefillHome.productList) {
             price_ = price_ + p.getPrice() * p.getQty();
             qty = qty + p.getQty();
         }
-
-
         calculate(price_);
 
     }
 
     int qty = 0;
 
-    private void calculate(Double price_) {
+    private void calculate(double price_) {
         final Setting setting = new Setting(this);
-        Double delivry_ = 0.0;
-        Double total_ = 0.0;
-        Double taxe = 0.0;
-        price.setText(price_.toString());
-        delivry_ = qty * Double.valueOf((setting.getDelivery()));
-        delivery.setText(delivry_.toString());
-        taxe = Double.valueOf((setting.getTax())) * price_ * 0.01;
-        tax.setText(taxe.toString());
+        double delivry_;
+        double total_;
+        double taxe;
+        price.setText(String.valueOf(price_));
+        delivry_ = qty * setting.getDelivery();
+        delivery.setText(String.valueOf(delivry_));
+        taxe = setting.getTax() * price_ * 0.01;
+        tax.setText(String.valueOf(taxe));
         total_ = price_ + delivry_ + taxe;
-        total.setText(total_.toString());
+        total.setText(String.valueOf(total_));
     }
 
     private void EDitNotesPopup() {

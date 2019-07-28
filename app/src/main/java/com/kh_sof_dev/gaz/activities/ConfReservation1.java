@@ -37,6 +37,7 @@ import java.util.List;
 
 public class ConfReservation1 extends AppCompatActivity implements View.OnClickListener {
     public static final String payment_type_s = "payment_type";
+    public static final String note_s = "note";
     private int payment_type, order_type;
 
     private TextView deliveryTV, taxtTV, total, nameTV, addressTv, priceTV;
@@ -117,7 +118,7 @@ public class ConfReservation1 extends AppCompatActivity implements View.OnClickL
                     calculate(price_ - (price_ * discount));
                     coupon = coupon_edt.getText().toString();
 
-                    coupone_msg.setText(test_coupon.getMessage() + " لديك خصم : " + discount * 100 + "%");
+                    coupone_msg.setText(String.valueOf(test_coupon.getMessage() + " لديك خصم : " + discount * 100 + "%"));
                 }
 
             }
@@ -135,20 +136,20 @@ public class ConfReservation1 extends AppCompatActivity implements View.OnClickL
 
     }
 
-    Double price_ = 0.0;
-    Double delivry_ = 0.0;
-    Double total_ = 0.0;
-    Double taxe = 0.0;
+    double price_ = 0.0;
+    double delivry_ = 0.0;
+    double total_ = 0.0;
+    double taxe = 0.0;
 
-    private void calculate(Double price_) {
+    private void calculate(double price_) {
         final Setting setting = new Setting(this);
-        priceTV.setText(price_.toString());
-        delivry_ = qty * Double.valueOf((setting.getDelivery()));
-        taxtTV.setText(delivry_.toString());
+        priceTV.setText(String.valueOf(price_));
+        delivry_ = qty * setting.getDelivery();
+        taxtTV.setText(String.valueOf(delivry_));
         taxe = Double.valueOf((setting.getTax())) * price_ * 0.01;
-        deliveryTV.setText(taxe.toString());
+        deliveryTV.setText(String.valueOf(taxe));
         total_ = price_ + delivry_ + taxe;
-        total.setText(total_.toString());
+        total.setText(String.valueOf(total_));
         Log.d("setting gaz ", "tax" + taxe + " delev " + delivry_ + "qty" + qty);
     }
 
@@ -226,7 +227,7 @@ public class ConfReservation1 extends AppCompatActivity implements View.OnClickL
                 } else {
                     order.setDelivery_date(RefillHome.date);
                     order.setDelivery_time(RefillHome.time);
-                    order.setNotes(ConfRefill.notes_);
+                    order.setNotes(getIntent().getStringExtra(note_s));
 
 
                     for (Product p : RefillHome.productList

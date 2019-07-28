@@ -27,8 +27,7 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainNew extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainNew extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public FragmentManager fragmentManager;
     public Fragment fragment;
     public FragmentTransaction fragmentTransaction;
@@ -189,9 +188,9 @@ public class MainNew extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         Log.d("id_select", id + "");
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragment = fragmentManager.findFragmentById(R.id.ContentLogin);
+//        fragmentManager = getSupportFragmentManager();
+//        fragmentTransaction = fragmentManager.beginTransaction();
+//        fragment = fragmentManager.findFragmentById(R.id.ContentLogin);
 
         switch (id) {
             case R.id.nav_profile:
@@ -225,7 +224,7 @@ public class MainNew extends AppCompatActivity
                 break;
             case R.id.nav_share:
 //fragment=new Follow_order(new Order_getter());
-                fragment = null;
+//                fragment = null;
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_TEXT, "انصحك بهذا النطبيق");

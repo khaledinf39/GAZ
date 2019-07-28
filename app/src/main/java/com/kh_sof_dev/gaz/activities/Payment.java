@@ -23,14 +23,12 @@ import com.kh_sof_dev.gaz.R;
 import java.util.List;
 
 public class Payment extends AppCompatActivity implements View.OnClickListener {
-    int order_typ;
     public static final String order_type = "order_type";
+    int order_typ;
 
     private LinearLayout visa, cash, paytabs;
-    private ImageView back;
     private int payment_typ = 0;
     private Double price_ = 0.0, total = 0.0;
-    private Button continue_btn;
     private TextView cashTV, visaTV, pointTV;
 
     @Override
@@ -41,14 +39,14 @@ public class Payment extends AppCompatActivity implements View.OnClickListener {
         order_typ = getIntent().getIntExtra(order_type, 0);
 
         paytabs = findViewById(R.id.point_lay);
-        back = findViewById(R.id.back_btn);
+        ImageView back = findViewById(R.id.back_btn);
         visa = findViewById(R.id.visa);
         cash = findViewById(R.id.cash);
         cashTV = findViewById(R.id.cash_tv);
 
         visaTV = findViewById(R.id.visa_tv);
         pointTV = findViewById(R.id.point_tv);
-        continue_btn = findViewById(R.id.continue_btn);
+        Button continue_btn = findViewById(R.id.continue_btn);
         paytabs.setOnClickListener(this);
         cash.setOnClickListener(this);
         visa.setOnClickListener(this);
@@ -74,8 +72,8 @@ public class Payment extends AppCompatActivity implements View.OnClickListener {
         }
 
         Setting setting = new Setting(this);
-        Double delivry_ = Double.valueOf((setting.getDelivery())) * price_ * 0.01;
-        Double taxe = Double.valueOf((setting.getTax())) * price_ * 0.01;
+        double delivry_ = setting.getDelivery() * price_ * 0.01;
+        double taxe = Double.valueOf((setting.getTax())) * price_ * 0.01;
         total = price_ + delivry_ + taxe;
     }
 
@@ -95,6 +93,7 @@ public class Payment extends AppCompatActivity implements View.OnClickListener {
                 }
                 Intent intent = new Intent(Payment.this, ConfReservation1.class);
                 intent.putExtra(ConfReservation1.payment_type_s, payment_typ);
+                intent.putExtra(ConfReservation1.note_s, getIntent().getStringExtra(ConfReservation1.note_s));
                 intent.putExtra(Refill.order_type_s, order_typ);
                 startActivity(intent);
                 finish();

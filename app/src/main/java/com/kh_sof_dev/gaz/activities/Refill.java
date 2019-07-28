@@ -21,20 +21,6 @@ public class Refill extends AppCompatActivity {
     public static final String order_type_s = "order_type";
 
     private ViewPager mViewPager;
-    private final String[] PAGE_TITLES = new String[]{
-            "خزان غاز",
-            "إسطوانة غاز"
-
-
-    };
-
-    private final Fragment[] PAGES = new Fragment[]{
-            new RefillHome(3),   //false
-            new RefillHome(2)   //true
-
-
-    };
-
     int order_type;
 
     private ImageView refillImg;
@@ -66,7 +52,6 @@ public class Refill extends AppCompatActivity {
 
             mViewPager.setCurrentItem(1);
 
-
             tabLayout.post(new Runnable() {
                 @Override
                 public void run() {
@@ -85,6 +70,16 @@ public class Refill extends AppCompatActivity {
             }
         });
     }
+
+    private final String[] PAGE_TITLES = new String[]{
+            "خزان غاز",
+            "إسطوانة غاز"
+    };
+
+    private final Fragment[] PAGES = new Fragment[]{
+            new RefillHome(3),   //false
+            new RefillHome(2)   //true
+    };
 
     public class MyPagerAdapter extends android.support.v4.app.FragmentStatePagerAdapter {
 

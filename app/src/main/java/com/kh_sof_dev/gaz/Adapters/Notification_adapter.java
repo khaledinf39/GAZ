@@ -2,10 +2,7 @@ package com.kh_sof_dev.gaz.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,14 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.kh_sof_dev.gaz.activities.OutherActivty;
 import com.kh_sof_dev.gaz.Classes.Ntification.Http_notification;
 import com.kh_sof_dev.gaz.Classes.Ntification.notification;
 import com.kh_sof_dev.gaz.Classes.Ntification.show_notif;
-import com.kh_sof_dev.gaz.activities.OrderDetails;
 import com.kh_sof_dev.gaz.R;
+import com.kh_sof_dev.gaz.activities.OrderDetails;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
