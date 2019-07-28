@@ -215,25 +215,25 @@ public class Home extends Fragment {
             @Override
             public void onSuccess(show_setting setting) {
                 if (setting.isStatus()) {
-                    Long nb_order = Long.valueOf(10);
-                    Long ring = Long.valueOf(0);
-                    Double tax = 0.0;
-                    Double delivery = 0.0;
+                    long nb_order = 10L;
+                    long ring = 0L;
+                    double tax = 0.0;
+                    double delivery = 0.0;
                     for (Setting i : setting.getItems()
                     ) {
                         switch (i.getName()) {
                             case "5c921977c4410f17e1c1ac4c":
-                                nb_order = i.getValue().longValue();
+                                nb_order = Long.parseLong(i.getValue());
                                 break;
                             case "5c6758e0c65f421a494cef89":
-                                ring = i.getValue().longValue();
+                                ring = Long.parseLong(i.getValue());
                                 break;
                             case "قيمة الضريبة":
-                                tax = i.getValue();
+                                tax = Double.parseDouble(i.getValue());
 //                                MainNew.tax= i.getValue().longValue();
                                 break;
                             case "قيمة التوصيل":
-                                delivery = i.getValue();
+                                delivery = Double.parseDouble(i.getValue());
 //                                MainNew.delivery= i.getValue().longValue();
                                 break;
                         }
@@ -243,7 +243,7 @@ public class Home extends Fragment {
                     Setting setting1 = new Setting(getContext());
                     setting1.setDelivery(delivery);
                     tax = tax * 100;
-                    setting1.setTax(tax.longValue());
+                    setting1.setTax((long) tax);
                     setting1.setRinge(ring);
                     setting1.setNb_order(nb_order);
                     new Setting(setting1, getContext());

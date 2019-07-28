@@ -9,11 +9,11 @@ import org.json.JSONObject;
 import static android.content.Context.MODE_PRIVATE;
 
 public class Setting {
-    private String id,name;
-    private Double value;
-private  Long ringe,tax;
-double delivery;
-private Long nb_order;
+    private String id, name;
+    private String value;
+    private Long ringe, tax;
+    double delivery;
+    private Long nb_order;
 
     public Long getRinge() {
         return ringe;
@@ -47,36 +47,37 @@ private Long nb_order;
         this.nb_order = nb_order;
     }
 
-    public Setting(JSONObject jsonObject) throws JSONException {
+    public Setting(JSONObject jsonObject) {
         if (jsonObject == null) {
             return;
         }
+
         id = jsonObject.optString("_id");
         name = jsonObject.optString("name");
-        value = jsonObject.getDouble("value");
-
+        value = jsonObject.optString("value");
     }
+
     public Setting(Setting setting, Context mcontext) {
 
         /***************************save**************************/
-        SharedPreferences sp=mcontext.getSharedPreferences("constant", MODE_PRIVATE);
-        SharedPreferences.Editor Ed=sp.edit();
-        Ed.putLong("nb_order",setting.nb_order );
-        Ed.putLong("tax",setting.tax);
-        Ed.putLong("ringe",setting.ringe);
-        Ed.putLong("delivery",Double.doubleToRawLongBits(setting.delivery));
+        SharedPreferences sp = mcontext.getSharedPreferences("constant", MODE_PRIVATE);
+        SharedPreferences.Editor Ed = sp.edit();
+        Ed.putLong("nb_order", setting.nb_order);
+        Ed.putLong("tax", setting.tax);
+        Ed.putLong("ringe", setting.ringe);
+        Ed.putLong("delivery", Double.doubleToRawLongBits(setting.delivery));
 
 
         Ed.commit();
-new Setting(mcontext);
+        new Setting(mcontext);
     }
 
     public Setting(Context mcontext) {
-        final SharedPreferences sp=mcontext.getSharedPreferences("constant", MODE_PRIVATE);
-        nb_order=sp.getLong("nb_order",10);
-        tax=sp.getLong("tax",0);
-        ringe=sp.getLong("ringe",0);
-        delivery= Double.longBitsToDouble(sp.getLong("delivery", Double.doubleToRawLongBits(0)));
+        final SharedPreferences sp = mcontext.getSharedPreferences("constant", MODE_PRIVATE);
+        nb_order = sp.getLong("nb_order", 10);
+        tax = sp.getLong("tax", 0);
+        ringe = sp.getLong("ringe", 0);
+        delivery = Double.longBitsToDouble(sp.getLong("delivery", Double.doubleToRawLongBits(0)));
 
     }
 
@@ -96,11 +97,11 @@ new Setting(mcontext);
         this.name = name;
     }
 
-    public Double getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(Double value) {
+    public void setValue(String value) {
         this.value = value;
     }
 }

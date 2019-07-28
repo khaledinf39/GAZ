@@ -150,7 +150,7 @@ public class ConfReservation1 extends AppCompatActivity implements View.OnClickL
         deliveryTV.setText(String.valueOf(taxe));
         total_ = price_ + delivry_ + taxe;
         total.setText(String.valueOf(total_));
-        Log.d("setting gaz ", "tax" + taxe + " delev " + delivry_ + "qty" + qty);
+        Log.e("setting gaz ", "tax" + taxe + " delev " + delivry_ + "qty" + qty);
     }
 
     int qty = 0;
