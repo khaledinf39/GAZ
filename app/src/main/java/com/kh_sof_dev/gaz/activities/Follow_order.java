@@ -423,6 +423,8 @@ public class Follow_order extends AppCompatActivity implements OnMapReadyCallbac
         protected void onPostExecute(List<List<HashMap<String, String>>> result) {
             ArrayList<LatLng> points;
             PolylineOptions lineOptions;
+            if (result == null)
+                result = new ArrayList<>();
             if (result.size() < 1) {
                 return;
             }

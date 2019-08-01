@@ -240,14 +240,14 @@ public class Home extends Fragment {
 
                     }
                     Log.d("setting", tax + "   " + delivery);
-                    Setting setting1 = new Setting(getContext());
+                    Setting setting1 = new Setting(getActivity());
                     setting1.setDelivery(delivery);
                     tax = tax * 100;
                     setting1.setTax((long) tax);
                     setting1.setRinge(ring);
                     setting1.setNb_order(nb_order);
-                    new Setting(setting1, getContext());
-                    Setting setting2 = new Setting(getContext());
+                    new Setting(setting1, getActivity());
+                    Setting setting2 = new Setting(getActivity());
                     Log.d("setting", setting2.getTax() + "   " + setting2.getDelivery());
                     // Toast.makeText(getContext(),"Setting"+delivery+" "+tax,Toast.LENGTH_LONG).show();
                 }
