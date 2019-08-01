@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
 import com.kh_sof_dev.gaz.Classes.Products.Product;
+import com.kh_sof_dev.gaz.Classes.Utils;
 import com.kh_sof_dev.gaz.R;
 
 import java.util.ArrayList;
@@ -59,9 +59,11 @@ if (Item_selected==position){
 
 }
 
-        Picasso.with(mContext).load(mItems.get(position).getImage())
-                .placeholder(R.drawable.placeholder)
-        .into(holder.img);
+        Utils.showImage(mContext, mItems.get(position).getImage(),
+                R.drawable.placeholder, holder.img);
+//        Picasso.with(mContext).load(mItems.get(position).getImage())
+//                .placeholder(R.drawable.placeholder)
+//        .into(holder.img);
         holder.date.setText(mItems.get(position).getName());
 
     }

@@ -9,9 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
 import com.kh_sof_dev.gaz.Classes.Order.GetMayOrders.OrderProduct;
-
+import com.kh_sof_dev.gaz.Classes.Utils;
 import com.kh_sof_dev.gaz.R;
 
 import java.util.ArrayList;
@@ -59,9 +58,12 @@ public static int Item_selected;
         holder.price.setText(mItems.get(position).getPrice().toString());
         holder.pro_nam.setText(mItems.get(position).getProductId().getName());
         holder.nb.setText(mItems.get(position).getQty()+"");
-        Picasso.with(mContext).load(mItems.get(position).getProductId().getImage())
-                .placeholder(R.drawable.placeholder)
-        .into(holder.pro_img);
+
+        Utils.showImage(mContext, mItems.get(position).getProductId().getImage(),
+                R.drawable.placeholder, holder.pro_img);
+//        Picasso.with(mContext).load(mItems.get(position).getProductId().getImage())
+//                .placeholder(R.drawable.placeholder)
+//        .into(holder.pro_img);
 
 
     }

@@ -11,9 +11,8 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.squareup.picasso.Picasso;
 import com.kh_sof_dev.gaz.Classes.Products.Product;
+import com.kh_sof_dev.gaz.Classes.Utils;
 import com.kh_sof_dev.gaz.R;
 
 import java.util.ArrayList;
@@ -73,10 +72,12 @@ mView=view;
 //        .into(holder.prod_img);
 
 
-        Picasso.with(mContext)
-                .load(url)
-                .placeholder(mContext.getDrawable(R.drawable.placeholder))
-                .into(holder.prod_img);
+        Utils.showImage(mContext, mItems.get(position).getImage(),
+                R.drawable.placeholder, holder.prod_img);
+//        Picasso.with(mContext)
+//                .load(url)
+//                .placeholder(mContext.getDrawable(R.drawable.placeholder))
+//                .into(holder.prod_img);
 
         holder.prod_img.setOnClickListener(new View.OnClickListener() {
             @Override

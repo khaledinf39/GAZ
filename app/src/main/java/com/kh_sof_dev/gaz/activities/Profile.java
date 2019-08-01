@@ -11,11 +11,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
 import com.kh_sof_dev.gaz.Adapters.Favorit_adapter;
 import com.kh_sof_dev.gaz.Adapters.Resrvation_adapter;
 import com.kh_sof_dev.gaz.Classes.Database.DBManager;
 import com.kh_sof_dev.gaz.Classes.User.user_info;
+import com.kh_sof_dev.gaz.Classes.Utils;
 import com.kh_sof_dev.gaz.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -57,10 +57,12 @@ public class Profile extends AppCompatActivity {
         //****************************action***************************/
         user_info user_info = new user_info(this);
         if (!user_info.getImag().isEmpty()) {
-            Picasso.with(this)
-                    .load(user_info.getImag())
-                    .placeholder(R.drawable.ic_user_img_gray)
-                    .into(user_img);
+            Utils.showImage(this, user_info.getImag(),
+                    R.drawable.ic_user_img_gray, user_img);
+//            Picasso.with(this)
+//                    .load(user_info.getImag())
+//                    .placeholder(R.drawable.ic_user_img_gray)
+//                    .into(user_img);
         }
         name.setText(user_info.getName());
         address.setText(user_info.getCity());

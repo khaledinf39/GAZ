@@ -3,7 +3,6 @@ package com.kh_sof_dev.gaz.Adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,13 +12,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-import com.kh_sof_dev.gaz.activities.MainNew;
 import com.kh_sof_dev.gaz.Classes.Products.Product;
-import com.kh_sof_dev.gaz.activities.ProductDetails;
+import com.kh_sof_dev.gaz.Classes.Utils;
 import com.kh_sof_dev.gaz.R;
+import com.kh_sof_dev.gaz.activities.ProductDetails;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -60,9 +57,12 @@ public class Top20Products extends RecyclerView.Adapter<Top20Products.ViewHolder
         holder.score.setText(mItems.get(position).getRate() + "");
         holder.type.setText("");
         holder.price.setText(mItems.get(position).getPrice().toString());
-        Picasso.with(mContext).load(mItems.get(position).getImage())
-                .placeholder(R.drawable.placeholder)
-                .into(holder.pro_img);
+
+        Utils.showImage(mContext, mItems.get(position).getImage(),
+                R.drawable.placeholder, holder.pro_img);
+//        Picasso.with(mContext).load(mItems.get(position).getImage())
+//                .placeholder(R.drawable.placeholder)
+//                .into(holder.pro_img);
 
         mView.setOnClickListener(new View.OnClickListener() {
             @Override

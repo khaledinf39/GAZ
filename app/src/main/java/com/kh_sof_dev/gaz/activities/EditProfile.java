@@ -48,11 +48,11 @@ import com.kh_sof_dev.gaz.Adapters.City_adapter;
 import com.kh_sof_dev.gaz.Classes.Http.upload_img.VolleyMultipartRequest;
 import com.kh_sof_dev.gaz.Classes.User.new_account;
 import com.kh_sof_dev.gaz.Classes.User.user_info;
+import com.kh_sof_dev.gaz.Classes.Utils;
 import com.kh_sof_dev.gaz.Classes.constant.City;
 import com.kh_sof_dev.gaz.Classes.constant.Http_get_constant;
 import com.kh_sof_dev.gaz.Classes.constant.show_cites;
 import com.kh_sof_dev.gaz.R;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -388,10 +388,11 @@ public class EditProfile extends AppCompatActivity {
         phone.setText(user_info.getPhone());
 
         if (!user_info.getImag().isEmpty()) {
-            Picasso.with(this)
-                    .load(user_info.getImag())
-                    .placeholder(R.drawable.ic_user_img_gray)
-                    .into(user_img);
+            Utils.showImage(this, user_info.getImag(), R.drawable.ic_user_img_gray, user_img);
+//            Picasso.with(this)
+//                    .load(user_info.getImag())
+//                    .placeholder(R.drawable.ic_user_img_gray)
+//                    .into(user_img);
 
         }
 

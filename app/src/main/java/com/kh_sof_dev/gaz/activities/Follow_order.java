@@ -43,9 +43,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.kh_sof_dev.gaz.Classes.Firebase.car_informatiom;
 import com.kh_sof_dev.gaz.Classes.Order.GetMayOrders.Order_getter;
+import com.kh_sof_dev.gaz.Classes.Utils;
 import com.kh_sof_dev.gaz.Classes.url.DirectionsJSONParser;
 import com.kh_sof_dev.gaz.R;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
@@ -92,10 +92,11 @@ public class Follow_order extends AppCompatActivity implements OnMapReadyCallbac
                 order_getter = (Order_getter) getIntent().getSerializableExtra(OrderDetails.REQUEST_DETAILS);
                 if (order_getter != null) {
                     if (order_getter.getDriverId() != null) {
-                        Picasso.with(this)
-                                .load(order_getter.getDriverId().getImage())
-                                .placeholder(R.drawable.ic_user_img_gray)
-                                .into(driverImg);
+                        Utils.showImage(this, order_getter.getDriverId().getImage(), R.drawable.ic_user_img_gray, driverImg);
+//                        Picasso.with(this)
+//                                .load(order_getter.getDriverId().getImage())
+//                                .placeholder(R.drawable.ic_user_img_gray)
+//                                .into(driverImg);
                         driverName.setText(order_getter.getDriverId().getName());
                         address1.setText(order_getter.getDriverId().getAddress());
                     }

@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import com.kh_sof_dev.gaz.Classes.Database.DBManager;
 import com.kh_sof_dev.gaz.Classes.Products.Product;
+import com.kh_sof_dev.gaz.Classes.Utils;
 import com.kh_sof_dev.gaz.R;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -59,8 +59,8 @@ public class ProductDetails extends AppCompatActivity {
                 name.setText(mProduct.getName());
                 price.setText(mProduct.getPrice().toString());
                 details.setText(mProduct.getDescription());
-                Picasso.with(this).load(mProduct.getImage()).into(pro_img);
-
+//                Picasso.with(this).load(mProduct.getImage()).into(pro_img);
+                Utils.showImage(this, mProduct.getImage(), pro_img);
                 //********************************action******************************/
                 like.setOnClickListener(new View.OnClickListener() {
                     @Override

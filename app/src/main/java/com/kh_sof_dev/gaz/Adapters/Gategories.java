@@ -10,8 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kh_sof_dev.gaz.Classes.Products.Categories;
-import com.squareup.picasso.Picasso;
-
+import com.kh_sof_dev.gaz.Classes.Utils;
 import com.kh_sof_dev.gaz.R;
 
 import java.util.ArrayList;
@@ -58,9 +57,12 @@ mView=view;
         Log.d(TAG, "onBindViewHolder: called.");
 
         holder.categories_tv.setText(mItems.get(position).getName());
-        Picasso.with(mContext).load(mItems.get(position).getImage())
-                .placeholder(R.drawable.placeholder)
-        .into(holder.cat_img);
+
+        Utils.showImage(mContext, mItems.get(position).getImage(),
+                R.drawable.placeholder, holder.cat_img);
+//        Picasso.with(mContext).load(mItems.get(position).getImage())
+//                .placeholder(R.drawable.placeholder)
+//        .into(holder.cat_img);
         mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -20,10 +20,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.kh_sof_dev.gaz.Classes.User.user_info;
+import com.kh_sof_dev.gaz.Classes.Utils;
 import com.kh_sof_dev.gaz.Fragments.Home;
 import com.kh_sof_dev.gaz.Fragments.Notifications;
 import com.kh_sof_dev.gaz.R;
-import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -108,10 +108,12 @@ public class MainNew extends AppCompatActivity implements NavigationView.OnNavig
         username.setText(user_info.getName());
         wallet.setText("لديك " + user_info.getPoint() + " نقطة");
         if (!user_info.getImag().isEmpty()) {
-            Picasso.with(getApplicationContext())
-                    .load(user_info.getImag())
-                    .placeholder(R.drawable.ic_user_img_gray)
-                    .into(user_img);
+            Utils.showImage(getApplicationContext(), user_info.getImag(),
+                    R.drawable.ic_user_img_gray, user_img);
+//            Picasso.with(getApplicationContext())
+//                    .load(user_info.getImag())
+//                    .placeholder(R.drawable.ic_user_img_gray)
+//                    .into(user_img);
         }
         user_img.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,10 +141,12 @@ public class MainNew extends AppCompatActivity implements NavigationView.OnNavig
         username.setText(user_info.getName());
         wallet.setText("لديك " + user_info.getPoint() + " نقطة");
         if (!user_info.getImag().isEmpty()) {
-            Picasso.with(getApplicationContext())
-                    .load(user_info.getImag())
-                    .placeholder(R.drawable.ic_user_img_gray)
-                    .into(user_img);
+            Utils.showImage(getApplicationContext(), user_info.getImag(),
+                    R.drawable.ic_user_img_gray, user_img);
+//            Picasso.with(getApplicationContext())
+//                    .load(user_info.getImag())
+//                    .placeholder(R.drawable.ic_user_img_gray)
+//                    .into(user_img);
         }
     }
 

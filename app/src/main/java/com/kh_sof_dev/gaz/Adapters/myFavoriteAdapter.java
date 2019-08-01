@@ -11,12 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-import com.kh_sof_dev.gaz.activities.MainNew;
 import com.kh_sof_dev.gaz.Classes.Database.DBManager;
 import com.kh_sof_dev.gaz.Classes.Products.Product;
-import com.kh_sof_dev.gaz.activities.ProductDetails;
+import com.kh_sof_dev.gaz.Classes.Utils;
 import com.kh_sof_dev.gaz.R;
+import com.kh_sof_dev.gaz.activities.ProductDetails;
 
 import java.util.List;
 
@@ -72,8 +71,10 @@ public class myFavoriteAdapter extends RecyclerView.Adapter<myFavoriteAdapter.Vi
 //        }
         holder.price.setText(String.valueOf(mItems.get(position).getPrice()));
         holder.name.setText(mItems.get(position).getName());
-        Picasso.with(mContext).load(mItems.get(position).getImage())
-                .into(holder.img);
+
+        Utils.showImage(mContext, mItems.get(position).getImage(), holder.img);
+//        Picasso.with(mContext).load(mItems.get(position).getImage())
+//                .into(holder.img);
         holder.delet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

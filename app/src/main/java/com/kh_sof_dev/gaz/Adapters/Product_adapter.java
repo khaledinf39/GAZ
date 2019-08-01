@@ -11,12 +11,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.kh_sof_dev.gaz.activities.ProductDetails;
-import com.squareup.picasso.Picasso;
-import com.kh_sof_dev.gaz.activities.MainNew;
+import com.kh_sof_dev.gaz.Classes.Utils;
 import com.kh_sof_dev.gaz.R;
+import com.kh_sof_dev.gaz.activities.ProductDetails;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -54,9 +52,12 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.ViewHo
         Log.d(TAG, "onBindViewHolder: called.");
 
         holder.prod_name.setText(mItems.get(position).getName());
-        Picasso.with(mContext).load(mItems.get(position).getImage())
-                .placeholder(R.drawable.placeholder)
-                .into(holder.prod_img);
+
+        Utils.showImage(mContext, mItems.get(position).getImage(),
+                R.drawable.placeholder, holder.prod_img);
+//        Picasso.with(mContext).load(mItems.get(position).getImage())
+//                .placeholder(R.drawable.placeholder)
+//                .into(holder.prod_img);
         holder.nb_start.setText(mItems.get(position).getRate() + "");
         holder.type.setText("");
         holder.price.setText(mItems.get(position).getPrice().toString());
