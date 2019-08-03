@@ -4,6 +4,7 @@ package com.kh_sof_dev.gaz.Fragments;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -20,14 +21,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.daimajia.slider.library.SliderLayout;
-import com.kh_sof_dev.gaz.activities.AllProducts;
-import com.kh_sof_dev.gaz.activities.Car;
-import com.kh_sof_dev.gaz.activities.Categories;
-import com.kh_sof_dev.gaz.activities.MainNew;
 import com.kh_sof_dev.gaz.Adapters.Gategories;
 import com.kh_sof_dev.gaz.Adapters.Top20Products;
-import com.kh_sof_dev.gaz.Classes.Database.DBManager;
+import com.kh_sof_dev.gaz.Classes.Database.OrderDetails;
 import com.kh_sof_dev.gaz.Classes.Order.Http_orders;
 import com.kh_sof_dev.gaz.Classes.Order.point.show_points;
 import com.kh_sof_dev.gaz.Classes.Products.Http_products;
@@ -39,6 +35,12 @@ import com.kh_sof_dev.gaz.Classes.constant.Setting;
 import com.kh_sof_dev.gaz.Classes.constant.show_setting;
 import com.kh_sof_dev.gaz.Fragments.Refill_frg.Tab_home_gaz;
 import com.kh_sof_dev.gaz.R;
+import com.kh_sof_dev.gaz.activities.AllProducts;
+import com.kh_sof_dev.gaz.activities.Car;
+import com.kh_sof_dev.gaz.activities.Categories;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class Home extends Fragment {
 
@@ -51,27 +53,25 @@ public class Home extends Fragment {
     Gategories categ_adapter;
 
     ImageView go_basket;
-    private SliderLayout mDemoSlider;
-    private TextView count, Allcatig;
+    private TextView count;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.layout_f_home, container, false);
         viewPager = view.findViewById(R.id.viewpager);
         viewPager.setAdapter(new MyPagerAdapter(getChildFragmentManager()));
 
 
-        speacialRV = (RecyclerView) view.findViewById(R.id.spacialRV);
-        categoriesRV = (RecyclerView) view.findViewById(R.id.categoriesRV);
-        productRV = (RecyclerView) view.findViewById(R.id.productRV);
+        speacialRV = view.findViewById(R.id.spacialRV);
+        categoriesRV = view.findViewById(R.id.categoriesRV);
+        productRV = view.findViewById(R.id.productRV);
 
         final ProgressBar progressBar = view.findViewById(R.id.progress);
-        /********************************count order**************************/
-        count = (TextView) view.findViewById(R.id.basketCount_tv);
-        Allcatig = (TextView) view.findViewById(R.id.seeAllPro_tv);
-        Allcatig.setOnClickListener(new View.OnClickListener() {
+        //********************************count order**************************/
+        count = view.findViewById(R.id.basketCount_tv);
+        TextView allcatig = view.findViewById(R.id.seeAllPro_tv);
+        allcatig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), Categories.class));
@@ -79,11 +79,12 @@ public class Home extends Fragment {
             }
         });
         try {
-            DBManager db = new DBManager(getActivity());
-            db.open();
-            long count_order = db.get_order_count();
-            db.close();
+//            DBManager db = new DBManager(getActivity());
+//            db.open();
+//            long count_order = db.get_order_count();
+//            db.close();
 
+            long count_order = getOrderCount();
             if (count_order != 0) {
                 count.setText(String.valueOf(count_order));
                 count.setVisibility(View.VISIBLE);
@@ -94,7 +95,7 @@ public class Home extends Fragment {
             e.printStackTrace();
         }
 
-        /**************************************************************/
+        //**************************************************************/
         go_basket = view.findViewById(R.id.basket);
         go_basket.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,7 +155,7 @@ public class Home extends Fragment {
                     categoriesRV.setAdapter(categ_adapter);
                     // Toast.makeText(getContext(),Categories.getMessage(),Toast.LENGTH_SHORT).show();
                 } catch (Exception ef) {
-
+                    ef.printStackTrace();
                 }
 
             }
@@ -191,10 +192,11 @@ public class Home extends Fragment {
             if (viewPager != null)
                 viewPager.setAdapter(new MyPagerAdapter(getChildFragmentManager()));
 
-            DBManager db = new DBManager(getContext());
-            db.open();
-            long count_order = db.get_order_count();
-            db.close();
+            long count_order = getOrderCount();
+//            DBManager db = new DBManager(getContext());
+//            db.open();
+//            long count_order = db.get_order_count();
+//            db.close();
             if (count_order != 0) {
                 count.setText(String.valueOf(count_order));
                 count.setVisibility(View.VISIBLE);
@@ -204,6 +206,15 @@ public class Home extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    long getOrderCount() {
+        long count_order = 0;
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<OrderDetails> orderDetailsList = realm.where(OrderDetails.class).findAll();
+        if (!orderDetailsList.isEmpty())
+            count_order = orderDetailsList.size();
+        return count_order;
     }
 
     public void Setting() {
@@ -267,13 +278,13 @@ public class Home extends Fragment {
         });
 
 
-        /***********************************************/
+        //***********************************************/
         Http_orders http_orders = new Http_orders();
         http_orders.GetPoints(getContext(), new Http_orders.OnPoint_lisennter() {
             @Override
             public void onSuccess(show_points show_points) {
                 if (show_points.isStatus()) {
-                    new user_info(getContext(), show_points.getItems().get(0));
+                    new user_info(getActivity(), show_points.getItems().get(0));
                 }
             }
 
@@ -296,7 +307,7 @@ public class Home extends Fragment {
 
     public class MyPagerAdapter extends android.support.v4.app.FragmentStatePagerAdapter {
 
-        public MyPagerAdapter(FragmentManager fragmentManager) {
+        MyPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
         }
 

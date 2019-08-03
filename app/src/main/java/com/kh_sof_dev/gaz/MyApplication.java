@@ -6,6 +6,7 @@ import com.crashlytics.android.Crashlytics;
 import com.facebook.FacebookSdk;
 
 import io.fabric.sdk.android.Fabric;
+import io.realm.Realm;
 
 public class MyApplication  extends Application {
 
@@ -14,5 +15,6 @@ public class MyApplication  extends Application {
         super.onCreate();
         Fabric.with(this, new Crashlytics());
         FacebookSdk.sdkInitialize(this);
+        Realm.init(this);
     }
 }

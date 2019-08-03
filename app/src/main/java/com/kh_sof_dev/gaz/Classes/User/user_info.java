@@ -9,79 +9,82 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class user_info {
     private String supplier_id;
-    private String id,phone,token,name,email,image,gender,city,pw,address;
-private String lat;
+    private String id, phone, token, name, email, image, gender, city, pw, address;
+    private String lat;
     private String lng;
-private long wallet;
-private  int point;
+    private long wallet;
+    private int point;
+
     public user_info(Context mcontext) {
-        final SharedPreferences sp=mcontext.getSharedPreferences("Login", MODE_PRIVATE);
-        id=sp.getString("id","");
-        token=sp.getString("token","");
-        phone=sp.getString("phone","+966 000-0000-00");
-        name=sp.getString("name","إسم العميل");
-        email=sp.getString("email","mail@email.com");
-        image=sp.getString("image","");
-        gender=sp.getString("gender","");
-        city=sp.getString("city"," ");
-        address=sp.getString("address"," ");
-        lat=sp.getString("lat","");
-        lng=sp.getString("lng","");
-        pw=sp.getString("pw","");
-        wallet=sp.getLong("wallet", (long) 0.0);
-        point=sp.getInt("point", 0);
-        supplier_id=sp.getString("supplier_id","");
+        final SharedPreferences sp = mcontext.getSharedPreferences("Login", MODE_PRIVATE);
+        id = sp.getString("id", "");
+        token = sp.getString("token", "");
+        phone = sp.getString("phone", "+966 000-0000-00");
+        name = sp.getString("name", "إسم العميل");
+        email = sp.getString("email", "mail@email.com");
+        image = sp.getString("image", "");
+        gender = sp.getString("gender", "");
+        city = sp.getString("city", " ");
+        address = sp.getString("address", " ");
+        lat = sp.getString("lat", "");
+        lng = sp.getString("lng", "");
+        pw = sp.getString("pw", "");
+        wallet = sp.getLong("wallet", (long) 0.0);
+        point = sp.getInt("point", 0);
+        supplier_id = sp.getString("supplier_id", "");
     }
 
     public user_info(String supplier_id, Context context) {
-        SharedPreferences sp=context.getSharedPreferences("Login", MODE_PRIVATE);
-        SharedPreferences.Editor Ed=sp.edit();
+        SharedPreferences sp = context.getSharedPreferences("Login", MODE_PRIVATE);
+        SharedPreferences.Editor Ed = sp.edit();
 
         Ed.putString("supplier_id", String.valueOf(supplier_id));
 
-        Ed.commit();
+        Ed.apply();
 
     }
-    public user_info(user user_,String pw, Context context) {
-        SharedPreferences sp=context.getSharedPreferences("Login", MODE_PRIVATE);
-        SharedPreferences.Editor Ed=sp.edit();
-        Ed.putString("phone",user_.getPhoneNumber() );
-        Ed.putString("id",user_.getId());
-        Ed.putString("token",user_.getToken());
-        Ed.putString("name",user_.getFullName());
-        Ed.putString("image",user_.getImage());
-        if (!pw.isEmpty()){
-            Ed.putString("pw",pw);
+
+    public user_info(user user_, String pw, Context context) {
+        SharedPreferences sp = context.getSharedPreferences("Login", MODE_PRIVATE);
+        SharedPreferences.Editor Ed = sp.edit();
+        Ed.putString("phone", user_.getPhoneNumber());
+        Ed.putString("id", user_.getId());
+        Ed.putString("token", user_.getToken());
+        Ed.putString("name", user_.getFullName());
+        Ed.putString("image", user_.getImage());
+        if (!pw.isEmpty()) {
+            Ed.putString("pw", pw);
         }
-        Ed.putString("email",user_.getEmail());
-        Ed.putString("city",user_.getCity());
-        Ed.putString("address",user_.getAddress());
-        Ed.putLong("wallet",user_.getWallet());
+        Ed.putString("email", user_.getEmail());
+        Ed.putString("city", user_.getCity());
+        Ed.putString("address", user_.getAddress());
+        Ed.putLong("wallet", user_.getWallet());
         Ed.putString("lat", String.valueOf(user_.getLat()));
         Ed.putString("lng", String.valueOf(user_.getLng()));
 
-        Ed.commit();
+        Ed.apply();
         new user_info(context);
     }
-    public user_info(Context context,Boolean sate) {
-        SharedPreferences sp=context.getSharedPreferences("Login", MODE_PRIVATE);
-        SharedPreferences.Editor Ed=sp.edit();
-        Ed.putString("phone",null );
-        Ed.putString("id",null);
-        Ed.putString("token",null);
-        Ed.putString("name",null);
-        Ed.putString("image",null);
-        Ed.putString("email",null);
-        Ed.putString("city",null);
+
+    public user_info(Context context, Boolean sate) {
+        SharedPreferences sp = context.getSharedPreferences("Login", MODE_PRIVATE);
+        SharedPreferences.Editor Ed = sp.edit();
+        Ed.putString("phone", null);
+        Ed.putString("id", null);
+        Ed.putString("token", null);
+        Ed.putString("name", null);
+        Ed.putString("image", null);
+        Ed.putString("email", null);
+        Ed.putString("city", null);
         Ed.putLong("wallet", (long) 0.0);
-        Ed.commit();
+        Ed.apply();
 
     }
 
     public String getSupplier_id(Context mcontext) {
-        final SharedPreferences sp=mcontext.getSharedPreferences("Login", MODE_PRIVATE);
+        final SharedPreferences sp = mcontext.getSharedPreferences("Login", MODE_PRIVATE);
 
-        supplier_id=sp.getString("supplier_id","");
+        supplier_id = sp.getString("supplier_id", "");
         return supplier_id;
     }
 
@@ -94,11 +97,11 @@ private  int point;
     }
 
     public user_info(Context context, points points) {
-        SharedPreferences sp=context.getSharedPreferences("Login", MODE_PRIVATE);
-        SharedPreferences.Editor Ed=sp.edit();
-        Ed.putInt("point",points.getPoints());
-        Ed.putLong("wallet",points.getMoney());
-        Ed.commit();
+        SharedPreferences sp = context.getSharedPreferences("Login", MODE_PRIVATE);
+        SharedPreferences.Editor Ed = sp.edit();
+        Ed.putInt("point", points.getPoints());
+        Ed.putLong("wallet", points.getMoney());
+        Ed.apply();
     }
 
     public String getAddress() {
@@ -199,17 +202,17 @@ private  int point;
     }
 
     public user_info(user_info user_, Context mcontext) {
-        SharedPreferences sp=mcontext.getSharedPreferences("Login", MODE_PRIVATE);
-        SharedPreferences.Editor Ed=sp.edit();
-        Ed.putString("phone",user_.getPhone() );
-        Ed.putString("id",user_.getId());
-        Ed.putString("token",user_.getToken());
-        Ed.putString("name",user_.getName());
-        Ed.putString("image",user_.getImag());
-        Ed.putString("email",user_.getEmail());
-        Ed.putString("gender",user_.getGender());
-        Ed.putLong("wallet",user_.getWallet());
-        Ed.commit();
+        SharedPreferences sp = mcontext.getSharedPreferences("Login", MODE_PRIVATE);
+        SharedPreferences.Editor Ed = sp.edit();
+        Ed.putString("phone", user_.getPhone());
+        Ed.putString("id", user_.getId());
+        Ed.putString("token", user_.getToken());
+        Ed.putString("name", user_.getName());
+        Ed.putString("image", user_.getImag());
+        Ed.putString("email", user_.getEmail());
+        Ed.putString("gender", user_.getGender());
+        Ed.putLong("wallet", user_.getWallet());
+        Ed.apply();
     }
 
     public void setPhone(String phone) {

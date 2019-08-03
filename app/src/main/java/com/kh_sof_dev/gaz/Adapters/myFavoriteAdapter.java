@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.kh_sof_dev.gaz.Classes.Database.Best;
 import com.kh_sof_dev.gaz.Classes.Database.DBManager;
 import com.kh_sof_dev.gaz.Classes.Products.Product;
 import com.kh_sof_dev.gaz.Classes.Utils;
@@ -18,6 +19,8 @@ import com.kh_sof_dev.gaz.R;
 import com.kh_sof_dev.gaz.activities.ProductDetails;
 
 import java.util.List;
+
+import io.realm.Realm;
 
 
 /**
@@ -78,10 +81,17 @@ public class myFavoriteAdapter extends RecyclerView.Adapter<myFavoriteAdapter.Vi
         holder.delet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DBManager dbManager = new DBManager(mContext);
-                dbManager.open();
-                dbManager.deleteBestPro(mItems.get(position).getID_());
-                dbManager.close();
+                Realm realm = Realm.getDefaultInstance();
+                Best best = realm.where(Best.class).equalTo("id", mItems.get(position).getID_()).findFirst();
+                realm.beginTransaction();
+                assert best != null;
+                best.deleteFromRealm();
+                realm.commitTransaction();
+
+//                DBManager dbManager = new DBManager(mContext);
+//                dbManager.open();
+//                dbManager.deleteBestPro(mItems.get(position).getID_());
+//                dbManager.close();
 
                 mItems.remove(position);
                 notifyDataSetChanged();

@@ -13,12 +13,20 @@ import android.widget.TextView;
 
 import com.kh_sof_dev.gaz.Adapters.Favorit_adapter;
 import com.kh_sof_dev.gaz.Adapters.Resrvation_adapter;
+import com.kh_sof_dev.gaz.Classes.Database.Best;
 import com.kh_sof_dev.gaz.Classes.Database.DBManager;
+import com.kh_sof_dev.gaz.Classes.Database.OrderDetails;
+import com.kh_sof_dev.gaz.Classes.Products.Product;
 import com.kh_sof_dev.gaz.Classes.User.user_info;
 import com.kh_sof_dev.gaz.Classes.Utils;
 import com.kh_sof_dev.gaz.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class Profile extends AppCompatActivity {
 
@@ -49,11 +57,40 @@ public class Profile extends AppCompatActivity {
         Rv_favor.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
         Rv_reser.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
 
-        DBManager dbManager = new DBManager(this);
-        dbManager.open();
-        Rv_reser.setAdapter(new Resrvation_adapter(this, dbManager.fetch_order()));
-        Rv_favor.setAdapter(new Favorit_adapter(this, dbManager.fetch_bestProd()));
-        dbManager.close();
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<OrderDetails> orderDetailsList = realm.where(OrderDetails.class).findAll();
+        List<Product> products = new ArrayList<>();
+        for (OrderDetails orderDetails : orderDetailsList) {
+            Product p = new Product();
+            p.setID_((int) orderDetails.getId());
+            p.setId(orderDetails.getProductId());
+            p.setName(orderDetails.getProductName());
+            p.setQty(orderDetails.getQuantity());
+            p.setPrice(orderDetails.getPrice());
+            p.setImage(orderDetails.getImage());
+            products.add(p);
+        }
+        Rv_reser.setAdapter(new Resrvation_adapter(this, products));
+
+        RealmResults<Best> orderDetailsListBest = realm.where(Best.class).findAll();
+        List<Product> productsFav = new ArrayList<>();
+        for (Best best : orderDetailsListBest) {
+            Product p = new Product();
+            p.setID_((int) best.getId());
+            p.setId(best.getProductId());
+            p.setName(best.getProductName());
+            p.setQty(best.getQuantity());
+            p.setPrice(best.getPrice());
+            p.setImage(best.getImage());
+            productsFav.add(p);
+        }
+        Rv_favor.setAdapter(new Favorit_adapter(this, productsFav));
+
+//        DBManager dbManager = new DBManager(this);
+//        dbManager.open();
+//        Rv_reser.setAdapter(new Resrvation_adapter(this, dbManager.fetch_order()));
+//        Rv_favor.setAdapter(new Favorit_adapter(this, dbManager.fetch_bestProd()));
+//        dbManager.close();
         //****************************action***************************/
         user_info user_info = new user_info(this);
         if (!user_info.getImag().isEmpty()) {

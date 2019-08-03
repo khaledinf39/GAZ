@@ -1,6 +1,7 @@
 package com.kh_sof_dev.gaz.Adapters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,12 +11,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kh_sof_dev.gaz.Classes.Database.DBManager;
+import com.kh_sof_dev.gaz.Classes.Database.OrderDetails;
 import com.kh_sof_dev.gaz.Classes.Products.Product;
 import com.kh_sof_dev.gaz.Classes.Utils;
 import com.kh_sof_dev.gaz.R;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import io.realm.Realm;
 
 
 /**
@@ -27,25 +30,31 @@ public class Basket_adapter extends RecyclerView.Adapter<Basket_adapter.ViewHold
     private static final String TAG = "RecyclerViewAdapter";
 
     //vars
-    private List<Product> mItems = new ArrayList<>();
-public static int Item_selected;
+    private List<Product> mItems;
+    public static int Item_selected;
     private Context mContext;
-    private  int qty;
-    public interface orderPrice_listenner{
-        void onSuccess(Double addPrice,int qty);
+    private int qty;
+
+    public interface orderPrice_listenner {
+        void onSuccess(Double addPrice, int qty);
+
         void onStart();
+
         void onFailure(String msg);
     }
+
     orderPrice_listenner listenner;
+
     public Basket_adapter(Context context, List<Product> names, orderPrice_listenner listenner) {
         mItems = names;
         mContext = context;
-        Item_selected=0;
-        this.listenner=listenner;
+        Item_selected = 0;
+        this.listenner = listenner;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) { //parent = theme type
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) { //parent = theme type
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_car_main, parent, false);
 
 
@@ -53,15 +62,15 @@ public static int Item_selected;
     }
 
 
-
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called.");
 
-final DBManager dbManager=new DBManager(mContext);
- qty=mItems.get(position).getQty();
-holder.nb.setText(qty+"");
-holder.price.setText(mItems.get(position).getPrice().toString());
+//        final DBManager dbManager = new DBManager(mContext);
+        final Realm realm = Realm.getDefaultInstance();
+        qty = mItems.get(position).getQty();
+        holder.nb.setText(qty + "");
+        holder.price.setText(mItems.get(position).getPrice().toString());
         holder.pro_nam.setText(mItems.get(position).getName());
 
         Utils.showImage(mContext, mItems.get(position).getImage(),
@@ -72,38 +81,69 @@ holder.price.setText(mItems.get(position).getPrice().toString());
         holder.add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            qty++;
+                qty++;
                 mItems.get(position).setQty(qty);
-                dbManager.open();
-                dbManager.update_Item(mItems.get(position).getID_(),qty);
-                dbManager.close();
-                listenner.onSuccess(mItems.get(position).getPrice(),qty);
+
+                realm.beginTransaction();
+                OrderDetails orderDetails = realm.where(OrderDetails.class)
+                        .equalTo("id", mItems.get(position).getID_())
+                        .findFirst();
+                if (orderDetails != null) {
+                    orderDetails.setQuantity(qty);
+                    realm.copyToRealmOrUpdate(orderDetails);
+                }
+                realm.commitTransaction();
+
+//                dbManager.open();
+//                dbManager.update_Item(mItems.get(position).getID_(), qty);
+//                dbManager.close();
+                listenner.onSuccess(mItems.get(position).getPrice(), qty);
                 notifyDataSetChanged();
             }
         });
         holder.minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (qty==1){
+                if (qty == 1) {
                     return;
                 }
                 qty--;
                 mItems.get(position).setQty(qty);
-                dbManager.open();
-                dbManager.update_Item(mItems.get(position).getID_(),qty);
-                dbManager.close();
-                listenner.onSuccess(-mItems.get(position).getPrice(),qty);
+
+                realm.beginTransaction();
+                OrderDetails orderDetails = realm.where(OrderDetails.class)
+                        .equalTo("id", mItems.get(position).getID_())
+                        .findFirst();
+                if (orderDetails != null) {
+                    orderDetails.setQuantity(qty);
+                    realm.copyToRealmOrUpdate(orderDetails);
+                }
+                realm.commitTransaction();
+
+//                dbManager.open();
+//                dbManager.update_Item(mItems.get(position).getID_(), qty);
+//                dbManager.close();
+                listenner.onSuccess(-mItems.get(position).getPrice(), qty);
                 notifyDataSetChanged();
             }
         });
         holder.delet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               dbManager.open();
-               dbManager.delete(mItems.get(position).getID_());
-               dbManager.close();
+                realm.beginTransaction();
+                OrderDetails orderDetails = realm.where(OrderDetails.class)
+                        .equalTo("id", mItems.get(position).getID_())
+                        .findFirst();
+                if (orderDetails != null) {
+                    orderDetails.deleteFromRealm();
+                }
+                realm.commitTransaction();
 
-                listenner.onSuccess(-mItems.get(position).getPrice()*qty,0);
+//                dbManager.open();
+//                dbManager.delete(mItems.get(position).getID_());
+//                dbManager.close();
+
+                listenner.onSuccess(-mItems.get(position).getPrice() * qty, 0);
                 mItems.remove(position);
                 notifyDataSetChanged();
             }
@@ -115,19 +155,20 @@ holder.price.setText(mItems.get(position).getPrice().toString());
         return mItems.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView pro_nam,price,nb;
-        ImageView pro_img,add,minus,delet;
-      public ViewHolder(View itemView) {
+        TextView pro_nam, price, nb;
+        ImageView pro_img, add, minus, delet;
+
+        public ViewHolder(View itemView) {
             super(itemView);
-            pro_img=itemView.findViewById(R.id.productImg);
-           pro_nam = itemView.findViewById(R.id.productName);
-          add=itemView.findViewById(R.id.add_btn);
-          minus = itemView.findViewById(R.id.minus_btn);
-          delet=itemView.findViewById(R.id.delete_btn);
-          price = itemView.findViewById(R.id.price_tv);
-          nb = itemView.findViewById(R.id.NoOfProducts_tv);
+            pro_img = itemView.findViewById(R.id.productImg);
+            pro_nam = itemView.findViewById(R.id.productName);
+            add = itemView.findViewById(R.id.add_btn);
+            minus = itemView.findViewById(R.id.minus_btn);
+            delet = itemView.findViewById(R.id.delete_btn);
+            price = itemView.findViewById(R.id.price_tv);
+            nb = itemView.findViewById(R.id.NoOfProducts_tv);
 
 
         }

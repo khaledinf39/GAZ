@@ -15,12 +15,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kh_sof_dev.gaz.Adapters.Basket_adapter;
-import com.kh_sof_dev.gaz.Classes.Database.DBManager;
+import com.kh_sof_dev.gaz.Classes.Database.OrderDetails;
 import com.kh_sof_dev.gaz.Classes.Products.Product;
 import com.kh_sof_dev.gaz.Classes.constant.Setting;
 import com.kh_sof_dev.gaz.R;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class Car extends AppCompatActivity {
 
@@ -33,10 +37,15 @@ public class Car extends AppCompatActivity {
     private TextView tax;
     private RecyclerView basketRV;
 
+    Realm realm;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_f_car);
+
+        realm = Realm.getDefaultInstance();
+
 //        TextView notes = findViewById(R.id.notes_tv);
         count = findViewById(R.id.order_count_tv);
         Button start = findViewById(R.id.start_btn);
@@ -90,12 +99,14 @@ public class Car extends AppCompatActivity {
 
 
 //*****************************count order******************************************/
-        DBManager db = new DBManager(this);
-        db.open();
-        Long count_order = db.get_order_count();
-        db.close();
-        count.setText(count_order.toString());
-        if (count_order != 0) {
+        RealmResults<OrderDetails> orderDetails = realm.where(OrderDetails.class).findAll();
+        count.setText(String.valueOf(orderDetails.size()));
+//        DBManager db = new DBManager(this);
+//        db.open();
+//        Long count_order = db.get_order_count();
+//        db.close();
+//        count.setText(count_order.toString());
+        if (!orderDetails.isEmpty()) {
             findViewById(R.id.empty_car).setVisibility(View.GONE);
             findViewById(R.id.car).setVisibility(View.VISIBLE);
         } else {
@@ -108,17 +119,31 @@ public class Car extends AppCompatActivity {
     int qty = 0;
 
     private void fetch_order() {
+        final RealmResults<OrderDetails> orderDetailsList = realm.where(OrderDetails.class).findAll();
+        List<Product> products = new ArrayList<>();
+        for (OrderDetails orderDetails : orderDetailsList) {
+            Product p = new Product();
+            p.setID_((int) orderDetails.getId());
+            p.setId(orderDetails.getProductId());
+            p.setName(orderDetails.getProductName());
+            p.setQty(orderDetails.getQuantity());
+            p.setPrice(orderDetails.getPrice());
+            p.setImage(orderDetails.getImage());
+            products.add(p);
 
-
-        final DBManager db = new DBManager(this);
-        db.open();
-        List<Product> products = db.fetch_order();
-
-        for (Product p : products
-        ) {
             price_ += p.getPrice() * p.getQty();
             qty = qty + p.getQty();
         }
+
+//        final DBManager db = new DBManager(this);
+//        db.open();
+//        List<Product> products = db.fetch_order();
+//
+//        for (Product p : products
+//        ) {
+//            price_ += p.getPrice() * p.getQty();
+//            qty = qty + p.getQty();
+//        }
 
         calculate(price_);
         basketRV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -129,9 +154,10 @@ public class Car extends AppCompatActivity {
                 price_ = price_ + priceadd;
                 qty = qty1;
                 calculate(price_);
-                db.open();
-                long nb = db.get_order_count();
-                db.close();
+//                db.open();
+//                long nb = db.get_order_count();
+//                db.close();
+                long nb = orderDetailsList.size();
                 if (nb == 0) {
                     recreate();
                 } else {

@@ -10,6 +10,7 @@ buildscript {
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'realm-android'
 
 android {
 //    signingConfigs {
@@ -25,8 +26,8 @@ android {
         applicationId "com.kh_sof_dev.gaz"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 19          //22-07-2019
-        versionName "1.0.18"                            //aliase gaz and pw 123456
+        versionCode 20          //22-07-2019
+        versionName "1.0.19"                            //aliase gaz and pw 123456
                                                        // google account pw:Na-g59372 ,email: alnaqellalafthalf@gmail.com
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }

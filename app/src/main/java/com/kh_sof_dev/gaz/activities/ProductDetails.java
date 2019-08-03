@@ -10,12 +10,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.kh_sof_dev.gaz.Classes.Database.Best;
 import com.kh_sof_dev.gaz.Classes.Database.DBManager;
+import com.kh_sof_dev.gaz.Classes.Database.OrderDetails;
 import com.kh_sof_dev.gaz.Classes.Products.Product;
 import com.kh_sof_dev.gaz.Classes.Utils;
 import com.kh_sof_dev.gaz.R;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class ProductDetails extends AppCompatActivity {
     public static final String product = "product";
@@ -42,12 +48,13 @@ public class ProductDetails extends AppCompatActivity {
         like = findViewById(R.id.like_btn);
         Button buy = findViewById(R.id.buy_btn);
         //***************************************intialise******************/
-        final DBManager manager = new DBManager(this, new DBManager.OnAddOrder_listenner() {
-            @Override
-            public void add_basket(Boolean state) {
-
-            }
-        });
+        final Realm realm = Realm.getDefaultInstance();
+//        final DBManager manager = new DBManager(this, new DBManager.OnAddOrder_listenner() {
+//            @Override
+//            public void add_basket(Boolean state) {
+//
+//            }
+//        });
         basketCount();
         like_function();
 
@@ -67,15 +74,29 @@ public class ProductDetails extends AppCompatActivity {
                     public void onClick(View v) {
 
                         if (like_function()) {
-                            manager.open();
-                            manager.deleteBestPro(mProduct.getID_());
-                            manager.close();
+                            Best best = realm.where(Best.class).equalTo("id", mProduct.getID_()).findFirst();
+                            realm.beginTransaction();
+                            best.deleteFromRealm();
+                            realm.commitTransaction();
+//                            manager.open();
+//                            manager.deleteBestPro(mProduct.getID_());
+//                            manager.close();
                             like_function();
                             like.setImageResource(R.drawable.ic_like);
                         } else {
-                            manager.open();
-                            manager.insert_bestProd(mProduct);
-                            manager.close();
+                            Best best = new Best();
+                            best.setId(mProduct.getID_());
+                            best.setProductId(mProduct.getId());
+                            best.setProductName(mProduct.getName());
+                            best.setPrice(mProduct.getPrice());
+                            best.setQuantity(mProduct.getQty());
+                            best.setImage(mProduct.getImage());
+                            realm.beginTransaction();
+                            realm.copyToRealmOrUpdate(best);
+                            realm.commitTransaction();
+//                            manager.open();
+//                            manager.insert_bestProd(mProduct);
+//                            manager.close();
 
                             like_function();
                             like.setImageResource(R.drawable.ic_like1);
@@ -85,10 +106,19 @@ public class ProductDetails extends AppCompatActivity {
                 buy.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-                        manager.open();
-                        manager.insert_order(mProduct);
-                        manager.close();
+                        Best best = new Best();
+                        best.setId(mProduct.getID_());
+                        best.setProductId(mProduct.getId());
+                        best.setProductName(mProduct.getName());
+                        best.setPrice(mProduct.getPrice());
+                        best.setQuantity(mProduct.getQty());
+                        best.setImage(mProduct.getImage());
+                        realm.beginTransaction();
+                        realm.copyToRealmOrUpdate(best);
+                        realm.commitTransaction();
+//                        manager.open();
+//                        manager.insert_order(mProduct);
+//                        manager.close();
                         basketCount();
                         startActivity(new Intent(ProductDetails.this, Car.class));
 //                MainNew.goto_(new Car(), getContext());
@@ -113,10 +143,13 @@ public class ProductDetails extends AppCompatActivity {
     }
 
     private void basketCount() {
-        DBManager manager = new DBManager(this);
-        manager.open();
-        long count = manager.get_order_count();
-        manager.close();
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<com.kh_sof_dev.gaz.Classes.Database.OrderDetails> orderDetailsList = realm.where(OrderDetails.class).findAll();
+        long count = orderDetailsList.size();
+//        DBManager manager = new DBManager(this);
+//        manager.open();
+//        long count = manager.get_order_count();
+//        manager.close();
         if (count != 0) {
             nb_basket.setVisibility(View.VISIBLE);
             nb_basket.setText(count + "");
@@ -127,19 +160,30 @@ public class ProductDetails extends AppCompatActivity {
     }
 
     private Boolean like_function() {
-        DBManager dbManager = new DBManager(this);
-        dbManager.open();
-        List<Product> products = dbManager.fetch_bestProd();
-        dbManager.close();
-        for (Product p : products
-        ) {
-            if (p.getId().equals(mProduct.getId())) {
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<OrderDetails> orderDetailsList = realm.where(OrderDetails.class).findAll();
+        List<Product> products = new ArrayList<>();
+        for (OrderDetails orderDetails : orderDetailsList) {
+            if (orderDetails.getProductId().equals(mProduct.getId())) {
                 like.setImageResource(R.drawable.ic_like1);
-                mProduct.setID_(p.getID_());
+                mProduct.setID_((int) orderDetails.getId());
                 return true;
 
             }
         }
+//        DBManager dbManager = new DBManager(this);
+//        dbManager.open();
+//        List<Product> products = dbManager.fetch_bestProd();
+//        dbManager.close();
+//        for (Product p : products
+//        ) {
+//            if (p.getId().equals(mProduct.getId())) {
+//                like.setImageResource(R.drawable.ic_like1);
+//                mProduct.setID_(p.getID_());
+//                return true;
+//
+//            }
+//        }
 
         like.setImageResource(R.drawable.ic_like);
         return false;

@@ -13,14 +13,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.kh_sof_dev.gaz.Classes.Database.DBManager;
+import com.kh_sof_dev.gaz.Classes.Database.OrderDetails;
 import com.kh_sof_dev.gaz.Classes.Products.Product;
 import com.kh_sof_dev.gaz.Classes.User.user_info;
 import com.kh_sof_dev.gaz.Classes.constant.Setting;
 import com.kh_sof_dev.gaz.Fragments.Refill_frg.RefillHome;
 import com.kh_sof_dev.gaz.R;
 
-import java.util.List;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class Payment extends AppCompatActivity implements View.OnClickListener {
     public static final String order_type = "order_type";
@@ -55,13 +56,18 @@ public class Payment extends AppCompatActivity implements View.OnClickListener {
 
 
         if (order_typ == 1) {
-            DBManager db = new DBManager(this);
-            db.open();
-            final List<Product> products = db.fetch_order();
-            for (Product p : products
-            ) {
-                price_ = price_ + p.getPrice() * p.getQty();
+            Realm realm = Realm.getDefaultInstance();
+            RealmResults<com.kh_sof_dev.gaz.Classes.Database.OrderDetails> orderDetailsList = realm.where(com.kh_sof_dev.gaz.Classes.Database.OrderDetails.class).findAll();
+            for (OrderDetails orderDetails : orderDetailsList) {
+                price_ = price_ + orderDetails.getPrice() * orderDetails.getQuantity();
             }
+//            DBManager db = new DBManager(this);
+//            db.open();
+//            final List<Product> products = db.fetch_order();
+//            for (Product p : products
+//            ) {
+//                price_ = price_ + p.getPrice() * p.getQty();
+//            }
         }
         if (order_typ != 1) {
 //            price_= RefillHome.price_refill*RefillHome.qty;

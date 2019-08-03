@@ -68,7 +68,7 @@ public class Setting {
         Ed.putLong("delivery", Double.doubleToRawLongBits(setting.delivery));
 
 
-        Ed.commit();
+        Ed.apply();
         new Setting(mcontext);
     }
 

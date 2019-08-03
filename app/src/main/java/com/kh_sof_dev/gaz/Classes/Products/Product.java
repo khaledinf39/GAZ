@@ -16,7 +16,7 @@ public class Product implements Serializable {
     private String warrenty;
     private String name;
     private int rate;
-    private Double price,price_buy_new;
+    private Double price, price_buy_new;
 
     ///fore order
     private int qty;
@@ -127,7 +127,7 @@ public class Product implements Serializable {
      */
 
     public Product(JSONObject jsonObject) throws JSONException {
-        if(jsonObject == null){
+        if (jsonObject == null) {
             return;
         }
         id = jsonObject.optString("_id");
@@ -146,8 +146,7 @@ public class Product implements Serializable {
     /**
      * Returns all the available property values in the form of JSONObject instance where the key is the approperiate json key and the value is the value of the corresponding field
      */
-    public JSONObject toJsonObject()
-    {
+    public JSONObject toJsonObject() {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("_id", id);

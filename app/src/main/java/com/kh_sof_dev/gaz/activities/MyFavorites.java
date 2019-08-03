@@ -10,8 +10,16 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.kh_sof_dev.gaz.Adapters.myFavoriteAdapter;
+import com.kh_sof_dev.gaz.Classes.Database.Best;
 import com.kh_sof_dev.gaz.Classes.Database.DBManager;
+import com.kh_sof_dev.gaz.Classes.Products.Product;
 import com.kh_sof_dev.gaz.R;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class MyFavorites extends AppCompatActivity {
 
@@ -21,10 +29,26 @@ public class MyFavorites extends AppCompatActivity {
         setContentView(R.layout.layout_f_my_favorites);
         RecyclerView favorRV = findViewById(R.id.my_favorit_RV);
         favorRV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        DBManager dbManager = new DBManager(this);
-        dbManager.open();
-        favorRV.setAdapter(new myFavoriteAdapter(this, dbManager.fetch_bestProd()));
-        dbManager.close();
+
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<Best> orderDetailsListBest = realm.where(Best.class).findAll();
+        List<Product> productsFav = new ArrayList<>();
+        for (Best best : orderDetailsListBest) {
+            Product p = new Product();
+            p.setID_((int) best.getId());
+            p.setId(best.getProductId());
+            p.setName(best.getProductName());
+            p.setQty(best.getQuantity());
+            p.setPrice(best.getPrice());
+            p.setImage(best.getImage());
+            productsFav.add(p);
+        }
+        favorRV.setAdapter(new myFavoriteAdapter(this, productsFav));
+
+//        DBManager dbManager = new DBManager(this);
+//        dbManager.open();
+//        favorRV.setAdapter(new myFavoriteAdapter(this, dbManager.fetch_bestProd()));
+//        dbManager.close();
         ImageView back = findViewById(R.id.back_btn);
         back.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kh_sof_dev.gaz.Adapters.BasketReserv_adapter;
-import com.kh_sof_dev.gaz.Classes.Database.DBManager;
+import com.kh_sof_dev.gaz.Classes.Database.OrderDetails;
 import com.kh_sof_dev.gaz.Classes.Order.AddOrder;
 import com.kh_sof_dev.gaz.Classes.Order.Http_orders;
 import com.kh_sof_dev.gaz.Classes.Order.OrderItem;
@@ -34,6 +34,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class ConfReservation1 extends AppCompatActivity implements View.OnClickListener {
     public static final String payment_type_s = "payment_type";
@@ -92,10 +95,10 @@ public class ConfReservation1 extends AppCompatActivity implements View.OnClickL
         edite_inf.setOnClickListener(this);
         orderRV = findViewById(R.id.orderRV);
         orderRV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        DBManager dbManager = new DBManager(this);
-        dbManager.open();
+//        DBManager dbManager = new DBManager(this);
+//        dbManager.open();
         // orderRV.setAdapter(new BasketReserv_adapter(getContext(),dbManager.fetch_order()));
-        dbManager.close();
+//        dbManager.close();
 
         fetch_order();
     }
@@ -156,30 +159,40 @@ public class ConfReservation1 extends AppCompatActivity implements View.OnClickL
     int qty = 0;
 
     private void fetch_order() {
+        final Realm realm = Realm.getDefaultInstance();
+        RealmResults<com.kh_sof_dev.gaz.Classes.Database.OrderDetails> orderDetailsList = realm.where(com.kh_sof_dev.gaz.Classes.Database.OrderDetails.class).findAll();
+        final List<Product> products = new ArrayList<>();
+        for (OrderDetails orderDetails : orderDetailsList) {
+            Product p = new Product();
+            p.setID_((int) orderDetails.getId());
+            p.setId(orderDetails.getProductId());
+            p.setName(orderDetails.getProductName());
+            p.setQty(orderDetails.getQuantity());
+            p.setPrice(orderDetails.getPrice());
+            p.setImage(orderDetails.getImage());
+            products.add(p);
+            price_ = price_ + p.getPrice() * p.getQty();
+            qty = qty + p.getQty();
+        }
 
-
-        final DBManager db = new DBManager(this);
-        db.open();
-        final List<Product> products = db.fetch_order();
+//        final DBManager db = new DBManager(this);
+//        db.open();
+//        final List<Product> products = db.fetch_order();
 
         if (order_type == 1) {
-            for (Product p : products
-            ) {
-                price_ = price_ + p.getPrice() * p.getQty();
-                qty = qty + p.getQty();
-            }
+//            for (Product p : products
+//            ) {
+//                price_ = price_ + p.getPrice() * p.getQty();
+//                qty = qty + p.getQty();
+//            }
             // orderRV.setVisibility(View.GONE);
             orderRV.setAdapter(new BasketReserv_adapter(this, products));
-        }
-        if (order_type != 1) {
-
-
-            for (Product p : RefillHome.productList
-            ) {
-                price_ = price_ + p.getPrice() * p.getQty();
-                qty = qty + p.getQty();
-            }
-
+        } else {
+//            for (Product p : RefillHome.productList
+//            ) {
+//                price_ = price_ + p.getPrice() * p.getQty();
+//                qty = qty + p.getQty();
+//            }
             orderRV.setAdapter(new BasketReserv_adapter(this, RefillHome.productList));
         }
 
@@ -246,9 +259,15 @@ public class ConfReservation1 extends AppCompatActivity implements View.OnClickL
 
 //                            Toast.makeText(getContext(),order.getMessage(),Toast.LENGTH_LONG).show();
                         if (order.getStatusCode() == 200) {
-                            db.open();
-                            db.clear_db();
-                            db.close();
+                            RealmResults<com.kh_sof_dev.gaz.Classes.Database.OrderDetails> orderDetailsList = realm.where(com.kh_sof_dev.gaz.Classes.Database.OrderDetails.class).findAll();
+                            realm.beginTransaction();
+                            orderDetailsList.deleteAllFromRealm();
+                            realm.commitTransaction();
+//                            realm.delete(OrderDetails.class);
+
+//                            db.open();
+//                            db.clear_db();
+//                            db.close();
 
 
                             startActivity(new Intent(ConfReservation1.this, SendRequestSucc.class));
