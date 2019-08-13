@@ -3,19 +3,20 @@ package com.kh_sof_dev.gaz.Classes.Order;
 //
 //	AddOrder.java
 
-import com.kh_sof_dev.gaz.Classes.User.user_info;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import org.json.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import java.util.*;
 
-
-public class AddOrder{
+public class AddOrder {
 
 
     private String Notes;
     private String addressDetails;
-     private Double deliveryCost;
+    private Double deliveryCost;
     private String delivery_time;
     private String delivery_date;
     private List<OrderItem> items;
@@ -24,6 +25,7 @@ public class AddOrder{
     private int paymentType;
     private Double subTotal;
     private int orderType;
+    private String coupon = null, suppiler_id;
 
     public AddOrder() {
     }
@@ -151,7 +153,7 @@ public class AddOrder{
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-           JSONArray itemsJsonArray = jsonObject.optJSONArray("items");
+            JSONArray itemsJsonArray = jsonObject.optJSONArray("items");
             if (itemsJsonArray != null) {
                 items = new ArrayList<>();
                 for (int i = 0; i < itemsJsonArray.length(); i++) {
@@ -177,19 +179,17 @@ public class AddOrder{
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            } catch (Exception ex) {
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
 
-
-
     }
-private String coupon=null,suppiler_id;
+
     /**
      * Returns all the available property values in the form of JSONObject instance where the key is the approperiate json key and the value is the value of the corresponding field
      */
-    public JSONObject Basket_toJsonObject()
-    {
+    public JSONObject Basket_toJsonObject() {
         JSONObject jsonObject = new JSONObject();
         try {
 ///9 parameter
@@ -197,9 +197,9 @@ private String coupon=null,suppiler_id;
             jsonObject.put("addressDetails", addressDetails);
             //jsonObject.put("delivery_time", delivery_time);
             jsonObject.put("deliveryCost", deliveryCost);
-            if(items != null && items.size() > 0){
+            if (items != null && items.size() > 0) {
                 JSONArray itemsJsonArray = new JSONArray();
-                for(OrderItem itemsElement : items){
+                for (OrderItem itemsElement : items) {
                     itemsJsonArray.put(itemsElement.toJsonObject());
                 }
                 jsonObject.put("items", itemsJsonArray);
@@ -212,18 +212,17 @@ private String coupon=null,suppiler_id;
 
 
             jsonObject.put("supplier_id", suppiler_id);
-            if (coupon!=null){
+            if (coupon != null) {
                 jsonObject.put("coupon", coupon);
             }
 
         } catch (JSONException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return jsonObject;
     }
-    public JSONObject Refill_toJsonObject()
-    {
+
+    public JSONObject Refill_toJsonObject() {
         JSONObject jsonObject = new JSONObject();
         try {
 /// 11 parameter
@@ -232,9 +231,9 @@ private String coupon=null,suppiler_id;
             jsonObject.put("delivery_time", delivery_time);
             jsonObject.put("delivery_date", delivery_date);
             jsonObject.put("deliveryCost", deliveryCost);
-            if(items != null && items.size() > 0){
+            if (items != null && items.size() > 0) {
                 JSONArray itemsJsonArray = new JSONArray();
-                for(OrderItem itemsElement : items){
+                for (OrderItem itemsElement : items) {
                     itemsJsonArray.put(itemsElement.toJsonObject());
                 }
                 jsonObject.put("items", itemsJsonArray);
@@ -246,66 +245,12 @@ private String coupon=null,suppiler_id;
             jsonObject.put("orderType", orderType);
 
             jsonObject.put("supplier_id", suppiler_id);
-            if (coupon!=null){
+            if (coupon != null) {
                 jsonObject.put("coupon", coupon);
             }
         } catch (JSONException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return jsonObject;
     }
-    public JSONObject toJsonObject_for_test()
-    {
-        JSONObject jsonObject = new JSONObject();
-        try {
-
-            if(items != null && items.size() > 0){
-                JSONArray itemsJsonArray = new JSONArray();
-                for(OrderItem itemsElement : items){
-                    itemsJsonArray.put(itemsElement.toJsonObject());
-                }
-                jsonObject.put("items", itemsJsonArray);
-            }
-
-        } catch (JSONException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return jsonObject;
-    }
-//    public JSONObject toJsonObject2()
-////    {
-////        JSONObject jsonObject = new JSONObject();
-////        try {
-////            jsonObject.put("BasketId", basketId);
-////            jsonObject.put("Notes", notes);
-////            jsonObject.put("StatusId", statusId);
-////            jsonObject.put("addressDetails",addressDetails);
-////            jsonObject.put("supplier", supplier);
-////            jsonObject.put("deliveryCost", deliveryCost);
-////            jsonObject.put("deliveryOption_id", deliveryOptionId);
-////            jsonObject.put("delivery_date", deliveryDate);
-////            jsonObject.put("delivery_id", deliveryId);
-////            jsonObject.put("isBasket", isBasket);
-////            jsonObject.put("isNotFound", isNotFound);
-////            if(items != null && items.size() > 0){
-////                JSONArray itemsJsonArray = new JSONArray();
-////                for(OrderItem itemsElement : items){
-////                    itemsJsonArray.put(itemsElement.toJsonObject());
-////                }
-////                jsonObject.put("items", itemsJsonArray);
-////            }
-////            jsonObject.put("lat", lng);
-////            jsonObject.put("lng", lat);
-////            jsonObject.put("paymentType", paymentType);
-////            jsonObject.put("subTotal", subTotal);
-////            jsonObject.put("user_id", userId);
-////        } catch (JSONException e) {
-////            // TODO Auto-generated catch block
-////            e.printStackTrace();
-////        }
-////        return jsonObject;
-////    }
-
 }

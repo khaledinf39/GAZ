@@ -118,7 +118,7 @@ public class ConfReservation1 extends AppCompatActivity implements View.OnClickL
                 if (test_coupon.getStatusCode() == 200) {
 
                     double discount = test_coupon.getItems().getDiscount();
-                    calculate(price_ - (price_ * discount));
+                    calculate(price_ /*- (price_ * discount)*/, discount);
                     coupon = coupon_edt.getText().toString();
 
                     coupone_msg.setText(String.valueOf(test_coupon.getMessage() + " لديك خصم : " + discount * 100 + "%"));
@@ -141,19 +141,24 @@ public class ConfReservation1 extends AppCompatActivity implements View.OnClickL
 
     double price_ = 0.0;
     double delivry_ = 0.0;
+    double delivryBase = 0.0;
     double total_ = 0.0;
     double taxe = 0.0;
 
-    private void calculate(double price_) {
+    private void calculate(double price_, double discount) {
         final Setting setting = new Setting(this);
         priceTV.setText(String.valueOf(price_));
-        delivry_ = qty * setting.getDelivery();
+        delivryBase = qty * setting.getDelivery();
+        if (discount > 0)
+            delivry_ = delivryBase - (delivryBase * discount);
+        else
+            delivry_ = delivryBase;
         taxtTV.setText(String.valueOf(delivry_));
         taxe = Double.valueOf((setting.getTax())) * price_ * 0.01;
         deliveryTV.setText(String.valueOf(taxe));
         total_ = price_ + delivry_ + taxe;
         total.setText(String.valueOf(total_));
-        Log.e("setting gaz ", "tax" + taxe + " delev " + delivry_ + "qty" + qty);
+        Log.e("setting gaz ", "tax" + taxe + " delivryBase " + delivryBase + " delev " + delivry_ + "qty" + qty);
     }
 
     int qty = 0;
@@ -196,7 +201,7 @@ public class ConfReservation1 extends AppCompatActivity implements View.OnClickL
             orderRV.setAdapter(new BasketReserv_adapter(this, RefillHome.productList));
         }
 
-        calculate(price_);
+        calculate(price_, 0);
 
         final user_info user_info = new user_info(this);
         nameTV.setText(user_info.getName());
@@ -224,7 +229,7 @@ public class ConfReservation1 extends AppCompatActivity implements View.OnClickL
                 //*****************************************************************************/
                 order.setSubTotal(price_ + taxe);
                 order.setOrderType(order_type);
-                order.setDeliveryCost(delivry_);                     // parameter total 11 - time and date =9
+                order.setDeliveryCost(delivryBase);                     // parameter total 11 - time and date =9
                 List<OrderItem> orderItems = new ArrayList<>();
                 /////9 parameters
                 JSONObject cart;
