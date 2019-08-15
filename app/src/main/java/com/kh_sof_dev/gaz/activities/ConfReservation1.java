@@ -178,6 +178,7 @@ public class ConfReservation1 extends AppCompatActivity implements View.OnClickL
             products.add(p);
             price_ = price_ + p.getPrice() * p.getQty();
             qty = qty + p.getQty();
+            Log.e("setting gaz ", "price_" + price_ + " qty " + qty);
         }
 
 //        final DBManager db = new DBManager(this);
@@ -185,19 +186,17 @@ public class ConfReservation1 extends AppCompatActivity implements View.OnClickL
 //        final List<Product> products = db.fetch_order();
 
         if (order_type == 1) {
-//            for (Product p : products
-//            ) {
-//                price_ = price_ + p.getPrice() * p.getQty();
-//                qty = qty + p.getQty();
-//            }
+            for (Product p : products) {
+                price_ = price_ + p.getPrice() * p.getQty();
+                qty = qty + p.getQty();
+            }
             // orderRV.setVisibility(View.GONE);
             orderRV.setAdapter(new BasketReserv_adapter(this, products));
         } else {
-//            for (Product p : RefillHome.productList
-//            ) {
-//                price_ = price_ + p.getPrice() * p.getQty();
-//                qty = qty + p.getQty();
-//            }
+            for (Product p : RefillHome.productList) {
+                price_ = price_ + p.getPrice() * p.getQty();
+                qty = qty + p.getQty();
+            }
             orderRV.setAdapter(new BasketReserv_adapter(this, RefillHome.productList));
         }
 

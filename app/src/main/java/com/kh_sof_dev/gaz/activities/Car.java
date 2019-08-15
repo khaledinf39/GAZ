@@ -83,7 +83,7 @@ public class Car extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                startActivity(new Intent(getContext(), MainNew.class));
+                startActivity(new Intent(Car.this, MainNew.class));
                 finish();
 //                MainNew.goto_(new Home(),getContext());
             }

@@ -28,13 +28,16 @@ public class SendRequestSucc extends AppCompatActivity {
         cont_shop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(SendRequestSucc.this, MainNew.class));
                 finish();
             }
         });
         cont_req.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SendRequestSucc.this, MyReservations.class));
+                Intent intent = new Intent(SendRequestSucc.this, MyReservations.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 finish();
 //                MainNew.goto_(new MyReservations(), getContext());
 

@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.kh_sof_dev.gaz.Adapters.Favorit_adapter;
 import com.kh_sof_dev.gaz.Adapters.Resrvation_adapter;
 import com.kh_sof_dev.gaz.Classes.Database.Best;
-import com.kh_sof_dev.gaz.Classes.Database.DBManager;
 import com.kh_sof_dev.gaz.Classes.Database.OrderDetails;
 import com.kh_sof_dev.gaz.Classes.Products.Product;
 import com.kh_sof_dev.gaz.Classes.User.user_info;
