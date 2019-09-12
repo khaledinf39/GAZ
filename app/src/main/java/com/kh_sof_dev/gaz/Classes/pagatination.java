@@ -9,10 +9,10 @@ public class pagatination {
         if(jsonObject == null){
             return;
         }
-        size = jsonObject.getInt("size");
-        totalElements = jsonObject.getInt("totalElements");
-        totalPages = jsonObject.getInt("totalPages");
-        pageNumber = jsonObject.getInt("pageNumber");}
+        size = jsonObject.optInt("size");
+        totalElements = jsonObject.optInt("totalElements");
+        totalPages = jsonObject.optInt("totalPages");
+        pageNumber = jsonObject.optInt("pageNumber");}
 
     public int getSize() {
         return size;

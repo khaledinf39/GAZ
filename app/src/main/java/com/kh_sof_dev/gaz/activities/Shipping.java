@@ -302,13 +302,13 @@ public class Shipping extends AppCompatActivity implements OnMapReadyCallback {
                     dialog.setTitle("التأكد من وجود سائقين");
                     dialog.setCanceledOnTouchOutside(false);
                     dialog.setCancelable(false);
-                    dialog.show();
 
                     http_orders.Get_TestMyPlace(this, latLng.latitude, latLng.longitude,
                             new Http_orders.Ontestplace_lisennter() {
                                 @Override
                                 public void onSuccess(testMyplace test) {
-                                    dialog.dismiss();
+                                    if (dialog.isShowing())
+                                        dialog.dismiss();
                                     if (test.getStatus()) {
                                         mLatLng = latLng;
                                         continue_btn.setEnabled(true);
@@ -331,10 +331,12 @@ public class Shipping extends AppCompatActivity implements OnMapReadyCallback {
 
                                 @Override
                                 public void onFailure(String msg) {
-                                    dialog.dismiss();
+                                    if (dialog.isShowing())
+                                        dialog.dismiss();
                                     Toast.makeText(Shipping.this, msg, Toast.LENGTH_LONG).show();
                                 }
                             });
+                    dialog.show();
                 }
             }
         } catch (Exception e) {

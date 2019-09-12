@@ -56,7 +56,7 @@ public class Top20Products extends RecyclerView.Adapter<Top20Products.ViewHolder
         holder.details_pro.setText(mItems.get(position).getDescription());
         holder.score.setText(mItems.get(position).getRate() + "");
         holder.type.setText("");
-        holder.price.setText(mItems.get(position).getPrice().toString());
+        holder.price.setText(mItems.get(position).getPrice_buy_new() + "");
 
         Utils.showImage(mContext, mItems.get(position).getImage(),
                 R.drawable.placeholder, holder.pro_img);

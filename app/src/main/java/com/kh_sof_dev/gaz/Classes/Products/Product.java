@@ -132,15 +132,15 @@ public class Product implements Serializable {
         }
         id = jsonObject.optString("_id");
         description = jsonObject.optString("description");
-        rate = jsonObject.getInt("rate");
+        rate = jsonObject.optInt("rate");
         createat = jsonObject.optString("createat");
-        price = jsonObject.getDouble("price");
-        price_buy_new = jsonObject.getDouble("price_buy_new");
+        price = jsonObject.optDouble("price");
+        price_buy_new = jsonObject.optDouble("price_buy_new");
         image = jsonObject.optString("image");
 
         name = jsonObject.optString("name");
         warrenty = jsonObject.optString("warrenty");
-        category_id = jsonObject.getString("category_id");
+        category_id = jsonObject.optString("category_id");
     }
 
     /**

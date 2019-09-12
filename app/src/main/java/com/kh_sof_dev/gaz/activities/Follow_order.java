@@ -245,7 +245,8 @@ public class Follow_order extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onPause() {
-        referenceLoc.removeEventListener(childEventListenerLoc);
+        if (referenceLoc != null && childEventListenerLoc != null)
+            referenceLoc.removeEventListener(childEventListenerLoc);
         super.onPause();
     }
 
@@ -435,8 +436,8 @@ public class Follow_order extends AppCompatActivity implements OnMapReadyCallbac
                 List<HashMap<String, String>> path = result.get(i);
                 for (int j = 0; j < path.size(); j++) {
                     HashMap<String, String> point = path.get(j);
-                    double lat = Double.parseDouble(point.get("lat"));
-                    double lng = Double.parseDouble(point.get("lng"));
+                    double lat = Double.parseDouble(point.get("lat") + "");
+                    double lng = Double.parseDouble(point.get("lng") + "");
                     LatLng position = new LatLng(lat, lng);
                     points.add(position);
                 }

@@ -198,11 +198,11 @@ public class Order_getter implements Serializable {
         }
         notes = jsonObject.optString("Notes");
         statusId = jsonObject.optInt("StatusId");
-        total = jsonObject.getDouble("Total");
+        total = jsonObject.optDouble("Total");
         addressDetails = jsonObject.optString("addressDetails");
         //city = jsonObject.optString("city");
         createAt = jsonObject.optString("createAt");
-        deliveryCost = jsonObject.getDouble("deliveryCost");
+        deliveryCost = jsonObject.optDouble("deliveryCost");
         JSONArray itemsJsonArray = jsonObject.optJSONArray("items");
         if (itemsJsonArray != null) {
             items = new ArrayList<>();
@@ -215,9 +215,9 @@ public class Order_getter implements Serializable {
         lat = jsonObject.optDouble("lat");
         lng = jsonObject.optDouble("lng");
         paymentType = jsonObject.optInt("paymentType");
-        subTotal = jsonObject.getDouble("subTotal");
+        subTotal = jsonObject.optDouble("subTotal");
 //
-        orderType = jsonObject.getInt("orderType");
+        orderType = jsonObject.optInt("orderType");
         userId = new user(jsonObject.optJSONObject("user_id"));
         try {
         } catch (Exception e) {

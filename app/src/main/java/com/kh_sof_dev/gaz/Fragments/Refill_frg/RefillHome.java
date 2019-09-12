@@ -91,16 +91,19 @@ public class RefillHome extends Fragment {
         final Refill_adapter adapter = new Refill_adapter(getContext(), productList, new Refill_adapter.OnGaztype_selected_listenner() {
             @Override
             public void OnAdd(int postion) {
-                int qty = productList.get(postion).getQty() + 1;
-                productList.get(postion).setQty(qty);
-
+                if (productList != null && !productList.isEmpty()) {
+                    int qty = productList.get(postion).getQty() + 1;
+                    productList.get(postion).setQty(qty);
+                }
             }
 
             @Override
             public void OnDelete(int postion) {
-                int qty = productList.get(postion).getQty() - 1;
-                if (qty > 0) {
-                    productList.get(postion).setQty(qty);
+                if (productList != null && !productList.isEmpty()) {
+                    int qty = productList.get(postion).getQty() - 1;
+                    if (qty > 0) {
+                        productList.get(postion).setQty(qty);
+                    }
                 }
 
             }

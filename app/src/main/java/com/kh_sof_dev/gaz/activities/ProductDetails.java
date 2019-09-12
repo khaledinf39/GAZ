@@ -63,7 +63,7 @@ public class ProductDetails extends AppCompatActivity {
                 waranty.setText(mProduct.getWarrenty());
                 rat.setText(mProduct.getRate() + "");
                 name.setText(mProduct.getName());
-                price.setText(mProduct.getPrice().toString());
+                price.setText(mProduct.getPrice_buy_new() + "");
                 details.setText(mProduct.getDescription());
 //                Picasso.with(this).load(mProduct.getImage()).into(pro_img);
                 Utils.showImage(this, mProduct.getImage(), pro_img);
@@ -87,7 +87,7 @@ public class ProductDetails extends AppCompatActivity {
                             best.setId(mProduct.getID_());
                             best.setProductId(mProduct.getId());
                             best.setProductName(mProduct.getName());
-                            best.setPrice(mProduct.getPrice());
+                            best.setPrice(mProduct.getPrice_buy_new());
                             best.setQuantity(mProduct.getQty());
                             best.setImage(mProduct.getImage());
                             realm.beginTransaction();
@@ -109,7 +109,7 @@ public class ProductDetails extends AppCompatActivity {
                         best.setId(mProduct.getID_());
                         best.setProductId(mProduct.getId());
                         best.setProductName(mProduct.getName());
-                        best.setPrice(mProduct.getPrice());
+                        best.setPrice(mProduct.getPrice_buy_new());
                         best.setQuantity(mProduct.getQty());
                         best.setImage(mProduct.getImage());
                         realm.beginTransaction();

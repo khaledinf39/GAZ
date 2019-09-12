@@ -51,8 +51,8 @@ private pagatination pagatination;
         if (itemsJsonArray != null) {
             items = new ArrayList<>();
             try {
-                pagatination=new pagatination(jsonObject.getJSONObject("pagenation"));
-            } catch (JSONException e) {
+                pagatination=new pagatination(jsonObject.optJSONObject("pagenation"));
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             message = jsonObject.optString("message");

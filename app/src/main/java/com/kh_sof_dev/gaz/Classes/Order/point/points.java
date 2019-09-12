@@ -33,13 +33,13 @@ public  class points {
             return;
         }
         try {
-            money = jsonObject.getLong("money");
-        } catch (JSONException e) {
+            money = jsonObject.optLong("money");
+        } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            points = jsonObject.getInt("points");
-        } catch (JSONException e) {
+            points = jsonObject.optInt("points");
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

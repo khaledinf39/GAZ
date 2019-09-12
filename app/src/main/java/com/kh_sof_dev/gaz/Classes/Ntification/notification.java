@@ -22,10 +22,10 @@ public class notification {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        type = jsonObject.getInt("type");
+        type = jsonObject.optInt("type");
 
         dt_date = jsonObject.optString("dt_date");
-        isRead = jsonObject.getBoolean("isRead");
+        isRead = jsonObject.optBoolean("isRead");
     }
 
     public String get_id() {

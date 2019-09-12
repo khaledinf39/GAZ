@@ -142,15 +142,15 @@ public class AddOrder {
         if (jsonObject == null) {
             return;
         }
-        orderType = jsonObject.getInt("orderType");
+        orderType = jsonObject.optInt("orderType");
         delivery_date = jsonObject.optString("delivery_date");
         try {
             Notes = jsonObject.optString("Notes");
             addressDetails = jsonObject.optString("addressDetails");
             delivery_time = jsonObject.optString("delivery_time");
             try {
-                deliveryCost = jsonObject.getDouble("deliveryCost");
-            } catch (JSONException e) {
+                deliveryCost = jsonObject.optDouble("deliveryCost");
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             JSONArray itemsJsonArray = jsonObject.optJSONArray("items");
@@ -167,16 +167,16 @@ public class AddOrder {
 
             }
             try {
-                lat = jsonObject.getDouble("lat");
-                lng = jsonObject.getDouble("lng");
-            } catch (JSONException e) {
+                lat = jsonObject.optDouble("lat");
+                lng = jsonObject.optDouble("lng");
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
             paymentType = jsonObject.optInt("paymentType");
             try {
-                subTotal = jsonObject.getDouble("subTotal");
-            } catch (JSONException e) {
+                subTotal = jsonObject.optDouble("subTotal");
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         } catch (Exception ex) {

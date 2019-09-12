@@ -1,6 +1,12 @@
 package com.kh_sof_dev.gaz.activities;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -11,19 +17,36 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.kh_sof_dev.gaz.Classes.User.user_info;
 import com.kh_sof_dev.gaz.Classes.Utils;
 import com.kh_sof_dev.gaz.Fragments.Home;
 import com.kh_sof_dev.gaz.Fragments.Notifications;
 import com.kh_sof_dev.gaz.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -128,6 +151,122 @@ public class MainNew extends AppCompatActivity implements NavigationView.OnNavig
             }
         });
 
+        testUpdate();
+    }
+
+    void testUpdate() {
+        RequestQueue queue = Volley.newRequestQueue(this);  // this = context
+        String url = getString(R.string.api) + "api/getUpdates";
+        StringRequest postRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                // response
+                Log.e("Response", response);
+                try {
+                    JSONObject jobject = new JSONObject(response);
+                    boolean status = jobject.optBoolean("status");
+                    if (status) {
+                        JSONArray items = jobject.optJSONArray("items");
+                        JSONObject item = items.getJSONObject(0);
+                        String androidVersion = item.optString("isAndroid");
+                        PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+                        String version = pInfo.versionName;
+                        Log.e("androidVersion", androidVersion + " , " + version + " , " + compareVersionNames(version, androidVersion));
+                        if (compareVersionNames(version, androidVersion) == -1)
+                            updateApplication();
+                    }
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                        // error
+                        Log.e("Error.Response", String.valueOf(error.getMessage()));
+                    }
+                }
+        );
+        queue.getCache().initialize();
+        queue.add(postRequest);
+        queue.getCache().clear();
+    }
+
+    public int compareVersionNames(String oldVersionName, String newVersionName) {
+        int res = 0;
+
+        String[] oldNumbers = oldVersionName.split("\\.");
+        String[] newNumbers = newVersionName.split("\\.");
+
+        int maxIndex = Math.min(oldNumbers.length, newNumbers.length);
+
+        for (int i = 0; i < maxIndex; i++) {
+            int oldVersionPart = Integer.valueOf(oldNumbers[i]);
+            int newVersionPart = Integer.valueOf(newNumbers[i]);
+
+            if (oldVersionPart < newVersionPart) {
+                res = -1;
+                break;
+            } else if (oldVersionPart > newVersionPart) {
+                res = 1;
+                break;
+            }
+        }
+
+        if (res == 0 && oldNumbers.length != newNumbers.length) {
+            res = (oldNumbers.length > newNumbers.length) ? 1 : -1;
+        }
+
+        return res;
+    }
+
+    void updateApplication() {
+        Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.dialog_force_update);
+
+        Button update = dialog.findViewById(R.id.update);
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                } catch (android.content.ActivityNotFoundException anfe) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+                }
+            }
+        });
+
+        dialog.show();
+
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setCancelable(false);
+//        builder.setTitle("تنبيه");
+//        builder.setMessage("النسخة الأخيرة اللتي تستخدمها قديمة - نرجو تحديث التطبيق للأهمية")
+//                .setPositiveButton("تحديث", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int id) {
+//                        String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
+//                        try {
+//                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+//                        } catch (android.content.ActivityNotFoundException anfe) {
+//                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+//                        }
+//                    }
+//                })
+//                .setNegativeButton("لا أريد التحديث", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        finish();
+//                    }
+//                });
+//        AlertDialog alert = builder.create();
+//        alert.setTitle("تحديث التطبيث");
+//        alert.show();
     }
 
     @Override

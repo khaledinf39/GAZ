@@ -66,7 +66,7 @@ public class show_main_catigories{
          // catigoriesses = catigoriessArrayList;
         }		message = jsonObject.optString("message");
 
-//       pagatination=new pagatination(jsonObject.getJSONObject("pagenation"));
+//       pagatination=new pagatination(jsonObject.optJSONObject("pagenation"));
         status = jsonObject.optBoolean("status");
         statusCode = jsonObject.optInt("status_code");
     }

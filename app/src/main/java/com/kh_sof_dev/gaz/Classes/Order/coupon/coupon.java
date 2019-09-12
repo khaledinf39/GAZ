@@ -15,7 +15,7 @@ public class coupon {
         dt_from = jsonObject.opt("dt_from").toString();
         dt_to = jsonObject.opt("dt_to").toString();
         msg = jsonObject.opt("msg").toString();
-        discount = jsonObject.getDouble("discount_rate");
+        discount = jsonObject.optDouble("discount_rate");
 
     }
     public String getId() {

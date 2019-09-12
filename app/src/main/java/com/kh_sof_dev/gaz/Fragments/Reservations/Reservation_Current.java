@@ -52,7 +52,7 @@ public class Reservation_Current extends Fragment {
             public void onSuccess(final show_order order) {
                 order_getterList.addAll(order.getItems());
                 adapter.notifyDataSetChanged();
-                if (order.getPagatination().getPageNumber() != order.getPagatination().getTotalPages()) {
+                if (order.getPagatination().getPageNumber() < order.getPagatination().getTotalPages()) {
                     seeMore.setVisibility(View.VISIBLE);
                     page = page + 1;
                 } else {
@@ -81,7 +81,7 @@ public class Reservation_Current extends Fragment {
                     public void onSuccess(final show_order order) {
                         order_getterList.addAll(order.getItems());
                         adapter.notifyDataSetChanged();
-                        if (order.getPagatination().getPageNumber() != order.getPagatination().getTotalPages()) {
+                        if (order.getPagatination().getPageNumber() < order.getPagatination().getTotalPages()) {
                             seeMore.setVisibility(View.VISIBLE);
                             page = page + 1;
                         } else {

@@ -12,7 +12,7 @@ public class Setting {
     private String id, name;
     private String value;
     private Long ringe, tax;
-    double delivery;
+    private double delivery;
     private Long nb_order;
 
     public Long getRinge() {
@@ -57,28 +57,37 @@ public class Setting {
         value = jsonObject.optString("value");
     }
 
-    public Setting(Setting setting, Context mcontext) {
+    public void addSetting(Setting setting, Context mcontext) {
 
-        /***************************save**************************/
-        SharedPreferences sp = mcontext.getSharedPreferences("constant", MODE_PRIVATE);
-        SharedPreferences.Editor Ed = sp.edit();
-        Ed.putLong("nb_order", setting.nb_order);
-        Ed.putLong("tax", setting.tax);
-        Ed.putLong("ringe", setting.ringe);
-        Ed.putLong("delivery", Double.doubleToRawLongBits(setting.delivery));
-
-
-        Ed.apply();
-        new Setting(mcontext);
+        //***************************save**************************/
+        try {
+            SharedPreferences sp = mcontext.getSharedPreferences("constant", MODE_PRIVATE);
+            SharedPreferences.Editor Ed = sp.edit();
+            Ed.putLong("nb_order", setting.nb_order);
+            Ed.putLong("tax", setting.tax);
+            Ed.putLong("ringe", setting.ringe);
+            Ed.putLong("delivery", Double.doubleToRawLongBits(setting.delivery));
+            Ed.apply();
+            nb_order = setting.nb_order;
+            tax = setting.tax;
+            ringe = setting.ringe;
+            delivery = setting.delivery;
+//            new Setting(mcontext);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public Setting(Context mcontext) {
-        final SharedPreferences sp = mcontext.getSharedPreferences("constant", MODE_PRIVATE);
-        nb_order = sp.getLong("nb_order", 10);
-        tax = sp.getLong("tax", 0);
-        ringe = sp.getLong("ringe", 0);
-        delivery = Double.longBitsToDouble(sp.getLong("delivery", Double.doubleToRawLongBits(0)));
-
+        try {
+            SharedPreferences sp = mcontext.getSharedPreferences("constant", MODE_PRIVATE);
+            nb_order = sp.getLong("nb_order", 10L);
+            tax = sp.getLong("tax", 0L);
+            ringe = sp.getLong("ringe", 0L);
+            delivery = Double.longBitsToDouble(sp.getLong("delivery", Double.doubleToRawLongBits(0)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public String getId() {

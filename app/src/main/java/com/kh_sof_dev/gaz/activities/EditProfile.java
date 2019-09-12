@@ -172,9 +172,9 @@ public class EditProfile extends AppCompatActivity {
 
                         try {
                             JSONObject jsonObject = new JSONObject(new String(response.data));
-                            //JSONObject jsonObjectRequest=jsonObject.getJSONObject("items");
-                            user_info.setImag(jsonObject.getString("url"));
-                            Log.d("ressssssoo", jsonObject.getString("url"));
+                            //JSONObject jsonObjectRequest=jsonObject.optJSONObject("items");
+                            user_info.setImag(jsonObject.optString("url"));
+                            Log.d("ressssssoo", jsonObject.optString("url"));
                         } catch (JSONException e1) {
                             e1.printStackTrace();
                         }

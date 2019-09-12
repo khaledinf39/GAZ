@@ -47,7 +47,7 @@ private Boolean status;
         }
         JSONArray itemsJsonArray = jsonObject.optJSONArray("items");
 
-        status = jsonObject.getBoolean("status");
+        status = jsonObject.optBoolean("status");
             message = jsonObject.optString("message");
             statusCode = jsonObject.optInt("status_code");
         }

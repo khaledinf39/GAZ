@@ -73,7 +73,7 @@ public class show_products {
          // catigoriess = catigoriessArrayList;
         }		message = jsonObject.optString("message");
         try {
-            pagatination=new pagatination(jsonObject.getJSONObject("pagenation"));
+            pagatination=new pagatination(jsonObject.optJSONObject("pagenation"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -56,22 +56,21 @@ public class OrderProduct implements Serializable {
      */
 
     public OrderProduct(JSONObject jsonObject) throws JSONException {
-        if(jsonObject == null){
+        if (jsonObject == null) {
             return;
         }
 
-        _id = jsonObject.getString("_id");
-        productId =new Product(jsonObject.getJSONObject("product_id")) ;
+        _id = jsonObject.optString("_id");
+        productId = new Product(jsonObject.optJSONObject("product_id"));
         qty = jsonObject.optInt("qty");
-        price =jsonObject.getDouble("price");
+        price = jsonObject.optDouble("price");
     }
 
     /**
      * Returns all the available property values in the form of JSONObject instance where the key is the approperiate json key and the value is the value of the corresponding field
      */
 
-    public JSONObject toJsonObject2()
-    {
+    public JSONObject toJsonObject2() {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("isOffer", false);

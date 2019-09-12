@@ -193,7 +193,7 @@ public class GeterOrder {
         Notes = jsonObject.optString("Notes");
         addressDetails = jsonObject.optString("addressDetails");
         delivery_time = jsonObject.optString("delivery_time");
-        deliveryCost = jsonObject.getDouble("deliveryCost");
+        deliveryCost = jsonObject.optDouble("deliveryCost");
         JSONArray itemsJsonArray = jsonObject.optJSONArray("items");
         if (itemsJsonArray != null) {
             items = new ArrayList<>();
@@ -206,18 +206,18 @@ public class GeterOrder {
 
             }
 
-            lat = jsonObject.getDouble("lat");
-            lng = jsonObject.getDouble("lng");
+            lat = jsonObject.optDouble("lat");
+            lng = jsonObject.optDouble("lng");
             paymentType = jsonObject.optInt("paymentType");
-            subTotal = jsonObject.getDouble("subTotal");
-            city = jsonObject.getString("city");
+            subTotal = jsonObject.optDouble("subTotal");
+            city = jsonObject.optString("city");
             user_id = new user(jsonObject.optJSONObject("user_id"));
             try {
-                comment = jsonObject.getString("comment");
-                ratedate = jsonObject.getString("rateDate");
-                rate = jsonObject.getInt("rate");
-                isOpen = jsonObject.getBoolean("isOpen");
-                isRate = jsonObject.getBoolean("isRate");
+                comment = jsonObject.optString("comment");
+                ratedate = jsonObject.optString("rateDate");
+                rate = jsonObject.optInt("rate");
+                isOpen = jsonObject.optBoolean("isOpen");
+                isRate = jsonObject.optBoolean("isRate");
 
             } catch (Exception e) {
 
@@ -297,8 +297,8 @@ class item {
             return;
         }
         id = jsonObject.optString("_id");
-        price = jsonObject.getDouble("price");
-        qty = jsonObject.getInt("qty");
+        price = jsonObject.optDouble("price");
+        qty = jsonObject.optInt("qty");
         product_id = new Product(jsonObject.optJSONObject("product_id"));
     }
 

@@ -58,7 +58,7 @@ public class AllProducts extends AppCompatActivity {
                     @Override
                     public void onSuccess(show_products products) {
                         productList.addAll(products.getProducts());
-                        if (products.getPagatination().getTotalPages() != products.getPagatination().getPageNumber()) {
+                        if (products.getPagatination().getTotalPages() > products.getPagatination().getPageNumber()) {
                             seeMore.setVisibility(View.VISIBLE);
                             page = page + 1;
                         } else {
@@ -87,7 +87,7 @@ public class AllProducts extends AppCompatActivity {
                             @Override
                             public void onSuccess(show_products products) {
                                 productList.addAll(products.getProducts());
-                                if (products.getPagatination().getTotalPages() != products.getPagatination().getPageNumber()) {
+                                if (products.getPagatination().getTotalPages() > products.getPagatination().getPageNumber()) {
                                     seeMore.setVisibility(View.VISIBLE);
                                     page = page + 1;
                                 } else {

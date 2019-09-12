@@ -175,12 +175,12 @@ public class SearchResults extends AppCompatActivity {
     private void trieFunction() {
         List<Product> productList_trie = new ArrayList<>();
         for (int i = 0; i < productList.size(); ) {
-            Double price = productList.get(i).getPrice();
+            Double price = productList.get(i).getPrice_buy_new();
             int pos = i;
             for (int j = 0; j < productList.size(); j++
             ) {
-                if (productList.get(j).getPrice() > price) {
-                    price = productList.get(j).getPrice();
+                if (productList.get(j).getPrice_buy_new() > price) {
+                    price = productList.get(j).getPrice_buy_new();
                     pos = j;
                 }
 

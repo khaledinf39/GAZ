@@ -51,8 +51,8 @@ public class OrderItem{
         if(jsonObject == null){
             return;
         }
-       price = jsonObject.getDouble("price");
-        productId = jsonObject.getString("product_id");
+       price = jsonObject.optDouble("price");
+        productId = jsonObject.optString("product_id");
         qty = jsonObject.optInt("qty");
          }
 
