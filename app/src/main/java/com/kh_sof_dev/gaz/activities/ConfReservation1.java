@@ -176,8 +176,8 @@ public class ConfReservation1 extends AppCompatActivity implements View.OnClickL
             p.setPrice(orderDetails.getPrice());
             p.setImage(orderDetails.getImage());
             products.add(p);
-            price_ = price_ + p.getPrice() * p.getQty();
-            qty = qty + p.getQty();
+//            price_ = price_ + p.getPrice() * p.getQty();
+//            qty = qty + p.getQty();
             Log.e("setting gaz ", "price_" + price_ + " qty " + qty);
         }
 

@@ -54,12 +54,10 @@ public class ProductDetails extends AppCompatActivity {
 //
 //            }
 //        });
-        basketCount();
-        like_function();
-
         if (getIntent().hasExtra(product)) {
             mProduct = (Product) getIntent().getSerializableExtra(product);
             if (mProduct != null) {
+
                 waranty.setText(mProduct.getWarrenty());
                 rat.setText(mProduct.getRate() + "");
                 name.setText(mProduct.getName());
@@ -67,6 +65,10 @@ public class ProductDetails extends AppCompatActivity {
                 details.setText(mProduct.getDescription());
 //                Picasso.with(this).load(mProduct.getImage()).into(pro_img);
                 Utils.showImage(this, mProduct.getImage(), pro_img);
+
+                basketCount();
+                like_function();
+
                 //********************************action******************************/
                 like.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -105,15 +107,15 @@ public class ProductDetails extends AppCompatActivity {
                 buy.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Best best = new Best();
-                        best.setId(mProduct.getID_());
-                        best.setProductId(mProduct.getId());
-                        best.setProductName(mProduct.getName());
-                        best.setPrice(mProduct.getPrice_buy_new());
-                        best.setQuantity(mProduct.getQty());
-                        best.setImage(mProduct.getImage());
+                        OrderDetails orderDetails = new OrderDetails();
+                        orderDetails.setId(mProduct.getID_());
+                        orderDetails.setProductId(mProduct.getId());
+                        orderDetails.setProductName(mProduct.getName());
+                        orderDetails.setPrice(mProduct.getPrice_buy_new());
+                        orderDetails.setQuantity(1);
+                        orderDetails.setImage(mProduct.getImage());
                         realm.beginTransaction();
-                        realm.copyToRealmOrUpdate(best);
+                        realm.copyToRealmOrUpdate(orderDetails);
                         realm.commitTransaction();
 //                        manager.open();
 //                        manager.insert_order(mProduct);
@@ -163,7 +165,7 @@ public class ProductDetails extends AppCompatActivity {
         RealmResults<OrderDetails> orderDetailsList = realm.where(OrderDetails.class).findAll();
         List<Product> products = new ArrayList<>();
         for (OrderDetails orderDetails : orderDetailsList) {
-            if (orderDetails.getProductId().equals(mProduct.getId())) {
+            if (orderDetails != null && orderDetails.getProductId() != null && orderDetails.getProductId().equals(mProduct.getId())) {
                 like.setImageResource(R.drawable.ic_like1);
                 mProduct.setID_((int) orderDetails.getId());
                 return true;

@@ -27,7 +27,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 24          //24-08-2019
-        versionName "1.0.24"                            //aliase gaz and pw 123456
+        versionName "1.1.0"                            //aliase gaz and pw 123456
         // google account pw:Na-g59372 ,email: alnaqellalafthalf@gmail.com
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -41,6 +41,12 @@ android {
     }
     dataBinding {
         enabled = true
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
     }
 }
 repositories {
