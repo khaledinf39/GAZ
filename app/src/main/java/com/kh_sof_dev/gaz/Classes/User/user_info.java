@@ -97,11 +97,15 @@ public class user_info {
     }
 
     public user_info(Context context, points points) {
-        SharedPreferences sp = context.getSharedPreferences("Login", MODE_PRIVATE);
-        SharedPreferences.Editor Ed = sp.edit();
-        Ed.putInt("point", points.getPoints());
-        Ed.putLong("wallet", points.getMoney());
-        Ed.apply();
+        try {
+            SharedPreferences sp = context.getSharedPreferences("Login", MODE_PRIVATE);
+            SharedPreferences.Editor Ed = sp.edit();
+            Ed.putInt("point", points.getPoints());
+            Ed.putLong("wallet", points.getMoney());
+            Ed.apply();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public String getAddress() {
