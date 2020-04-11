@@ -3,16 +3,12 @@ package com.kh_sof_dev.gaz.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.kh_sof_dev.gaz.activities.MainNew;
-import com.kh_sof_dev.gaz.activities.MyReservations;
 import com.kh_sof_dev.gaz.R;
 
 public class SendRequestSucc extends AppCompatActivity {

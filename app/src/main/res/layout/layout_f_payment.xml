@@ -8,7 +8,7 @@
     android:weightSum="100"
     tools:context=".activities.Payment">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="10">
@@ -43,7 +43,7 @@
             android:layout_height="1dp"
             android:background="@color/et_line_color"
             app:layout_constraintBottom_toBottomOf="parent" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -163,7 +163,7 @@
                     app:layout_constraintRight_toRightOf="@+id/view4"
                     app:layout_constraintTop_toBottomOf="@+id/view4" />
 
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
                 android:gravity="center"
@@ -298,7 +298,7 @@ android:visibility="gone"
         android:fontFamily="@font/cairo_regular"
         android:textSize="16sp"/>
 </LinearLayout>
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
@@ -525,7 +525,7 @@ android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/tx8"
                     />
 
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
             <Button
                 android:id="@+id/continue_btn"
                 android:layout_width="match_parent"

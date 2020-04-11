@@ -15,23 +15,41 @@ public class user_info {
     private long wallet;
     private int point;
 
-    public user_info(Context mcontext) {
-        final SharedPreferences sp = mcontext.getSharedPreferences("Login", MODE_PRIVATE);
-        id = sp.getString("id", "");
-        token = sp.getString("token", "");
-        phone = sp.getString("phone", "+966 000-0000-00");
-        name = sp.getString("name", "إسم العميل");
-        email = sp.getString("email", "mail@email.com");
-        image = sp.getString("image", "");
-        gender = sp.getString("gender", "");
-        city = sp.getString("city", " ");
-        address = sp.getString("address", " ");
-        lat = sp.getString("lat", "");
-        lng = sp.getString("lng", "");
-        pw = sp.getString("pw", "");
-        wallet = sp.getLong("wallet", (long) 0.0);
-        point = sp.getInt("point", 0);
-        supplier_id = sp.getString("supplier_id", "");
+    public user_info(Context context) {
+        SharedPreferences sp = context.getSharedPreferences("Login", MODE_PRIVATE);
+        if (sp != null) {
+            id = sp.getString("id", "");
+            token = sp.getString("token", "");
+            phone = sp.getString("phone", "+966 000-0000-00");
+            name = sp.getString("name", "إسم العميل");
+            email = sp.getString("email", "mail@email.com");
+            image = sp.getString("image", "");
+            gender = sp.getString("gender", "");
+            city = sp.getString("city", " ");
+            address = sp.getString("address", " ");
+            lat = sp.getString("lat", "");
+            lng = sp.getString("lng", "");
+            pw = sp.getString("pw", "");
+            wallet = sp.getLong("wallet", (long) 0.0);
+            point = sp.getInt("point", 0);
+            supplier_id = sp.getString("supplier_id", "");
+        } else {
+            id = "";
+            token = "";
+            phone = "+966 000-0000-00";
+            name = "إسم العميل";
+            email = "mail@email.com";
+            image = "";
+            gender = "";
+            city = " ";
+            address = " ";
+            lat = "";
+            lng = "";
+            pw = "";
+            wallet = 0;
+            point = 0;
+            supplier_id = "";
+        }
     }
 
     public user_info(String supplier_id, Context context) {
@@ -81,8 +99,8 @@ public class user_info {
 
     }
 
-    public String getSupplier_id(Context mcontext) {
-        final SharedPreferences sp = mcontext.getSharedPreferences("Login", MODE_PRIVATE);
+    public String getSupplier_id(Context context) {
+        final SharedPreferences sp = context.getSharedPreferences("Login", MODE_PRIVATE);
 
         supplier_id = sp.getString("supplier_id", "");
         return supplier_id;
@@ -205,8 +223,8 @@ public class user_info {
         this.gender = gender;
     }
 
-    public user_info(user_info user_, Context mcontext) {
-        SharedPreferences sp = mcontext.getSharedPreferences("Login", MODE_PRIVATE);
+    public user_info(user_info user_, Context context) {
+        SharedPreferences sp = context.getSharedPreferences("Login", MODE_PRIVATE);
         SharedPreferences.Editor Ed = sp.edit();
         Ed.putString("phone", user_.getPhone());
         Ed.putString("id", user_.getId());

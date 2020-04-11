@@ -1,25 +1,12 @@
 package com.kh_sof_dev.gaz.activities;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,13 +15,24 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.volley.AuthFailureError;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import com.kh_sof_dev.gaz.Classes.User.user_info;
 import com.kh_sof_dev.gaz.Classes.Utils;
 import com.kh_sof_dev.gaz.Fragments.Home;
@@ -42,11 +40,7 @@ import com.kh_sof_dev.gaz.Fragments.Notifications;
 import com.kh_sof_dev.gaz.R;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -90,12 +84,16 @@ public class MainNew extends AppCompatActivity implements NavigationView.OnNavig
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                fragmentManager = getSupportFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                fragment = fragmentManager.findFragmentById(R.id.ContentLogin);
+                if (fragmentManager == null)
+                    fragmentManager = getSupportFragmentManager();
+                if (fragmentTransaction == null)
+                    fragmentTransaction = fragmentManager.beginTransaction();
+                if (fragment == null)
+                    fragment = fragmentManager.findFragmentById(R.id.ContentLogin);
 
                 switch (menuItem.getItemId()) {
                     case R.id.Search:
+                        fragment = null;
                         startActivity(new Intent(MainNew.this, Search.class));
 //                        fragment = new Search();
                         break;
@@ -106,6 +104,7 @@ public class MainNew extends AppCompatActivity implements NavigationView.OnNavig
                         fragment = new Notifications();
                         break;
                     case R.id.MyReservations:
+                        fragment = null;
                         startActivity(new Intent(MainNew.this, MyReservations.class));
 //                        fragment = new MyReservations();
                         break;
@@ -114,9 +113,9 @@ public class MainNew extends AppCompatActivity implements NavigationView.OnNavig
                 if (fragment != null) {
                     fragmentTransaction.replace(R.id.ContentLogin, fragment).commit();
                     fragmentTransaction.addToBackStack(null);
-                    return true;
+                    fragmentTransaction.commit();
                 }
-                return false;
+                return true;
             }
         });
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -291,7 +290,7 @@ public class MainNew extends AppCompatActivity implements NavigationView.OnNavig
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
         try {
             for (Fragment fragment : getSupportFragmentManager().getFragments()) {
                 fragment.onActivityResult(requestCode, resultCode, data);

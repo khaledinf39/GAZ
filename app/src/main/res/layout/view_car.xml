@@ -8,13 +8,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/basketRV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="225dp"
             />
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="15dp"
@@ -22,7 +22,7 @@
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="3dp"
             app:cardElevation="3dp">
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
@@ -65,8 +65,8 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/notes_tv"
                     />
-            </android.support.constraint.ConstraintLayout>
-        </android.support.v7.widget.CardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
             android:layout_marginEnd="30dp"
             android:layout_marginTop="10dp"
             />
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
@@ -206,7 +206,7 @@
                 app:layout_constraintLeft_toRightOf="@+id/tax_tv"
                 app:layout_constraintTop_toBottomOf="@+id/delivery_tv"
                 />
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_blue_white"
@@ -258,9 +258,9 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     />
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <Button
             android:id="@+id/continue_btn"
             android:layout_width="match_parent"

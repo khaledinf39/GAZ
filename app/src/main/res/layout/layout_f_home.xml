@@ -9,7 +9,7 @@
     android:background="@color/white"
     tools:context=".Fragments.Home">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="10"
@@ -42,7 +42,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/basket"
             tools:ignore="SmallSp" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -67,7 +67,7 @@
                     android:background="#1f57ff"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:layout_marginStart="15dp"
@@ -77,18 +77,18 @@
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="8dp"
                     app:cardElevation="5dp">
-                    <android.support.v4.view.ViewPager
+                    <androidx.viewpager.widget.ViewPager
                         android:id="@+id/viewpager"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"/>
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
             </RelativeLayout>
             <ProgressBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/progress"
                 android:layout_gravity="center"/>
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="9"
@@ -113,7 +113,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/line1"
                     app:layout_constraintRight_toRightOf="parent"
                     />
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/spacialRV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -155,7 +155,7 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/line2"
                     />
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/categoriesRV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -201,7 +201,7 @@
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    app:layout_constraintTop_toBottomOf="@+id/tx4">
-                   <android.support.v7.widget.RecyclerView
+                   <androidx.recyclerview.widget.RecyclerView
                        android:id="@+id/productRV"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
@@ -213,7 +213,7 @@
                        android:minHeight="260dp"
                        />
                </ScrollView>
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
     </ScrollView>

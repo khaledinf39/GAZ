@@ -3,8 +3,10 @@ package com.kh_sof_dev.gaz.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -76,9 +78,11 @@ public class ProductDetails extends AppCompatActivity {
 
                         if (like_function()) {
                             Best best = realm.where(Best.class).equalTo("id", mProduct.getID_()).findFirst();
-                            realm.beginTransaction();
-                            best.deleteFromRealm();
-                            realm.commitTransaction();
+                            if (best != null) {
+                                realm.beginTransaction();
+                                best.deleteFromRealm();
+                                realm.commitTransaction();
+                            }
 //                            manager.open();
 //                            manager.deleteBestPro(mProduct.getID_());
 //                            manager.close();

@@ -13,10 +13,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -28,6 +24,12 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
@@ -58,7 +60,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -126,7 +127,7 @@ public class EditProfile extends AppCompatActivity {
     Bitmap bitmap = null;
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
 
@@ -134,15 +135,17 @@ public class EditProfile extends AppCompatActivity {
 //                Uri picUri = data.getData();
 //                Log.d("picUri", picUri.toString());
                 // Log.d("filePath", filePath);
-                Uri contentURI = data.getData();
                 // user_img.setImageURI(picUri);
                 try {
+                    Uri contentURI = data.getData();
+
                     bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), contentURI);
-                } catch (IOException e) {
+
+                    if (bitmap != null) {
+                        user_img.setImageBitmap(bitmap);
+                    }
+                } catch (Exception e) {
                     e.printStackTrace();
-                }
-                if (bitmap != null) {
-                    user_img.setImageBitmap(bitmap);
                 }
 
 
@@ -167,21 +170,24 @@ public class EditProfile extends AppCompatActivity {
                 new Response.Listener<NetworkResponse>() {
                     @Override
                     public void onResponse(NetworkResponse response) {
-                        Log.d("ressssssoo", new String(response.data));
-                        rQueue.getCache().clear();
+
 
                         try {
+                            Log.d("ressssssoo", new String(response.data));
+                            rQueue.getCache().clear();
+
                             JSONObject jsonObject = new JSONObject(new String(response.data));
                             //JSONObject jsonObjectRequest=jsonObject.optJSONObject("items");
                             user_info.setImag(jsonObject.optString("url"));
                             Log.d("ressssssoo", jsonObject.optString("url"));
-                        } catch (JSONException e1) {
+
+
+                            Put_profilInfo(EditProfile.this);
+
+                            dialog.dismiss();
+                        } catch (Exception e1) {
                             e1.printStackTrace();
                         }
-
-                        dialog.dismiss();
-
-                        Put_profilInfo(EditProfile.this);
 
 
                     }
@@ -306,7 +312,6 @@ public class EditProfile extends AppCompatActivity {
     private void requestMultiplePermissions() {
         Dexter.withActivity(this)
                 .withPermissions(
-
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.READ_EXTERNAL_STORAGE)
                 .withListener(new MultiplePermissionsListener() {
@@ -350,8 +355,7 @@ public class EditProfile extends AppCompatActivity {
 
     public boolean isStoragePermissionGranted() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-                    == PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 Log.v(TAG, "Permission is granted");
                 return true;
             } else {
@@ -442,7 +446,7 @@ public class EditProfile extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             Log.v(TAG, "Permission: " + permissions[0] + "was " + grantResults[0]);
             //resume tasks needing this permission
         }

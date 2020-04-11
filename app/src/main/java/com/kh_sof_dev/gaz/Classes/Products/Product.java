@@ -19,7 +19,7 @@ public class Product implements Serializable {
     private Double price, price_buy_new;
 
     ///fore order
-    private int qty;
+    private int qty = 0;
 
     public int getID_() {
         return ID_;
@@ -29,7 +29,7 @@ public class Product implements Serializable {
         this.ID_ = ID_;
     }
 
-    private int ID_;
+    private int ID_ = 0;
 
     public int getQty() {
         return qty;
@@ -40,7 +40,7 @@ public class Product implements Serializable {
     }
 
     public String getId() {
-        return id;
+        return id != null ? id : "";
     }
 
     public void setId(String id) {
@@ -72,7 +72,7 @@ public class Product implements Serializable {
     }
 
     public String getImage() {
-        return image;
+        return image != null ? image : "";
     }
 
     public void setImage(String image) {
@@ -88,7 +88,7 @@ public class Product implements Serializable {
     }
 
     public String getName() {
-        return name;
+        return name != null ? name : "";
     }
 
     public void setName(String name) {
@@ -112,7 +112,7 @@ public class Product implements Serializable {
     }
 
     public Double getPrice_buy_new() {
-        return price_buy_new;
+        return price_buy_new != null ? price_buy_new : 0.0;
     }
 
     public void setPrice_buy_new(Double price_buy_new) {

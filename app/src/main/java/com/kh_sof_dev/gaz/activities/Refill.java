@@ -4,12 +4,13 @@ package com.kh_sof_dev.gaz.activities;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import com.google.android.material.tabs.TabLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -81,7 +82,7 @@ public class Refill extends AppCompatActivity {
             new RefillHome(2)   //true
     };
 
-    public class MyPagerAdapter extends android.support.v4.app.FragmentStatePagerAdapter {
+    public class MyPagerAdapter extends FragmentStatePagerAdapter {
 
         public MyPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -122,7 +123,7 @@ public class Refill extends AppCompatActivity {
 
     };
 
-    public class MyPagerAdapter2 extends android.support.v4.app.FragmentStatePagerAdapter {
+    public class MyPagerAdapter2 extends FragmentStatePagerAdapter {
 
         public MyPagerAdapter2(FragmentManager fragmentManager) {
             super(fragmentManager);

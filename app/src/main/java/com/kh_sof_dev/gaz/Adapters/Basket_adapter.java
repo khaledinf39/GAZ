@@ -1,8 +1,8 @@
 package com.kh_sof_dev.gaz.Adapters;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.kh_sof_dev.gaz.Classes.Database.DBManager;
 import com.kh_sof_dev.gaz.Classes.Database.OrderDetails;
 import com.kh_sof_dev.gaz.Classes.Products.Product;
 import com.kh_sof_dev.gaz.Classes.Utils;

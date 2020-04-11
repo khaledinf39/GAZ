@@ -16,12 +16,12 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -297,7 +297,7 @@ public class Shipping extends AppCompatActivity implements OnMapReadyCallback {
                     new user_info(user_info, this);
                 } else {
                     Http_orders http_orders = new Http_orders();
-                    final ProgressDialog dialog = new ProgressDialog(this);
+                    dialog = new ProgressDialog(this);
                     dialog.setMessage("يتم التأكد من وجود سائقين في هده المتطقة ...");
                     dialog.setTitle("التأكد من وجود سائقين");
                     dialog.setCanceledOnTouchOutside(false);
@@ -307,8 +307,7 @@ public class Shipping extends AppCompatActivity implements OnMapReadyCallback {
                             new Http_orders.Ontestplace_lisennter() {
                                 @Override
                                 public void onSuccess(testMyplace test) {
-                                    if (dialog.isShowing())
-                                        dialog.dismiss();
+                                    dismissProgressDialog();
                                     if (test.getStatus()) {
                                         mLatLng = latLng;
                                         continue_btn.setEnabled(true);
@@ -331,9 +330,8 @@ public class Shipping extends AppCompatActivity implements OnMapReadyCallback {
 
                                 @Override
                                 public void onFailure(String msg) {
-                                    if (dialog.isShowing())
-                                        dialog.dismiss();
                                     Toast.makeText(Shipping.this, msg, Toast.LENGTH_LONG).show();
+                                    dismissProgressDialog();
                                 }
                             });
                     dialog.show();
@@ -342,6 +340,20 @@ public class Shipping extends AppCompatActivity implements OnMapReadyCallback {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    ProgressDialog dialog;
+
+    private void dismissProgressDialog() {
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        dismissProgressDialog();
+        super.onDestroy();
     }
 
     private void enableMyLocationIfPermitted() {

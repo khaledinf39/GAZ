@@ -13,11 +13,13 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -111,8 +113,8 @@ public class Follow_order extends AppCompatActivity implements OnMapReadyCallbac
                         @Override
                         public void onClick(View v) {
                             if (order_getter.getId() != null) {
-                                Chat.order_id = order_getter.getId();
-                                startActivity(new Intent(Follow_order.this, Chat.class));
+//                                Chat.order_id = order_getter.getId();
+                                startActivity(new Intent(Follow_order.this, Chat.class).putExtra(Chat.order_id, order_getter.getId()));
                             }
                         }
                     });
@@ -436,8 +438,14 @@ public class Follow_order extends AppCompatActivity implements OnMapReadyCallbac
                 List<HashMap<String, String>> path = result.get(i);
                 for (int j = 0; j < path.size(); j++) {
                     HashMap<String, String> point = path.get(j);
-                    double lat = Double.parseDouble(point.get("lat") + "");
-                    double lng = Double.parseDouble(point.get("lng") + "");
+                    double lat = 0.0;
+                    double lng = 0.0;
+
+                    if (point.containsKey("lat"))
+                        lat = Double.parseDouble(point.get("lat") + "");
+                    if (point.containsKey("lng"))
+                        lng = Double.parseDouble(point.get("lng") + "");
+
                     LatLng position = new LatLng(lat, lng);
                     points.add(position);
                 }

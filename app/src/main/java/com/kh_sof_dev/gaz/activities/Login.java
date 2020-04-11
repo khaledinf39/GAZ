@@ -1,10 +1,10 @@
 package com.kh_sof_dev.gaz.activities;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.kh_sof_dev.gaz.Fragments.LoginFrag;

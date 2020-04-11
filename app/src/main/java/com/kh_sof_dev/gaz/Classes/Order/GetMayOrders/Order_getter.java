@@ -55,7 +55,7 @@ public class Order_getter implements Serializable {
 
 
     public String getId() {
-        return id;
+        return id != null ? id : "0";
     }
 
     public void setId(String id) {
@@ -185,46 +185,43 @@ public class Order_getter implements Serializable {
      * Instantiate the instance using the passed jsonObject to set the properties values
      */
 
-    public Order_getter(JSONObject jsonObject) throws JSONException {
-        if (jsonObject == null) {
-            return;
-        }
-        id = jsonObject.optString("_id");
+    public Order_getter(JSONObject jsonObject) {
         try {
-            delivery_date = jsonObject.optString("delivery_date");
-            delivery_time = jsonObject.optString("delivery_time");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        notes = jsonObject.optString("Notes");
-        statusId = jsonObject.optInt("StatusId");
-        total = jsonObject.optDouble("Total");
-        addressDetails = jsonObject.optString("addressDetails");
-        //city = jsonObject.optString("city");
-        createAt = jsonObject.optString("createAt");
-        deliveryCost = jsonObject.optDouble("deliveryCost");
-        JSONArray itemsJsonArray = jsonObject.optJSONArray("items");
-        if (itemsJsonArray != null) {
-            items = new ArrayList<>();
-            for (int i = 0; i < itemsJsonArray.length(); i++) {
-                JSONObject itemsObject = itemsJsonArray.optJSONObject(i);
-                items.add(new OrderProduct(itemsObject));
+
+            if (jsonObject == null) {
+                return;
             }
+            id = jsonObject.optString("_id");
+            try {
+                delivery_date = jsonObject.optString("delivery_date");
+                delivery_time = jsonObject.optString("delivery_time");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            notes = jsonObject.optString("Notes");
+            statusId = jsonObject.optInt("StatusId");
+            total = jsonObject.optDouble("Total");
+            addressDetails = jsonObject.optString("addressDetails");
+            //city = jsonObject.optString("city");
+            createAt = jsonObject.optString("createAt");
+            deliveryCost = jsonObject.optDouble("deliveryCost");
+            JSONArray itemsJsonArray = jsonObject.optJSONArray("items");
+            if (itemsJsonArray != null) {
+                items = new ArrayList<>();
+                for (int i = 0; i < itemsJsonArray.length(); i++) {
+                    JSONObject itemsObject = itemsJsonArray.optJSONObject(i);
+                    items.add(new OrderProduct(itemsObject));
+                }
 
-        }
-        lat = jsonObject.optDouble("lat");
-        lng = jsonObject.optDouble("lng");
-        paymentType = jsonObject.optInt("paymentType");
-        subTotal = jsonObject.optDouble("subTotal");
+            }
+            lat = jsonObject.optDouble("lat");
+            lng = jsonObject.optDouble("lng");
+            paymentType = jsonObject.optInt("paymentType");
+            subTotal = jsonObject.optDouble("subTotal");
 //
-        orderType = jsonObject.optInt("orderType");
-        userId = new user(jsonObject.optJSONObject("user_id"));
-        try {
-        } catch (Exception e) {
+            orderType = jsonObject.optInt("orderType");
+            userId = new user(jsonObject.optJSONObject("user_id"));
 
-
-        }
-        try {
             driverId = new DriverId(jsonObject.optJSONObject("driver_id"));
         } catch (Exception e) {
             e.printStackTrace();

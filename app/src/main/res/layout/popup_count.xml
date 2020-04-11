@@ -9,7 +9,7 @@
     android:paddingRight="5dp"
     android:paddingLeft="5dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="350dp"
         android:layout_height="70dp"
@@ -109,5 +109,5 @@
                 android:background="@drawable/bg_circle_count"
                 />
         </LinearLayout>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>

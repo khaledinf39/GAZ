@@ -3,7 +3,7 @@ package com.kh_sof_dev.gaz.Fragments;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,22 +23,20 @@ public class ForgotPassword extends Fragment {
 
     }
 
-    ImageView logout;
-    Button send;
-    EditText email;
+    private EditText email;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.layout_f_forgot_password, container, false);
-        email = (EditText) view.findViewById(R.id.email_et);
-        send = (Button) view.findViewById(R.id.send);
-        logout = (ImageView) view.findViewById(R.id.logout_btn);
+        email = view.findViewById(R.id.email_et);
+        Button send = view.findViewById(R.id.send);
+        ImageView logout = view.findViewById(R.id.logout_btn);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((Login) getActivity()).changeFragment(new LoginFrag());
+                getActivityForFragment().changeFragment(new LoginFrag());
 //                _goto(new LoginFrag());
             }
         });
@@ -65,7 +63,7 @@ public class ForgotPassword extends Fragment {
             email.setError(email.getHint());
             return;
         }
-        final ProgressDialog dialog = new ProgressDialog(getContext());
+        final ProgressDialog dialog = new ProgressDialog(getActivityForFragment());
         dialog.setTitle("إرسال كلمة المرور");
         dialog.setMessage("يتم إرسال كلمة المرور الى بريدك، نرجو الانتظار   !");
         dialog.show();
@@ -73,7 +71,7 @@ public class ForgotPassword extends Fragment {
         http_user.Post_forget_password(getContext(), "", email_, new Http_user.user_createListener() {
             @Override
             public void onSuccess(new_account new_account) {
-                Toast.makeText(getContext(), new_account.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivityForFragment(), new_account.getMessage(), Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
 
@@ -85,11 +83,14 @@ public class ForgotPassword extends Fragment {
             @Override
             public void onFailure(String msg) {
 
-                Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivityForFragment(), msg, Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
     }
 
+    private Login getActivityForFragment() {
+        return ((Login) getActivity());
+    }
 
 }

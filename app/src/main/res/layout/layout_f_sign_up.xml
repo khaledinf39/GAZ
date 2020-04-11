@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:weightSum="100"
     tools:context=".Fragments.SignUp">
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="10">
@@ -35,7 +35,7 @@
             app:layout_constraintTop_toTopOf="parent"
             />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -142,7 +142,7 @@
                        />
 
                </LinearLayout>
-               <android.support.constraint.ConstraintLayout
+               <androidx.constraintlayout.widget.ConstraintLayout
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    android:layout_marginTop="10dp"
@@ -179,9 +179,9 @@
                        android:layout_marginTop="10dp"
                        app:layout_constraintLeft_toLeftOf="@+id/account_typ_et"
                        />
-               </android.support.constraint.ConstraintLayout>
+               </androidx.constraintlayout.widget.ConstraintLayout>
 
-               <android.support.constraint.ConstraintLayout
+               <androidx.constraintlayout.widget.ConstraintLayout
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    android:layout_marginTop="10dp">
@@ -215,7 +215,7 @@
                        android:layout_marginTop="10dp"
                        app:layout_constraintLeft_toLeftOf="@+id/city_et"
                        />
-               </android.support.constraint.ConstraintLayout>
+               </androidx.constraintlayout.widget.ConstraintLayout>
 
 
                <EditText
@@ -260,7 +260,7 @@
                    android:layout_marginTop="38dp"
                    android:elevation="3dp"
                    />
-               <android.support.constraint.ConstraintLayout
+               <androidx.constraintlayout.widget.ConstraintLayout
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    android:orientation="horizontal"
@@ -291,7 +291,7 @@
                        app:layout_constraintTop_toTopOf="parent"
                        app:layout_constraintBottom_toBottomOf="parent"
                        />
-               </android.support.constraint.ConstraintLayout>
+               </androidx.constraintlayout.widget.ConstraintLayout>
 
            </LinearLayout>
        </RelativeLayout>

@@ -10,7 +10,7 @@
     android:background="@color/white"
     android:weightSum="100"
     tools:context=".activities.MyFavorites">
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="10">
@@ -46,17 +46,17 @@
             android:background="@color/line_lightgray"
             app:layout_constraintBottom_toBottomOf="parent"
             />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
    <ScrollView
        android:layout_width="match_parent"
        android:layout_height="0dp"
        android:layout_weight="90">
-       <android.support.constraint.ConstraintLayout
+       <androidx.constraintlayout.widget.ConstraintLayout
            android:layout_width="match_parent"
            android:layout_height="match_parent"
            android:orientation="vertical"
            >
-           <android.support.v7.widget.RecyclerView
+           <androidx.recyclerview.widget.RecyclerView
                android:id="@+id/RV"
                android:layout_width="match_parent"
                android:layout_height="match_parent"
@@ -74,6 +74,6 @@
                android:fontFamily="@font/cairo_semibold"
                android:gravity="center"
                android:layout_marginBottom="10dp"/>
-       </android.support.constraint.ConstraintLayout>
+       </androidx.constraintlayout.widget.ConstraintLayout>
    </ScrollView>
 </LinearLayout>

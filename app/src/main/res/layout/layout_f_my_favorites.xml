@@ -8,7 +8,7 @@
     android:background="@color/white"
     android:weightSum="100"
     tools:context=".activities.MyFavorites">
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="10">
@@ -43,13 +43,13 @@ android:layout_marginRight="60dp"
             android:background="@color/line_lightgray"
             app:layout_constraintBottom_toBottomOf="parent"
             />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
         android:layout_weight="90">
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/my_favorit_RV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

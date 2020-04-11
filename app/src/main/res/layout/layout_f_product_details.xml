@@ -17,7 +17,7 @@
         android:orientation="vertical"
         android:paddingBottom="10dp"
         >
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:layout_weight="10">
 
@@ -43,9 +43,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/back_btn"
                 app:layout_constraintTop_toTopOf="parent" />
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
            >
@@ -103,7 +103,7 @@ android:id="@+id/add_basket"
                 app:layout_constraintTop_toBottomOf="@+id/add_basket">
 
             </ImageView>
-           <android.support.constraint.ConstraintLayout
+           <androidx.constraintlayout.widget.ConstraintLayout
                android:id="@+id/details_lay"
                     app:layout_constraintTop_toBottomOf="@+id/img"
                     android:layout_width="match_parent"
@@ -315,7 +315,7 @@ android:id="@+id/add_basket"
                         app:layout_constraintTop_toBottomOf="@+id/tx9"
                         />
 
-                </android.support.constraint.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
@@ -336,7 +336,7 @@ android:id="@+id/add_basket"
                 app:layout_constraintTop_toBottomOf="@+id/details_lay"
                 />
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </ScrollView>
 

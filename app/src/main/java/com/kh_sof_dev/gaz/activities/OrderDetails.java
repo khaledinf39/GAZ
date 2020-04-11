@@ -5,10 +5,10 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -127,14 +127,14 @@ public class OrderDetails extends AppCompatActivity {
         cancelReq_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!cancelReq_et.getText().toString().trim().equals("")) {
-                    cancelReqDialog.dismiss();
+                if (reqDetail != null && !cancelReq_et.getText().toString().trim().equals("")) {
                     Http_orders request_post = new Http_orders();
                     request_post.Post_updateOrder(OrderDetails.this, reqDetail.getId(), 5, new Http_orders.OnOrder_geter_lisennter() {
                         @Override
                         public void onSuccess(show_order order) {
                             Toast.makeText(OrderDetails.this, "تم الغاء طلبك ", Toast.LENGTH_LONG).show();
                             cancelReq_tv.setVisibility(View.GONE);
+                            cancelReqDialog.dismiss();
                         }
 
                         @Override
@@ -146,6 +146,7 @@ public class OrderDetails extends AppCompatActivity {
                         public void onFailure(String msg) {
                             cancelReq_tv.setVisibility(View.GONE);
 //                            Toast.makeText(getContext(),msg,Toast.LENGTH_LONG).show();
+                            cancelReqDialog.dismiss();
                         }
                     });
                 }

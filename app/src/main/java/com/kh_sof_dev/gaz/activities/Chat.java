@@ -7,11 +7,13 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -39,7 +41,7 @@ public class Chat extends AppCompatActivity {
     ImageView Send_icon, back_btn, camera_icon;
     EditText msg_et;
     RecyclerView chat_RV;
-    public static String order_id;
+    public static final String order_id = "order_id";
     public Context context;
     Chat_adapter chatAdapter;
     List<NewMessage> msg_arraylist;
@@ -73,8 +75,10 @@ public class Chat extends AppCompatActivity {
 
         //************************DatabaseReference******************************/
 
-
-        reference = FirebaseDatabase.getInstance().getReference().child("messages").child(order_id);//"NewBranchForTesting"
+        String orderId = "0";
+        if (getIntent().hasExtra(order_id))
+            orderId = getIntent().getStringExtra(order_id);
+        reference = FirebaseDatabase.getInstance().getReference().child("messages").child(orderId != null ? orderId : "0");//"NewBranchForTesting"
         //***********************************************************************/
 
         //*******************************Actions*********************************/

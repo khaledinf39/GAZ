@@ -2,7 +2,6 @@ package com.kh_sof_dev.gaz.activities;
 
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -16,9 +15,9 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -155,7 +154,6 @@ public class TestLocation extends AppCompatActivity {
                 finish();
             }
         });
-        dialog.show();
         Button go_sitting = dialog.findViewById(R.id.open_sitting_btn);
         go_sitting.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,6 +164,7 @@ public class TestLocation extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
+        dialog.show();
 
 
     }

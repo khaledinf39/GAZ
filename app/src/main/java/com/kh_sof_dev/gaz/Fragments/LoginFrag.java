@@ -2,11 +2,7 @@ package com.kh_sof_dev.gaz.Fragments;
 
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,15 +14,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.hbb20.CountryCodePicker;
-import com.kh_sof_dev.gaz.activities.Login;
-import com.kh_sof_dev.gaz.activities.MainNew;
-import com.kh_sof_dev.gaz.Classes.User.Http_user;
-import com.kh_sof_dev.gaz.Classes.User.new_account;
-import com.kh_sof_dev.gaz.Classes.User.user_info;
-import com.kh_sof_dev.gaz.R;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -44,13 +35,21 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.hbb20.CountryCodePicker;
+import com.kh_sof_dev.gaz.Classes.User.Http_user;
+import com.kh_sof_dev.gaz.Classes.User.new_account;
+import com.kh_sof_dev.gaz.Classes.User.user_info;
+import com.kh_sof_dev.gaz.R;
+import com.kh_sof_dev.gaz.activities.Login;
+import com.kh_sof_dev.gaz.activities.MainNew;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
 
-import static android.content.Context.MODE_PRIVATE;
 import static com.facebook.FacebookSdk.getApplicationContext;
 import static com.facebook.internal.FacebookDialogFragment.TAG;
 
@@ -61,28 +60,22 @@ public class LoginFrag extends Fragment {
         // Required empty public constructor
     }
 
-    EditText phone, password;
-    TextView logup, forget;
-    Button login;
-    ImageView logout;
-    private AccessTokenTracker accessTokenTracker;
-    private LoginButton FaceBookButton;
+    private EditText phone, password;
     private CallbackManager callbackManager;
-    String number;
-    CountryCodePicker ccp;
-    String fcmtoken;
+    private String number;
+    private CountryCodePicker ccp;
+    private String fcmtoken;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        FacebookSdk.sdkInitialize(getActivity());
+        FacebookSdk.sdkInitialize(getActivityForFragment());
         callbackManager = CallbackManager.Factory.create();
         View view = inflater.inflate(R.layout.layout_f_loginfrag, container, false);
 
 
-
-        FirebaseApp.initializeApp(getContext());
+        FirebaseApp.initializeApp(getActivityForFragment());
         fcmtoken = FirebaseInstanceId.getInstance().getToken();
 
         final ProgressBar progressBar = view.findViewById(R.id.progress);
@@ -97,11 +90,13 @@ public class LoginFrag extends Fragment {
         });
 
 
-        FaceBookButton = (LoginButton) view.findViewById(R.id.loginButton);
-        FaceBookButton.setReadPermissions(Arrays.asList("email", "public_profile"));
+        LoginButton faceBookButton = view.findViewById(R.id.loginButton);
+        faceBookButton.setReadPermissions(Arrays.asList("email", "public_profile"));
         // Creating CallbackManager
 //        callbackManager = CallbackManager.Factory.create();
-        accessTokenTracker = new AccessTokenTracker() {
+        // This method is invoked everytime access token changes
+//        AccessTokenTracker accessTokenTracker =
+        new AccessTokenTracker() {
             // This method is invoked everytime access token changes
             @Override
             protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
@@ -109,7 +104,7 @@ public class LoginFrag extends Fragment {
 
             }
         };
-        FaceBookButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+        faceBookButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Toast.makeText(getApplicationContext(), "succ", Toast.LENGTH_SHORT).show();
@@ -130,18 +125,18 @@ public class LoginFrag extends Fragment {
         });
 
 
-        phone = (EditText) view.findViewById(R.id.phoneNo_et);
-        password = (EditText) view.findViewById(R.id.password_et);
-        logup = (TextView) view.findViewById(R.id.logup_tv);
-        forget = (TextView) view.findViewById(R.id.forget_tv);
-        login = (Button) view.findViewById(R.id.login_btn);
-        logout = (ImageView) view.findViewById(R.id.logout_btn);
-        ccp = (CountryCodePicker) view.findViewById(R.id.ccp);
+        phone = view.findViewById(R.id.phoneNo_et);
+        password = view.findViewById(R.id.password_et);
+        TextView logup = view.findViewById(R.id.logup_tv);
+        TextView forget = view.findViewById(R.id.forget_tv);
+        Button login = view.findViewById(R.id.login_btn);
+        ImageView logout = view.findViewById(R.id.logout_btn);
+        ccp = view.findViewById(R.id.ccp);
         ccp.registerCarrierNumberEditText(phone);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().finish();
+                getActivityForFragment().finish();
             }
         });
         login.setOnClickListener(new View.OnClickListener() {
@@ -150,16 +145,16 @@ public class LoginFrag extends Fragment {
                 if (verify()) {
                     progressBar.setVisibility(View.VISIBLE);
                     Http_user http_user = new Http_user();
-                    http_user.Post_Login(getContext(), fcmtoken, password.getText().toString()
+                    http_user.Post_Login(getActivityForFragment(), fcmtoken, password.getText().toString()
                             , number, new Http_user.user_loginListener() {
                                 @Override
                                 public Boolean onSuccess(new_account new_account) {
                                     progressBar.setVisibility(View.GONE);
-                                    Toast.makeText(getContext(), new_account.getMessage(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getActivityForFragment(), new_account.getMessage(), Toast.LENGTH_LONG).show();
                                     if (new_account.isStatus()) {
-                                        new user_info(new_account.getItems(), password.getText().toString(), getContext());
-                                        startActivity(new Intent(getContext(), MainNew.class));
-                                        getActivity().finish();
+                                        new user_info(new_account.getItems(), password.getText().toString(), getActivityForFragment());
+                                        startActivity(new Intent(getActivityForFragment(), MainNew.class));
+                                        getActivityForFragment().finish();
                                         return true;
                                     } else {
                                         return false;
@@ -173,8 +168,12 @@ public class LoginFrag extends Fragment {
 
                                 @Override
                                 public Boolean onFailure(String msg) {
-                                    progressBar.setVisibility(View.GONE);
-                                    Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
+                                    try {
+                                        progressBar.setVisibility(View.GONE);
+                                        Toast.makeText(getActivityForFragment(), msg, Toast.LENGTH_LONG).show();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
                                     return false;
                                 }
                             });
@@ -185,21 +184,21 @@ public class LoginFrag extends Fragment {
         forget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((Login) getActivity()).changeFragment(new ForgotPassword());
+                getActivityForFragment().changeFragment(new ForgotPassword());
 //                _goto(new ForgotPassword());
             }
         });
         logup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((Login) getActivity()).changeFragment(new SignUp());
+                getActivityForFragment().changeFragment(new SignUp());
 //                _goto(new SignUp());
             }
         });
         return view;
     }
 
-    int RC_SIGN_IN = 1;
+    private int RC_SIGN_IN = 1;
 
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
@@ -207,12 +206,12 @@ public class LoginFrag extends Fragment {
     }
 
     private void goMainScreen() {
-        Intent intent = new Intent(getContext(), MainNew.class);
+        Intent intent = new Intent(getActivityForFragment(), MainNew.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
-    GoogleSignInClient mGoogleSignInClient;
+    private GoogleSignInClient mGoogleSignInClient;
 
     private void login_with_google() {
 
@@ -220,29 +219,30 @@ public class LoginFrag extends Fragment {
                 .requestEmail()
                 .build();
         // Build a GoogleSignInClient with the options specified by gso.
-        mGoogleSignInClient = GoogleSignIn.getClient(getContext(), gso);
+        mGoogleSignInClient = GoogleSignIn.getClient(getActivityForFragment(), gso);
         // Check for existing Google Sign In account, if the user is already signed in
 // the GoogleSignInAccount will be non-null.
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getActivityForFragment());
         updateUI(account);
 
     }
 
     private void useLoginInformation(AccessToken accessToken) {
-        /**
+        /*
          Creating the GraphRequest to fetch user details
          1st Param - AccessToken
          2nd Param - Callback (which will be invoked once the request is successful)
          **/
-        GraphRequest request = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
+//        GraphRequest request =
+        GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
             //OnCompleted is invoked once the GraphRequest is successful
             @Override
             public void onCompleted(JSONObject object, GraphResponse response) {
                 try {
                     String name = object.getString("name");
                     String email = object.getString("email");
-                    String image = object.getJSONObject("picture").getJSONObject("data").getString("url");
-                    Toast.makeText(getContext(), name + email + "fb info", Toast.LENGTH_LONG).show();
+//                    String image = object.getJSONObject("picture").getJSONObject("data").getString("url");
+                    Toast.makeText(getActivityForFragment(), name + email + "fb info", Toast.LENGTH_LONG).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -259,9 +259,9 @@ public class LoginFrag extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        GoogleSignInAccount alreadyloggedAccount = GoogleSignIn.getLastSignedInAccount(getContext());
+        GoogleSignInAccount alreadyloggedAccount = GoogleSignIn.getLastSignedInAccount(getActivityForFragment());
         if (alreadyloggedAccount != null) {
-            Toast.makeText(getContext(), "Already Logged In" + alreadyloggedAccount.getDisplayName()
+            Toast.makeText(getActivityForFragment(), "Already Logged In" + alreadyloggedAccount.getDisplayName()
                     + alreadyloggedAccount.getEmail(), Toast.LENGTH_SHORT).show();
             // onLoggedIn(alreadyloggedAccount);
         } else {
@@ -287,17 +287,17 @@ public class LoginFrag extends Fragment {
 //
 //            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
 //            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
-            user_info user_info = new user_info(getContext());
+            user_info user_info = new user_info(getActivityForFragment());
             user_info.setPoint(2);
             user_info.setName(account.getGivenName());
             user_info.setGender(account.getFamilyName());
             user_info.setEmail(account.getEmail());
             try {
-                user_info.setImag(account.getPhotoUrl().toString());
+                user_info.setImag(String.valueOf(account.getPhotoUrl()));
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
-            ((Login) getActivity()).changeFragment(new SignUp(user_info));
+            getActivityForFragment().changeFragment(new SignUp(user_info));
 //            _goto(new SignUp(user_info));
             mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
@@ -308,9 +308,7 @@ public class LoginFrag extends Fragment {
 //                startActivity(intent);
                 }
             });
-//            Toast.makeText(getContext(),"googel login  "+account.getEmail()+account.getDisplayName(),Toast.LENGTH_LONG).show();
-        } else {
-
+//            Toast.makeText(getActivity(),"googel login  "+account.getEmail()+account.getDisplayName(),Toast.LENGTH_LONG).show();
         }
 
 
@@ -331,7 +329,7 @@ public class LoginFrag extends Fragment {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         Log.d("FRAGMENT", "onResultCalled");
 
-        Toast.makeText(getContext(), data.toString() + "", Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivityForFragment(), data.toString() + "", Toast.LENGTH_LONG).show();
     }
 
     // [START handleSignInResult]
@@ -374,4 +372,7 @@ public class LoginFrag extends Fragment {
 //        Login.fragmentTransaction.commit();
 //    }
 
+    private Login getActivityForFragment() {
+        return ((Login) getActivity());
+    }
 }
