@@ -84,10 +84,8 @@ public class MainNew extends AppCompatActivity implements NavigationView.OnNavig
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                if (fragmentManager == null)
-                    fragmentManager = getSupportFragmentManager();
-                if (fragmentTransaction == null)
-                    fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
                 if (fragment == null)
                     fragment = fragmentManager.findFragmentById(R.id.ContentLogin);
 
@@ -111,7 +109,7 @@ public class MainNew extends AppCompatActivity implements NavigationView.OnNavig
                 }
 
                 if (fragment != null) {
-                    fragmentTransaction.replace(R.id.ContentLogin, fragment).commit();
+                    fragmentTransaction.replace(R.id.ContentLogin, fragment);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
                 }

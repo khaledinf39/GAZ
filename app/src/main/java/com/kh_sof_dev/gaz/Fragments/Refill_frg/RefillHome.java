@@ -3,13 +3,17 @@ package com.kh_sof_dev.gaz.Fragments.Refill_frg;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -210,9 +214,8 @@ public class RefillHome extends Fragment {
                     return;
                 }
 
-                Intent intent = new Intent(getActivity(), ConfRefill.class);
-                intent.putExtra(Refill.order_type_s, order_type);
-                startActivity(intent);
+                checkOrderAvailable();
+
 //                MainNew.goto_(new ConfRefill(order_type), getContext());
 //        OutherActivty._goto(RefillHome.this,new ConfRefill(rellifHome),View.GONE );
             }
@@ -603,5 +606,33 @@ public class RefillHome extends Fragment {
         cal.add(Calendar.DATE, i);
         String convertedDate = dateFormat.format(cal.getTime());
         return convertedDate;
+    }
+
+    private void checkOrderAvailable() {
+        ProgressDialog dialog = new ProgressDialog(getContext());
+        dialog.setMessage("الرجاء الانتظار");
+        dialog.show();
+        new Http_products().Post_checkOrderAvailable(getContext(), date, new Http_products.productsListener() {
+            @Override
+            public void onSuccess(final show_products response) {
+                if (response != null && response.isStatus()) {
+                    Intent intent = new Intent(getActivity(), ConfRefill.class);
+                    intent.putExtra(Refill.order_type_s, order_type);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getActivity(), response.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onFailure(String msg) {
+
+            }
+        });
     }
 }

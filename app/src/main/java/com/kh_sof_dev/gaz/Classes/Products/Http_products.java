@@ -23,21 +23,28 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Http_products {
-    public interface categoriesListener{
+    public interface categoriesListener {
         void onSuccess(show_main_catigories catigories);
+
         void onStart();
+
         void onFailure(String msg);
     }
-    public interface productsListener{
+
+    public interface productsListener {
         void onSuccess(show_products products);
+
         void onStart();
+
         void onFailure(String msg);
     }
+
     private RequestQueue queue;
-    public void Getcatigories(final Context mcontext, int page, final categoriesListener listener)
-    {
-        try{ listener.onStart();
-            String url=mcontext.getString(R.string.api)+"api/category";
+
+    public void Getcatigories(final Context mcontext, int page, final categoriesListener listener) {
+        try {
+            listener.onStart();
+            String url = mcontext.getString(R.string.api) + "api/category";
 
 
             if (queue == null) {
@@ -46,8 +53,7 @@ public class Http_products {
             }
             // prepare the Request
             JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                    new Response.Listener<JSONObject>()
-                    {
+                    new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
                             // display response
@@ -61,94 +67,7 @@ public class Http_products {
 
                         }
                     },
-                    new Response.ErrorListener()
-                    {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-
-//                        Log.d("Error.Response", error.getMessage());
-                        }
-                    }
-            );
-
- queue.getCache().initialize();
-// add it to the RequestQueue
-        queue.add(getRequest);
-        queue.getCache().clear();
-        }catch (Exception ex){
-
-        }}
-    public void Get_top20_Products(final Context mcontext, final productsListener listener)
-    {
-        try{ listener.onStart();
-            String url=mcontext.getString(R.string.api)+"api/top20prodcuts";
-
-
-            if (queue == null) {
-                queue = Volley.newRequestQueue(mcontext);  // this = context
-                //Build.logError("Setting a new request queue");
-            }
-            // prepare the Request
-            JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                    new Response.Listener<JSONObject>()
-                    {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            // display response
-                            Log.d("Response", response.toString());
-                            listener.onSuccess(new show_products(response));
-
-
-                        }
-                    },
-                    new Response.ErrorListener()
-                    {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-
-//                        Log.d("Error.Response", error.getMessage());
-                        }
-                    }
-            );
-
-// add it to the RequestQueue
-            queue.getCache().clear();
-// add it to the RequestQueue
-            queue.add(getRequest);
-        }catch (Exception ex){
-
-        }}
-    public void Get_details_Products(final Context mcontext,final String pro_id, final productsListener listener)
-    {
-        try{ listener.onStart();
-            String url=mcontext.getString(R.string.api)+"api/getSingleProduct/"+pro_id;
-
-
-            if (queue == null) {
-                queue = Volley.newRequestQueue(mcontext);  // this = context
-                //Build.logError("Setting a new request queue");
-            }
-            // prepare the Request
-            JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                    new Response.Listener<JSONObject>()
-                    {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            // display response
-                            Log.d("Response", response.toString());
-                            try {
-                                show_products products=new show_products(response);
-                                products.getProducts().add(new Product(response.optJSONObject("items")));
-                                listener.onSuccess(products);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-
-                        }
-                    },
-                    new Response.ErrorListener()
-                    {
+                    new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
 
@@ -161,25 +80,112 @@ public class Http_products {
 // add it to the RequestQueue
             queue.add(getRequest);
             queue.getCache().clear();
-        }catch (Exception ex){
+        } catch (Exception ex) {
 
-        }}
-    public void Post_shearch_products(final  Context mcontext, final String prod_name, final productsListener listener ){
+        }
+    }
+
+    public void Get_top20_Products(final Context mcontext, final productsListener listener) {
+        try {
+            listener.onStart();
+            String url = mcontext.getString(R.string.api) + "api/top20prodcuts";
+
+
+            if (queue == null) {
+                queue = Volley.newRequestQueue(mcontext);  // this = context
+                //Build.logError("Setting a new request queue");
+            }
+            // prepare the Request
+            JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            // display response
+                            Log.d("Response", response.toString());
+                            listener.onSuccess(new show_products(response));
+
+
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+//                        Log.d("Error.Response", error.getMessage());
+                        }
+                    }
+            );
+
+// add it to the RequestQueue
+            queue.getCache().clear();
+// add it to the RequestQueue
+            queue.add(getRequest);
+        } catch (Exception ex) {
+
+        }
+    }
+
+    public void Get_details_Products(final Context mcontext, final String pro_id, final productsListener listener) {
+        try {
+            listener.onStart();
+            String url = mcontext.getString(R.string.api) + "api/getSingleProduct/" + pro_id;
+
+
+            if (queue == null) {
+                queue = Volley.newRequestQueue(mcontext);  // this = context
+                //Build.logError("Setting a new request queue");
+            }
+            // prepare the Request
+            JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            // display response
+                            Log.d("Response", response.toString());
+                            try {
+                                show_products products = new show_products(response);
+                                products.getProducts().add(new Product(response.optJSONObject("items")));
+                                listener.onSuccess(products);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+//                        Log.d("Error.Response", error.getMessage());
+                        }
+                    }
+            );
+
+            queue.getCache().initialize();
+// add it to the RequestQueue
+            queue.add(getRequest);
+            queue.getCache().clear();
+        } catch (Exception ex) {
+
+        }
+    }
+
+    public void Post_shearch_products(final Context mcontext, final String prod_name, final productsListener listener) {
         listener.onStart();
-        user_info user_info=new user_info(mcontext);
-        final String supplier_id=user_info.getSupplier_id(mcontext);
-        if (supplier_id.equals("")){
+        user_info user_info = new user_info(mcontext);
+        final String supplier_id = user_info.getSupplier_id(mcontext);
+        if (supplier_id.equals("")) {
             mcontext.startActivity(new Intent(mcontext, Login.class));
 
         }
-        if (queue==null){
+        if (queue == null) {
             queue = Volley.newRequestQueue(mcontext);  // this = context
         }
         ;//"http://httpbin.org/post";
-        final String url=mcontext.getString(R.string.api)+"api/search?page=0&limit=10";
+        final String url = mcontext.getString(R.string.api) + "api/search?page=0&limit=10";
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>()
-                {
+                new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         // response
@@ -197,8 +203,7 @@ public class Http_products {
 
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // error
@@ -206,13 +211,13 @@ public class Http_products {
                         listener.onFailure("Error.Response");
                     }
                 }
-        ){
+        ) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String>  param = new HashMap<String, String>();
-                param.put("name",prod_name);
-                param.put("supplier_id",supplier_id);
-               return  param;
+                Map<String, String> param = new HashMap<String, String>();
+                param.put("name", prod_name);
+                param.put("supplier_id", supplier_id);
+                return param;
             }
 
 
@@ -225,26 +230,26 @@ public class Http_products {
         // prepare the Request
 
     }
-    public void Post_products_category(final Context mcontext, final String categorie_id,final  int orderNB, int limit, int page, final productsListener listener){
+
+    public void Post_products_category(final Context mcontext, final String categorie_id, final int orderNB, int limit, int page, final productsListener listener) {
         listener.onStart();
 
-         user_info user_info=new user_info(mcontext);
-        final String supplier_id=user_info.getSupplier_id(mcontext);
-        if (supplier_id.equals("")){
+        user_info user_info = new user_info(mcontext);
+        final String supplier_id = user_info.getSupplier_id(mcontext);
+        if (supplier_id.equals("")) {
             mcontext.startActivity(new Intent(mcontext, Login.class));
 
         }
-Log.d("supllier_id","Http_prod line 237  :"+supplier_id);
+        Log.d("supllier_id", "Http_prod line 237  :" + supplier_id);
 
-        if (queue==null){
+        if (queue == null) {
             queue = Volley.newRequestQueue(mcontext);  // this = context
         }
         ;//"http://httpbin.org/post";
-        final String url=mcontext.getString(R.string.api)+"api/productscategory?page="+page+"&limit="+limit+"";
-        Log.d("produt url",url);
+        final String url = mcontext.getString(R.string.api) + "api/productscategory?page=" + page + "&limit=" + limit + "";
+        Log.d("produt url", url);
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>()
-                {
+                new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         // response
@@ -262,8 +267,7 @@ Log.d("supllier_id","Http_prod line 237  :"+supplier_id);
 
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // error
@@ -271,30 +275,30 @@ Log.d("supllier_id","Http_prod line 237  :"+supplier_id);
                         listener.onFailure("Error.Response");
                     }
                 }
-        ){
+        ) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String>  param = new HashMap<String, String>();
-                if (orderNB==4){
-                    param.put("isNewProduct","true");
-                    param.put("category_id","5c681f80ad8747623305f634");
+                Map<String, String> param = new HashMap<String, String>();
+                if (orderNB == 4) {
+                    param.put("isNewProduct", "true");
+                    param.put("category_id", "5c681f80ad8747623305f634");
                 }
-                    if (orderNB==2){
-                        param.put("isReplacement","true");
-                        param.put("category_id","5c681f80ad8747623305f634");
-                    }
-
-
-                    if (orderNB==3){
-                        param.put("category_id","5c8cb6c10a34fc002491f406");
-                    }
-                if (orderNB==1){
-                    param.put("category_id",categorie_id);
+                if (orderNB == 2) {
+                    param.put("isReplacement", "true");
+                    param.put("category_id", "5c681f80ad8747623305f634");
                 }
 
-                param.put("supplier_id",supplier_id);
 
-                return  param;
+                if (orderNB == 3) {
+                    param.put("category_id", "5c8cb6c10a34fc002491f406");
+                }
+                if (orderNB == 1) {
+                    param.put("category_id", categorie_id);
+                }
+
+                param.put("supplier_id", supplier_id);
+
+                return param;
             }
 
 
@@ -305,6 +309,67 @@ Log.d("supllier_id","Http_prod line 237  :"+supplier_id);
         queue.getCache().clear();
         // prepare the Request
 
+    }
+
+    public void Post_checkOrderAvailable(final Context mContext, final String date, final productsListener listener) {
+        listener.onStart();
+
+        user_info user_info = new user_info(mContext);
+        final String supplier_id = user_info.getSupplier_id(mContext);
+        if (supplier_id.equals("")) {
+            mContext.startActivity(new Intent(mContext, Login.class));
+
+        }
+        Log.d("supllier_id", "Http_prod line 237  :" + supplier_id);
+
+        if (queue == null) {
+            queue = Volley.newRequestQueue(mContext);  // this = context
+        }
+        ;//"http://httpbin.org/post";
+        final String url = mContext.getString(R.string.api) + "api/canOrder ";
+        Log.d("product url", url);
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // response
+                        Log.d("Response", response);
+                        JSONObject Jobject = null;
+                        try {
+                            Jobject = new JSONObject(response);
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                            listener.onFailure(e1.getMessage());
+                        }
+                        listener.onSuccess(new show_products(Jobject));
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                        Log.d("Error.Response", String.valueOf(error.getMessage()));
+                        listener.onFailure("Error.Response");
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> param = new HashMap<>();
+
+                param.put("supplier_id", supplier_id);
+                param.put("order_date", date);
+
+                return param;
+            }
+
+
+        };
+        queue.getCache().initialize();
+        queue.add(postRequest);
+        queue.getCache().clear();
     }
 
 }

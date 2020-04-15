@@ -5,7 +5,7 @@ import android.os.Build;
 import android.text.TextUtils;
 import android.widget.ImageView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 public class Utils {
 
@@ -14,9 +14,10 @@ public class Utils {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !url.startsWith("https")) {
                 url = url.replace("http", "https");
             }
-            Picasso.with(context)
-                    .load(url)
-                    .into(imageView);
+            Glide.with(context).load(url).into(imageView);
+//            Picasso.with(context)
+//                    .load(url)
+//                    .into(imageView);
         }
     }
 
@@ -25,10 +26,11 @@ public class Utils {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !url.startsWith("https")) {
                 url = url.replace("http", "https");
             }
-            Picasso.with(context)
-                    .load(url)
-                    .placeholder(placeholder)
-                    .into(imageView);
+            Glide.with(context).load(url).placeholder(placeholder).into(imageView);
+//            Picasso.with(context)
+//                    .load(url)
+//                    .placeholder(placeholder)
+//                    .into(imageView);
         }
     }
 }
