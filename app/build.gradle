@@ -26,8 +26,8 @@ android {
         applicationId "com.kh_sof_dev.gaz"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 26          //20-10-2019
-        versionName "1.1.2"                            //aliase gaz and pw 123456
+        versionCode 27         //16-04-2020
+        versionName "1.1.3"                            //aliase gaz and pw 123456
         // google account pw:Na-g59372 ,email: alnaqellalafthalf@gmail.com
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

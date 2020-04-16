@@ -71,6 +71,7 @@ public class Http_user {
                         // error
                         Log.d("Error.Response", String.valueOf(mcontext.getString(R.string.networke)));
                         lisenner.onFailure(String.valueOf(mcontext.getString(R.string.networke)));
+                        error.printStackTrace();
                     }
                 }
         ) {
@@ -95,6 +96,7 @@ public class Http_user {
 
 
                 }
+                Log.e("parameters", parameters.toString());
                 return parameters;
             }
         };
