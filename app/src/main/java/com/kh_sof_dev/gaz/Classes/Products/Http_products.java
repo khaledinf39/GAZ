@@ -13,6 +13,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.kh_sof_dev.gaz.Classes.User.user_info;
+import com.kh_sof_dev.gaz.MyApplication;
 import com.kh_sof_dev.gaz.R;
 import com.kh_sof_dev.gaz.activities.Login;
 
@@ -288,9 +289,8 @@ public class Http_products {
                     param.put("category_id", "5c681f80ad8747623305f634");
                 }
 
-
                 if (orderNB == 3) {
-                    param.put("category_id", "5c8cb6c10a34fc002491f406");
+                    param.put("category_id", MyApplication.PRODUCT_TANK_CATEGORY_ID);
                 }
                 if (orderNB == 1) {
                     param.put("category_id", categorie_id);

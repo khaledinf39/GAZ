@@ -37,13 +37,18 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.kh_sof_dev.gaz.Classes.Database.OrderDetails;
 import com.kh_sof_dev.gaz.Classes.Order.Http_orders;
 import com.kh_sof_dev.gaz.Classes.Order.testMyplace;
 import com.kh_sof_dev.gaz.Classes.User.user_info;
+import com.kh_sof_dev.gaz.MyApplication;
 import com.kh_sof_dev.gaz.R;
 
 import java.util.List;
 import java.util.Locale;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class Shipping extends AppCompatActivity implements OnMapReadyCallback {
     public static String locationAdd = "";
@@ -175,13 +180,19 @@ public class Shipping extends AppCompatActivity implements OnMapReadyCallback {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Maptyp == 2) {
-                    finish();
-//            MainNew._goto(Shipping.this, new Home(), View.VISIBLE);
-                } else {
-//            MainNew.goto_(new Refill(refillhome),getContext());
-                    finish();
+                Realm realm = Realm.getDefaultInstance();
+                RealmResults<com.kh_sof_dev.gaz.Classes.Database.OrderDetails> orderDetailsList = realm.where(com.kh_sof_dev.gaz.Classes.Database.OrderDetails.class).findAll();
+                for (OrderDetails orderDetails : orderDetailsList) {
+                    if (orderDetails.getCategoryId().equals(MyApplication.PRODUCT_TANK_CATEGORY_ID)){
+                        realm.beginTransaction();
+                        orderDetails.deleteFromRealm();
+                        realm.commitTransaction();
+                    }
                 }
+                Intent intent = new Intent(Shipping.this, MainNew.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
             }
         });
         location_tv = findViewById(R.id.address1_tv);

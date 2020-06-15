@@ -3,9 +3,11 @@ package com.kh_sof_dev.gaz.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,6 +20,7 @@ import com.kh_sof_dev.gaz.Classes.Products.Product;
 import com.kh_sof_dev.gaz.Classes.User.user_info;
 import com.kh_sof_dev.gaz.Classes.constant.Setting;
 import com.kh_sof_dev.gaz.Fragments.Refill_frg.RefillHome;
+import com.kh_sof_dev.gaz.MyApplication;
 import com.kh_sof_dev.gaz.R;
 
 import io.realm.Realm;
@@ -55,7 +58,7 @@ public class Payment extends AppCompatActivity implements View.OnClickListener {
         back.setOnClickListener(this);
 
 
-        if (order_typ == 1) {
+        if (order_typ == 1 || order_typ == 3) {
             Realm realm = Realm.getDefaultInstance();
             RealmResults<com.kh_sof_dev.gaz.Classes.Database.OrderDetails> orderDetailsList = realm.where(com.kh_sof_dev.gaz.Classes.Database.OrderDetails.class).findAll();
             for (OrderDetails orderDetails : orderDetailsList) {
@@ -78,7 +81,12 @@ public class Payment extends AppCompatActivity implements View.OnClickListener {
         }
 
         Setting setting = new Setting(this);
-        double delivry_ = setting.getDelivery() * price_ * 0.01;
+        double deliveryPrice;
+        if (order_typ != 3)
+            deliveryPrice = setting.getDelivery();
+        else
+            deliveryPrice = setting.getDeliveryTank();
+        double delivry_ = deliveryPrice * price_ * 0.01;
         double taxe = Double.valueOf((setting.getTax())) * price_ * 0.01;
         total = price_ + delivry_ + taxe;
     }
@@ -88,7 +96,13 @@ public class Payment extends AppCompatActivity implements View.OnClickListener {
         int id = v.getId();
         switch (id) {
             case R.id.back_btn:
-                startActivity(new Intent(this, Car.class));
+                if (order_typ != 3) {
+                    startActivity(new Intent(this, Car.class));
+                } else {
+                    Intent intent = new Intent(this, MainNew.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
                 finish();
 //                MainNew.goto_(new Car(), getContext());
                 break;
@@ -102,7 +116,7 @@ public class Payment extends AppCompatActivity implements View.OnClickListener {
                 intent.putExtra(ConfReservation1.note_s, getIntent().getStringExtra(ConfReservation1.note_s));
                 intent.putExtra(Refill.order_type_s, order_typ);
                 startActivity(intent);
-                finish();
+//                finish();
 //                MainNew.goto_(new ConfReservation1(payment_typ, order_typ), this);
                 break;
             case R.id.point_lay:
@@ -158,5 +172,21 @@ public class Payment extends AppCompatActivity implements View.OnClickListener {
                 cash.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_pay_ways2));
                 break;
         }
+    }
+
+    @Override
+    public void finish() {
+        if (order_typ == 3) {
+            Realm realm = Realm.getDefaultInstance();
+            RealmResults<com.kh_sof_dev.gaz.Classes.Database.OrderDetails> orderDetailsList = realm.where(com.kh_sof_dev.gaz.Classes.Database.OrderDetails.class).findAll();
+            for (OrderDetails orderDetails : orderDetailsList) {
+                if (orderDetails.getCategoryId().equals(MyApplication.PRODUCT_TANK_CATEGORY_ID)) {
+                    realm.beginTransaction();
+                    orderDetails.deleteFromRealm();
+                    realm.commitTransaction();
+                }
+            }
+        }
+        super.finish();
     }
 }

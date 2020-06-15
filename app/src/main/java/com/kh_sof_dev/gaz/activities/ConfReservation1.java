@@ -3,10 +3,12 @@ package com.kh_sof_dev.gaz.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +29,7 @@ import com.kh_sof_dev.gaz.Classes.Products.Product;
 import com.kh_sof_dev.gaz.Classes.User.user_info;
 import com.kh_sof_dev.gaz.Classes.constant.Setting;
 import com.kh_sof_dev.gaz.Fragments.Refill_frg.RefillHome;
+import com.kh_sof_dev.gaz.MyApplication;
 import com.kh_sof_dev.gaz.R;
 import com.wang.avi.AVLoadingIndicatorView;
 
@@ -101,6 +104,9 @@ public class ConfReservation1 extends AppCompatActivity implements View.OnClickL
 //        dbManager.close();
 
         fetch_order();
+
+        if (order_type == 3)
+            edit_car.setVisibility(View.GONE);
     }
 
     private String coupon = null;
@@ -147,8 +153,13 @@ public class ConfReservation1 extends AppCompatActivity implements View.OnClickL
 
     private void calculate(double price_, double discount) {
         final Setting setting = new Setting(this);
+        double deliveryPrice;
+        if (order_type != 3)
+            deliveryPrice = setting.getDelivery();
+        else
+            deliveryPrice = setting.getDeliveryTank();
         priceTV.setText(String.valueOf(price_));
-        delivryBase = qty * setting.getDelivery();
+        delivryBase = qty * deliveryPrice;
         if (discount > 0)
             delivry_ = delivryBase - (delivryBase * discount);
         else
@@ -185,7 +196,7 @@ public class ConfReservation1 extends AppCompatActivity implements View.OnClickL
 //        db.open();
 //        final List<Product> products = db.fetch_order();
 
-        if (order_type == 1) {
+        if (order_type == 1 || order_type == 3) {
             for (Product p : products) {
                 price_ = price_ + p.getPrice() * p.getQty();
                 qty = qty + p.getQty();
@@ -302,7 +313,24 @@ public class ConfReservation1 extends AppCompatActivity implements View.OnClickL
         int id = v.getId();
         switch (id) {
             case R.id.back_btn:
-                startActivity(new Intent(this, Car.class));
+
+                if (order_type == 3) {
+                    Realm realm = Realm.getDefaultInstance();
+                    RealmResults<com.kh_sof_dev.gaz.Classes.Database.OrderDetails> orderDetailsList = realm.where(com.kh_sof_dev.gaz.Classes.Database.OrderDetails.class).findAll();
+                    for (OrderDetails orderDetails : orderDetailsList) {
+                        if (orderDetails.getCategoryId().equals(MyApplication.PRODUCT_TANK_CATEGORY_ID)) {
+                            realm.beginTransaction();
+                            orderDetails.deleteFromRealm();
+                            realm.commitTransaction();
+                        }
+                    }
+                    Intent intent = new Intent(this, MainNew.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                } else
+                    startActivity(new Intent(this, Car.class));
+
 //                MainNew.goto_(new Car(), getContext());
                 break;
             case R.id.Edit_icon:

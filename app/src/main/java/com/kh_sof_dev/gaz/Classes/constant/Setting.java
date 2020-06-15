@@ -13,6 +13,7 @@ public class Setting {
     private String value;
     private Long ringe, tax;
     private double delivery;
+    private double deliveryTank;
     private Long nb_order;
 
     public Long getRinge() {
@@ -37,6 +38,14 @@ public class Setting {
 
     public void setDelivery(double delivery) {
         this.delivery = delivery;
+    }
+
+    public double getDeliveryTank() {
+        return deliveryTank;
+    }
+
+    public void setDeliveryTank(double deliveryTank) {
+        this.deliveryTank = deliveryTank;
     }
 
     public Long getNb_order() {
@@ -67,6 +76,7 @@ public class Setting {
             Ed.putLong("tax", setting.tax);
             Ed.putLong("ringe", setting.ringe);
             Ed.putLong("delivery", Double.doubleToRawLongBits(setting.delivery));
+            Ed.putLong("delivery_tank", Double.doubleToRawLongBits(setting.deliveryTank));
             Ed.apply();
             nb_order = setting.nb_order;
             tax = setting.tax;
@@ -85,6 +95,7 @@ public class Setting {
             tax = sp.getLong("tax", 0L);
             ringe = sp.getLong("ringe", 0L);
             delivery = Double.longBitsToDouble(sp.getLong("delivery", Double.doubleToRawLongBits(0)));
+            deliveryTank = Double.longBitsToDouble(sp.getLong("delivery_tank", Double.doubleToRawLongBits(0)));
         } catch (Exception e) {
             e.printStackTrace();
         }

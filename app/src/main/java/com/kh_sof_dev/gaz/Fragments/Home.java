@@ -4,6 +4,7 @@ package com.kh_sof_dev.gaz.Fragments;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
@@ -13,6 +14,7 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -231,6 +233,7 @@ public class Home extends Fragment {
                     long ring = 0L;
                     double tax = 0.0;
                     double delivery = 0.0;
+                    double deliveryTank = 0.0;
                     for (Setting i : setting.getItems()
                     ) {
                         switch (i.getName()) {
@@ -249,11 +252,14 @@ public class Home extends Fragment {
 //                                MainNew.delivery= i.getValue().longValue();
                                 break;
                         }
-
+                        if (i.getId().equals("5ee1dab07c213e044cc3bf25")) {
+                            deliveryTank = Double.parseDouble(i.getValue());
+                        }
                     }
                     Log.d("setting", tax + "   " + delivery);
                     Setting setting1 = new Setting(getActivity());
                     setting1.setDelivery(delivery);
+                    setting1.setDeliveryTank(deliveryTank);
                     tax = tax * 100;
                     setting1.setTax((long) tax);
                     setting1.setRinge(ring);

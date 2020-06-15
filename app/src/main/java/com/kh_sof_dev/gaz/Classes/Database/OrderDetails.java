@@ -12,6 +12,7 @@ public class OrderDetails extends RealmObject {
     private int quantity;
     private double price;
     private String image;
+    private String categoryId;
 
     public long getId() {
         return id;
@@ -59,5 +60,13 @@ public class OrderDetails extends RealmObject {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
     }
 }

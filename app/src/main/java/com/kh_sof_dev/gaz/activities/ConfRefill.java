@@ -113,7 +113,12 @@ public class ConfRefill extends AppCompatActivity {
         double total_;
         double taxe;
         price.setText(String.valueOf(price_));
-        delivry_ = qty * setting.getDelivery();
+        double deliveryPrice;
+        if (order_type != 3)
+            deliveryPrice = setting.getDelivery();
+        else
+            deliveryPrice = setting.getDeliveryTank();
+        delivry_ = qty * deliveryPrice;
         delivery.setText(String.valueOf(delivry_));
         taxe = setting.getTax() * price_ * 0.01;
         tax.setText(String.valueOf(taxe));

@@ -8,7 +8,8 @@ import com.facebook.FacebookSdk;
 import io.fabric.sdk.android.Fabric;
 import io.realm.Realm;
 
-public class MyApplication  extends Application {
+public class MyApplication extends Application {
+    public static final String PRODUCT_TANK_CATEGORY_ID = "5c8cb6c10a34fc002491f406";
 
     @Override
     public void onCreate() {

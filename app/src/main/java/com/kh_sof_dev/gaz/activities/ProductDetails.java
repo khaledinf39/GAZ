@@ -118,15 +118,23 @@ public class ProductDetails extends AppCompatActivity {
                         orderDetails.setPrice(mProduct.getPrice_buy_new());
                         orderDetails.setQuantity(1);
                         orderDetails.setImage(mProduct.getImage());
+                        orderDetails.setCategoryId(mProduct.getCategory_id());
                         realm.beginTransaction();
                         realm.copyToRealmOrUpdate(orderDetails);
                         realm.commitTransaction();
 //                        manager.open();
 //                        manager.insert_order(mProduct);
 //                        manager.close();
-                        basketCount();
-                        startActivity(new Intent(ProductDetails.this, Car.class));
-//                MainNew.goto_(new Car(), getContext());
+//                        basketCount();
+                        if (!mProduct.getCategory_id().equals("5c8cb6c10a34fc002491f406"))
+                            startActivity(new Intent(ProductDetails.this, Car.class));
+                        else {
+                            Intent intent = new Intent(ProductDetails.this, Shipping.class);
+                            intent.putExtra(Shipping.typ2_Order_1_test, 2);
+                            intent.putExtra(Shipping.order_type_s, 3);
+                            startActivity(intent);
+                        }
+                        //                MainNew.goto_(new Car(), getContext());
                     }
                 });
 
