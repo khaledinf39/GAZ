@@ -309,6 +309,26 @@ public class ConfReservation1 extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
+    public void onBackPressed() {
+        if (order_type == 3) {
+            Realm realm = Realm.getDefaultInstance();
+            RealmResults<com.kh_sof_dev.gaz.Classes.Database.OrderDetails> orderDetailsList = realm.where(com.kh_sof_dev.gaz.Classes.Database.OrderDetails.class).findAll();
+            for (OrderDetails orderDetails : orderDetailsList) {
+                if (orderDetails.getCategoryId().equals(MyApplication.PRODUCT_TANK_CATEGORY_ID)) {
+                    realm.beginTransaction();
+                    orderDetails.deleteFromRealm();
+                    realm.commitTransaction();
+                }
+            }
+            Intent intent = new Intent(this, MainNew.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        } else
+            super.onBackPressed();
+    }
+
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {

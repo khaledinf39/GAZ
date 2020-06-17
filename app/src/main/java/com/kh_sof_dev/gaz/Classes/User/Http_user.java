@@ -113,7 +113,7 @@ public class Http_user {
         String url = mcontext.getString(R.string.api)+"api/verfiy";//"http://httpbin.org/post";
 
         listenner.onStart();
-        StringRequest postRequest = new StringRequest(Request.Method.PUT, url,
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>()
                 {
                     @Override

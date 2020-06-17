@@ -16,12 +16,14 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -180,18 +182,20 @@ public class Shipping extends AppCompatActivity implements OnMapReadyCallback {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Realm realm = Realm.getDefaultInstance();
-                RealmResults<com.kh_sof_dev.gaz.Classes.Database.OrderDetails> orderDetailsList = realm.where(com.kh_sof_dev.gaz.Classes.Database.OrderDetails.class).findAll();
-                for (OrderDetails orderDetails : orderDetailsList) {
-                    if (orderDetails.getCategoryId().equals(MyApplication.PRODUCT_TANK_CATEGORY_ID)){
-                        realm.beginTransaction();
-                        orderDetails.deleteFromRealm();
-                        realm.commitTransaction();
+                if (order_type == 3) {
+                    Realm realm = Realm.getDefaultInstance();
+                    RealmResults<com.kh_sof_dev.gaz.Classes.Database.OrderDetails> orderDetailsList = realm.where(com.kh_sof_dev.gaz.Classes.Database.OrderDetails.class).findAll();
+                    for (OrderDetails orderDetails : orderDetailsList) {
+                        if (orderDetails.getCategoryId().equals(MyApplication.PRODUCT_TANK_CATEGORY_ID)) {
+                            realm.beginTransaction();
+                            orderDetails.deleteFromRealm();
+                            realm.commitTransaction();
+                        }
                     }
+                    Intent intent = new Intent(Shipping.this, MainNew.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
                 }
-                Intent intent = new Intent(Shipping.this, MainNew.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
                 finish();
             }
         });
@@ -437,5 +441,22 @@ public class Shipping extends AppCompatActivity implements OnMapReadyCallback {
 //                }
 //            };
 
-
+    @Override
+    public void onBackPressed() {
+        if (order_type == 3) {
+            Realm realm = Realm.getDefaultInstance();
+            RealmResults<com.kh_sof_dev.gaz.Classes.Database.OrderDetails> orderDetailsList = realm.where(com.kh_sof_dev.gaz.Classes.Database.OrderDetails.class).findAll();
+            for (OrderDetails orderDetails : orderDetailsList) {
+                if (orderDetails.getCategoryId().equals(MyApplication.PRODUCT_TANK_CATEGORY_ID)) {
+                    realm.beginTransaction();
+                    orderDetails.deleteFromRealm();
+                    realm.commitTransaction();
+                }
+            }
+            Intent intent = new Intent(Shipping.this, MainNew.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+        finish();
+    }
 }

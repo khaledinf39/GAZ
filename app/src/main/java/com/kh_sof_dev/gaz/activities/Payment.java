@@ -189,4 +189,11 @@ public class Payment extends AppCompatActivity implements View.OnClickListener {
         }
         super.finish();
     }
+
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
 }

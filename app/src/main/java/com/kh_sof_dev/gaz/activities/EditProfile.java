@@ -247,7 +247,7 @@ public class EditProfile extends AppCompatActivity {
         String url = "https://gazapp.herokuapp.com/api/updateUserAndroid";
 
         progressBar.setVisibility(View.VISIBLE);
-        StringRequest postRequest = new StringRequest(Request.Method.PUT, url,
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
