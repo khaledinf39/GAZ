@@ -183,7 +183,7 @@ public class Shipping extends AppCompatActivity implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 if (order_type == 3) {
-                    Realm realm = Realm.getDefaultInstance();
+                    Realm realm = MyApplication.getRealm();
                     RealmResults<com.kh_sof_dev.gaz.Classes.Database.OrderDetails> orderDetailsList = realm.where(com.kh_sof_dev.gaz.Classes.Database.OrderDetails.class).findAll();
                     for (OrderDetails orderDetails : orderDetailsList) {
                         if (orderDetails.getCategoryId().equals(MyApplication.PRODUCT_TANK_CATEGORY_ID)) {
@@ -444,7 +444,7 @@ public class Shipping extends AppCompatActivity implements OnMapReadyCallback {
     @Override
     public void onBackPressed() {
         if (order_type == 3) {
-            Realm realm = Realm.getDefaultInstance();
+            Realm realm = MyApplication.getRealm();
             RealmResults<com.kh_sof_dev.gaz.Classes.Database.OrderDetails> orderDetailsList = realm.where(com.kh_sof_dev.gaz.Classes.Database.OrderDetails.class).findAll();
             for (OrderDetails orderDetails : orderDetailsList) {
                 if (orderDetails.getCategoryId().equals(MyApplication.PRODUCT_TANK_CATEGORY_ID)) {

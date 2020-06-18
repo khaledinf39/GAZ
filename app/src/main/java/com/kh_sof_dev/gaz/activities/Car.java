@@ -18,6 +18,7 @@ import com.kh_sof_dev.gaz.Adapters.Basket_adapter;
 import com.kh_sof_dev.gaz.Classes.Database.OrderDetails;
 import com.kh_sof_dev.gaz.Classes.Products.Product;
 import com.kh_sof_dev.gaz.Classes.constant.Setting;
+import com.kh_sof_dev.gaz.MyApplication;
 import com.kh_sof_dev.gaz.R;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class Car extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_f_car);
 
-        realm = Realm.getDefaultInstance();
+        realm = MyApplication.getRealm();
 
 //        TextView notes = findViewById(R.id.notes_tv);
         count = findViewById(R.id.order_count_tv);

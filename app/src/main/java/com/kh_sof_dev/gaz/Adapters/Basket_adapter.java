@@ -1,8 +1,10 @@
 package com.kh_sof_dev.gaz.Adapters;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import com.kh_sof_dev.gaz.Classes.Database.OrderDetails;
 import com.kh_sof_dev.gaz.Classes.Products.Product;
 import com.kh_sof_dev.gaz.Classes.Utils;
+import com.kh_sof_dev.gaz.MyApplication;
 import com.kh_sof_dev.gaz.R;
 
 import java.util.List;
@@ -66,7 +69,7 @@ public class Basket_adapter extends RecyclerView.Adapter<Basket_adapter.ViewHold
         Log.d(TAG, "onBindViewHolder: called.");
 
 //        final DBManager dbManager = new DBManager(mContext);
-        final Realm realm = Realm.getDefaultInstance();
+        final Realm realm = MyApplication.getRealm();
         qty = mItems.get(position).getQty();
         holder.nb.setText(qty + "");
         holder.price.setText(mItems.get(position).getPrice().toString());

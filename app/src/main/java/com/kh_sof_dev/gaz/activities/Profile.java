@@ -18,6 +18,7 @@ import com.kh_sof_dev.gaz.Classes.Database.OrderDetails;
 import com.kh_sof_dev.gaz.Classes.Products.Product;
 import com.kh_sof_dev.gaz.Classes.User.user_info;
 import com.kh_sof_dev.gaz.Classes.Utils;
+import com.kh_sof_dev.gaz.MyApplication;
 import com.kh_sof_dev.gaz.R;
 
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ public class Profile extends AppCompatActivity {
         Rv_favor.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
         Rv_reser.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
 
-        Realm realm = Realm.getDefaultInstance();
+        Realm realm = MyApplication.getRealm();
         RealmResults<OrderDetails> orderDetailsList = realm.where(OrderDetails.class).findAll();
         List<Product> products = new ArrayList<>();
         for (OrderDetails orderDetails : orderDetailsList) {

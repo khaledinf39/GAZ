@@ -14,6 +14,7 @@ import android.widget.SearchView;
 
 import com.kh_sof_dev.gaz.Adapters.Search_adapter;
 import com.kh_sof_dev.gaz.Classes.Products.Product;
+import com.kh_sof_dev.gaz.MyApplication;
 import com.kh_sof_dev.gaz.R;
 
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class Search extends AppCompatActivity {
         searchRV.setLayoutManager(layoutManager);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, layoutManager.getOrientation());
         searchRV.addItemDecoration(dividerItemDecoration);
-        final Realm realm = Realm.getDefaultInstance();
+        final Realm realm = MyApplication.getRealm();
         RealmResults<com.kh_sof_dev.gaz.Classes.Database.Search> searches = realm.where(com.kh_sof_dev.gaz.Classes.Database.Search.class).findAll();
         List<Product> products = new ArrayList<>();
         for (com.kh_sof_dev.gaz.Classes.Database.Search search : searches) {

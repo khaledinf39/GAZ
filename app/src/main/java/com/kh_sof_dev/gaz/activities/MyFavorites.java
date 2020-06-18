@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import com.kh_sof_dev.gaz.Adapters.myFavoriteAdapter;
 import com.kh_sof_dev.gaz.Classes.Database.Best;
 import com.kh_sof_dev.gaz.Classes.Products.Product;
+import com.kh_sof_dev.gaz.MyApplication;
 import com.kh_sof_dev.gaz.R;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class MyFavorites extends AppCompatActivity {
         RecyclerView favorRV = findViewById(R.id.my_favorit_RV);
         favorRV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        Realm realm = Realm.getDefaultInstance();
+        Realm realm = MyApplication.getRealm();
         RealmResults<Best> orderDetailsListBest = realm.where(Best.class).findAll();
         List<Product> productsFav = new ArrayList<>();
         for (Best best : orderDetailsListBest) {

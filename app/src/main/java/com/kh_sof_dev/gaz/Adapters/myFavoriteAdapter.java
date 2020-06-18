@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.kh_sof_dev.gaz.Classes.Database.Best;
 import com.kh_sof_dev.gaz.Classes.Products.Product;
 import com.kh_sof_dev.gaz.Classes.Utils;
+import com.kh_sof_dev.gaz.MyApplication;
 import com.kh_sof_dev.gaz.R;
 import com.kh_sof_dev.gaz.activities.ProductDetails;
 
@@ -80,7 +81,7 @@ public class myFavoriteAdapter extends RecyclerView.Adapter<myFavoriteAdapter.Vi
         holder.delet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Realm realm = Realm.getDefaultInstance();
+                Realm realm = MyApplication.getRealm();
                 Best best = realm.where(Best.class).equalTo("id", mItems.get(position).getID_()).findFirst();
                 realm.beginTransaction();
                 assert best != null;

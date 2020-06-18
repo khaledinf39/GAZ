@@ -175,7 +175,7 @@ public class ConfReservation1 extends AppCompatActivity implements View.OnClickL
     int qty = 0;
 
     private void fetch_order() {
-        final Realm realm = Realm.getDefaultInstance();
+        final Realm realm = MyApplication.getRealm();
         RealmResults<com.kh_sof_dev.gaz.Classes.Database.OrderDetails> orderDetailsList = realm.where(com.kh_sof_dev.gaz.Classes.Database.OrderDetails.class).findAll();
         final List<Product> products = new ArrayList<>();
         for (OrderDetails orderDetails : orderDetailsList) {
@@ -311,7 +311,7 @@ public class ConfReservation1 extends AppCompatActivity implements View.OnClickL
     @Override
     public void onBackPressed() {
         if (order_type == 3) {
-            Realm realm = Realm.getDefaultInstance();
+            Realm realm = MyApplication.getRealm();
             RealmResults<com.kh_sof_dev.gaz.Classes.Database.OrderDetails> orderDetailsList = realm.where(com.kh_sof_dev.gaz.Classes.Database.OrderDetails.class).findAll();
             for (OrderDetails orderDetails : orderDetailsList) {
                 if (orderDetails.getCategoryId().equals(MyApplication.PRODUCT_TANK_CATEGORY_ID)) {
@@ -335,7 +335,7 @@ public class ConfReservation1 extends AppCompatActivity implements View.OnClickL
             case R.id.back_btn:
 
                 if (order_type == 3) {
-                    Realm realm = Realm.getDefaultInstance();
+                    Realm realm = MyApplication.getRealm();
                     RealmResults<com.kh_sof_dev.gaz.Classes.Database.OrderDetails> orderDetailsList = realm.where(com.kh_sof_dev.gaz.Classes.Database.OrderDetails.class).findAll();
                     for (OrderDetails orderDetails : orderDetailsList) {
                         if (orderDetails.getCategoryId().equals(MyApplication.PRODUCT_TANK_CATEGORY_ID)) {

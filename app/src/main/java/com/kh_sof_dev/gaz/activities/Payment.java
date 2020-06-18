@@ -59,7 +59,7 @@ public class Payment extends AppCompatActivity implements View.OnClickListener {
 
 
         if (order_typ == 1 || order_typ == 3) {
-            Realm realm = Realm.getDefaultInstance();
+            Realm realm = MyApplication.getRealm();
             RealmResults<com.kh_sof_dev.gaz.Classes.Database.OrderDetails> orderDetailsList = realm.where(com.kh_sof_dev.gaz.Classes.Database.OrderDetails.class).findAll();
             for (OrderDetails orderDetails : orderDetailsList) {
                 price_ = price_ + orderDetails.getPrice() * orderDetails.getQuantity();
@@ -177,7 +177,7 @@ public class Payment extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void finish() {
         if (order_typ == 3) {
-            Realm realm = Realm.getDefaultInstance();
+            Realm realm = MyApplication.getRealm();
             RealmResults<com.kh_sof_dev.gaz.Classes.Database.OrderDetails> orderDetailsList = realm.where(com.kh_sof_dev.gaz.Classes.Database.OrderDetails.class).findAll();
             for (OrderDetails orderDetails : orderDetailsList) {
                 if (orderDetails.getCategoryId().equals(MyApplication.PRODUCT_TANK_CATEGORY_ID)) {

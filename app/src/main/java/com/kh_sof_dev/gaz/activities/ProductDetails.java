@@ -16,6 +16,7 @@ import com.kh_sof_dev.gaz.Classes.Database.Best;
 import com.kh_sof_dev.gaz.Classes.Database.OrderDetails;
 import com.kh_sof_dev.gaz.Classes.Products.Product;
 import com.kh_sof_dev.gaz.Classes.Utils;
+import com.kh_sof_dev.gaz.MyApplication;
 import com.kh_sof_dev.gaz.R;
 
 import java.util.ArrayList;
@@ -49,7 +50,7 @@ public class ProductDetails extends AppCompatActivity {
         like = findViewById(R.id.like_btn);
         Button buy = findViewById(R.id.buy_btn);
         //***************************************intialise******************/
-        final Realm realm = Realm.getDefaultInstance();
+        final Realm realm = MyApplication.getRealm();
 //        final DBManager manager = new DBManager(this, new DBManager.OnAddOrder_listenner() {
 //            @Override
 //            public void add_basket(Boolean state) {
@@ -156,7 +157,7 @@ public class ProductDetails extends AppCompatActivity {
     }
 
     private void basketCount() {
-        Realm realm = Realm.getDefaultInstance();
+        Realm realm = MyApplication.getRealm();
         RealmResults<com.kh_sof_dev.gaz.Classes.Database.OrderDetails> orderDetailsList = realm.where(OrderDetails.class).findAll();
         long count = orderDetailsList.size();
 //        DBManager manager = new DBManager(this);
@@ -173,7 +174,7 @@ public class ProductDetails extends AppCompatActivity {
     }
 
     private Boolean like_function() {
-        Realm realm = Realm.getDefaultInstance();
+        Realm realm = MyApplication.getRealm();
         RealmResults<OrderDetails> orderDetailsList = realm.where(OrderDetails.class).findAll();
         List<Product> products = new ArrayList<>();
         for (OrderDetails orderDetails : orderDetailsList) {

@@ -37,6 +37,7 @@ import com.kh_sof_dev.gaz.Classes.constant.Http_get_constant;
 import com.kh_sof_dev.gaz.Classes.constant.Setting;
 import com.kh_sof_dev.gaz.Classes.constant.show_setting;
 import com.kh_sof_dev.gaz.Fragments.Refill_frg.Tab_home_gaz;
+import com.kh_sof_dev.gaz.MyApplication;
 import com.kh_sof_dev.gaz.R;
 import com.kh_sof_dev.gaz.activities.AllProducts;
 import com.kh_sof_dev.gaz.activities.Car;
@@ -213,7 +214,7 @@ public class Home extends Fragment {
 
     long getOrderCount() {
         long count_order = 0;
-        Realm realm = Realm.getDefaultInstance();
+        Realm realm = MyApplication.getRealm();
         RealmResults<OrderDetails> orderDetailsList = realm.where(OrderDetails.class).findAll();
         if (!orderDetailsList.isEmpty())
             count_order = orderDetailsList.size();
