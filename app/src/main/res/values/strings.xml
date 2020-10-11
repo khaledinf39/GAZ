@@ -21,6 +21,7 @@
 
     <string name="title_activity_main_new">Main</string>
     <string name="action_settings">Settings</string>
+<!--    <string name="api">https://apisgaz.souqgaz.com/</string>-->
     <string name="api">https://gazapp.herokuapp.com/</string>
 
 
