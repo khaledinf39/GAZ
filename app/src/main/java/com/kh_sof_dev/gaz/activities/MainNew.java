@@ -1,7 +1,10 @@
 package com.kh_sof_dev.gaz.activities;
 
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -17,6 +20,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -75,6 +79,39 @@ public class MainNew extends AppCompatActivity implements NavigationView.OnNavig
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
+        SharedPreferences sp = getSharedPreferences("Main", MODE_PRIVATE);
+        if (!sp.getBoolean("rate_app", false)) {
+            sp.edit().putBoolean("rate_app", true).apply();
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("تقييم التطبيق");
+            alertDialog.setMessage("نتمنى تقييمك لتطبيقنا من خلال المتجر");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "تقييم",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Uri uri = Uri.parse("market://details?id=" + getPackageName());
+                            Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                            // To count with Play market backstack, After pressing back button,
+                            // to taken back to our application, we need to add following flags to intent.
+                            goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                            goToMarket.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+                            goToMarket.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                            try {
+                                startActivity(goToMarket);
+                            } catch (ActivityNotFoundException e) {
+                                startActivity(new Intent(Intent.ACTION_VIEW,
+                                        Uri.parse("http://play.google.com/store/apps/details?id=" + getPackageName())));
+                            }
+                            dialog.dismiss();
+                        }
+                    });
+//            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "اغلاق",
+//                    new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            dialog.dismiss();
+//                        }
+//                    });
+            alertDialog.show();
+        }
 
         //***********************selecte home bar defealt***************/
         bottomNavigationView.setSelectedItemId(R.id.Home);
