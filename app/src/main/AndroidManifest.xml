@@ -88,7 +88,8 @@
 
 
         </activity>
-        <activity android:name=".activities.Logo">
+        <activity android:name=".activities.Logo"
+            android:exported="true">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -121,9 +122,9 @@
         <activity android:name=".activities.Search" />
         <activity android:name=".activities.SearchResults" />
 
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="d2cca9159707aeb74a5e8a636bf00585e97f446c" />
+<!--        <meta-data-->
+<!--            android:name="io.fabric.ApiKey"-->
+<!--            android:value="d2cca9159707aeb74a5e8a636bf00585e97f446c" />-->
     </application>
 
 </manifest>
