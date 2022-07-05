@@ -36,7 +36,7 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.hbb20.CountryCodePicker;
 import com.kh_sof_dev.gaz.Classes.User.Http_user;
 import com.kh_sof_dev.gaz.Classes.User.new_account;
@@ -76,7 +76,20 @@ public class LoginFrag extends Fragment {
 
 
         FirebaseApp.initializeApp(getActivityForFragment());
-        fcmtoken = FirebaseInstanceId.getInstance().getToken();
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        fcmtoken = task.getResult();
+                    }
+                });
+//        fcmtoken = FirebaseInstanceId.getInstance().getToken();
 
         final ProgressBar progressBar = view.findViewById(R.id.progress);
         login_with_google();

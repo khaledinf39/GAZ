@@ -1,10 +1,14 @@
 package com.kh_sof_dev.gaz.Fragments;
 
 
+import static com.facebook.internal.FacebookDialogFragment.TAG;
+
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,8 +23,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.hbb20.CountryCodePicker;
 import com.kh_sof_dev.gaz.Adapters.City_adapter;
 import com.kh_sof_dev.gaz.Classes.User.Http_user;
@@ -105,8 +111,20 @@ public class SignUp extends Fragment {
         ccp.registerCarrierNumberEditText(phone);
 
         FirebaseApp.initializeApp(getContext());
-        fcmtoken = FirebaseInstanceId.getInstance().getToken();
+//        fcmtoken = FirebaseInstanceId.getInstance().getToken();
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
 
+                        // Get new FCM registration token
+                        fcmtoken = task.getResult();
+                    }
+                });
         Loading_cities();
         Loading_data();
         city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
