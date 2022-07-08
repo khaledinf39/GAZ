@@ -1,15 +1,18 @@
 package com.kh_sof_dev.gaz.Classes.User;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.kh_sof_dev.gaz.Classes.Utils;
 import com.kh_sof_dev.gaz.activities.Login;
 import com.kh_sof_dev.gaz.R;
 
@@ -17,6 +20,7 @@ import com.kh_sof_dev.gaz.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -415,6 +419,9 @@ public class Http_user {
                 {
                     @Override
                     public void onResponse(String response) {
+                        if (!TextUtils.isEmpty(response)) {
+                            Utils.checkResponse(response);
+                        }
                         // response
                         Log.d("Response", response);
                         String jsonData = response;
@@ -442,6 +449,18 @@ public class Http_user {
                         // error
                         Log.d("Error.Response", String.valueOf(mcontext.getString(R.string.networke)));
                         lisenner.onFailure(String.valueOf(mcontext.getString(R.string.networke)));
+                        NetworkResponse response = error.networkResponse;
+                        try {
+                            if (response != null) {
+                                String res = new String(response.data, StandardCharsets.UTF_8);
+                                Log.e("error response", res);
+                                if (!TextUtils.isEmpty(res)) {
+                                    Utils.checkResponse(res);
+                                }
+                            }
+                        } catch (Exception e1) {
+                            e1.printStackTrace();
+                        }
                     }
                 }
         ) {

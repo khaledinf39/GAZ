@@ -2,9 +2,11 @@ package com.kh_sof_dev.gaz.Classes.Products;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -13,6 +15,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.kh_sof_dev.gaz.Classes.User.user_info;
+import com.kh_sof_dev.gaz.Classes.Utils;
 import com.kh_sof_dev.gaz.MyApplication;
 import com.kh_sof_dev.gaz.R;
 import com.kh_sof_dev.gaz.activities.Login;
@@ -20,6 +23,7 @@ import com.kh_sof_dev.gaz.activities.Login;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,6 +61,9 @@ public class Http_products {
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
+                            if (!TextUtils.isEmpty(response.toString())) {
+                                Utils.checkResponse(response.toString());
+                            }
                             // display response
                             Log.d("Response", response.toString());
                             try {
@@ -71,6 +78,18 @@ public class Http_products {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            NetworkResponse response = error.networkResponse;
+                            try {
+                                if (response != null) {
+                                    String res = new String(response.data, StandardCharsets.UTF_8);
+                                    Log.e("error response", res);
+                                    if (!TextUtils.isEmpty(res)) {
+                                        Utils.checkResponse(res);
+                                    }
+                                }
+                            } catch (Exception e1) {
+                                e1.printStackTrace();
+                            }
 
 //                        Log.d("Error.Response", error.getMessage());
                         }
@@ -101,6 +120,9 @@ public class Http_products {
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
+                            if (!TextUtils.isEmpty(response.toString())) {
+                                Utils.checkResponse(response.toString());
+                            }
                             // display response
                             Log.d("Response", response.toString());
                             listener.onSuccess(new show_products(response));
@@ -111,6 +133,18 @@ public class Http_products {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            NetworkResponse response = error.networkResponse;
+                            try {
+                                if (response != null) {
+                                    String res = new String(response.data, StandardCharsets.UTF_8);
+                                    Log.e("error response", res);
+                                    if (!TextUtils.isEmpty(res)) {
+                                        Utils.checkResponse(res);
+                                    }
+                                }
+                            } catch (Exception e1) {
+                                e1.printStackTrace();
+                            }
 
 //                        Log.d("Error.Response", error.getMessage());
                         }
@@ -141,6 +175,9 @@ public class Http_products {
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
+                            if (!TextUtils.isEmpty(response.toString())) {
+                                Utils.checkResponse(response.toString());
+                            }
                             // display response
                             Log.d("Response", response.toString());
                             try {
@@ -157,6 +194,18 @@ public class Http_products {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            NetworkResponse response = error.networkResponse;
+                            try {
+                                if (response != null) {
+                                    String res = new String(response.data, StandardCharsets.UTF_8);
+                                    Log.e("error response", res);
+                                    if (!TextUtils.isEmpty(res)) {
+                                        Utils.checkResponse(res);
+                                    }
+                                }
+                            } catch (Exception e1) {
+                                e1.printStackTrace();
+                            }
 
 //                        Log.d("Error.Response", error.getMessage());
                         }
@@ -189,6 +238,9 @@ public class Http_products {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        if (!TextUtils.isEmpty(response)) {
+                            Utils.checkResponse(response);
+                        }
                         // response
                         Log.d("Response", response);
                         String jsonData = response;
@@ -210,6 +262,18 @@ public class Http_products {
                         // error
                         Log.d("Error.Response", String.valueOf(error.getMessage()));
                         listener.onFailure("Error.Response");
+                        NetworkResponse response = error.networkResponse;
+                        try {
+                            if (response != null) {
+                                String res = new String(response.data, StandardCharsets.UTF_8);
+                                Log.e("error response", res);
+                                if (!TextUtils.isEmpty(res)) {
+                                    Utils.checkResponse(res);
+                                }
+                            }
+                        } catch (Exception e1) {
+                            e1.printStackTrace();
+                        }
                     }
                 }
         ) {
@@ -253,6 +317,9 @@ public class Http_products {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        if (!TextUtils.isEmpty(response)) {
+                            Utils.checkResponse(response);
+                        }
                         // response
                         Log.d("Response", response);
                         String jsonData = response;
@@ -274,6 +341,18 @@ public class Http_products {
                         // error
                         Log.d("Error.Response", String.valueOf(error.getMessage()));
                         listener.onFailure("Error.Response");
+                        NetworkResponse response = error.networkResponse;
+                        try {
+                            if (response != null) {
+                                String res = new String(response.data, StandardCharsets.UTF_8);
+                                Log.e("error response", res);
+                                if (!TextUtils.isEmpty(res)) {
+                                    Utils.checkResponse(res);
+                                }
+                            }
+                        } catch (Exception e1) {
+                            e1.printStackTrace();
+                        }
                     }
                 }
         ) {
@@ -332,6 +411,9 @@ public class Http_products {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        if (!TextUtils.isEmpty(response)) {
+                            Utils.checkResponse(response);
+                        }
                         // response
                         Log.d("Response", response);
                         JSONObject Jobject = null;
@@ -352,6 +434,18 @@ public class Http_products {
                         error.printStackTrace();
                         Log.d("Error.Response", String.valueOf(error.getMessage()));
                         listener.onFailure("Error.Response");
+                        NetworkResponse response = error.networkResponse;
+                        try {
+                            if (response != null) {
+                                String res = new String(response.data, StandardCharsets.UTF_8);
+                                Log.e("error response", res);
+                                if (!TextUtils.isEmpty(res)) {
+                                    Utils.checkResponse(res);
+                                }
+                            }
+                        } catch (Exception e1) {
+                            e1.printStackTrace();
+                        }
                     }
                 }
         ) {

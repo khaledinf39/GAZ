@@ -1,10 +1,12 @@
 package com.kh_sof_dev.gaz.Classes.Order;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -16,63 +18,80 @@ import com.kh_sof_dev.gaz.Classes.Order.coupon.test_coupon;
 import com.kh_sof_dev.gaz.Classes.Order.point.show_points;
 import com.kh_sof_dev.gaz.Classes.Order.supplier.near_supplier;
 import com.kh_sof_dev.gaz.Classes.User.user_info;
+import com.kh_sof_dev.gaz.Classes.Utils;
 import com.kh_sof_dev.gaz.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Http_orders {
-    RequestQueue queue=null;
-    public interface OnOrder_lisennter{
+    RequestQueue queue = null;
+
+    public interface OnOrder_lisennter {
         void onSuccess(send_order order);
 
         void onStart();
+
         void onFailure(String msg);
     }
-    public interface OnOrder_geter_lisennter{
+
+    public interface OnOrder_geter_lisennter {
         void onSuccess(show_order order);
 
         void onStart();
+
         void onFailure(String msg);
     }
-    public interface Ontestplace_lisennter{
+
+    public interface Ontestplace_lisennter {
         void onSuccess(testMyplace test);
 
         void onStart();
+
         void onFailure(String msg);
     }
-    public interface Onsupplier_place_lisennter{
+
+    public interface Onsupplier_place_lisennter {
         void onSuccess(near_supplier near_supplier);
 
         void onStart();
+
         void onFailure(String msg);
     }
-    public interface OnPoint_lisennter{
+
+    public interface OnPoint_lisennter {
         void onSuccess(show_points show_points);
 
         void onStart();
+
         void onFailure(String msg);
     }
-    public interface OnCoupon_lisennter{
+
+    public interface OnCoupon_lisennter {
         void onSuccess(test_coupon test_coupon);
 
         void onStart();
+
         void onFailure(String msg);
     }
-    public void Post_test_coupon(final  Context mcontext,final String coupon_txt,final OnCoupon_lisennter listener){
+
+    public void Post_test_coupon(final Context mcontext, final String coupon_txt, final OnCoupon_lisennter listener) {
         listener.onStart();
         RequestQueue queue = Volley.newRequestQueue(mcontext);  // this = context
-        String url = mcontext.getString(R.string.api)+"api/coupon/checkCoupon";
-        final user_info user_info=new user_info(mcontext);
+        String url = mcontext.getString(R.string.api) + "api/coupon/checkCoupon";
+        final user_info user_info = new user_info(mcontext);
 
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>()
-                {
+                new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        if (!TextUtils.isEmpty(response)) {
+                            Utils.checkResponse(response);
+                        }
                         // response
                         Log.d("Response", response);
                         String jsonData = response;
@@ -83,7 +102,7 @@ public class Http_orders {
                             e1.printStackTrace();
                         }
                         try {
-                            test_coupon test_coupon_=new test_coupon(Jobject);
+                            test_coupon test_coupon_ = new test_coupon(Jobject);
                             listener.onSuccess(test_coupon_);
 
 //                            mOrder_.setmCoupon(test_coupon_.getOrdergetters());
@@ -94,32 +113,42 @@ public class Http_orders {
 
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // error
                         Log.d("Error.Response", String.valueOf(error.getMessage()));
                         listener.onFailure("Error.Response");
+                        NetworkResponse response = error.networkResponse;
+                        try {
+                            if (response != null) {
+                                String res = new String(response.data, StandardCharsets.UTF_8);
+                                Log.e("error response", res);
+                                if (!TextUtils.isEmpty(res)) {
+                                    Utils.checkResponse(res);
+                                }
+                            }
+                        } catch (Exception e1) {
+                            e1.printStackTrace();
+                        }
                     }
                 }
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String>  Header = new HashMap<String, String>();
+                Map<String, String> Header = new HashMap<String, String>();
 //
-                Header.put("token",user_info.getToken());
+                Header.put("token", user_info.getToken());
 
 
                 return Header;
             }
 
             @Override
-            protected Map<String, String> getParams()
-            {
-                Map<String, String>  parameters = new HashMap<String, String>();
+            protected Map<String, String> getParams() {
+                Map<String, String> parameters = new HashMap<String, String>();
 //
-                parameters.put("coupon",coupon_txt);
+                parameters.put("coupon", coupon_txt);
 
                 return parameters;
             }
@@ -132,17 +161,17 @@ public class Http_orders {
 
     }
 
-    public void Post_send_Order(final Context mcontext, final JSONObject cart , final OnOrder_lisennter listener){
-        if (queue==null){
+    public void Post_send_Order(final Context mcontext, final JSONObject cart, final OnOrder_lisennter listener) {
+        if (queue == null) {
             queue = Volley.newRequestQueue(mcontext);
         }
 
-        String url =mcontext.getString(R.string.api)+"api/order";
-        final user_info user_info=new user_info(mcontext);
-       // POST parameters
+        String url = mcontext.getString(R.string.api) + "api/order";
+        final user_info user_info = new user_info(mcontext);
+        // POST parameters
 
-        Log.d("parameter",cart.toString());
-        Log.d("parameter",user_info.getToken());
+        Log.d("parameter", cart.toString());
+        Log.d("parameter", user_info.getToken());
 
 // Request a json response from the provided URL
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
@@ -150,30 +179,46 @@ public class Http_orders {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
-                        Log.d("response",jsonObject.toString());
+                        if (!TextUtils.isEmpty(jsonObject.toString())) {
+                            Utils.checkResponse(jsonObject.toString());
+                        }
+                        Log.d("response", jsonObject.toString());
                         listener.onSuccess(new send_order(jsonObject));
                     }
-                }, new Response.ErrorListener (){
+                }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                Toast.makeText(mcontext,cart.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(mcontext, cart.toString(), Toast.LENGTH_LONG).show();
                 listener.onFailure(volleyError.toString());
-                Log.d("response_error",volleyError.toString());
+                Log.d("response_error", volleyError.toString());
                 volleyError.printStackTrace();
+                NetworkResponse response = volleyError.networkResponse;
+                try {
+                    if (response != null) {
+                        String res = new String(response.data, StandardCharsets.UTF_8);
+                        Log.e("error response", res);
+                        if (!TextUtils.isEmpty(res)) {
+                            Utils.checkResponse(res);
+                        }
+                    }
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
             }
         }
-        ){
+        ) {
             @Override
-            public Map<String, String> getHeaders()  {
-                Map<String, String>  Headers = new HashMap<String, String>();
-                Headers.put("token",user_info.getToken());
-                Headers.put("Accept","application/json");
-                Headers.put("Content-Type","application/json");
+            public Map<String, String> getHeaders() {
+                Map<String, String> Headers = new HashMap<String, String>();
+                Headers.put("token", user_info.getToken());
+                Headers.put("Accept", "application/json");
+                Headers.put("Content-Type", "application/json");
                 return Headers;
             }
+
             @Override
-            public String getBodyContentType(){
+            public String getBodyContentType() {
                 return "application/json";
             }
         };
@@ -187,12 +232,11 @@ public class Http_orders {
 
     }
 
-    public void GetMy_Order(final Context mcontext, String req_nb, int limit, int page, final OnOrder_geter_lisennter listener)
-    {
-        user_info user_info_=new user_info(mcontext);
+    public void GetMy_Order(final Context mcontext, String req_nb, int limit, int page, final OnOrder_geter_lisennter listener) {
+        user_info user_info_ = new user_info(mcontext);
         listener.onStart();
-        String url=mcontext.getString(R.string.api)+"api/getUserOrder?id="+user_info_.getId()+"&staustId="+req_nb+"&page="+page+"&limit="+ limit +"";
-        Log.d("my Order",url);
+        String url = mcontext.getString(R.string.api) + "api/getUserOrder?id=" + user_info_.getId() + "&staustId=" + req_nb + "&page=" + page + "&limit=" + limit + "";
+        Log.d("my Order", url);
         if (queue == null) {
             queue = Volley.newRequestQueue(mcontext);  // this = context
             //Build.logError("Setting a new request queue");
@@ -200,10 +244,12 @@ public class Http_orders {
 
         // prepare the Request
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>()
-                {
+                new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        if (!TextUtils.isEmpty(response.toString())) {
+                            Utils.checkResponse(response.toString());
+                        }
                         // display response
                         Log.d("Response", response.toString());
                         listener.onSuccess(new show_order(response));
@@ -211,10 +257,21 @@ public class Http_orders {
 
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        NetworkResponse response = error.networkResponse;
+                        try {
+                            if (response != null) {
+                                String res = new String(response.data, StandardCharsets.UTF_8);
+                                Log.e("error response", res);
+                                if (!TextUtils.isEmpty(res)) {
+                                    Utils.checkResponse(res);
+                                }
+                            }
+                        } catch (Exception e1) {
+                            e1.printStackTrace();
+                        }
 
 //                        Log.d("Error.Response", mcontext.getString(R.string.networke));
                     }
@@ -227,10 +284,11 @@ public class Http_orders {
         queue.add(getRequest);
         queue.getCache().clear();
     }
-    public void Get_TestMyPlace(final Context mcontext,Double lat,Double lng, final Ontestplace_lisennter listener){
-       // user_info user_info_=new user_info(mcontext);
+
+    public void Get_TestMyPlace(final Context mcontext, Double lat, Double lng, final Ontestplace_lisennter listener) {
+        // user_info user_info_=new user_info(mcontext);
         listener.onStart();
-        String url=mcontext.getString(R.string.api)+"api/checkAvailableDrivers";
+        String url = mcontext.getString(R.string.api) + "api/checkAvailableDrivers";
         if (queue == null) {
             queue = Volley.newRequestQueue(mcontext);  // this = context
             //Build.logError("Setting a new request queue");
@@ -247,10 +305,12 @@ public class Http_orders {
         Log.d("parrameter", jsonObject.toString());
         // prepare the Request
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
-                new Response.Listener<JSONObject>()
-                {
+                new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        if (!TextUtils.isEmpty(response.toString())) {
+                            Utils.checkResponse(response.toString());
+                        }
                         // display response
                         Log.d("Response", response.toString());
                         try {
@@ -262,11 +322,22 @@ public class Http_orders {
 
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-listener.onFailure(mcontext.getString(R.string.networke)+"لا وجود لسائقين في هذه المنطقة ");
+                        listener.onFailure(mcontext.getString(R.string.networke) + "لا وجود لسائقين في هذه المنطقة ");
+                        NetworkResponse response = error.networkResponse;
+                        try {
+                            if (response != null) {
+                                String res = new String(response.data, StandardCharsets.UTF_8);
+                                Log.e("error response", res);
+                                if (!TextUtils.isEmpty(res)) {
+                                    Utils.checkResponse(res);
+                                }
+                            }
+                        } catch (Exception e1) {
+                            e1.printStackTrace();
+                        }
 //                        Log.d("Error.Response", mcontext.getString(R.string.networke));
                     }
                 }
@@ -278,10 +349,11 @@ listener.onFailure(mcontext.getString(R.string.networke)+"لا وجود لسائ
         queue.add(getRequest);
         queue.getCache().clear();
     }
-    public void Get_MyPlaceSupp(final Context mcontext,Double lat,Double lng, final Onsupplier_place_lisennter listener){
+
+    public void Get_MyPlaceSupp(final Context mcontext, Double lat, Double lng, final Onsupplier_place_lisennter listener) {
         // user_info user_info_=new user_info(mcontext);
         listener.onStart();
-        String url=mcontext.getString(R.string.api)+"api/checkAvailableSupplier";
+        String url = mcontext.getString(R.string.api) + "api/checkAvailableSupplier";
         if (queue == null) {
             queue = Volley.newRequestQueue(mcontext);  // this = context
             //Build.logError("Setting a new request queue");
@@ -298,10 +370,12 @@ listener.onFailure(mcontext.getString(R.string.networke)+"لا وجود لسائ
         Log.d("parrameter", jsonObject.toString());
         // prepare the Request
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
-                new Response.Listener<JSONObject>()
-                {
+                new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        if (!TextUtils.isEmpty(response.toString())) {
+                            Utils.checkResponse(response.toString());
+                        }
                         // display response
                         Log.d("Response", response.toString());
                         try {
@@ -313,11 +387,22 @@ listener.onFailure(mcontext.getString(R.string.networke)+"لا وجود لسائ
 
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        listener.onFailure(mcontext.getString(R.string.networke)+"لا وجود لسائقين في هذه المنطقة ");
+                        listener.onFailure(mcontext.getString(R.string.networke) + "لا وجود لسائقين في هذه المنطقة ");
+                        NetworkResponse response = error.networkResponse;
+                        try {
+                            if (response != null) {
+                                String res = new String(response.data, StandardCharsets.UTF_8);
+                                Log.e("error response", res);
+                                if (!TextUtils.isEmpty(res)) {
+                                    Utils.checkResponse(res);
+                                }
+                            }
+                        } catch (Exception e1) {
+                            e1.printStackTrace();
+                        }
 //                        Log.d("Error.Response", mcontext.getString(R.string.networke));
                     }
                 }
@@ -331,12 +416,11 @@ listener.onFailure(mcontext.getString(R.string.networke)+"لا وجود لسائ
     }
 
 
-    public void Getdetails_Order(final Context mcontext,String order_id, final OnOrder_geter_lisennter listener)
-    {
-        user_info user_info_=new user_info(mcontext);
+    public void Getdetails_Order(final Context mcontext, String order_id, final OnOrder_geter_lisennter listener) {
+        user_info user_info_ = new user_info(mcontext);
         listener.onStart();
-        String url=mcontext.getString(R.string.api)+"api/getOrderDetails?id="+order_id;
-        Log.d("url",url);
+        String url = mcontext.getString(R.string.api) + "api/getOrderDetails?id=" + order_id;
+        Log.d("url", url);
         if (queue == null) {
             queue = Volley.newRequestQueue(mcontext);  // this = context
             //Build.logError("Setting a new request queue");
@@ -344,10 +428,12 @@ listener.onFailure(mcontext.getString(R.string.networke)+"لا وجود لسائ
 
         // prepare the Request
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>()
-                {
+                new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        if (!TextUtils.isEmpty(response.toString())) {
+                            Utils.checkResponse(response.toString());
+                        }
                         // display response
                         Log.d("Response", response.toString());
                         listener.onSuccess(new show_order(response));
@@ -355,10 +441,21 @@ listener.onFailure(mcontext.getString(R.string.networke)+"لا وجود لسائ
 
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        NetworkResponse response = error.networkResponse;
+                        try {
+                            if (response != null) {
+                                String res = new String(response.data, StandardCharsets.UTF_8);
+                                Log.e("error response", res);
+                                if (!TextUtils.isEmpty(res)) {
+                                    Utils.checkResponse(res);
+                                }
+                            }
+                        } catch (Exception e1) {
+                            e1.printStackTrace();
+                        }
 
 //                        Log.d("Error.Response", mcontext.getString(R.string.networke));
                     }
@@ -372,18 +469,20 @@ listener.onFailure(mcontext.getString(R.string.networke)+"لا وجود لسائ
         queue.getCache().clear();
     }
 
-    public void Post_PostADD_rat(final  Context mcontext, final String order_id, final String comment,
-                                 final int rat_score, final OnOrder_geter_lisennter listener ){
-        final user_info user_info_=new user_info(mcontext);
+    public void Post_PostADD_rat(final Context mcontext, final String order_id, final String comment,
+                                 final int rat_score, final OnOrder_geter_lisennter listener) {
+        final user_info user_info_ = new user_info(mcontext);
         listener.onStart();
         RequestQueue queue = Volley.newRequestQueue(mcontext);  // this = context
-        String url = mcontext.getString(R.string.api)+"api/addRate?id="+order_id;
+        String url = mcontext.getString(R.string.api) + "api/addRate?id=" + order_id;
 
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>()
-                {
+                new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        if (!TextUtils.isEmpty(response)) {
+                            Utils.checkResponse(response);
+                        }
                         // response
                         Log.d("Response", response);
                         String jsonData = response;
@@ -396,56 +495,63 @@ listener.onFailure(mcontext.getString(R.string.networke)+"لا وجود لسائ
 
                         listener.onSuccess(new show_order(Jobject));
 
-
-
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // error
                         Log.d("Error.Response", String.valueOf(mcontext.getString(R.string.networke)));
                         listener.onFailure(mcontext.getString(R.string.networke));
+                        NetworkResponse response = error.networkResponse;
+                        try {
+                            if (response != null) {
+                                String res = new String(response.data, StandardCharsets.UTF_8);
+                                Log.e("error response", res);
+                                if (!TextUtils.isEmpty(res)) {
+                                    Utils.checkResponse(res);
+                                }
+                            }
+                        } catch (Exception e1) {
+                            e1.printStackTrace();
+                        }
                     }
                 }
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String>  Header = new HashMap<String, String>();
+                Map<String, String> Header = new HashMap<String, String>();
 //
-                Header.put("token",user_info_.getToken());
+                Header.put("token", user_info_.getToken());
 
 
                 return Header;
             }
 
             @Override
-            protected Map<String, String> getParams()
-            {
-                Map<String, String>  parameters = new HashMap<String, String>();
+            protected Map<String, String> getParams() {
+                Map<String, String> parameters = new HashMap<String, String>();
 //
-                parameters.put("rate",rat_score+"");
-                parameters.put("comment",comment);
+                parameters.put("rate", rat_score + "");
+                parameters.put("comment", comment);
 
                 return parameters;
             }
         };
         queue.getCache().initialize();
         queue.add(postRequest);
-queue.getCache().clear();
+        queue.getCache().clear();
         // prepare the Request
 
     }
 
     public void Post_updateOrder(final Context mcontext, final String order_id, final int state,
-                                  final OnOrder_geter_lisennter listener)  {
-        if (queue==null){
+                                 final OnOrder_geter_lisennter listener) {
+        if (queue == null) {
             queue = Volley.newRequestQueue(mcontext);  // this = context
         }
-        final user_info user_info_=new user_info(mcontext);
-        String url = mcontext.getString(R.string.api)+"api/updateOrderByUser?id="+order_id;
-
+        final user_info user_info_ = new user_info(mcontext);
+        String url = mcontext.getString(R.string.api) + "api/updateOrderByUser?id=" + order_id;
 
 
         listener.onStart();
@@ -453,10 +559,12 @@ queue.getCache().clear();
 // Request a json response from the provided URL
 
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>()
-                {
+                new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        if (!TextUtils.isEmpty(response)) {
+                            Utils.checkResponse(response);
+                        }
                         // response
                         Log.d("Response", response);
                         String jsonData = response;
@@ -470,20 +578,31 @@ queue.getCache().clear();
 
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // error
                         Log.d("Error.Response", String.valueOf(mcontext.getString(R.string.networke)));
-                        listener.onFailure(String.valueOf("Error "+mcontext.getString(R.string.networke)));
+                        listener.onFailure(String.valueOf("Error " + mcontext.getString(R.string.networke)));
+                        NetworkResponse response = error.networkResponse;
+                        try {
+                            if (response != null) {
+                                String res = new String(response.data, StandardCharsets.UTF_8);
+                                Log.e("error response", res);
+                                if (!TextUtils.isEmpty(res)) {
+                                    Utils.checkResponse(res);
+                                }
+                            }
+                        } catch (Exception e1) {
+                            e1.printStackTrace();
+                        }
                     }
                 }
         ) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String>  Params = new HashMap<String, String>();
-                Params.put("StatusId",state+"");
+                Map<String, String> Params = new HashMap<String, String>();
+                Params.put("StatusId", state + "");
 //                if (state!=7) {
 //                    Params.put("Notes", Notes);
 //                }
@@ -492,8 +611,8 @@ queue.getCache().clear();
 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String>  Headers = new HashMap<String, String>();
-                Headers.put("token",user_info_.getToken());
+                Map<String, String> Headers = new HashMap<String, String>();
+                Headers.put("token", user_info_.getToken());
 
                 return Headers;
             }
@@ -505,43 +624,55 @@ queue.getCache().clear();
 
     }
 
-    public void GetPoints(final Context mcontext, final OnPoint_lisennter listenner)
-    {
-        if (queue==null){
+    public void GetPoints(final Context mcontext, final OnPoint_lisennter listenner) {
+        if (queue == null) {
             queue = Volley.newRequestQueue(mcontext);  // this = context
         }
-        final user_info user_info_=new user_info(mcontext);
-        String url=mcontext.getString(R.string.api)+"api/updateUserPoint/"+user_info_.getId();
+        final user_info user_info_ = new user_info(mcontext);
+        String url = mcontext.getString(R.string.api) + "api/updateUserPoint/" + user_info_.getId();
         listenner.onStart();
         // prepare the Request
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>()
-                {
+                new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        if (!TextUtils.isEmpty(response.toString())) {
+                            Utils.checkResponse(response.toString());
+                        }
                         // display response
                         Log.d("Response", response.toString());
-                        show_points get_user_points_=new show_points(response);
+                        show_points get_user_points_ = new show_points(response);
                         listenner.onSuccess(get_user_points_);
 
 
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
 //                    Log.d("Error.Response", mcontext.getString(R.string.networke));
                         listenner.onFailure(mcontext.getString(R.string.networke));
+                        NetworkResponse response = error.networkResponse;
+                        try {
+                            if (response != null) {
+                                String res = new String(response.data, StandardCharsets.UTF_8);
+                                Log.e("error response", res);
+                                if (!TextUtils.isEmpty(res)) {
+                                    Utils.checkResponse(res);
+                                }
+                            }
+                        } catch (Exception e1) {
+                            e1.printStackTrace();
+                        }
                     }
                 }
 
-        ){
+        ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String>  Header = new HashMap<String, String>();
+                Map<String, String> Header = new HashMap<String, String>();
 //
-                Header.put("token",user_info_.getToken());
+                Header.put("token", user_info_.getToken());
 
 
                 return Header;

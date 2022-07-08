@@ -27,8 +27,8 @@ android {
         applicationId "com.kh_sof_dev.gaz"
         minSdkVersion 21
         targetSdkVersion 31
-        versionCode 32         //16-04-2020
-        versionName "1.1.8"                            //aliase gaz and pw 123456
+        versionCode 33         //16-04-2020
+        versionName "1.1.9"                            //aliase gaz and pw 123456
         multiDexEnabled true
         // google account pw:Na-g59372 ,email: alnaqellalafthalf@gmail.com
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -132,4 +132,3 @@ dependencies {
 
     implementation "androidx.multidex:multidex:2.0.1"
 }
-apply plugin: 'com.google.gms.google-services'

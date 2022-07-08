@@ -10,10 +10,12 @@ import io.realm.RealmConfiguration;
 
 public class MyApplication extends MultiDexApplication {
     public static final String PRODUCT_TANK_CATEGORY_ID = "5c8cb6c10a34fc002491f406";
+    public static MyApplication instance;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
 //        Fabric.with(this, new Crashlytics());
         FirebaseApp.initializeApp(this);
         FacebookSdk.sdkInitialize(this);

@@ -1,9 +1,11 @@
 package com.kh_sof_dev.gaz.Classes.Ntification;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -13,11 +15,13 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import com.kh_sof_dev.gaz.Classes.User.user_info;
+import com.kh_sof_dev.gaz.Classes.Utils;
 import com.kh_sof_dev.gaz.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,6 +51,9 @@ public class Http_notification {
                         public void onResponse(JSONObject response) {
                             // display response
                             Log.d("Response", response.toString());
+                            if (!TextUtils.isEmpty(response.toString())) {
+                                Utils.checkResponse(response.toString());
+                            }
                             try {
                                 listener.onSuccess(new show_notif(response));
                             } catch (JSONException e) {
@@ -60,6 +67,18 @@ public class Http_notification {
                     {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            NetworkResponse response = error.networkResponse;
+                            try {
+                                if (response != null) {
+                                    String res = new String(response.data, StandardCharsets.UTF_8);
+                                    Log.e("error response", res);
+                                    if (!TextUtils.isEmpty(res)) {
+                                        Utils.checkResponse(res);
+                                    }
+                                }
+                            } catch (Exception e1) {
+                                e1.printStackTrace();
+                            }
 
 //                        Log.d("Error.Response", error.getMessage());
                         }
@@ -96,6 +115,9 @@ public class Http_notification {
                         // response
                         Log.d("Response", response);
                         String jsonData = response;
+                        if (!TextUtils.isEmpty(response)) {
+                            Utils.checkResponse(response);
+                        }
 
                     }
                 },
@@ -105,6 +127,18 @@ public class Http_notification {
                     public void onErrorResponse(VolleyError error) {
                         // error
                         Log.d("Error.Response", String.valueOf(error.getMessage()));
+                        NetworkResponse response = error.networkResponse;
+                        try {
+                            if (response != null) {
+                                String res = new String(response.data, StandardCharsets.UTF_8);
+                                Log.e("error response", res);
+                                if (!TextUtils.isEmpty(res)) {
+                                    Utils.checkResponse(res);
+                                }
+                            }
+                        } catch (Exception e1) {
+                            e1.printStackTrace();
+                        }
 
                     }
                 }
